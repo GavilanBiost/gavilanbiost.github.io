@@ -1,52 +1,65 @@
 ---
-title: Terms of Service
+title: Terminos de Servicio
 seo:
-  title: Terms of Service
-  description: Explore the terms and conditions of Dante website for a clear understanding of guidelines and responsibilities.
+  title: Terminos de Servicio
+  description: Términos de servicio de esta web
 ---
 
-**Last updated on January 11, 2024**
+**Actualización, 1 de noviembre de 2025**
 
-These Terms of Service ("Terms") govern your access to and use of [Website Name] ("the Website") and any related services provided by [Website Owner/Company] ("we," "us," or "our"). Please read these Terms carefully before using the Website.
+# Condiciones de uso:
 
-**1. Acceptance of Terms**
+**Condiciones de uso**
 
-By accessing or using the Website, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms or the Privacy Policy, please do not use the Website.
+El acceso y la navegación por el sitio web atribuyen la condición de usuario e implican la aceptación plena de las disposiciones incluidas en el Aviso Legal.
 
-**2. Changes to Terms**
+El usuario se compromete a hacer un uso adecuado de los contenidos y servicios del sitio web y a no emplearlos para:
 
-We reserve the right to modify, amend, or update these Terms at any time. Such changes will be effective upon posting on the Website. It is your responsibility to review these Terms regularly. Your continued use of the Website after any changes indicates your acceptance of the revised Terms.
+- Realizar actividades ilícitas o contrarias a la buena fe y al orden público.
+- Difundir contenidos de carácter racista, xenófobo, ilegal o que atenten contra los derechos humanos y libertades públicas.
+- Provocar daños en los sistemas físicos o lógicos del titular, de sus proveedores o de terceras personas.
+- Introducir o difundir en la red virus informáticos o cualesquiera otros sistemas susceptibles de provocar daños.
 
-**3. Use of the Website**
+**Propiedad intelectual e industrial**
 
-You agree to use the Website for lawful purposes and in a manner consistent with these Terms. You are responsible for any content you post or submit on the Website.
+Todos los contenidos del sitio web (textos, imágenes, logotipos, código fuente, etc.) son propiedad del titular o de terceros con autorización, y están protegidos por la normativa de propiedad intelectual e industrial. Queda prohibida su reproducción, distribución, comunicación pública o transformación sin autorización expresa.
 
-**4. Registration and Account**
+**Enlaces externos**
 
-Certain areas of the Website may require registration or the creation of an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
+El titular no se responsabiliza del mal uso que se realice del sitio web ni de los daños que puedan derivarse del acceso, uso indebido o de la imposibilidad de uso del miso.
 
-**5. Content and Intellectual Property**
+**Exclusión de responsabilidad**
 
-The content on the Website, including text, graphics, logos, images, audio, video, software, and other materials, is owned or licensed by us and is protected by copyright and other intellectual property laws. You may not use, reproduce, or distribute the content without our prior written consent.
+El titular no se responsabiliza del mal uso que los usuarios realicen de los contenidos del sitio web, ni de daños derivados del acceso o uso de la página
 
-**6. Third-Party Links**
+**Legislación aplicable y jurisdicción**
 
-The Website may contain links to third-party websites or resources. We do not endorse and are not responsible for the content, products, or services provided by third parties. Your use of such websites is at your own risk.
+Con carácter general, las relaciones entre la titular y los usuarios están sometidas a la legislación española y a los tribunales de Tarragona, salvo que la normativa de protección de consumidores y usuarios disponga otro fuero imperativo.
 
-**7. Termination**
+# Política de cookies
+En principio, esta web no tiene cookies, pero si las tuviera, en cumplimiento de lo dispuesto en el artículo 22.2 de la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y comercio electrónico (LSSI-CE), este sitio web utiliza cookies para mejorar la experiencia de usuario.
 
-We may, at our sole discretion, terminate or suspend your access to the Website at any time and for any reason, without notice.
+**¿Qué son las cookies?**
 
-**8. Disclaimer**
+Las cookies son pequeños archivos de texto que se descargan en el dispositivo del usuario al acceder a determinadas páginas web, permitiendo almacenar y recuperar información sobre hábitos de navegación.
 
-The Website and its content are provided on an "as is" and "as available" basis. We make no warranties or representations about the accuracy or completeness of the content. We do not guarantee that the Website will be error-free or uninterrupted.
+**Tipos de cookies utilizadas en este sitio web**
 
-**9. Limitation of Liability**
+- Cookies técnicas: necesarias para la navegación y el funcionamiento básico de la web.
+- Cookies de análisis: permiten medir y analizar el tráfico en el sitio web.
+- Cookies de personalización (si aplica): para recordar preferencias del usuario.
+ 
+**Gestión y desactivación de cookie**
 
-To the fullest extent permitted by law, we shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to damages for loss of profits, goodwill, use, data, or other intangible losses, arising out of or in connection with the use or inability to use the Website.
+El usuario puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador.
 
-**10. Governing Law**
+Más información sobre la gestión de cookies en los principales navegadores:
 
-These Terms are governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of laws principles. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of [Your Jurisdiction].
+Chrome: https://support.google.com/chrome/answer/95647
+Firefox: https://support.mozilla.org/es/kb/Borrar%20cookies
+Safari: https://support.apple.com/es-es/guide/safari/sfri11471/mac
+Edge:https://support.microsoft.com/es-es/help/4027947/microsoft-edge-delete-
+cookies
 
-_Thank you for reading our Terms of Service. By using the Website, you agree to be bound by these Terms._
+**Revocación del consentimiento**
+El usuario puede modificar su consentimiento en cualquier momento desde el enlace “Configurar cookies” disponible en el pie de página del sitio web.
