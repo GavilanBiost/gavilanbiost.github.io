@@ -16,7 +16,7 @@ Visualizaciones es un proyecto con el que se ha generado las siguientes imágene
 2.  Digrama de red (network diagram)
 3.  Gráfico en espiral (spiral plot)
 
-El notebook con el código y las bases de datos empleadas se puede encontrar en XXX. Las tres figuras se han realizado con R.
+El notebook con el código y las bases de datos empleadas se puede encontrar en [este repositorio de GitHub](https://github.com/GavilanBiost/proyectos_varios/tree/main/PEC_2_VdD). Las tres figuras se han realizado con R.
 
 ![Histograma](/PEC2_vdd_histograma.png)
 
