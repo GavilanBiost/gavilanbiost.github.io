@@ -55,11 +55,10 @@ El usuario puede permitir, bloquear o eliminar las cookies instaladas en su equi
 
 Más información sobre la gestión de cookies en los principales navegadores:
 
-Chrome: https://support.google.com/chrome/answer/95647
-Firefox: https://support.mozilla.org/es/kb/Borrar%20cookies
-Safari: https://support.apple.com/es-es/guide/safari/sfri11471/mac
-Edge:https://support.microsoft.com/es-es/help/4027947/microsoft-edge-delete-
-cookies
+* Chrome: https://support.google.com/chrome/answer/95647
+* Firefox: https://support.mozilla.org/es/kb/Borrar%20cookies
+* Safari: https://support.apple.com/es-es/guide/safari/sfri11471/mac
+* Edge:https://support.microsoft.com/es-es/help/4027947/microsoft-edge-delete-cookies
 
 **Revocación del consentimiento**
 El usuario puede modificar su consentimiento en cualquier momento desde el enlace “Configurar cookies” disponible en el pie de página del sitio web.
