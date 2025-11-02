@@ -1,0 +1,15 @@
+/* css/style.css */
+:root{
+  --accent: #2b7cff;
+  --muted: #666;
+}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 20px;
+  color: #111;
+}
+header h1 { margin: 0 0 6px 0; color: var(--accent); }
+section { margin: 28px 0; }
+#d3-bar { width: 100%; max-width: 760px; height: 340px; }
+canvas { max-width: 100%; height: auto; }
+footer { margin-top: 40px; color: var(--muted); font-size: 0.9rem; }
