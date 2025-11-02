@@ -87,11 +87,13 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Bienvenido a mi espacio personal',
-        text: `👋 ¡Hola! Soy Jesús y soy bioestadístico.
-        <p>Desde 2018 he trabajado en el mundo de los datos aplicados a la salud y la investigación científica, cuando los análisis epidemiológicos eran la referencia y las herramientas bioinformáticas apenas comenzaban a abrirse paso. 
-        </p><p>A lo largo de mi trayectoria, he participado en proyectos con todo tipo de datos como socio-culturales, nutricionales, clínicos, genéticos, metabolómicos, proteómicos y metagenómicos. Estoy especializado en el uso de R para el análisis estadístico y visualización, aunque también trabajo con Python y SQL, adaptándome siempre a las necesidades del proyecto y los datos que lo respaldan.
-        </p><p> 📊 ¿Cuál es mi objetivo?
-        </p><p>Compartir herramientas, código y proyectos que reflejen mi experiencia en el análisis de datos complejos y la investigación bioestadística. Mi propósito es contribuir un poquito al conocimiento general y facilitar el acceso a recursos que ayuden a otros profesionales, futuros profesionales y estudiantes a resolver problemas reales a través de los datos. Este espacio es mi manera de aprender, desarrollar y devolver a la comunidad parte de lo aprendido y de seguir creciendo junto a profesionales con intereses afines.`,
+        text: `👋 ¡Hola! Soy Jesús, bioestadístico y científico de datos especializado en el análisis y la interpretación de datos aplicados a la salud y la investigación científica.
+        <p>Desde 2018 he trabajado en el ámbito de la ciencia de datos en salud, una etapa en la que la estadística tradicional convivía con el auge de la bioinformática y el aprendizaje automático. Esta evolución me ha permitido integrar metodologías clásicas y modernas para extraer conocimiento útil a partir de datos complejos y heterogéneos. 
+        </p><p>A lo largo de mi trayectoria, he participado en proyectos que abarcan múltiples tipos de datos: socio-culturales, nutricionales, clínicos, genéticos, metabolómicos, proteómicos y metagenómicos. Mi especialidad es el uso de R para el análisis estadístico, modelado y visualización de datos, aunque también trabajo con Python y SQL, adaptando las herramientas a las necesidades de cada proyecto.
+        </p><p> ¿Cuál es mi objetivo?
+        </p><p>Compartir herramientas, código y proyectos que reflejen mi experiencia en bioestadística y ciencia de datos aplicadas a la salud.
+        </p><p>Busco contribuir al conocimiento colectivo y facilitar el acceso a recursos que ayuden a profesionales, investigadores y estudiantes a resolver problemas reales mediante el uso riguroso y creativo de los datos.
+        </p><p> Este espacio es mi manera de aprender, experimentar y colaborar con una comunidad que cree, como yo, que los datos pueden impulsar avances significativos en la investigación, la salud y la toma de decisiones basada en evidencia.`,
         image: {
             src: '/e12ac28f-6872-4b76-9e8a-fe1fd5792af5.jpg',
             alt: 'Una foto mia en un congreso'
