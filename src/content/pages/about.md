@@ -8,5 +8,7 @@ seo:
     alt: A person sitting at a desk in front of a computer
 ---
 
-
+<p align="right">
+  <img src="/IMG_9589_org.png" alt="Yo primera persona" width="300"/>
+</p>
 *Pendiente de construir*

@@ -55,17 +55,17 @@ const siteConfig: SiteConfig = {
         {
             text: 'Proyectos',
             href: '/projects'
-        },
+        }/*,
         {
             text: 'Blog',
             href: '/blog'
-        }
+        }*/
     ],
     footerNavLinks: [
-        {
+        /*{
             text: 'Sobre mi',
             href: '/about'
-        },
+        },*/
         {
             text: 'Contacto',
             href: '/contact'
