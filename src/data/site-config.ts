@@ -85,8 +85,8 @@ const siteConfig: SiteConfig = {
     ],
     socialLinks: [
         {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
+            text: 'LinkdIn',
+            href: 'www.linkedin.com/in/jesus-garcia-gavilan'
         },
         {
             text: 'Instagram',
