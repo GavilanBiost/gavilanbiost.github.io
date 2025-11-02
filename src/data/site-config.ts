@@ -44,8 +44,8 @@ const siteConfig: SiteConfig = {
     subtitle: 'Si hay un patrón, lo encontraré 🔍',
     description: 'A personal blog and portfolio site built with Astro.js and Tailwind CSS.',
     image: {
-        src: '/dante-preview.jpg',
-        alt: 'Dante - Astro.js and Tailwind CSS theme'
+        src: '',
+        alt: ''
     },
     headerNavLinks: [
         {
@@ -77,7 +77,7 @@ const siteConfig: SiteConfig = {
     ],
     socialLinks: [
         {
-            text: 'LinkdIn',
+            text: 'LinkedIn',
             href: 'https://www.linkedin.com/in/jesus-garcia-gavilan'
         },
         {
@@ -104,8 +104,8 @@ const siteConfig: SiteConfig = {
         ]
     },
     subscribe: {
-        title: 'Subscribe to Dante Newsletter',
-        text: 'One update per week. All the latest posts directly in your inbox.',
+        title: 'Suscríbete a mi newsletter',
+        text: 'Una actualización por semana. Todas las últimas publicaciones directamente en tu bandeja de entrada.',
         formUrl: '#'
     },
     postsPerPage: 8,
