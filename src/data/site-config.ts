@@ -40,7 +40,7 @@ export type SiteConfig = {
 
 const siteConfig: SiteConfig = {
     website: 'https://gavilanbiost.github.io',
-    title: 'Jesús F García Gavilán',
+    title: 'Jesús F García Gavilán, PhD',
     /*subtitle: 'Si hay un patrón, lo encontraré 🔍',*/
     description: 'A personal blog and portfolio site',
     image: {
