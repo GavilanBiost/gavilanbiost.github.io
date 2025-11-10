@@ -12,5 +12,5 @@ _Email:_
 Puedes escribirme a [gavilanbiost@gmail.com](mailto:gavilanbiost@gmail.com), y haré todo lo posible por responderte lo antes posible.
 
 _Redes Sociales:_
-También puedes conectar conmigo en redes sociales. Encuéntrame en [LinkedIn](www.linkedin.com/in/jesus-garcia-gavilan).
+También puedes conectarte conmigo en redes sociales. Encuéntrame en [LinkedIn](www.linkedin.com/in/jesus-garcia-gavilan).
 </p>
