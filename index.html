@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de GavilanBiost</title>
+    <style>
+        /* --- ESTILOS GENERALES (CSS) --- */
+        :root {
+            --primary-color: #2563eb; /* Azul Profesional */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- HEADER (PERFIL) --- */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; color: #0f172a; }
+        .role { color: var(--primary-color); font-weight: 600; font-size: 1.2rem; margin-top: 5px; }
+        .bio { max-width: 600px; margin: 15px auto; color: var(--text-secondary); }
+
+        /* --- BOTONES DE REDES --- */
+        .social-links { margin-top: 20px; }
+        .btn {
+            display: inline-block;
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            margin: 0 5px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .btn:hover { border-color: var(--primary-color); color: var(--primary-color); transform: translateY(-2px); }
+        .btn-primary { background-color: var(--primary-color); color: white; border: none; }
+        .btn-primary:hover { background-color: #1d4ed8; color: white; }
+
+        /* --- SECCIÓN DE PROYECTOS --- */
+        h2 { border-left: 5px solid var(--primary-color); padding-left: 15px; margin-top: 50px; color: #0f172a; }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: var(--primary-color); }
+        
+        .card h3 { margin-top: 0; font-size: 1.25rem; }
+        .card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* --- ETIQUETAS (TAGS) --- */
+        .tags { margin: 15px 0; }
+        .tag {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        
+        .card-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .card-link:hover { text-decoration: underline; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; margin-top: 80px; color: var(--text-secondary); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <img src="https://github.com/gavilanbiost.png" alt="Foto de Perfil" class="profile-img">
+            
+            <h1>GavilanBiost</h1>
+            <div class="role">Data Scientist | Bioestadística | R & Python</div>
+            
+            <p class="bio">
+                Especialista en convertir datos complejos en soluciones claras. 
+                Apasionado por la investigación reproducible, el análisis genómico y la visualización de datos.
+            </p>
+
+            <div class="social-links">
+                <a href="https://github.com/gavilanbiost" class="btn">GitHub</a>
+                <a href="https://linkedin.com/in/tu-usuario" class="btn">LinkedIn</a>
+                <a href="./links" class="btn btn-primary">Mis Enlaces Rápidos</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>📂 Proyectos Destacados</h2>
+            <div class="project-grid">
+
+                <article class="card">
+                    <h3>🧬 Análisis de Expresión Génica</h3>
+                    <p>Pipeline completo de bioinformática para procesar datos de RNA-Seq, desde el control de calidad hasta la visualización de genes diferenciales.</p>
+                    <div class="tags">
+                        <span class="tag">R</span>
+                        <span class="tag">Bioconductor</span>
+                        <span class="tag">RNA-Seq</span>
+                    </div>
+                    <a href="https://github.com/gavilanbiost/tu-repo-1" class="card-link">Ver Repositorio &rarr;</a>
+                </article>
+
+                <article class="card">
+                    <h3>📊 Dashboard de Salud Pública</h3>
+                    <p>Visualización interactiva de datos epidemiológicos para monitorear tendencias en tiempo real.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">Pandas</span>
+                    </div>
+                    <a href="https://github.com/gavilanbiost/tu-repo-2" class="card-link">Ver Demo &rarr;</a>
+                </article>
+
+                <article class="card">
+                    <h3>🤖 Predicción Clínica con ML</h3>
+                    <p>Modelo de clasificación para predecir riesgos en pacientes basado en historial clínico usando algoritmos de Random Forest.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Scikit-Learn</span>
+                        <span class="tag">Jupyter</span>
+                    </div>
+                    <a href="https://github.com/gavilanbiost/tu-repo-3" class="card-link">Ver Notebook &rarr;</a>
+                </article>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 GavilanBiost. Construido 100% en GitHub Pages.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
