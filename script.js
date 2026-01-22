@@ -80,3 +80,132 @@ document.addEventListener('DOMContentLoaded', () => {
         checkMobile(); // Ejecutar al inicio
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- LÓGICA DE LA NUBE DE ETIQUETAS AUTOMÁTICA ---
+    
+    function generateWordCloud() {
+        const container = document.getElementById('auto-tag-cloud');
+        if (!container) return;
+
+        // 1. Obtener todo el texto visible del contenido principal
+        // Seleccionamos solo el contenido relevante para evitar palabras del menú o footer repetidas
+        const content = document.querySelector('.main-container');
+        if (!content) return;
+        
+        let text = content.innerText || content.textContent;
+        
+        // 2. Limpieza de texto
+        text = text.toLowerCase()
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitar puntuación
+            .replace(/\s{2,}/g, " "); // Quitar espacios extra
+
+        const words = text.split(" ");
+
+        // 3. Lista de "Stop Words" (Palabras a ignorar en Español e Inglés)
+        // Puedes añadir aquí palabras que no quieras que salgan
+        const stopWords = new Set([
+            // Español
+            "el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "al", 
+            "y", "o", "en", "a", "por", "para", "con", "sin", "sobre", "entre", "tras",
+            "que", "qué", "como", "cómo", "donde", "cuando", "quien", "mas", "más",
+            "mi", "tu", "su", "mis", "sus", "yo", "tu", "el", "ella", "nosotros",
+            "soy", "eres", "es", "somos", "son", "estoy", "estas", "esta", "estamos", 
+            "tengo", "tienes", "tiene", "hacer", "hace", "ver", "leer", "ir",
+            "pero", "aunque", "sino", "porque", "pues", "01", "02", "03", "04", "05", "06", "07", "08",
+            "pdf", "demo", "repo", "code", "aquí", "contact", "contacto", "Jesús", "paso",
+            "mí", "soy", "sobre", "García", "modernas",
+            
+            // Inglés
+            "the", "a", "an", "and", "or", "but", "if", "then", "else", "when", 
+            "at", "by", "for", "from", "in", "into", "of", "off", "on", "onto", 
+            "to", "with", "within", "without", "about", "above", "across", "after",
+            "i", "you", "he", "she", "it", "we", "they", "my", "your", "his", "her",
+            "is", "am", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+            "this", "that", "these", "those", "click", "here", "read", "more", "join",
+            "new", "free", "learn"
+        ]);
+
+        // 4. Contar Frecuencias
+        const wordCounts = {};
+        words.forEach(word => {
+            if (!stopWords.has(word) && word.length > 2 && isNaN(word)) { // Ignorar números y palabras cortas
+                wordCounts[word] = (wordCounts[word] || 0) + 1;
+            }
+        });
+
+        // 5. Convertir a array y ordenar por frecuencia
+        let sortedWords = Object.keys(wordCounts).map(word => {
+            return { word: word, count: wordCounts[word] };
+        });
+        
+        sortedWords.sort((a, b) => b.count - a.count);
+
+        // Nos quedamos solo con las top 30 palabras para no saturar
+        const topWords = sortedWords.slice(0, 30);
+
+        // Encontrar el máximo para calcular proporciones
+        const maxCount = topWords[0].count;
+
+        // 6. Función para mezclar (Shuffle) el array para que quede orgánico
+        // Algoritmo Fisher-Yates
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        shuffleArray(topWords);
+
+        // 7. Generar el HTML (MODIFICADO PARA ENLACES)
+        container.innerHTML = ''; // Limpiar
+        
+        topWords.forEach(item => {
+            const link = document.createElement('a');
+            link.textContent = item.word;
+            link.className = 'tag'; 
+            
+            link.href = `?tag=${item.word}`; 
+            
+            const ratio = item.count / maxCount;
+            if (ratio > 0.8) link.classList.add('tag-xl');
+            else if (ratio > 0.6) link.classList.add('tag-lg');
+            else if (ratio > 0.4) link.classList.add('tag-md');
+            else link.classList.add('tag-sm');
+            
+            link.title = `Ver entradas con: ${item.word}`;
+            
+            container.appendChild(link);
+        });
+    }
+
+    // Ejecutar la función
+    generateWordCloud();
+});
+
+function filterContentByTag() {
+        // 1. Leer el parámetro de la URL (ej: ?tag=python)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tag = urlParams.get('tag');
+
+        if (tag) {
+            // 2. Filtrar las tarjetas y publicaciones
+            const items = document.querySelectorAll('.card, .publication-item');
+            
+            items.forEach(item => {
+                if (!item.textContent.toLowerCase().includes(tag)) {
+                    item.style.display = 'none';
+                }
+            });
+
+            // 3. Scroll suave hacia el contenido filtrado
+            setTimeout(() => {
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
+
+    // Ejecutar el filtro al cargar
+    filterContentByTag();
