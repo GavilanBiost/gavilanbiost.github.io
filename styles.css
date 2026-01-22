@@ -339,6 +339,39 @@ a:hover {
     color: var(--text-muted);
 }
 
+.contact-card-layout {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 30px;
+}
+
+.contact-row {
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.icon-box {
+    width: 30px; 
+    font-size: 1.3rem; 
+    color: var(--text-main); 
+    display: flex;
+    justify-content: center;
+}
+
+.contact-link {
+    color: var(--text-main); 
+    font-weight: 600; 
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    color: var(--mets-blue); 
+    text-decoration: underline;
+}
+
 /* Botones */
 .btn-outline {
     display: inline-block;
