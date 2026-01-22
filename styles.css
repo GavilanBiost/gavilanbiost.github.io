@@ -144,7 +144,7 @@ a:hover {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    background-image: url('perfil.jpg');
+    background-image: url('img/IMG_9589.jpg');
     background-color: var(--bg-alt);
     background-size: cover;
     background-position: center;
@@ -257,6 +257,18 @@ a:hover {
 
 /* --- ELEMENTOS INTERNOS --- */
 
+.bio-text {
+    text-align: justify; 
+    
+    /* Espaciado y legibilidad */
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-main);
+    
+    max-width: 900px; 
+}
+
 /* Grid Info */
 .info-grid {
     display: grid;
@@ -275,13 +287,18 @@ a:hover {
 
 .education-item {
     display: flex;
-    margin-bottom: 15px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--bg-alt);
+    padding-bottom: 10px;
 }
 .education-item .year {
     font-family: var(--font-mono);
     color: var(--text-main);
     font-weight: 700;
-    margin-right: 15px;
+    min-width: 40px;
+    margin-right: 20px;
+    flex-shrink: 0;
 }
 
 /* Publicaciones / Charlas */
