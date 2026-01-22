@@ -90,21 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
 
         // 1. Obtener todo el texto visible del contenido principal
-        // Seleccionamos solo el contenido relevante para evitar palabras del menú o footer repetidas
-        const content = document.querySelector('.main-container');
-        if (!content) return;
-        
-        let text = content.innerText || content.textContent;
+        const targetSections = ['#posts', '#proyectos', '#charlas', '#publicaciones'];
+        let text = "";
+        targetSections.forEach(id => {
+            const section = document.querySelector(id);
+            if (section) {
+                text += section.innerText + " "; 
+            }
+        });
         
         // 2. Limpieza de texto
         text = text.toLowerCase()
-            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitar puntuación
-            .replace(/\s{2,}/g, " "); // Quitar espacios extra
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+            .replace(/\s{2,}/g, " ");
 
         const words = text.split(" ");
 
         // 3. Lista de "Stop Words" (Palabras a ignorar en Español e Inglés)
-        // Puedes añadir aquí palabras que no quieras que salgan
         const stopWords = new Set([
             // Español
             "el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "al", 
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "tengo", "tienes", "tiene", "hacer", "hace", "ver", "leer", "ir",
             "pero", "aunque", "sino", "porque", "pues", "01", "02", "03", "04", "05", "06", "07", "08",
             "pdf", "demo", "repo", "code", "aquí", "contact", "contacto", "Jesús", "paso",
-            "mí", "soy", "sobre", "García", "modernas",
+            "mí", "soy", "sobre", "García", "modernas", "enfoque", "->",
             
             // Inglés
             "the", "a", "an", "and", "or", "but", "if", "then", "else", "when", 
@@ -124,49 +126,45 @@ document.addEventListener('DOMContentLoaded', () => {
             "i", "you", "he", "she", "it", "we", "they", "my", "your", "his", "her",
             "is", "am", "are", "was", "were", "be", "been", "being", "have", "has", "had",
             "this", "that", "these", "those", "click", "here", "read", "more", "join",
-            "new", "free", "learn"
+            "new", "free", "learn",
         ]);
 
         // 4. Contar Frecuencias
         const wordCounts = {};
         words.forEach(word => {
-            if (!stopWords.has(word) && word.length > 2 && isNaN(word)) { // Ignorar números y palabras cortas
+            if (!stopWords.has(word) && word.length > 2 && isNaN(word)) {
                 wordCounts[word] = (wordCounts[word] || 0) + 1;
             }
         });
 
-        // 5. Convertir a array y ordenar por frecuencia
+        // 5. Ordenar por frecuencia
         let sortedWords = Object.keys(wordCounts).map(word => {
             return { word: word, count: wordCounts[word] };
         });
         
         sortedWords.sort((a, b) => b.count - a.count);
 
-        // Nos quedamos solo con las top 30 palabras para no saturar
+        // top 30 palabras
         const topWords = sortedWords.slice(0, 30);
-
-        // Encontrar el máximo para calcular proporciones
+        if (topWords.length === 0) return;
         const maxCount = topWords[0].count;
 
-        // 6. Función para mezclar (Shuffle) el array para que quede orgánico
-        // Algoritmo Fisher-Yates
+        // 6. Función para mezclar (Shuffle)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
-        }
-        
+        }        
         shuffleArray(topWords);
 
-        // 7. Generar el HTML (MODIFICADO PARA ENLACES)
-        container.innerHTML = ''; // Limpiar
+        // 7. Generar el HTML
+        container.innerHTML = '';
         
         topWords.forEach(item => {
             const link = document.createElement('a');
             link.textContent = item.word;
-            link.className = 'tag'; 
-            
+            link.className = 'tag';             
             link.href = `?tag=${item.word}`; 
             
             const ratio = item.count / maxCount;
