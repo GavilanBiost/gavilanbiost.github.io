@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Compensación de 70px por la barra de navegación fija
                 const headerOffset = 70;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.scrollY - headerOffset;
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2. Lógica del Menú Móvil (Hamburguesa)
-    // Crearemos el botón dinámicamente si no existe para no romper tu HTML
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
     
@@ -32,19 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleButton = document.createElement('button');
         toggleButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
         toggleButton.className = 'mobile-menu-btn';
-        toggleButton.style.display = 'none'; // Se oculta por defecto en CSS, lo manejamos ahí
-        
-        // Estilos básicos para el botón (inyectados por JS para no tocar tu CSS)
+        toggleButton.style.display = 'none'; 
         toggleButton.style.background = 'none';
         toggleButton.style.border = 'none';
         toggleButton.style.fontSize = '1.5rem';
         toggleButton.style.cursor = 'pointer';
         toggleButton.style.color = '#333';
         
-        // Insertar botón antes de los enlaces
         navContainer.insertBefore(toggleButton, navLinks);
 
-        // Funcionalidad Click
         toggleButton.addEventListener('click', () => {
             if (navLinks.style.display === 'flex') {
                 navLinks.style.display = 'none';
@@ -61,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Mostrar botón solo en móvil (Media Query en JS)
         const checkMobile = () => {
             if (window.innerWidth <= 768) {
                 toggleButton.style.display = 'block';
@@ -77,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         window.addEventListener('resize', checkMobile);
-        checkMobile(); // Ejecutar al inicio
+        checkMobile();
     }
 });
 
