@@ -140,6 +140,26 @@ try:
         else:
             print('Error: No se encontró la etiqueta de cierre </ul>')
     else:
-        print('Error: No se encontró una lista con id "publicaciones" o "publications"')
+        print('No se encontró lista; se creará una nueva sección de publicaciones al final del body')
+        new_list = (
+            '\n<section class="content-section" id="publicaciones">\n'
+            '  <div class="section-header">\n'
+            '    <h2><span class="mono-text"></span> Publicaciones</h2>\n'
+            '  </div>\n'
+            '  <ul id="publicaciones" class="publication-list">\n'
+            f'    {'\n    '.join(publications)}\n'
+            '  </ul>\n'
+            '</section>\n'
+        )
+
+        body_end = content.rfind('</body>')
+        if body_end == -1:
+            body_end = len(content)
+
+        updated_content = content[:body_end] + new_list + content[body_end:]
+
+        with open('index.html', 'w', encoding='utf-8') as file:
+            file.write(updated_content)
+        print(f'Se creó sección y se escribieron {len(publications)} publicaciones en index.html')
 except Exception as e:
     print(f'Error al actualizar index.html: {e}')
