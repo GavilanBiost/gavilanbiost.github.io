@@ -82,13 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('auto-tag-cloud');
         if (!container) return;
 
-        // 1. Obtener todo el texto visible del contenido principal
+        // 1. Obtener solo los títulos de las secciones
         const targetSections = ['#posts', '#proyectos', '#charlas', '#publicaciones'];
         let text = "";
         targetSections.forEach(id => {
             const section = document.querySelector(id);
             if (section) {
-                text += section.innerText + " "; 
+                // Solo extraer títulos (.pub-title, h3, strong en títulos)
+                const titles = section.querySelectorAll('.pub-title, h3, .card strong, .publication-item strong, li strong');
+                titles.forEach(title => {
+                    text += title.innerText + " ";
+                });
             }
         });
         
@@ -110,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "tengo", "tienes", "tiene", "hacer", "hace", "ver", "leer", "ir",
             "pero", "aunque", "sino", "porque", "pues", "01", "02", "03", "04", "05", "06", "07", "08",
             "pdf", "demo", "repo", "code", "aquí", "contact", "contacto", "Jesús", "paso",
-            "mí", "soy", "sobre", "García", "modernas", "enfoque", "->",
+            "mí", "soy", "sobre", "García", "modernas", "enfoque", "->", "jesús", "josé",
+            "salassalvaó","revista","vidal","ruizcanela",
             
             // Inglés
             "the", "a", "an", "and", "or", "but", "if", "then", "else", "when", 
