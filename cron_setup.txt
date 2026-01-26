@@ -1,7 +1,0 @@
-# Abre la terminal y ejecuta el siguiente comando para editar el cron job:
-crontab -e
-
-# Agrega la siguiente línea para ejecutar el script el primer día de cada mes a las 12:00 PM:
-0 12 1 * * /usr/bin/python3 /path/to/your/update_publications.py
-
-# Asegúrate de reemplazar '/path/to/your/' con la ruta real donde se encuentra tu script.
