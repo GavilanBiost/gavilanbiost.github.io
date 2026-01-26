@@ -1,0 +1,138 @@
+import requests
+import xml.etree.ElementTree as ET
+
+# Parámetros de búsqueda en PubMed
+search_term = 'garcia-gavilan+j&sort=date'
+email = 'gargavilan@gmail.com'
+
+# Paso 1: Buscar artículos usando ESearch
+search_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
+search_params = {
+    'db': 'pubmed',
+    'term': search_term,
+    'sort': 'date',
+    'retmax': 10000,
+    'email': email
+}
+
+response = requests.get(search_url, params=search_params)
+
+if response.status_code == 200:
+    root = ET.fromstring(response.content)
+    pmids = [id_elem.text for id_elem in root.findall('.//Id')]
+    
+    if pmids:
+        # Paso 2: Obtener detalles de los artículos usando EFetch
+        fetch_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
+        fetch_params = {
+            'db': 'pubmed',
+            'id': ','.join(pmids),
+            'rettype': 'medline',
+            'retmode': 'xml',
+            'email': email
+        }
+        
+        fetch_response = requests.get(fetch_url, params=fetch_params)
+        
+        if fetch_response.status_code == 200:
+            fetch_root = ET.fromstring(fetch_response.content)
+            publications = []
+            
+            for article in fetch_root.findall('.//PubmedArticle'):
+                try:
+                    title_elem = article.find('.//ArticleTitle')
+                    title = title_elem.text if title_elem is not None else 'Título no disponible'
+
+                    authors = []
+                    for author in article.findall('.//Author'):
+                        collective = author.find('CollectiveName')
+                        if collective is not None and collective.text:
+                            authors.append(collective.text)
+                            continue
+
+                        last = author.find('LastName')
+                        fore = author.find('ForeName')
+                        name_parts = []
+                        if fore is not None and fore.text:
+                            name_parts.append(fore.text)
+                        if last is not None and last.text:
+                            name_parts.append(last.text)
+                        if name_parts:
+                            authors.append(' '.join(name_parts))
+
+                    authors_str = ', '.join(authors) if authors else 'Autores no disponibles'
+
+                    journal_elem = article.find('.//Journal/Title')
+                    journal = journal_elem.text if journal_elem is not None else 'Revista no disponible'
+
+                    year = 'Fecha no disponible'
+                    year_elem = article.find('.//PubDate/Year') or article.find('.//ArticleDate/Year')
+                    if year_elem is not None and year_elem.text:
+                        year = year_elem.text
+                    else:
+                        medline_date = article.find('.//PubDate/MedlineDate')
+                        if medline_date is not None and medline_date.text and medline_date.text[:4].isdigit():
+                            year = medline_date.text[:4]
+
+                    doi_elem = article.find('.//ArticleId[@IdType="doi"]')
+                    doi = doi_elem.text if doi_elem is not None else ''
+
+                    pmid_elem = article.find('.//PMID')
+                    pmid = pmid_elem.text if pmid_elem is not None else ''
+
+                    if pmid:
+                        link = f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/'
+                        doi_display = f'<a href="https://doi.org/{doi}" target="_blank">{doi}</a>' if doi else 'DOI no disponible'
+                        publications.append(
+                            f'<li>'
+                            f'<strong>{title}</strong><br>'
+                            f'Autores: {authors_str}<br>'
+                            f'Revista: {journal} ({year})<br>'
+                            f'DOI: {doi_display}<br>'
+                            f'PMID: {pmid} - <a href="{link}" target="_blank">Ver en PubMed</a>'
+                            f'</li>'
+                        )
+                except Exception as e:
+                    print(f'Error procesando artículo: {e}')
+            
+            if publications:
+                # Actualizar el archivo index.html
+                try:
+                    with open('index.html', 'r', encoding='utf-8') as file:
+                        content = file.read()
+                    
+                    # Buscar la sección de publicaciones (acepta publicaciones o publications)
+                    start_marker = None
+                    for marker in ['<ul id="publicaciones">', '<ul id="publications">']:
+                        idx = content.find(marker)
+                        if idx != -1:
+                            start_marker = marker
+                            start_index = idx + len(marker)
+                            break
+
+                    end_marker = '</ul>'
+
+                    if start_marker:
+                        end_index = content.find(end_marker, start_index)
+                        
+                        if end_index != -1:
+                            new_content = '\n'.join(publications)
+                            updated_content = content[:start_index] + '\n' + new_content + '\n' + content[end_index:]
+                            
+                            with open('index.html', 'w', encoding='utf-8') as file:
+                                file.write(updated_content)
+                            print('Archivo index.html actualizado correctamente')
+                        else:
+                            print('Error: No se encontró la etiqueta de cierre </ul>')
+                    else:
+                        print('Error: No se encontró una lista con id "publicaciones" o "publications"')
+                except Exception as e:
+                    print(f'Error al actualizar index.html: {e}')
+            else:
+                print('No se encontraron publicaciones')
+        else:
+            print(f'Error al obtener detalles: {fetch_response.status_code}')
+    else:
+        print('No se encontraron resultados para la búsqueda')
+else:
+    print(f'Error en la búsqueda: {response.status_code}')
