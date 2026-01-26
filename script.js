@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "i", "you", "he", "she", "it", "we", "they", "my", "your", "his", "her",
             "is", "am", "are", "was", "were", "be", "been", "being", "have", "has", "had",
             "this", "that", "these", "those", "click", "here", "read", "more", "join",
-            "new", "free", "learn",
+            "new", "free", "learn", "between", "within", "without", "using", "used", "use",
+            "also", "based", "data", "using", "using", "used", "use", "analysis", "results",
         ]);
 
         // 4. Contar Frecuencias
