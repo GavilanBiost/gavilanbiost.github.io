@@ -118,11 +118,13 @@ try:
 
     # Buscar la sección de publicaciones (acepta publicaciones o publications)
     start_marker = None
-    for marker in ['<ul id="publicaciones">', '<ul id="publications">']:
+    start_index = -1
+    for marker in ['<ul id="publicaciones"', '<ul id="publications"']:
         idx = content.find(marker)
         if idx != -1:
+            # Encontrar el cierre del tag (>)
+            start_index = content.find('>', idx) + 1
             start_marker = marker
-            start_index = idx + len(marker)
             break
 
     end_marker = '</ul>'
