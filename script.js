@@ -114,8 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "tengo", "tienes", "tiene", "hacer", "hace", "ver", "leer", "ir",
             "pero", "aunque", "sino", "porque", "pues", "01", "02", "03", "04", "05", "06", "07", "08",
             "pdf", "demo", "repo", "code", "aquí", "contact", "contacto", "Jesús", "paso",
-            "mí", "soy", "sobre", "García", "modernas", "enfoque", "->", "jesús", "josé",
-            "salassalvaó","revista","vidal","ruizcanela",
+            "mí", "soy", "sobre", "García", "modernas", "enfoque", "->", "predimedplus",
             
             // Inglés
             "the", "a", "an", "and", "or", "but", "if", "then", "else", "when", 

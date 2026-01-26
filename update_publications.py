@@ -73,6 +73,12 @@ for article in fetch_root.findall('.//PubmedArticle'):
                 authors.append(' '.join(name_parts))
 
         authors_str = ', '.join(authors) if authors else 'Autores no disponibles'
+        
+        # Mostrar solo los primeros 4 autores
+        if len(authors) > 4:
+            authors_str = ', '.join(authors[:4]) + ', ...'
+        else:
+            authors_str = ', '.join(authors) if authors else 'Autores no disponibles'
 
         journal_elem = article.find('.//Journal/Title')
         journal = journal_elem.text if journal_elem is not None else 'Revista no disponible'
@@ -94,16 +100,20 @@ for article in fetch_root.findall('.//PubmedArticle'):
 
         if pmid:
             link = f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/'
-            doi_display = f'<a href="https://doi.org/{doi}" target="_blank">{doi}</a>' if doi else 'DOI no disponible'
-            publications.append(
-                f'<li>'
-                f'<strong>{title}</strong><br>'
-                f'Autores: {authors_str}<br>'
-                f'Revista: {journal} ({year})<br>'
-                f'DOI: {doi_display}<br>'
-                f'PMID: {pmid} - <a href="{link}" target="_blank">Ver en PubMed</a>'
-                f'</li>'
-            )
+            
+            # Generar HTML en formato card
+            pub_html = f'<div class="card">\n'
+            pub_html += f'    <div class="pub-meta">{journal.upper()} · {year}</div>\n'
+            pub_html += f'    <a href="{link}" class="pub-title" target="_blank">{title}</a>\n'
+            pub_html += f'    <p class="text-small">{authors_str}</p>\n'
+            pub_html += f'    <div class="pub-links">\n'
+            if doi:
+                pub_html += f'        <a href="https://doi.org/{doi}" class="btn-outline" target="_blank"><i class="fa-regular fa-file-pdf"></i> DOI</a>\n'
+            pub_html += f'        <a href="{link}" class="btn-outline" target="_blank"><i class="fa-solid fa-link"></i> PubMed</a>\n'
+            pub_html += f'    </div>\n'
+            pub_html += f'</div>'
+            
+            publications.append(pub_html)
     except Exception as e:
         print(f'Error procesando artículo: {e}')
 
@@ -115,15 +125,19 @@ if not publications:
 try:
     with open('index.html', 'r', encoding='utf-8') as file:
         content = file.read()
-
-    # Buscar la sección de publicaciones (acepta publicaciones o publications)
-    start_marker = None
-    start_index = -1
-    for marker in ['<ul id="publicaciones"', '<ul id="publications"']:
+div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications"']:
         idx = content.find(marker)
         if idx != -1:
             # Encontrar el cierre del tag (>)
             start_index = content.find('>', idx) + 1
+            start_marker = marker
+            break
+
+    # Determinar el marcador de cierre según lo que se encontró
+    if start_marker and start_marker.startswith('<div'):
+        end_marker = '</div>'
+    else:
+                start_index = content.find('>', idx) + 1
             start_marker = marker
             break
 
@@ -139,15 +153,15 @@ try:
             with open('index.html', 'w', encoding='utf-8') as file:
                 file.write(updated_content)
             print(f'Se escribieron {len(publications)} publicaciones en index.html')
-        else:
-            print('Error: No se encontró la etiqueta de cierre </ul>')
-    else:
-        print('No se encontró lista; se creará una nueva sección de publicaciones al final del body')
-        pub_items = '\n    '.join(publications)
+        else:'.join(publications)
         new_list = (
             '\n<section class="content-section" id="publicaciones">\n'
             '  <div class="section-header">\n'
             '    <h2><span class="mono-text"></span> Publicaciones</h2>\n'
+            '  </div>\n'
+            '  <div id="publicaciones-content">\n'
+            f'{pub_items}\n'
+            '  </div2><span class="mono-text"></span> Publicaciones</h2>\n'
             '  </div>\n'
             '  <ul id="publicaciones" class="publication-list">\n'
             f'    {pub_items}\n'
