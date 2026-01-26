@@ -125,7 +125,11 @@ if not publications:
 try:
     with open('index.html', 'r', encoding='utf-8') as file:
         content = file.read()
-div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications"']:
+
+    # Buscar la sección de publicaciones (acepta publicaciones o publications)
+    start_marker = None
+    start_index = -1
+    for marker in ['<div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications"']:
         idx = content.find(marker)
         if idx != -1:
             # Encontrar el cierre del tag (>)
@@ -137,11 +141,7 @@ div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications
     if start_marker and start_marker.startswith('<div'):
         end_marker = '</div>'
     else:
-                start_index = content.find('>', idx) + 1
-            start_marker = marker
-            break
-
-    end_marker = '</ul>'
+        end_marker = '</ul>'
 
     if start_marker:
         end_index = content.find(end_marker, start_index)
@@ -153,7 +153,11 @@ div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications
             with open('index.html', 'w', encoding='utf-8') as file:
                 file.write(updated_content)
             print(f'Se escribieron {len(publications)} publicaciones en index.html')
-        else:'.join(publications)
+        else:
+            print('Error: No se encontró la etiqueta de cierre')
+    else:
+        print('No se encontró lista; se creará una nueva sección de publicaciones al final del body')
+        pub_items = '\n'.join(publications)
         new_list = (
             '\n<section class="content-section" id="publicaciones">\n'
             '  <div class="section-header">\n'
@@ -161,11 +165,7 @@ div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications
             '  </div>\n'
             '  <div id="publicaciones-content">\n'
             f'{pub_items}\n'
-            '  </div2><span class="mono-text"></span> Publicaciones</h2>\n'
             '  </div>\n'
-            '  <ul id="publicaciones" class="publication-list">\n'
-            f'    {pub_items}\n'
-            '  </ul>\n'
             '</section>\n'
         )
 
