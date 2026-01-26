@@ -141,13 +141,14 @@ try:
             print('Error: No se encontró la etiqueta de cierre </ul>')
     else:
         print('No se encontró lista; se creará una nueva sección de publicaciones al final del body')
+        pub_items = '\n    '.join(publications)
         new_list = (
             '\n<section class="content-section" id="publicaciones">\n'
             '  <div class="section-header">\n'
             '    <h2><span class="mono-text"></span> Publicaciones</h2>\n'
             '  </div>\n'
             '  <ul id="publicaciones" class="publication-list">\n'
-            f'    {'\n    '.join(publications)}\n'
+            f'    {pub_items}\n'
             '  </ul>\n'
             '</section>\n'
         )
