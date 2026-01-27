@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesús F García Gavilán - Bio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .biolink-container {
+            width: 100%;
+            max-width: 500px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-image: url('img/IMG_9589.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 20px;
+            border: 4px solid #9b51e0;
+            box-shadow: 0 10px 30px rgba(155, 81, 224, 0.2);
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .profile-bio {
+            font-size: 0.95rem;
+            color: #374151;
+            margin-bottom: 5px;
+        }
+
+        .profile-subtitle {
+            font-size: 0.85rem;
+            color: #9b51e0;
+            font-weight: 600;
+        }
+
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .biolink-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .biolink-button i {
+            font-size: 1.2rem;
+        }
+
+        .biolink-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-portafolio {
+            background: linear-gradient(135deg, #000000 0%, #111827 100%);
+            color: white;
+        }
+
+        .btn-portafolio:hover {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        }
+
+        .btn-linkedin {
+            background: linear-gradient(135deg, #0a66c2 0%, #0855a8 100%);
+            color: white;
+        }
+
+        .btn-linkedin:hover {
+            background: linear-gradient(135deg, #0855a8 0%, #073a8f 100%);
+        }
+
+        .btn-substack {
+            background: linear-gradient(135deg, #ff6b2c 0%, #e55a1f 100%);
+            color: white;
+        }
+
+        .btn-substack:hover {
+            background: linear-gradient(135deg, #e55a1f 0%, #cc4a1a 100%);
+        }
+
+        .btn-github {
+            background: linear-gradient(135deg, #24292f 0%, #0d1117 100%);
+            color: white;
+        }
+
+        .btn-github:hover {
+            background: linear-gradient(135deg, #0d1117 0%, #010409 100%);
+        }
+
+        .btn-metsdata {
+            background: linear-gradient(135deg, #9b51e0 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .btn-metsdata:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+        }
+
+        .footer-section {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #374151;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .social-link:hover {
+            background: #9b51e0;
+            color: white;
+            border-color: #9b51e0;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 480px) {
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .biolink-button {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="biolink-container">
+        <div class="profile-section">
+            <div class="avatar"></div>
+            <h1 class="profile-name">Jesús F García Gavilán</h1>
+            <p class="profile-bio">Bioinformática & Data Science</p>
+            <p class="profile-subtitle">Datos ómicos • Salud • Investigación</p>
+        </div>
+
+        <div class="links-section">
+            <a href="https://gavilanbiost.github.io" class="biolink-button btn-portafolio" target="_blank">
+                <i class="fas fa-globe"></i>
+                Mi Portafolio
+            </a>
+
+            <a href="https://www.linkedin.com/in/jesus-garcia-gavilan" class="biolink-button btn-linkedin" target="_blank">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+
+            <a href="https://gavilanbiost.substack.com" class="biolink-button btn-substack" target="_blank">
+                <i class="fas fa-envelope"></i>
+                Substack
+            </a>
+
+            <a href="https://github.com/GavilanBiost" class="biolink-button btn-github" target="_blank">
+                <i class="fab fa-github"></i>
+                GitHub
+            </a>
+
+            <a href="https://www.metsdata.com" class="biolink-button btn-metsdata" target="_blank">
+                <i class="fas fa-flask-vial"></i>
+                METS Data
+            </a>
+        </div>
+
+        <div class="footer-section">
+            <p>Conecta conmigo en cualquier plataforma</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/jesus-garcia-gavilan" class="social-link" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/GavilanBiost" class="social-link" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://gavilanbiost.substack.com" class="social-link" target="_blank" title="Substack">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="mailto:gargavilan@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
