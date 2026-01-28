@@ -181,13 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
     generateWordCloud();
 });
 
-function filterContentByTag() {
-        // 1. Leer el parámetro de la URL (ej: ?tag=python)
+// --- FUNCIONALIDAD DE FILTRADO POR TAG Y "VER MÁS PUBLICACIONES" ---
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. FILTRADO POR TAG
+    function filterContentByTag() {
         const urlParams = new URLSearchParams(window.location.search);
         const tag = urlParams.get('tag');
 
         if (tag) {
-            // 2. Filtrar las tarjetas y publicaciones
             const items = document.querySelectorAll('.card, .publication-item');
             
             items.forEach(item => {
@@ -196,24 +198,22 @@ function filterContentByTag() {
                 }
             });
 
-            // 3. Scroll suave hacia el contenido filtrado
             setTimeout(() => {
-                mainContent.scrollIntoView({ behavior: 'smooth' });
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.scrollIntoView({ behavior: 'smooth' });
+                }
             }, 100);
         }
     }
-
-    // Ejecutar el filtro al cargar
-    filterContentByTag();
-
-// --- FUNCIONALIDAD DE "VER MÁS PUBLICACIONES" ---
-document.addEventListener('DOMContentLoaded', () => {
+    
+    // 2. VER MÁS PUBLICACIONES
     const publicacionesContainer = document.getElementById('publicaciones-content');
     const verMasBtn = document.getElementById('ver-mas-publicaciones');
     
     if (publicacionesContainer && verMasBtn) {
         const publicaciones = publicacionesContainer.querySelectorAll('.card');
-        const maxVisible = 5; // Número de publicaciones visibles inicialmente
+        const maxVisible = 5;
         
         // Ocultar publicaciones después de las primeras 5
         if (publicaciones.length > maxVisible) {
@@ -246,4 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
+    // Ejecutar el filtro por tag
+    filterContentByTag();
 });
