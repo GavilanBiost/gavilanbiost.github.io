@@ -205,3 +205,45 @@ function filterContentByTag() {
 
     // Ejecutar el filtro al cargar
     filterContentByTag();
+
+// --- FUNCIONALIDAD DE "VER MÁS PUBLICACIONES" ---
+document.addEventListener('DOMContentLoaded', () => {
+    const publicacionesContainer = document.getElementById('publicaciones-content');
+    const verMasBtn = document.getElementById('ver-mas-publicaciones');
+    
+    if (publicacionesContainer && verMasBtn) {
+        const publicaciones = publicacionesContainer.querySelectorAll('.card');
+        const maxVisible = 5; // Número de publicaciones visibles inicialmente
+        
+        // Ocultar publicaciones después de las primeras 5
+        if (publicaciones.length > maxVisible) {
+            publicaciones.forEach((pub, index) => {
+                if (index >= maxVisible) {
+                    pub.classList.add('hidden-publication');
+                    pub.style.display = 'none';
+                }
+            });
+        } else {
+            // Si hay 5 o menos publicaciones, ocultar el botón
+            verMasBtn.style.display = 'none';
+        }
+        
+        // Evento click para mostrar todas las publicaciones
+        verMasBtn.addEventListener('click', () => {
+            const hiddenPubs = publicacionesContainer.querySelectorAll('.hidden-publication');
+            
+            hiddenPubs.forEach(pub => {
+                pub.style.display = 'block';
+                pub.classList.remove('hidden-publication');
+            });
+            
+            // Ocultar el botón después de mostrar todas
+            verMasBtn.style.display = 'none';
+            
+            // Scroll suave hacia las publicaciones recién mostradas
+            if (hiddenPubs.length > 0) {
+                hiddenPubs[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    }
+});
