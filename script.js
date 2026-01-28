@@ -207,59 +207,65 @@ window.addEventListener('load', () => {
         }
     }
     
-    // 2. VER MÁS PUBLICACIONES
-    setTimeout(() => {
-        const publicacionesContainer = document.getElementById('publicaciones-content');
-        const verMasBtn = document.getElementById('ver-mas-publicaciones');
-        
-        console.log('Container encontrado:', publicacionesContainer);
-        console.log('Botón encontrado:', verMasBtn);
-        
-        if (publicacionesContainer && verMasBtn) {
-            const publicaciones = publicacionesContainer.querySelectorAll('.card');
-            const maxVisible = 5;
+    // 2. FUNCIÓN GENÉRICA PARA "VER MÁS"
+    function setupVerMas(containerId, buttonId, maxVisible, itemName) {
+        setTimeout(() => {
+            const container = document.getElementById(containerId);
+            const verMasBtn = document.getElementById(buttonId);
             
-            console.log('Total de publicaciones encontradas:', publicaciones.length);
+            console.log(`[${itemName}] Container encontrado:`, container);
+            console.log(`[${itemName}] Botón encontrado:`, verMasBtn);
             
-            // Ocultar publicaciones después de las primeras 5
-            if (publicaciones.length > maxVisible) {
-                publicaciones.forEach((pub, index) => {
-                    if (index >= maxVisible) {
-                        pub.classList.add('hidden-publication');
-                        pub.style.display = 'none';
-                        pub.style.visibility = 'hidden';
+            if (container && verMasBtn) {
+                const items = container.querySelectorAll('.card');
+                
+                console.log(`[${itemName}] Total de items encontrados:`, items.length);
+                
+                // Ocultar items después de los primeros maxVisible
+                if (items.length > maxVisible) {
+                    items.forEach((item, index) => {
+                        if (index >= maxVisible) {
+                            item.classList.add('hidden-item');
+                            item.style.display = 'none';
+                            item.style.visibility = 'hidden';
+                        }
+                    });
+                    console.log(`[${itemName}] Se ocultaron`, items.length - maxVisible, 'items');
+                } else {
+                    // Si hay maxVisible o menos items, ocultar el botón
+                    verMasBtn.style.display = 'none';
+                    console.log(`[${itemName}] Hay ${maxVisible} o menos items, botón ocultado`);
+                }
+                
+                // Evento click para mostrar todos los items
+                verMasBtn.addEventListener('click', () => {
+                    console.log(`[${itemName}] Clic en ver más`);
+                    const hiddenItems = container.querySelectorAll('.hidden-item');
+                    
+                    hiddenItems.forEach(item => {
+                        item.style.display = 'block';
+                        item.style.visibility = 'visible';
+                        item.classList.remove('hidden-item');
+                    });
+                    
+                    // Ocultar el botón después de mostrar todas
+                    verMasBtn.style.display = 'none';
+                    
+                    // Scroll suave hacia los items recién mostrados
+                    if (hiddenItems.length > 0) {
+                        hiddenItems[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
-                console.log('Se ocultaron', publicaciones.length - maxVisible, 'publicaciones');
             } else {
-                // Si hay 5 o menos publicaciones, ocultar el botón
-                verMasBtn.style.display = 'none';
-                console.log('Hay 5 o menos publicaciones, botón ocultado');
+                console.error(`[${itemName}] No se encontró el contenedor o el botón`);
             }
-            
-            // Evento click para mostrar todas las publicaciones
-            verMasBtn.addEventListener('click', () => {
-                console.log('Clic en ver más');
-                const hiddenPubs = publicacionesContainer.querySelectorAll('.hidden-publication');
-                
-                hiddenPubs.forEach(pub => {
-                    pub.style.display = 'block';
-                    pub.style.visibility = 'visible';
-                    pub.classList.remove('hidden-publication');
-                });
-                
-                // Ocultar el botón después de mostrar todas
-                verMasBtn.style.display = 'none';
-                
-                // Scroll suave hacia las publicaciones recién mostradas
-                if (hiddenPubs.length > 0) {
-                    hiddenPubs[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            });
-        } else {
-            console.error('No se encontró el contenedor o el botón');
-        }
-    }, 100);
+        }, 100);
+    }
+    
+    // Aplicar "Ver más" a las diferentes secciones
+    setupVerMas('publicaciones-content', 'ver-mas-publicaciones', 5, 'Publicaciones');
+    setupVerMas('posts-content', 'ver-mas-posts', 3, 'Posts');
+    setupVerMas('proyectos', 'ver-mas-proyectos', 3, 'Proyectos');
     
     // Ejecutar el filtro por tag
     filterContentByTag();
