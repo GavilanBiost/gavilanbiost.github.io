@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- FUNCIONALIDAD DE FILTRADO POR TAG Y "VER MÁS PUBLICACIONES" ---
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     
     // 1. FILTRADO POR TAG
     function filterContentByTag() {
@@ -208,44 +208,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 2. VER MÁS PUBLICACIONES
-    const publicacionesContainer = document.getElementById('publicaciones-content');
-    const verMasBtn = document.getElementById('ver-mas-publicaciones');
-    
-    if (publicacionesContainer && verMasBtn) {
-        const publicaciones = publicacionesContainer.querySelectorAll('.card');
-        const maxVisible = 5;
+    setTimeout(() => {
+        const publicacionesContainer = document.getElementById('publicaciones-content');
+        const verMasBtn = document.getElementById('ver-mas-publicaciones');
         
-        // Ocultar publicaciones después de las primeras 5
-        if (publicaciones.length > maxVisible) {
-            publicaciones.forEach((pub, index) => {
-                if (index >= maxVisible) {
-                    pub.classList.add('hidden-publication');
-                    pub.style.display = 'none';
+        console.log('Container encontrado:', publicacionesContainer);
+        console.log('Botón encontrado:', verMasBtn);
+        
+        if (publicacionesContainer && verMasBtn) {
+            const publicaciones = publicacionesContainer.querySelectorAll('.card');
+            const maxVisible = 5;
+            
+            console.log('Total de publicaciones encontradas:', publicaciones.length);
+            
+            // Ocultar publicaciones después de las primeras 5
+            if (publicaciones.length > maxVisible) {
+                publicaciones.forEach((pub, index) => {
+                    if (index >= maxVisible) {
+                        pub.classList.add('hidden-publication');
+                        pub.style.display = 'none';
+                        pub.style.visibility = 'hidden';
+                    }
+                });
+                console.log('Se ocultaron', publicaciones.length - maxVisible, 'publicaciones');
+            } else {
+                // Si hay 5 o menos publicaciones, ocultar el botón
+                verMasBtn.style.display = 'none';
+                console.log('Hay 5 o menos publicaciones, botón ocultado');
+            }
+            
+            // Evento click para mostrar todas las publicaciones
+            verMasBtn.addEventListener('click', () => {
+                console.log('Clic en ver más');
+                const hiddenPubs = publicacionesContainer.querySelectorAll('.hidden-publication');
+                
+                hiddenPubs.forEach(pub => {
+                    pub.style.display = 'block';
+                    pub.style.visibility = 'visible';
+                    pub.classList.remove('hidden-publication');
+                });
+                
+                // Ocultar el botón después de mostrar todas
+                verMasBtn.style.display = 'none';
+                
+                // Scroll suave hacia las publicaciones recién mostradas
+                if (hiddenPubs.length > 0) {
+                    hiddenPubs[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             });
         } else {
-            // Si hay 5 o menos publicaciones, ocultar el botón
-            verMasBtn.style.display = 'none';
+            console.error('No se encontró el contenedor o el botón');
         }
-        
-        // Evento click para mostrar todas las publicaciones
-        verMasBtn.addEventListener('click', () => {
-            const hiddenPubs = publicacionesContainer.querySelectorAll('.hidden-publication');
-            
-            hiddenPubs.forEach(pub => {
-                pub.style.display = 'block';
-                pub.classList.remove('hidden-publication');
-            });
-            
-            // Ocultar el botón después de mostrar todas
-            verMasBtn.style.display = 'none';
-            
-            // Scroll suave hacia las publicaciones recién mostradas
-            if (hiddenPubs.length > 0) {
-                hiddenPubs[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        });
-    }
+    }, 100);
     
     // Ejecutar el filtro por tag
     filterContentByTag();
