@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gavilanbiost.github.io/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Archivos específicos
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /README.md
