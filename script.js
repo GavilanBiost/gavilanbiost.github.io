@@ -270,3 +270,56 @@ window.addEventListener('load', () => {
     // Ejecutar el filtro por tag
     filterContentByTag();
 });
+
+// --- AVISO DE COOKIES ---
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+
+    if (!banner || !acceptBtn || !declineBtn) return;
+
+    const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+    const SIMPLE_ANALYTICS_DOMAIN = 'gavilanbiost.github.io';
+
+    const loadGoogleAnalytics = () => {
+        if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);} // eslint-disable-line no-inner-declarations
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    };
+
+    const loadSimpleAnalytics = () => {
+        const saScript = document.createElement('script');
+        saScript.async = true;
+        saScript.defer = true;
+        saScript.src = 'https://scripts.simpleanalyticscdn.com/latest.js';
+        saScript.setAttribute('data-domain', SIMPLE_ANALYTICS_DOMAIN);
+        document.head.appendChild(saScript);
+    };
+
+    const consent = localStorage.getItem('cookie_consent');
+    if (!consent) banner.style.display = 'block';
+    if (consent === 'accepted') {
+        loadGoogleAnalytics();
+        loadSimpleAnalytics();
+    }
+
+    const saveConsent = (value) => {
+        localStorage.setItem('cookie_consent', value);
+        banner.style.display = 'none';
+    };
+
+    acceptBtn.addEventListener('click', () => {
+        saveConsent('accepted');
+        loadGoogleAnalytics();
+        loadSimpleAnalytics();
+    });
+    declineBtn.addEventListener('click', () => saveConsent('declined'));
+});
