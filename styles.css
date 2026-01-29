@@ -480,18 +480,18 @@ footer {
 
 /* Aviso de cookies */
 .cookie-overlay {
-    position: fixed;
-    inset: 0;
+    position: fixed !important;
+    inset: 0 !important;
     background: rgba(17, 24, 39, 0.45);
     z-index: 1999;
     display: none;
 }
 
 .cookie-banner {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
     width: min(560px, calc(100% - 32px));
     background: #ffffff;
     border: 1px solid var(--border-color);
