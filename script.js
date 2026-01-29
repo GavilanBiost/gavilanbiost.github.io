@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!banner || !overlay || !acceptBtn || !declineBtn) return;
 
     const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-    const SIMPLE_ANALYTICS_DOMAIN = 'gavilanbiost.github.io';
+    const GTM_ID = 'GTM-IM5FCFZW';
 
     const loadGoogleAnalytics = () => {
         if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
@@ -296,13 +296,14 @@ document.addEventListener('DOMContentLoaded', () => {
         gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
     };
 
-    const loadSimpleAnalytics = () => {
-        const saScript = document.createElement('script');
-        saScript.async = true;
-        saScript.defer = true;
-        saScript.src = 'https://scripts.simpleanalyticscdn.com/latest.js';
-        saScript.setAttribute('data-domain', SIMPLE_ANALYTICS_DOMAIN);
-        document.head.appendChild(saScript);
+    const loadGtm = () => {
+        if (!GTM_ID) return;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        const gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+        document.head.appendChild(gtmScript);
     };
 
     const consent = localStorage.getItem('cookie_consent');
@@ -312,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (consent === 'accepted') {
         loadGoogleAnalytics();
-        loadSimpleAnalytics();
+        loadGtm();
     }
 
     const saveConsent = (value) => {
@@ -324,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     acceptBtn.addEventListener('click', () => {
         saveConsent('accepted');
         loadGoogleAnalytics();
-        loadSimpleAnalytics();
+        loadGtm();
     });
     declineBtn.addEventListener('click', () => saveConsent('declined'));
 });
