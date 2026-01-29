@@ -274,10 +274,11 @@ window.addEventListener('load', () => {
 // --- AVISO DE COOKIES ---
 document.addEventListener('DOMContentLoaded', () => {
     const banner = document.getElementById('cookie-banner');
+    const overlay = document.getElementById('cookie-overlay');
     const acceptBtn = document.getElementById('cookie-accept');
     const declineBtn = document.getElementById('cookie-decline');
 
-    if (!banner || !acceptBtn || !declineBtn) return;
+    if (!banner || !overlay || !acceptBtn || !declineBtn) return;
 
     const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
     const SIMPLE_ANALYTICS_DOMAIN = 'gavilanbiost.github.io';
@@ -305,7 +306,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const consent = localStorage.getItem('cookie_consent');
-    if (!consent) banner.style.display = 'block';
+    if (!consent) {
+        banner.style.display = 'block';
+        overlay.style.display = 'block';
+    }
     if (consent === 'accepted') {
         loadGoogleAnalytics();
         loadSimpleAnalytics();
@@ -314,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveConsent = (value) => {
         localStorage.setItem('cookie_consent', value);
         banner.style.display = 'none';
+        overlay.style.display = 'none';
     };
 
     acceptBtn.addEventListener('click', () => {
