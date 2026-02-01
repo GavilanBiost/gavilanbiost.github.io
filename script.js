@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.textContent = item.word;
             link.className = 'tag';             
-            link.href = `?tag=${item.word}`; 
+            link.href = `?tag=${encodeURIComponent(item.word)}`; 
             
             const ratio = item.count / maxCount;
             if (ratio > 0.8) link.classList.add('tag-xl');
@@ -175,6 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
             else link.classList.add('tag-sm');
             
             link.title = `Ver entradas con: ${item.word}`;
+            
+            // Asegurar que navegue correctamente
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = `${window.location.pathname}?tag=${encodeURIComponent(item.word)}`;
+            });
             
             container.appendChild(link);
         });
