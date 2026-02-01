@@ -1,5 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
+import re
 
 # Parámetros de búsqueda en PubMed
 search_term = 'garcia-gavilan j'  # ajusta el término si quieres filtrar más (p.ej., añadiendo afiliación o rango de fechas)
@@ -126,57 +127,87 @@ try:
     with open('index.html', 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Buscar la sección de publicaciones (acepta publicaciones o publications)
-    start_marker = None
-    start_index = -1
-    for marker in ['<div id="publicaciones-content"', '<ul id="publicaciones"', '<ul id="publications"']:
-        idx = content.find(marker)
-        if idx != -1:
-            # Encontrar el cierre del tag (>)
-            start_index = content.find('>', idx) + 1
-            start_marker = marker
-            break
-
-    # Determinar el marcador de cierre según lo que se encontró
-    if start_marker and start_marker.startswith('<div'):
-        end_marker = '</div>'
+    # Buscar el contenedor de publicaciones usando regex
+    # El patrón busca: <div id="publicaciones-content"> ... contenido ... </div>
+    # hasta el div que cierra justo antes del botón "ver-mas-publicaciones"
+    
+    pattern = r'(<div id="publicaciones-content">)(.*?)(</div>\s*<div style="text-align: center[^>]*>\s*<button id="ver-mas-publicaciones")'
+    
+    match = re.search(pattern, content, re.DOTALL)
+    
+    if match:
+        # Reemplazar solo el contenido entre las etiquetas
+        new_content = '\n' + '\n'.join(publications) + '\n'
+        updated_content = content[:match.start(2)] + new_content + content[match.end(2):]
+        
+        with open('index.html', 'w', encoding='utf-8') as file:
+            file.write(updated_content)
+        print(f'✓ Se actualizaron {len(publications)} publicaciones en index.html')
     else:
-        end_marker = '</ul>'
+        print('⚠ No se encontró la sección de publicaciones con el formato esperado')
+        print('Buscando estructura alternativa...')
+        
+        # Intentar con un patrón más simple
+        simple_pattern = r'(<div id="publicaciones-content">)(.*?)(</div>)'
+        simple_match = re.search(simple_pattern, content, re.DOTALL)
+        
+        if simple_match:
+            # Verificar que el cierre esté antes de la sección de proyectos
+            next_section_idx = content.find('<section class="content-section" id="proyectos">', simple_match.end())
+            button_idx = content.find('id="ver-mas-publicaciones"', simple_match.end())
+            
+            if button_idx != -1 and button_idx < next_section_idx:
+                # Buscar el </div> que cierra publicaciones-content (está justo antes del botón)
+                end_search_start = button_idx
+                # Buscar hacia atrás el </div> más cercano
+                close_div_idx = content.rfind('</div>', simple_match.start(2), button_idx)
+                
+                if close_div_idx > simple_match.start(2):
+                    new_content = '\n' + '\n'.join(publications) + '\n'
+                    updated_content = content[:simple_match.start(2)] + new_content + content[close_div_idx:]
+                    
+                    with open('index.html', 'w', encoding='utf-8') as file:
+                        file.write(updated_content)
+                    print(f'✓ Se actualizaron {len(publications)} publicaciones en index.html')
+                else:
+                    print('✗ Error: No se pudo determinar el cierre correcto del contenedor')
+            else:
+                print('✗ Error: No se encontró el botón ver-mas-publicaciones o la estructura es incorrecta')
+        else:
+            print('✗ No se encontró la sección de publicaciones; creando una nueva...')
+            pub_items = '\n'.join(publications)
+            new_list = (
+                '\n<section class="content-section" id="publicaciones">\n'
+                '    <div class="section-header">\n'
+                '        <h2><span class="mono-text"></span> Publicaciones</h2>\n'
+                '    </div>\n'
+                '    <!-- Lista auto-generada por update_publications.py -->\n'
+                '    <div id="publicaciones-content">\n'
+                f'{pub_items}\n'
+                '    </div>\n'
+                '    <div style="text-align: center; margin-top: 20px;">\n'
+                '        <button id="ver-mas-publicaciones" class="btn-outline" style="cursor: pointer; padding: 12px 24px; font-size: 1rem;">\n'
+                '            <i class="fa-solid fa-plus"></i> Ver más publicaciones\n'
+                '        </button>\n'
+                '    </div>\n'
+                '</section>\n\n'
+            )
 
-    if start_marker:
-        end_index = content.find(end_marker, start_index)
+            # Buscar dónde insertar (antes de la sección de proyectos si existe, o antes de </main>)
+            proyectos_idx = content.find('<section class="content-section" id="proyectos">')
+            if proyectos_idx != -1:
+                insert_idx = proyectos_idx
+            else:
+                main_end = content.find('</main>')
+                insert_idx = main_end if main_end != -1 else content.rfind('</body>')
 
-        if end_index != -1:
-            new_content = '\n'.join(publications)
-            updated_content = content[:start_index] + '\n' + new_content + '\n' + content[end_index:]
+            updated_content = content[:insert_idx] + new_list + content[insert_idx:]
 
             with open('index.html', 'w', encoding='utf-8') as file:
                 file.write(updated_content)
-            print(f'Se escribieron {len(publications)} publicaciones en index.html')
-        else:
-            print('Error: No se encontró la etiqueta de cierre')
-    else:
-        print('No se encontró lista; se creará una nueva sección de publicaciones al final del body')
-        pub_items = '\n'.join(publications)
-        new_list = (
-            '\n<section class="content-section" id="publicaciones">\n'
-            '  <div class="section-header">\n'
-            '    <h2><span class="mono-text"></span> Publicaciones</h2>\n'
-            '  </div>\n'
-            '  <div id="publicaciones-content">\n'
-            f'{pub_items}\n'
-            '  </div>\n'
-            '</section>\n'
-        )
-
-        body_end = content.rfind('</body>')
-        if body_end == -1:
-            body_end = len(content)
-
-        updated_content = content[:body_end] + new_list + content[body_end:]
-
-        with open('index.html', 'w', encoding='utf-8') as file:
-            file.write(updated_content)
-        print(f'Se creó sección y se escribieron {len(publications)} publicaciones en index.html')
+            print(f'✓ Se creó la sección y se escribieron {len(publications)} publicaciones en index.html')
+            
 except Exception as e:
-    print(f'Error al actualizar index.html: {e}')
+    print(f'✗ Error al actualizar index.html: {e}')
+    import traceback
+    traceback.print_exc()
