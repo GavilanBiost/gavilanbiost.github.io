@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.textContent = item.word;
             link.className = 'tag';             
-            link.href = `?tag=${encodeURIComponent(item.word)}`; 
+            link.href = '#'; 
             
             const ratio = item.count / maxCount;
             if (ratio > 0.8) link.classList.add('tag-xl');
@@ -174,13 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (ratio > 0.4) link.classList.add('tag-md');
             else link.classList.add('tag-sm');
             
-            link.title = `Ver entradas con: ${item.word}`;
-            
-            // Asegurar que navegue correctamente
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = `${window.location.pathname}?tag=${encodeURIComponent(item.word)}`;
-            });
+            link.title = `${item.word}`;
             
             container.appendChild(link);
         });
@@ -190,140 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
     generateWordCloud();
 });
 
-// --- FUNCIONALIDAD DE FILTRADO POR TAG Y "VER MÁS PUBLICACIONES" ---
+// --- FUNCIONALIDAD DE "VER MÁS PUBLICACIONES" ---
 window.addEventListener('load', () => {
     
-    // 1. FILTRADO POR TAG
-    function filterContentByTag() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tag = urlParams.get('tag');
-
-        if (tag) {
-            // Crear banner de filtro
-            const filterBanner = document.createElement('div');
-            filterBanner.id = 'filter-banner';
-            filterBanner.style.cssText = `
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                padding: 15px 20px;
-                text-align: center;
-                z-index: 999;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                font-size: 1rem;
-            `;
-            filterBanner.innerHTML = `
-                <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                    <div style="flex: 1;">
-                        <i class="fa-solid fa-filter" style="margin-right: 8px;"></i>
-                        Mostrando artículos que contienen: <strong style="font-size: 1.1rem;">"${tag}"</strong>
-                    </div>
-                    <button id="clear-filter" style="
-                        background: white;
-                        color: #667eea;
-                        border: none;
-                        padding: 8px 16px;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        font-weight: 600;
-                        transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        <i class="fa-solid fa-times"></i> Limpiar filtro
-                    </button>
-                </div>
-            `;
-            document.body.insertBefore(filterBanner, document.body.firstChild);
-            
-            // Añadir evento al botón limpiar
-            document.getElementById('clear-filter').addEventListener('click', () => {
-                window.location.href = window.location.pathname;
-            });
-            
-            // Ajustar el padding del body para compensar el banner
-            document.querySelector('main').style.paddingTop = '100px';
-
-            // Filtrar contenido
-            const sections = ['#publicaciones', '#posts', '#proyectos', '#charlas'];
-            let totalVisible = 0;
-            let totalHidden = 0;
-            
-            sections.forEach(sectionId => {
-                const section = document.querySelector(sectionId);
-                if (section) {
-                    const items = section.querySelectorAll('.card, .publication-item');
-                    
-                    items.forEach(item => {
-                        const itemText = item.textContent.toLowerCase();
-                        const tagLower = tag.toLowerCase();
-                        
-                        if (itemText.includes(tagLower)) {
-                            item.style.display = '';
-                            item.style.opacity = '1';
-                            item.style.animation = 'fadeIn 0.5s ease-in';
-                            // Añadir highlight visual
-                            item.style.borderLeft = '4px solid #667eea';
-                            item.style.backgroundColor = '#f8f9ff';
-                            totalVisible++;
-                        } else {
-                            item.style.display = 'none';
-                            totalHidden++;
-                        }
-                    });
-                    
-                    // Ocultar botón "ver más" cuando hay filtro activo
-                    const verMasBtn = section.querySelector('[id^="ver-mas-"]');
-                    if (verMasBtn) {
-                        verMasBtn.style.display = 'none';
-                    }
-                }
-            });
-            
-            // Mostrar contador de resultados
-            if (totalVisible > 0) {
-                const counter = document.createElement('div');
-                counter.style.cssText = `
-                    text-align: center;
-                    margin: 20px 0;
-                    font-size: 1.1rem;
-                    color: #667eea;
-                    font-weight: 600;
-                `;
-                counter.innerHTML = `<i class="fa-solid fa-check-circle"></i> Se encontraron ${totalVisible} resultado${totalVisible !== 1 ? 's' : ''}`;
-                
-                // Insertar después del banner
-                const mainContent = document.querySelector('main');
-                if (mainContent && mainContent.firstChild) {
-                    mainContent.insertBefore(counter, mainContent.firstChild);
-                }
-            }
-            
-            // Añadir estilos para la animación
-            if (!document.getElementById('filter-animation-styles')) {
-                const style = document.createElement('style');
-                style.id = 'filter-animation-styles';
-                style.textContent = `
-                    @keyframes fadeIn {
-                        from { opacity: 0; transform: translateY(10px); }
-                        to { opacity: 1; transform: translateY(0); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-
-            // Scroll suave al contenido principal
-            setTimeout(() => {
-                const mainContent = document.querySelector('main');
-                if (mainContent) {
-                    mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 100);
-        }
-    }
-    
-    // 2. FUNCIÓN GENÉRICA PARA "VER MÁS"
+    // FUNCIÓN GENÉRICA PARA "VER MÁS"
     function setupVerMas(containerId, buttonId, maxVisible, itemName) {
         setTimeout(() => {
             const container = document.getElementById(containerId);
@@ -382,9 +246,6 @@ window.addEventListener('load', () => {
     setupVerMas('publicaciones-content', 'ver-mas-publicaciones', 5, 'Publicaciones');
     setupVerMas('posts-content', 'ver-mas-posts', 3, 'Posts');
     setupVerMas('proyectos', 'ver-mas-proyectos', 3, 'Proyectos');
-    
-    // Ejecutar el filtro por tag
-    filterContentByTag();
 });
 
 // --- AVISO DE COOKIES ---
