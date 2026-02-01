@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "this", "that", "these", "those", "click", "here", "read", "more", "join",
             "new", "free", "learn", "between", "within", "without", "using", "used", "use",
             "also", "based", "data", "using", "using", "used", "use", "analysis", "results",
+            "associated", "study", "studies", "based", "model", "models", "results", "conclusions",
+            "trial",
+            
         ]);
 
         // 4. Contar Frecuencias
@@ -190,18 +193,125 @@ window.addEventListener('load', () => {
         const tag = urlParams.get('tag');
 
         if (tag) {
-            const items = document.querySelectorAll('.card, .publication-item');
+            // Crear banner de filtro
+            const filterBanner = document.createElement('div');
+            filterBanner.id = 'filter-banner';
+            filterBanner.style.cssText = `
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 15px 20px;
+                text-align: center;
+                z-index: 999;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                font-size: 1rem;
+            `;
+            filterBanner.innerHTML = `
+                <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div style="flex: 1;">
+                        <i class="fa-solid fa-filter" style="margin-right: 8px;"></i>
+                        Mostrando artículos que contienen: <strong style="font-size: 1.1rem;">"${tag}"</strong>
+                    </div>
+                    <button id="clear-filter" style="
+                        background: white;
+                        color: #667eea;
+                        border: none;
+                        padding: 8px 16px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        <i class="fa-solid fa-times"></i> Limpiar filtro
+                    </button>
+                </div>
+            `;
+            document.body.insertBefore(filterBanner, document.body.firstChild);
             
-            items.forEach(item => {
-                if (!item.textContent.toLowerCase().includes(tag)) {
-                    item.style.display = 'none';
+            // Añadir evento al botón limpiar
+            document.getElementById('clear-filter').addEventListener('click', () => {
+                window.location.href = window.location.pathname;
+            });
+            
+            // Ajustar el padding del body para compensar el banner
+            document.querySelector('main').style.paddingTop = '100px';
+
+            // Filtrar contenido
+            const sections = ['#publicaciones', '#posts', '#proyectos', '#charlas'];
+            let totalVisible = 0;
+            let totalHidden = 0;
+            
+            sections.forEach(sectionId => {
+                const section = document.querySelector(sectionId);
+                if (section) {
+                    const items = section.querySelectorAll('.card, .publication-item');
+                    
+                    items.forEach(item => {
+                        const itemText = item.textContent.toLowerCase();
+                        const tagLower = tag.toLowerCase();
+                        
+                        if (itemText.includes(tagLower)) {
+                            item.style.display = '';
+                            item.style.opacity = '1';
+                            item.style.animation = 'fadeIn 0.5s ease-in';
+                            // Añadir highlight visual
+                            item.style.borderLeft = '4px solid #667eea';
+                            item.style.backgroundColor = '#f8f9ff';
+                            totalVisible++;
+                        } else {
+                            item.style.display = 'none';
+                            totalHidden++;
+                        }
+                    });
+                    
+                    // Ocultar botón "ver más" cuando hay filtro activo
+                    const verMasBtn = section.querySelector('[id^="ver-mas-"]');
+                    if (verMasBtn) {
+                        verMasBtn.style.display = 'none';
+                    }
                 }
             });
+            
+            // Mostrar contador de resultados
+            if (totalVisible > 0) {
+                const counter = document.createElement('div');
+                counter.style.cssText = `
+                    text-align: center;
+                    margin: 20px 0;
+                    font-size: 1.1rem;
+                    color: #667eea;
+                    font-weight: 600;
+                `;
+                counter.innerHTML = `<i class="fa-solid fa-check-circle"></i> Se encontraron ${totalVisible} resultado${totalVisible !== 1 ? 's' : ''}`;
+                
+                // Insertar después del banner
+                const mainContent = document.querySelector('main');
+                if (mainContent && mainContent.firstChild) {
+                    mainContent.insertBefore(counter, mainContent.firstChild);
+                }
+            }
+            
+            // Añadir estilos para la animación
+            if (!document.getElementById('filter-animation-styles')) {
+                const style = document.createElement('style');
+                style.id = 'filter-animation-styles';
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
 
+            // Scroll suave al contenido principal
             setTimeout(() => {
                 const mainContent = document.querySelector('main');
                 if (mainContent) {
-                    mainContent.scrollIntoView({ behavior: 'smooth' });
+                    mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }, 100);
         }
