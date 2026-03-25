@@ -8,7 +8,8 @@ from urllib.parse import quote_plus
 
 import requests
 
-MAX_NEWS = 20
+MAX_NEWS = 100  # Obtener hasta 100 noticias para el archivo
+MAX_INDEX_NEWS = 5  # Mostrar solo últimas 5 en index
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419"
 QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
@@ -26,8 +27,6 @@ QUERY_TERMS = [
     '"Garcia Gavilan"',
     '"García Gavilán"',
     '"García-Gavilán"',
-    '"Gavilan"',
-    '"Gavilán"',
 ]
 
 
@@ -135,10 +134,12 @@ def fetch_news() -> list[dict]:
     return deduped[:MAX_NEWS]
 
 
-def build_news_cards(news_items: list[dict]) -> str:
+def build_news_cards(news_items: list[dict], limit: int = None) -> str:
+    """Genera tarjetas HTML de noticias."""
     cards = []
+    items_to_show = news_items[:limit] if limit else news_items
 
-    for item in news_items:
+    for item in items_to_show:
         title = html.escape(item["title"] or "Sin titulo")
         link = html.escape(item["link"] or "#", quote=True)
         source = html.escape(item["source"] or "Google News")
@@ -164,6 +165,7 @@ def build_news_cards(news_items: list[dict]) -> str:
 
 
 def update_index_html(news_html: str) -> None:
+    """Actualiza la sección de noticias en index.html con solo las últimas 5 noticias."""
     with open("index.html", "r", encoding="utf-8") as file:
         content = file.read()
 
@@ -184,10 +186,133 @@ def update_index_html(news_html: str) -> None:
         file.write(updated)
 
 
+def create_news_page(all_news: list[dict]) -> None:
+    """Crea la página news.html con todas las noticias agrupadas por año."""
+    if not all_news:
+        html_content = '''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Jesús F García Gavilán</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <main role="main">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Noticias</h2>
+                </div>
+                <div class="card">
+                    <p class="text-small">No se encontraron noticias aún.</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="index.html" class="btn-outline">← Volver al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>'''
+        with open("news.html", "w", encoding="utf-8") as f:
+            f.write(html_content)
+        return
+
+    # Agrupar noticias por año
+    news_by_year = {}
+    for item in all_news:
+        year = item["pub_dt"].year
+        if year not in news_by_year:
+            news_by_year[year] = []
+        news_by_year[year].append(item)
+
+    # Ordenar años en orden descendente
+    sorted_years = sorted(news_by_year.keys(), reverse=True)
+
+    # Construir contenido HTML
+    news_sections = []
+    for year in sorted_years:
+        year_html = f'<div class="section-header"><h3>{year}</h3></div>\n'
+        for item in news_by_year[year]:
+            title = html.escape(item["title"] or "Sin titulo")
+            link = html.escape(item["link"] or "#", quote=True)
+            source = html.escape(item["source"] or "Google News")
+            pub_date = html.escape(item["pub_date"] or "Fecha no disponible")
+
+            year_html += (
+                '<div class="card">\n'
+                f'    <div class="pub-meta">{source} · {pub_date}</div>\n'
+                f'    <a href="{link}" class="pub-title" target="_blank" rel="noopener noreferrer">{title}</a>\n'
+                "</div>\n"
+            )
+        news_sections.append(year_html)
+
+    html_content = f'''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Noticias - Jesús F García Gavilán</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="index.html#posts">Posts</a>
+                <a href="index.html#publicaciones">Papers</a>
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="news.html">Noticias</a>
+                <a href="index.html#newsletter">Newsletter</a>
+                <a href="index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <main role="main" aria-label="Contenido principal">
+            <section class="content-section" id="noticias-archive">
+                <div class="section-header">
+                    <h2><span class="mono-text"></span> Noticias</h2>
+                </div>
+                
+                {"".join(news_sections)}
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="index.html" class="btn-outline">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>'''
+
+    with open("news.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+
 if __name__ == "__main__":
     print("Buscando noticias...")
-    news = fetch_news()
-    print(f"Noticias relevantes encontradas: {len(news)}")
-    html_cards = build_news_cards(news)
-    update_index_html(html_cards)
-    print("index.html actualizado con la seccion de noticias")
+    all_news = fetch_news()
+    print(f"Noticias relevantes encontradas: {len(all_news)}")
+    
+    # Actualizar index con solo las últimas 5 noticias
+    html_cards_index = build_news_cards(all_news, limit=MAX_INDEX_NEWS)
+    update_index_html(html_cards_index)
+    print(f"✓ index.html actualizado con {min(len(all_news), MAX_INDEX_NEWS)} noticias")
+    
+    # Crear página de archivo con todas las noticias por año
+    create_news_page(all_news)
+    print(f"✓ news.html creado con {len(all_news)} noticias agrupadas por año")

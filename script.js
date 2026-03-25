@@ -246,7 +246,7 @@ window.addEventListener('load', () => {
     setupVerMas('publicaciones-content', 'ver-mas-publicaciones', 5, 'Publicaciones');
     setupVerMas('posts-content', 'ver-mas-posts', 3, 'Posts');
     setupVerMas('proyectos', 'ver-mas-proyectos', 3, 'Proyectos');
-    setupVerMas('noticias-content', 'ver-mas-noticias', 5, 'Noticias');
+    // Nota: Noticias redirige directamente a news.html, no utiliza setupVerMas
 });
 
 // --- AVISO DE COOKIES ---
