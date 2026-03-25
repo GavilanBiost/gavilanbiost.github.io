@@ -24,6 +24,22 @@ QUERY_TERMS = [
     '"J. F. Garcia-Gavilan"',
 ]
 
+SPANISH_MONTHS = {
+    "enero": 1,
+    "febrero": 2,
+    "marzo": 3,
+    "abril": 4,
+    "mayo": 5,
+    "junio": 6,
+    "julio": 7,
+    "agosto": 8,
+    "septiembre": 9,
+    "setiembre": 9,
+    "octubre": 10,
+    "noviembre": 11,
+    "diciembre": 12,
+}
+
 
 def normalize_text(value: str) -> str:
     normalized = unicodedata.normalize("NFD", value)
@@ -73,6 +89,55 @@ def format_pub_date(raw_date: str) -> tuple[datetime, str]:
         return datetime.min, "Fecha no disponible"
 
 
+def extract_date_from_text(text: str) -> tuple[datetime, str]:
+    if not text:
+        return datetime.min, "Fecha no disponible"
+
+    plain = html.unescape(text)
+    plain = re.sub(r"<[^>]+>", " ", plain)
+    plain = re.sub(r"\s+", " ", plain).strip()
+
+    # Formato dd/mm/yyyy o dd-mm-yyyy
+    match_dmy = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b", plain)
+    if match_dmy:
+        day, month, year = map(int, match_dmy.groups())
+        try:
+            dt = datetime(year, month, day)
+            return dt, dt.strftime("%d/%m/%Y")
+        except ValueError:
+            pass
+
+    # Formato yyyy-mm-dd
+    match_ymd = re.search(r"\b(\d{4})-(\d{2})-(\d{2})\b", plain)
+    if match_ymd:
+        year, month, day = map(int, match_ymd.groups())
+        try:
+            dt = datetime(year, month, day)
+            return dt, dt.strftime("%d/%m/%Y")
+        except ValueError:
+            pass
+
+    # Formato "25 de marzo de 2026"
+    match_spanish = re.search(
+        r"\b(\d{1,2})\s+de\s+([a-záéíóú]+)\s+de\s+(\d{4})\b",
+        plain,
+        flags=re.IGNORECASE,
+    )
+    if match_spanish:
+        day = int(match_spanish.group(1))
+        month_name = normalize_text(match_spanish.group(2))
+        year = int(match_spanish.group(3))
+        month = SPANISH_MONTHS.get(month_name)
+        if month:
+            try:
+                dt = datetime(year, month, day)
+                return dt, dt.strftime("%d/%m/%Y")
+            except ValueError:
+                pass
+
+    return datetime.min, "Fecha no disponible"
+
+
 def get_item_text(item: ET.Element, tag_name: str) -> str:
     elem = item.find(tag_name)
     if elem is None or elem.text is None:
@@ -100,13 +165,19 @@ def fetch_news() -> list[dict]:
             link = get_item_text(item, "link")
             description = get_item_text(item, "description")
             source = get_item_text(item, "source") or "Google News"
-            pub_date_raw = get_item_text(item, "pubDate")
+            pub_date_raw = (
+                get_item_text(item, "pubDate")
+                or get_item_text(item, "published")
+                or get_item_text(item, "updated")
+            )
 
             combined_text = f"{title} {description}"
             if not contains_name_variant(combined_text):
                 continue
 
             pub_dt, pub_date = format_pub_date(pub_date_raw)
+            if pub_dt == datetime.min:
+                pub_dt, pub_date = extract_date_from_text(f"{title} {description}")
 
             key = link or normalize_text(title)
             existing = all_news.get(key)
