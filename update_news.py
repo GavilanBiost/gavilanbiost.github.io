@@ -8,10 +8,10 @@ from urllib.parse import quote_plus
 
 import requests
 
-MAX_NEWS = 100  # Obtener hasta 100 noticias para el archivo
+MAX_NEWS = 250  # Obtener mas noticias para cubrir historico
 MAX_INDEX_NEWS = 3  # Mostrar solo últimas 3 en index
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419"
-QUERY_TERMS = [
+NAME_QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
     '"Jesus F Garcia-Gavilan"',
     '"Jesus Garcia Gavilan"',
@@ -22,6 +22,16 @@ QUERY_TERMS = [
     '"J. F. Garcia Gavilan"',
     '"J F Garcia-Gavilan"',
     '"J. F. Garcia-Gavilan"',
+]
+
+# Ventanas temporales para captar noticias antiguas que Google no devuelve siempre
+# en una sola consulta (sin filtro y con cortes previos a 2026).
+DATE_WINDOWS = [
+    "",
+    " before:2026-01-01",
+    " before:2025-01-01",
+    " before:2024-01-01",
+    " after:2020-01-01 before:2026-01-01",
 ]
 
 SPANISH_MONTHS = {
@@ -145,10 +155,22 @@ def get_item_text(item: ET.Element, tag_name: str) -> str:
     return elem.text.strip()
 
 
+def build_search_queries() -> list[str]:
+    queries = []
+    seen = set()
+    for base_term in NAME_QUERY_TERMS:
+        for window in DATE_WINDOWS:
+            query = f"{base_term}{window}".strip()
+            if query not in seen:
+                seen.add(query)
+                queries.append(query)
+    return queries
+
+
 def fetch_news() -> list[dict]:
     all_news = {}
 
-    for query_term in QUERY_TERMS:
+    for query_term in build_search_queries():
         feed_url = GOOGLE_NEWS_RSS.format(query=quote_plus(query_term))
         print(f"Consultando: {query_term}")
 
