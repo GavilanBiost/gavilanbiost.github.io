@@ -45,8 +45,8 @@ def contains_name_variant(text: str) -> bool:
     has_jesus = "jesus" in token_set
     has_initials = bool(re.search(r"\bj\s+f\b", normalized))
 
-    # Require "gavilan" plus either garcia, jesus or initials to avoid unrelated news.
-    if has_gavilan and (has_garcia or has_jesus or has_initials):
+    # Strict match: require both surnames and Jesus (or initials J F).
+    if has_gavilan and has_garcia and (has_jesus or has_initials):
         return True
 
     patterns = [
@@ -56,9 +56,6 @@ def contains_name_variant(text: str) -> bool:
         r"\bgarcia\s+gavilan\b",
         r"\bjesus\s+f\s+garcia\b",
     ]
-
-    if (has_garcia and has_jesus) or (has_garcia and has_initials):
-        return True
 
     return any(re.search(pattern, normalized) for pattern in patterns)
 
@@ -194,7 +191,7 @@ def create_news_page(all_news: list[dict]) -> None:
     <title>Noticias - Jesús F García Gavilán</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="news-page">
     <div class="main-container">
         <main role="main">
             <section class="content-section">
@@ -261,7 +258,7 @@ def create_news_page(all_news: list[dict]) -> None:
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="news-page">
     <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
             <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>

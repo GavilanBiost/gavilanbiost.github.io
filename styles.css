@@ -128,6 +128,16 @@ a:hover {
     gap: 60px;
 }
 
+/* Página de noticias sin sidebar: usar todo el ancho de contenido */
+.news-page .main-container {
+    display: block;
+    max-width: 1200px;
+}
+
+.news-page .content-section {
+    width: 100%;
+}
+
 /* Sidebar */
 .profile-sidebar {
     position: sticky;
