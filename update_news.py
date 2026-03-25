@@ -9,7 +9,7 @@ from urllib.parse import quote_plus
 import requests
 
 MAX_NEWS = 100  # Obtener hasta 100 noticias para el archivo
-MAX_INDEX_NEWS = 5  # Mostrar solo últimas 5 en index
+MAX_INDEX_NEWS = 3  # Mostrar solo últimas 3 en index
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419"
 QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
@@ -22,11 +22,6 @@ QUERY_TERMS = [
     '"J. F. Garcia Gavilan"',
     '"J F Garcia-Gavilan"',
     '"J. F. Garcia-Gavilan"',
-    '"Garcia Gavilan"',
-    '"Garcia-Gavilan"',
-    '"Garcia Gavilan"',
-    '"García Gavilán"',
-    '"García-Gavilán"',
 ]
 
 
@@ -50,8 +45,8 @@ def contains_name_variant(text: str) -> bool:
     has_jesus = "jesus" in token_set
     has_initials = bool(re.search(r"\bj\s+f\b", normalized))
 
-    # Explicitly accept any Gavilan mention as requested.
-    if has_gavilan:
+    # Require "gavilan" plus either garcia, jesus or initials to avoid unrelated news.
+    if has_gavilan and (has_garcia or has_jesus or has_initials):
         return True
 
     patterns = [
@@ -165,7 +160,7 @@ def build_news_cards(news_items: list[dict], limit: int = None) -> str:
 
 
 def update_index_html(news_html: str) -> None:
-    """Actualiza la sección de noticias en index.html con solo las últimas 5 noticias."""
+    """Actualiza la sección de noticias en index.html con solo las últimas 3 noticias."""
     with open("index.html", "r", encoding="utf-8") as file:
         content = file.read()
 
@@ -188,6 +183,8 @@ def update_index_html(news_html: str) -> None:
 
 def create_news_page(all_news: list[dict]) -> None:
     """Crea la página news.html con todas las noticias agrupadas por año."""
+    generated_at = datetime.utcnow().strftime("%d/%m/%Y %H:%M UTC")
+
     if not all_news:
         html_content = '''<!DOCTYPE html>
 <html lang="es">
@@ -204,6 +201,7 @@ def create_news_page(all_news: list[dict]) -> None:
                 <div class="section-header">
                     <h2>Noticias</h2>
                 </div>
+                <p class="text-small" style="margin-bottom: 16px;">Última actualización: ''' + generated_at + '''</p>
                 <div class="card">
                     <p class="text-small">No se encontraron noticias aún.</p>
                 </div>
@@ -285,6 +283,7 @@ def create_news_page(all_news: list[dict]) -> None:
                 <div class="section-header">
                     <h2><span class="mono-text"></span> Noticias</h2>
                 </div>
+                <p class="text-small" style="margin-bottom: 16px;">Última actualización: {generated_at}</p>
                 
                 {"".join(news_sections)}
                 
@@ -308,7 +307,7 @@ if __name__ == "__main__":
     all_news = fetch_news()
     print(f"Noticias relevantes encontradas: {len(all_news)}")
     
-    # Actualizar index con solo las últimas 5 noticias
+    # Actualizar index con solo las últimas 3 noticias
     html_cards_index = build_news_cards(all_news, limit=MAX_INDEX_NEWS)
     update_index_html(html_cards_index)
     print(f"✓ index.html actualizado con {min(len(all_news), MAX_INDEX_NEWS)} noticias")
