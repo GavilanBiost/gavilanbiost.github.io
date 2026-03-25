@@ -138,6 +138,12 @@ a:hover {
     width: 100%;
 }
 
+/* Fallback robusto: si el contenedor solo tiene <main>, ocupar todo el grid */
+.main-container > main:only-child {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
 /* Sidebar */
 .profile-sidebar {
     position: sticky;
