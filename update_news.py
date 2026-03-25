@@ -3,14 +3,16 @@ import re
 import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from datetime import timedelta
 from email.utils import parsedate_to_datetime
 from urllib.parse import quote_plus
 
 import requests
 
-MAX_NEWS = 250  # Obtener mas noticias para cubrir historico
+MAX_NEWS = 400  # Obtener mas noticias para cubrir historico
 MAX_INDEX_NEWS = 3  # Mostrar solo últimas 3 en index
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419"
+MIN_HISTORY_YEAR = 2010
 NAME_QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
     '"Jesus F Garcia-Gavilan"',
@@ -22,16 +24,6 @@ NAME_QUERY_TERMS = [
     '"J. F. Garcia Gavilan"',
     '"J F Garcia-Gavilan"',
     '"J. F. Garcia-Gavilan"',
-]
-
-# Ventanas temporales para captar noticias antiguas que Google no devuelve siempre
-# en una sola consulta (sin filtro y con cortes previos a 2026).
-DATE_WINDOWS = [
-    "",
-    " before:2026-01-01",
-    " before:2025-01-01",
-    " before:2024-01-01",
-    " after:2020-01-01 before:2026-01-01",
 ]
 
 SPANISH_MONTHS = {
@@ -96,7 +88,44 @@ def format_pub_date(raw_date: str) -> tuple[datetime, str]:
             dt = dt.astimezone().replace(tzinfo=None)
         return dt, dt.strftime("%d/%m/%Y")
     except (TypeError, ValueError):
+        # Mostrar fecha cruda evita perder informacion util cuando llega en
+        # formatos no RFC822 (p. ej., cadenas localizadas del proveedor).
+        raw_clean = re.sub(r"\s+", " ", html.unescape(raw_date)).strip()
+        if raw_clean:
+            return datetime.min, raw_clean
         return datetime.min, "Fecha no disponible"
+
+
+def extract_relative_date_from_text(text: str) -> tuple[datetime, str]:
+    if not text:
+        return datetime.min, "Fecha no disponible"
+
+    normalized = normalize_text(html.unescape(text))
+    match = re.search(
+        r"\bhace\s+(\d+)\s+(minuto|minutos|hora|horas|dia|dias|semana|semanas|mes|meses|ano|anos)\b",
+        normalized,
+    )
+    if not match:
+        return datetime.min, "Fecha no disponible"
+
+    amount = int(match.group(1))
+    unit = match.group(2)
+    now = datetime.utcnow()
+
+    if unit in {"minuto", "minutos"}:
+        dt = now - timedelta(minutes=amount)
+    elif unit in {"hora", "horas"}:
+        dt = now - timedelta(hours=amount)
+    elif unit in {"dia", "dias"}:
+        dt = now - timedelta(days=amount)
+    elif unit in {"semana", "semanas"}:
+        dt = now - timedelta(weeks=amount)
+    elif unit in {"mes", "meses"}:
+        dt = now - timedelta(days=30 * amount)
+    else:
+        dt = now - timedelta(days=365 * amount)
+
+    return dt, dt.strftime("%d/%m/%Y")
 
 
 def extract_date_from_text(text: str) -> tuple[datetime, str]:
@@ -156,10 +185,17 @@ def get_item_text(item: ET.Element, tag_name: str) -> str:
 
 
 def build_search_queries() -> list[str]:
+    current_year = datetime.utcnow().year
+    date_windows = [""]
+
+    # Dividir por año fuerza a Google News a devolver resultados historicos.
+    for year in range(current_year, MIN_HISTORY_YEAR - 1, -1):
+        date_windows.append(f" after:{year}-01-01 before:{year + 1}-01-01")
+
     queries = []
     seen = set()
     for base_term in NAME_QUERY_TERMS:
-        for window in DATE_WINDOWS:
+        for window in date_windows:
             query = f"{base_term}{window}".strip()
             if query not in seen:
                 seen.add(query)
@@ -171,6 +207,7 @@ def fetch_news() -> list[dict]:
     all_news = {}
 
     for query_term in build_search_queries():
+        strict_query = '"' in query_term
         feed_url = GOOGLE_NEWS_RSS.format(query=quote_plus(query_term))
         print(f"Consultando: {query_term}")
 
@@ -194,12 +231,19 @@ def fetch_news() -> list[dict]:
             )
 
             combined_text = f"{title} {description}"
-            if not contains_name_variant(combined_text):
+            # Cuando la consulta usa frase exacta, Google ya aplica una fuerte
+            # restriccion semantica y muchos snippets no repiten el nombre.
+            if not strict_query and not contains_name_variant(combined_text):
+                continue
+
+            if not title and not description:
                 continue
 
             pub_dt, pub_date = format_pub_date(pub_date_raw)
             if pub_dt == datetime.min:
                 pub_dt, pub_date = extract_date_from_text(f"{title} {description}")
+            if pub_dt == datetime.min:
+                pub_dt, pub_date = extract_relative_date_from_text(f"{title} {description}")
 
             key = link or normalize_text(title)
             existing = all_news.get(key)
@@ -310,7 +354,7 @@ def create_news_page(all_news: list[dict]) -> None:
     # Agrupar noticias por año
     news_by_year = {}
     for item in all_news:
-        year = item["pub_dt"].year
+        year = item["pub_dt"].year if item["pub_dt"] != datetime.min else 0
         if year not in news_by_year:
             news_by_year[year] = []
         news_by_year[year].append(item)
@@ -321,7 +365,8 @@ def create_news_page(all_news: list[dict]) -> None:
     # Construir contenido HTML
     news_sections = []
     for year in sorted_years:
-        year_html = f'<div class="section-header"><h3>{year}</h3></div>\n'
+        year_label = str(year) if year != 0 else "Sin fecha"
+        year_html = f'<div class="section-header"><h3>{year_label}</h3></div>\n'
         for item in news_by_year[year]:
             title = html.escape(item["title"] or "Sin titulo")
             link = html.escape(item["link"] or "#", quote=True)
