@@ -130,12 +130,23 @@ a:hover {
 
 /* Página de noticias sin sidebar: usar todo el ancho de contenido */
 .news-page .main-container {
-    display: block;
+    display: block !important;
     max-width: 1200px;
 }
 
 .news-page .content-section {
-    width: 100%;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.news-page .main-container > main {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.news-page #noticias-archive {
+    width: 100% !important;
+    max-width: none !important;
 }
 
 /* Fallback robusto: si el contenedor solo tiene <main>, ocupar todo el grid */

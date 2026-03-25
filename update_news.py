@@ -192,9 +192,9 @@ def create_news_page(all_news: list[dict]) -> None:
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="news-page">
-    <div class="main-container">
-        <main role="main">
-            <section class="content-section">
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" style="width:100%;max-width:none;">
+            <section class="content-section" style="width:100%;max-width:none;">
                 <div class="section-header">
                     <h2>Noticias</h2>
                 </div>
@@ -274,9 +274,9 @@ def create_news_page(all_news: list[dict]) -> None:
         </div>
     </nav>
 
-    <div class="main-container">
-        <main role="main" aria-label="Contenido principal">
-            <section class="content-section" id="noticias-archive">
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section" id="noticias-archive" style="width:100%;max-width:none;">
                 <div class="section-header">
                     <h2><span class="mono-text"></span> Noticias</h2>
                 </div>
