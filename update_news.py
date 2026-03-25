@@ -172,7 +172,7 @@ def update_index_html(news_html: str) -> None:
     pattern = (
         r'(<div id="noticias-content">)'
         r'(.*?)'
-        r'(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*<button id="ver-mas-noticias")'
+        r'(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*(?:<button id="ver-mas-noticias"|<a href="news\.html"))'
     )
 
     match = re.search(pattern, content, re.DOTALL)
