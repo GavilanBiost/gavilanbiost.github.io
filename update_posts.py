@@ -8,6 +8,8 @@ import re
 # URL del feed RSS de Substack
 SUBSTACK_FEED = 'https://gavilanbiost.substack.com/feed'
 SUBSTACK_ARCHIVE_API = 'https://gavilanbiost.substack.com/api/v1/archive'
+JINA_MIRROR_FEED = 'https://r.jina.ai/http://gavilanbiost.substack.com/feed'
+JINA_MIRROR_ARCHIVE = 'https://r.jina.ai/http://gavilanbiost.substack.com/archive'
 MAX_POSTS = 5  # Número máximo de posts a mostrar
 REQUEST_TIMEOUT = 20
 COMMON_HEADERS = {
@@ -84,17 +86,17 @@ def fetch_substack_posts_from_api():
         )
     except requests.RequestException as exc:
         print(f'Error de red en fallback API: {exc}')
-        return []
+        return fetch_substack_posts_from_jina_mirror()
 
     if response.status_code != 200:
         print(f'Fallback API devolvió estado {response.status_code}')
-        return []
+        return fetch_substack_posts_from_jina_mirror()
 
     try:
         payload = response.json()
     except ValueError as exc:
         print(f'Fallback API devolvió JSON inválido: {exc}')
-        return []
+        return fetch_substack_posts_from_jina_mirror()
 
     items = payload if isinstance(payload, list) else payload.get('posts', [])
     posts = []
@@ -112,6 +114,65 @@ def fetch_substack_posts_from_api():
         if post_html:
             posts.append(post_html)
             print(f'✓ Post encontrado (API): {title}')
+
+    if posts:
+        return posts
+
+    return fetch_substack_posts_from_jina_mirror()
+
+
+def fetch_substack_posts_from_jina_mirror():
+    print('Intentando fallback final vía espejo de lectura (r.jina.ai)...')
+
+    candidates = []
+    for mirror_url in (JINA_MIRROR_FEED, JINA_MIRROR_ARCHIVE):
+        try:
+            response = requests.get(
+                mirror_url,
+                timeout=REQUEST_TIMEOUT + 10,
+                headers={
+                    **COMMON_HEADERS,
+                    'Accept': 'text/plain, text/markdown, */*',
+                },
+            )
+        except requests.RequestException as exc:
+            print(f'Error de red con {mirror_url}: {exc}')
+            continue
+
+        if response.status_code != 200:
+            print(f'Espejo devolvió estado {response.status_code} para {mirror_url}')
+            continue
+
+        candidates.append(response.text)
+
+    if not candidates:
+        print('No fue posible recuperar contenido desde el espejo')
+        return []
+
+    # Extraer pares [titulo](url) apuntando a posts /p/
+    link_pattern = re.compile(r'\[([^\]]+)\]\((https?://gavilanbiost\.substack\.com/p/[^)\s]+)\)')
+    seen = set()
+    posts = []
+
+    for text in candidates:
+        for title, link in link_pattern.findall(text):
+            title_clean = re.sub(r'\s+', ' ', title).strip()
+            if not title_clean:
+                continue
+            if title_clean.lower().startswith('http'):
+                continue
+
+            link_clean = link.strip()
+            if link_clean in seen:
+                continue
+
+            seen.add(link_clean)
+            post_html = build_post_card(title_clean, link_clean, 'Fecha no disponible', '')
+            if post_html:
+                posts.append(post_html)
+                print(f'✓ Post encontrado (espejo): {title_clean}')
+            if len(posts) >= MAX_POSTS:
+                return posts
 
     return posts
 
