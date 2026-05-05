@@ -18,7 +18,9 @@ def fetch_substack_posts():
             SUBSTACK_FEED,
             timeout=REQUEST_TIMEOUT,
             headers={
-                'User-Agent': 'Mozilla/5.0 (compatible; gavilanbiost-bot/1.0)'
+                'User-Agent': 'Mozilla/5.0 (compatible; gavilanbiost-bot/1.0)',
+                'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+                'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
             },
         )
     except requests.RequestException as exc:
@@ -120,8 +122,8 @@ if __name__ == '__main__':
     posts = fetch_substack_posts()
 
     if not posts:
-        print('No se encontraron posts en el feed. Se mantiene index.html sin cambios.')
-        raise SystemExit(0)
+        print('No se encontraron posts en el feed. Se detiene para evitar un éxito silencioso sin actualizar index.html.')
+        raise SystemExit(1)
 
     # Actualizar el archivo index.html
     try:
