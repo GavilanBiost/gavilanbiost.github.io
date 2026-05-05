@@ -35,7 +35,7 @@ jobs:
 
           content = Path('index.html').read_text(encoding='utf-8')
           match = re.search(
-              r'(<div id="posts-content">)(.*?)(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*<button id="ver-mas-posts")',
+              r'(<div id="posts-content">)(.*?)(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*(?:<button id="ver-mas-posts"|<a href="posts\.html"))',
               content,
               re.DOTALL,
           )
@@ -59,6 +59,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html posts.html
           git diff --staged --quiet || git commit -m "chore: update substack posts"
           git push

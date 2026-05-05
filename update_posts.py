@@ -1,6 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from html import escape
 from html import unescape
 import re
@@ -10,7 +11,8 @@ SUBSTACK_FEED = 'https://gavilanbiost.substack.com/feed'
 SUBSTACK_ARCHIVE_API = 'https://gavilanbiost.substack.com/api/v1/archive'
 JINA_MIRROR_FEED = 'https://r.jina.ai/http://gavilanbiost.substack.com/feed'
 JINA_MIRROR_ARCHIVE = 'https://r.jina.ai/http://gavilanbiost.substack.com/archive'
-MAX_POSTS = 5  # Número máximo de posts a mostrar
+MAX_INDEX_POSTS = 3
+MAX_ARCHIVE_POSTS = 200
 REQUEST_TIMEOUT = 20
 COMMON_HEADERS = {
     'User-Agent': (
@@ -33,96 +35,117 @@ def clean_description(text):
         description += '...'
     return description
 
+def parse_date_value(date_text):
+    if date_text is None or date_text == '':
+        return datetime.min, 'Fecha no disponible'
 
-def format_api_date(date_text):
-    if not date_text:
-        return 'Fecha no disponible'
+    if isinstance(date_text, (int, float)):
+        try:
+            ts = float(date_text)
+            if ts > 10_000_000_000:
+                ts = ts / 1000.0
+            dt = datetime.utcfromtimestamp(ts)
+            return dt, dt.strftime('%d/%m/%Y')
+        except (ValueError, OSError):
+            return datetime.min, 'Fecha no disponible'
+
+    text = str(date_text).strip()
+    if not text:
+        return datetime.min, 'Fecha no disponible'
 
     try:
-        normalized = str(date_text).replace('Z', '+00:00')
+        normalized = text.replace('Z', '+00:00')
         dt = datetime.fromisoformat(normalized)
-        return dt.strftime('%d %b %Y')
+        if dt.tzinfo is not None:
+            dt = dt.astimezone().replace(tzinfo=None)
+        return dt, dt.strftime('%d/%m/%Y')
     except ValueError:
-        return str(date_text)[:10] if len(str(date_text)) >= 10 else str(date_text)
+        return datetime.min, text[:10] if len(text) >= 10 else text
 
 
-def build_post_card(title, link, pub_date, description):
+def parse_rss_pub_date(raw_date):
+    if not raw_date:
+        return datetime.min, 'Fecha no disponible'
+
+    try:
+        dt = parsedate_to_datetime(raw_date)
+        if dt.tzinfo is not None:
+            dt = dt.astimezone().replace(tzinfo=None)
+        return dt, dt.strftime('%d/%m/%Y')
+    except (TypeError, ValueError):
+        return datetime.min, 'Fecha no disponible'
+
+
+def format_post_entry(title, link, pub_dt, pub_date, description):
+    return {
+        'title': title or 'Sin título',
+        'link': link or '',
+        'pub_dt': pub_dt if pub_dt else datetime.min,
+        'pub_date': pub_date or 'Fecha no disponible',
+        'description': description or '',
+    }
+
+
+def build_post_card(post):
+    link = post.get('link', '')
     if not link:
         return ''
 
-    safe_title = escape(title or 'Sin título')
+    safe_title = escape(post.get('title') or 'Sin título')
     safe_link = escape(link, quote=True)
-    safe_date = escape(pub_date or 'Fecha no disponible')
-    safe_description = escape(description or '')
+    safe_date = escape(post.get('pub_date') or 'Fecha no disponible')
+    safe_description = escape(post.get('description') or '')
 
-    post_html = f'<div class="card">\n'
+    post_html = '<div class="card">\n'
     post_html += f'    <div class="pub-meta">SUBSTACK · {safe_date}</div>\n'
     post_html += f'    <a href="{safe_link}" class="pub-title" target="_blank" rel="noopener noreferrer">{safe_title}</a>\n'
-    if description:
+    if safe_description:
         post_html += f'    <p class="text-small">{safe_description}</p>\n'
-    post_html += f'    <div class="pub-links">\n'
+    post_html += '    <div class="pub-links">\n'
     post_html += (
         f'        <a href="{safe_link}" class="btn-outline" target="_blank" '
         'rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> '
         'Leer Post</a>\n'
     )
-    post_html += f'    </div>\n'
-    post_html += f'</div>'
+    post_html += '    </div>\n'
+    post_html += '</div>'
     return post_html
 
 
-def fetch_substack_posts_from_api():
-    print('Intentando fallback con API pública de Substack...')
+def dedupe_and_sort_posts(posts):
+    unique = {}
+    for post in posts:
+        link = post.get('link', '').strip()
+        if not link:
+            continue
 
-    try:
-        response = requests.get(
-            SUBSTACK_ARCHIVE_API,
-            params={'sort': 'new'},
-            timeout=REQUEST_TIMEOUT,
-            headers={
-                **COMMON_HEADERS,
-                'Accept': 'application/json, text/plain, */*',
-            },
-        )
-    except requests.RequestException as exc:
-        print(f'Error de red en fallback API: {exc}')
-        return fetch_substack_posts_from_jina_mirror()
+        existing = unique.get(link)
+        if existing is None:
+            unique[link] = post
+            continue
 
-    if response.status_code != 200:
-        print(f'Fallback API devolvió estado {response.status_code}')
-        return fetch_substack_posts_from_jina_mirror()
+        # Mantener el que tenga mejor fecha o mejor descripción.
+        if post.get('pub_dt', datetime.min) > existing.get('pub_dt', datetime.min):
+            unique[link] = post
+        elif len(post.get('description', '')) > len(existing.get('description', '')):
+            unique[link] = post
 
-    try:
-        payload = response.json()
-    except ValueError as exc:
-        print(f'Fallback API devolvió JSON inválido: {exc}')
-        return fetch_substack_posts_from_jina_mirror()
-
-    items = payload if isinstance(payload, list) else payload.get('posts', [])
-    posts = []
-
-    for item in items[:MAX_POSTS]:
-        title = item.get('title') or 'Sin título'
-        link = item.get('canonical_url') or item.get('post_url') or ''
-        if not link and item.get('slug'):
-            link = f'https://gavilanbiost.substack.com/p/{item.get("slug")}'
-
-        pub_date = format_api_date(item.get('post_date') or item.get('published_at') or item.get('created_at'))
-        description = clean_description(item.get('subtitle') or item.get('description') or item.get('body_html') or '')
-
-        post_html = build_post_card(title, link, pub_date, description)
-        if post_html:
-            posts.append(post_html)
-            print(f'✓ Post encontrado (API): {title}')
-
-    if posts:
-        return posts
-
-    return fetch_substack_posts_from_jina_mirror()
+    deduped = list(unique.values())
+    deduped.sort(key=lambda x: x.get('pub_dt', datetime.min), reverse=True)
+    return deduped
 
 
-def fetch_substack_posts_from_jina_mirror():
-    print('Intentando fallback final vía espejo de lectura (r.jina.ai)...')
+def build_cards_html(posts):
+    cards = []
+    for post in posts:
+        card = build_post_card(post)
+        if card:
+            cards.append(card)
+    return '\n'.join(cards)
+
+
+def fetch_substack_posts_from_jina_mirror(limit):
+    print('Intentando fallback final via espejo de lectura (r.jina.ai)...')
 
     candidates = []
     for mirror_url in (JINA_MIRROR_FEED, JINA_MIRROR_ARCHIVE):
@@ -140,7 +163,7 @@ def fetch_substack_posts_from_jina_mirror():
             continue
 
         if response.status_code != 200:
-            print(f'Espejo devolvió estado {response.status_code} para {mirror_url}')
+            print(f'Espejo devolvio estado {response.status_code} para {mirror_url}')
             continue
 
         candidates.append(response.text)
@@ -149,35 +172,90 @@ def fetch_substack_posts_from_jina_mirror():
         print('No fue posible recuperar contenido desde el espejo')
         return []
 
-    # Extraer pares [titulo](url) apuntando a posts /p/
     link_pattern = re.compile(r'\[([^\]]+)\]\((https?://gavilanbiost\.substack\.com/p/[^)\s]+)\)')
-    seen = set()
     posts = []
 
     for text in candidates:
         for title, link in link_pattern.findall(text):
             title_clean = re.sub(r'\s+', ' ', title).strip()
-            if not title_clean:
-                continue
-            if title_clean.lower().startswith('http'):
+            if not title_clean or title_clean.lower().startswith('http'):
                 continue
 
-            link_clean = link.strip()
-            if link_clean in seen:
-                continue
+            posts.append(
+                format_post_entry(
+                    title=title_clean,
+                    link=link.strip(),
+                    pub_dt=datetime.min,
+                    pub_date='Fecha no disponible',
+                    description='',
+                )
+            )
 
-            seen.add(link_clean)
-            post_html = build_post_card(title_clean, link_clean, 'Fecha no disponible', '')
-            if post_html:
-                posts.append(post_html)
-                print(f'✓ Post encontrado (espejo): {title_clean}')
-            if len(posts) >= MAX_POSTS:
-                return posts
-
-    return posts
+    posts = dedupe_and_sort_posts(posts)
+    for post in posts[:limit]:
+        print(f"✓ Post encontrado (espejo): {post['title']}")
+    return posts[:limit]
 
 
-def fetch_substack_posts():
+def fetch_substack_posts_from_api(limit):
+    print('Intentando fallback con API publica de Substack...')
+
+    try:
+        response = requests.get(
+            SUBSTACK_ARCHIVE_API,
+            params={'sort': 'new'},
+            timeout=REQUEST_TIMEOUT,
+            headers={
+                **COMMON_HEADERS,
+                'Accept': 'application/json, text/plain, */*',
+            },
+        )
+    except requests.RequestException as exc:
+        print(f'Error de red en fallback API: {exc}')
+        return fetch_substack_posts_from_jina_mirror(limit)
+
+    if response.status_code != 200:
+        print(f'Fallback API devolvio estado {response.status_code}')
+        return fetch_substack_posts_from_jina_mirror(limit)
+
+    try:
+        payload = response.json()
+    except ValueError as exc:
+        print(f'Fallback API devolvio JSON invalido: {exc}')
+        return fetch_substack_posts_from_jina_mirror(limit)
+
+    items = payload if isinstance(payload, list) else payload.get('posts', [])
+    posts = []
+
+    for item in items[:limit]:
+        title = item.get('title') or 'Sin título'
+        link = item.get('canonical_url') or item.get('post_url') or ''
+        if not link and item.get('slug'):
+            link = f'https://gavilanbiost.substack.com/p/{item.get("slug")}'
+
+        pub_dt, pub_date = parse_date_value(item.get('post_date') or item.get('published_at') or item.get('created_at'))
+        description = clean_description(item.get('subtitle') or item.get('description') or item.get('body_html') or '')
+
+        posts.append(
+            format_post_entry(
+                title=title,
+                link=link,
+                pub_dt=pub_dt,
+                pub_date=pub_date,
+                description=description,
+            )
+        )
+
+    posts = dedupe_and_sort_posts(posts)
+    for post in posts[:limit]:
+        print(f"✓ Post encontrado (API): {post['title']}")
+
+    if posts:
+        return posts[:limit]
+    return fetch_substack_posts_from_jina_mirror(limit)
+
+
+def fetch_substack_posts(limit=MAX_ARCHIVE_POSTS):
     print('Obteniendo posts de Substack...')
 
     try:
@@ -191,94 +269,215 @@ def fetch_substack_posts():
         )
     except requests.RequestException as exc:
         print(f'Error de red al obtener el feed: {exc}')
-        return fetch_substack_posts_from_api()
+        return fetch_substack_posts_from_api(limit)
 
     if response.status_code != 200:
         print(f'Error al obtener el feed: {response.status_code}')
-        return fetch_substack_posts_from_api()
+        return fetch_substack_posts_from_api(limit)
 
     try:
         root = ET.fromstring(response.content)
     except ET.ParseError as exc:
         print(f'Error parseando XML del feed: {exc}')
-        return fetch_substack_posts_from_api()
+        return fetch_substack_posts_from_api(limit)
 
     posts = []
-
-    # Buscar todos los items (posts)
-    for item in root.findall('.//item')[:MAX_POSTS]:
+    for item in root.findall('.//item')[:limit]:
         try:
-            # Extraer título
             title_elem = item.find('title')
             title = title_elem.text.strip() if title_elem is not None and title_elem.text else 'Sin título'
 
-            # Extraer link
             link_elem = item.find('link')
             link = link_elem.text.strip() if link_elem is not None and link_elem.text else ''
 
-            # Extraer fecha de publicación
             pub_date_elem = item.find('pubDate')
-            pub_date = 'Fecha no disponible'
-            if pub_date_elem is not None and pub_date_elem.text:
-                # Formato: Mon, 27 Jan 2026 10:00:00 GMT
-                date_parts = pub_date_elem.text.split()
-                if len(date_parts) >= 4:
-                    day = date_parts[1]
-                    month = date_parts[2]
-                    year = date_parts[3]
-                    pub_date = f'{day} {month} {year}'
+            pub_dt, pub_date = parse_rss_pub_date(pub_date_elem.text if pub_date_elem is not None else '')
 
-            # Extraer descripción/extracto
             description_elem = item.find('description')
             description = clean_description(description_elem.text if description_elem is not None else '')
 
-            post_html = build_post_card(title, link, pub_date, description)
-            if post_html:
-                posts.append(post_html)
-                print(f'✓ Post encontrado: {title}')
+            posts.append(
+                format_post_entry(
+                    title=title,
+                    link=link,
+                    pub_dt=pub_dt,
+                    pub_date=pub_date,
+                    description=description,
+                )
+            )
         except Exception as exc:
             print(f'Error procesando post: {exc}')
 
+    posts = dedupe_and_sort_posts(posts)
+    for post in posts[:limit]:
+        print(f"✓ Post encontrado: {post['title']}")
+
     if posts:
-        return posts
+        return posts[:limit]
 
-    print('Feed RSS no devolvió items utilizables. Intentando fallback API...')
-    return fetch_substack_posts_from_api()
+    print('Feed RSS no devolvio items utilizables. Intentando fallback API...')
+    return fetch_substack_posts_from_api(limit)
 
 
-def update_index_html(posts):
+def update_index_html(posts, generated_at):
     with open('index.html', 'r', encoding='utf-8') as file:
         content = file.read()
 
-    pattern = (
+    pattern_posts = (
         r'(<div id="posts-content">)'
         r'(.*?)'
-        r'(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*<button id="ver-mas-posts")'
+        r'(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*(?:<button id="ver-mas-posts"|<a href="posts\.html"))'
     )
 
-    match = re.search(pattern, content, re.DOTALL)
-    if not match:
-        raise RuntimeError('No se encontró la sección de posts en index.html con el formato esperado')
+    match_posts = re.search(pattern_posts, content, re.DOTALL)
+    if not match_posts:
+        raise RuntimeError('No se encontro la seccion de posts en index.html con el formato esperado')
 
-    new_content = '\n' + '\n'.join(posts) + '\n'
-    updated_content = content[:match.start(2)] + new_content + content[match.end(2):]
+    new_cards = '\n' + build_cards_html(posts[:MAX_INDEX_POSTS]) + '\n'
+    updated_content = content[:match_posts.start(2)] + new_cards + content[match_posts.end(2):]
+
+    date_text = f'Ultima actualizacion: {generated_at}'
+    pattern_date = r'(<p class="text-small" id="posts-last-updated"[^>]*>)(.*?)(</p>)'
+    if re.search(pattern_date, updated_content, re.DOTALL):
+        updated_content = re.sub(pattern_date, rf'\1{date_text}\3', updated_content, count=1, flags=re.DOTALL)
+    else:
+        insert_after_header = (
+            r'(<section class="content-section" id="posts">\s*<div class="section-header">\s*'
+            r'<h2><span class="mono-text"></span> Ultimos Posts</h2>\s*</div>)'
+        )
+        updated_content = re.sub(
+            insert_after_header,
+            r'\1\n                <p class="text-small" id="posts-last-updated" style="margin-bottom: 16px;">'
+            + date_text
+            + '</p>',
+            updated_content,
+            count=1,
+            flags=re.DOTALL,
+        )
 
     with open('index.html', 'w', encoding='utf-8') as file:
         file.write(updated_content)
 
-if __name__ == '__main__':
-    posts = fetch_substack_posts()
 
-    if not posts:
-        print('No se encontraron posts en el feed. Se detiene para evitar un éxito silencioso sin actualizar index.html.')
+def create_posts_page(all_posts, generated_at):
+    if not all_posts:
+        html_content = '''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts - Jesus F Garcia Gavilan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="news-page">
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" style="width:100%;max-width:none;">
+            <section class="content-section" style="width:100%;max-width:none;">
+                <div class="section-header">
+                    <h2>Posts</h2>
+                </div>
+                <p class="text-small" style="margin-bottom: 16px;">Ultima actualizacion: ''' + generated_at + '''</p>
+                <div class="card">
+                    <p class="text-small">No se encontraron posts aun.</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="index.html" class="btn-outline">← Volver al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>'''
+        with open('posts.html', 'w', encoding='utf-8') as file:
+            file.write(html_content)
+        return
+
+    posts_by_year = {}
+    for post in all_posts:
+        year = post['pub_dt'].year if post.get('pub_dt', datetime.min) != datetime.min else 0
+        posts_by_year.setdefault(year, []).append(post)
+
+    sorted_years = sorted(posts_by_year.keys(), reverse=True)
+    sections = []
+
+    for year in sorted_years:
+        year_label = str(year) if year != 0 else 'Sin fecha'
+        year_html = f'<div class="section-header"><h3>{year_label}</h3></div>\n'
+        year_html += build_cards_html(posts_by_year[year]) + '\n'
+        sections.append(year_html)
+
+    html_content = f'''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Posts - Jesus F Garcia Gavilan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+        <div class="nav-container">
+            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="posts.html">Posts</a>
+                <a href="index.html#publicaciones">Papers</a>
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="news.html">Noticias</a>
+                <a href="index.html#newsletter">Newsletter</a>
+                <a href="index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section" id="posts-archive" style="width:100%;max-width:none;">
+                <div class="section-header">
+                    <h2><span class="mono-text"></span> Posts</h2>
+                </div>
+                <p class="text-small" style="margin-bottom: 16px;">Ultima actualizacion: {generated_at}</p>
+
+                {''.join(sections)}
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="index.html" class="btn-outline">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>'''
+
+    with open('posts.html', 'w', encoding='utf-8') as file:
+        file.write(html_content)
+
+
+if __name__ == '__main__':
+    all_posts = fetch_substack_posts(limit=MAX_ARCHIVE_POSTS)
+
+    if not all_posts:
+        print('No se encontraron posts desde ninguna fuente. Se detiene para evitar un exito silencioso.')
         raise SystemExit(1)
 
-    # Actualizar el archivo index.html
+    generated_at = datetime.utcnow().strftime('%d/%m/%Y %H:%M UTC')
+
     try:
-        update_index_html(posts)
-        print(f'✓ Se actualizaron {len(posts)} posts en index.html')
+        update_index_html(all_posts, generated_at)
+        create_posts_page(all_posts, generated_at)
+        print(f'✓ Se actualizaron {min(len(all_posts), MAX_INDEX_POSTS)} posts en index.html')
+        print(f'✓ Se creo posts.html con {len(all_posts)} posts')
     except Exception as exc:
-        print(f'Error al actualizar index.html: {exc}')
+        print(f'Error al actualizar archivos de posts: {exc}')
         import traceback
         traceback.print_exc()
         raise SystemExit(1)
