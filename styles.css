@@ -280,8 +280,10 @@ a:hover {
 #noticias { background-color: #8ed1fc10; border-color: #000000; }
 #charlas { background-color: #8ed1fc10; border-color: #000000; }
 #publicaciones { background-color: #ffffff; border-color: #000000; }
-#newsletter { background-color: #8ed1fc10; border-color: #000000; }
+#newsletter { background-color: #8ed1fc10; border-color: #000000; display: none; }
 #contact { background-color: #ffffff; border-color: #000000; }
+
+.nav-links a[href="#newsletter"] { display: none; }
 
 /* --- ELEMENTOS INTERNOS --- */
 
