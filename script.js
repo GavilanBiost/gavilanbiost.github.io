@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
 
         // 1. Obtener solo los títulos de las secciones
-        const targetSections = ['#posts', '#proyectos', '#charlas', '#publicaciones'];
+        const targetSections = ['#posts', '#tutoriales', '#proyectos', '#charlas', '#publicaciones'];
         let text = "";
         targetSections.forEach(id => {
             const section = document.querySelector(id);
