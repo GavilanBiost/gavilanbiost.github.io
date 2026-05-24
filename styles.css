@@ -124,8 +124,12 @@ a:hover {
     margin: 100px auto 60px;
     padding: 0 25px;
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 1fr 280px;
     gap: 60px;
+}
+
+.main-container > main {
+    grid-column: 1;
 }
 
 /* Página de noticias sin sidebar: usar todo el ancho de contenido */
@@ -157,6 +161,7 @@ a:hover {
 
 /* Sidebar */
 .profile-sidebar {
+    grid-column: 2;
     position: sticky;
     top: 100px;
     height: fit-content;
@@ -267,6 +272,13 @@ a:hover {
 
 .sidebar-tags .tag-sm {
     font-size: 0.8rem;
+}
+
+.sidebar-tags .tag {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
 }
 
 /* --- SECCIONES Y TARJETAS --- */
@@ -421,7 +433,9 @@ a:hover {
     cursor: pointer;
     transition: all 0.2s ease;
     cursor: default;
-    line-height: 1; 
+    line-height: 1;
+    display: inline-block;
+    max-width: 100%;
 }
 
 
@@ -627,6 +641,11 @@ footer {
         grid-template-columns: 1fr;
         margin-top: 80px;
         gap: 30px;
+    }
+
+    .main-container > main,
+    .profile-sidebar {
+        grid-column: auto;
     }
     
     .profile-sidebar {
