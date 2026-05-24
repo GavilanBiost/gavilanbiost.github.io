@@ -120,16 +120,19 @@ a:hover {
 
 /* --- LAYOUT --- */
 .main-container {
-    max-width: 1200px;
+    max-width: none;
+    width: 100%;
     margin: 100px auto 60px;
     padding: 0 25px;
     display: grid;
     grid-template-columns: 280px minmax(0, 1fr) 280px;
     gap: 40px;
+    align-items: start;
 }
 
 .main-container > main {
     grid-column: 2;
+    min-width: 0;
 }
 
 /* Página de noticias sin sidebar: usar todo el ancho de contenido */
