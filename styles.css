@@ -236,6 +236,39 @@ a:hover {
     font-weight: 700;
 }
 
+.sidebar-tags {
+    margin-top: 24px;
+    padding: 1rem;
+}
+
+.sidebar-tags h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.sidebar-tags .tag-cloud {
+    justify-content: flex-start;
+    gap: 10px 12px;
+    padding: 0;
+}
+
+.sidebar-tags .tag-xl {
+    font-size: 1.35rem;
+}
+
+.sidebar-tags .tag-lg {
+    font-size: 1.15rem;
+}
+
+.sidebar-tags .tag-md {
+    font-size: 1rem;
+}
+
+.sidebar-tags .tag-sm {
+    font-size: 0.8rem;
+}
+
 /* --- SECCIONES Y TARJETAS --- */
 
 /* Estilo contenedor de sección */
@@ -606,6 +639,10 @@ footer {
     .info-grid { grid-template-columns: 1fr; }
     
     .avatar-container, .social-icons, .skills-mini-list {
+        justify-content: center;
+    }
+
+    .sidebar-tags .tag-cloud {
         justify-content: center;
     }
 }
