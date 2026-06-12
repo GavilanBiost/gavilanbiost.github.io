@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reg Condicional vs Reg Cox - Jesus F Garcia Gavilan</title>
+    <title>Reg Condicional vs Reg Cox - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial en R sobre regresion logistica condicional y regresion de Cox.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="description" content="Tutorial en R sobre regresión logística condicional y regresión de Cox.">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gavilanbiost.github.io/reg-condicional-vs-reg-cox.html">
 
@@ -125,7 +125,7 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
             <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
@@ -147,9 +147,9 @@
                     <div class="tutorial-kicker"><i class="fa-solid fa-scale-balanced"></i> Tutorial</div>
                     <h1>Reg Condicional vs Reg Cox</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
-                        Este tutorial explica de forma practica cuando usar <strong>regresion logistica condicional</strong>
-                        y cuando usar <strong>regresion de Cox</strong> en R. Incluye simulaciones, ajuste de modelos y
-                        una demostracion de equivalencia matematica para datos emparejados con estratos.
+                        Este tutorial explica de forma practica cuando usar <strong>regresión logística condicional</strong>
+                        y cuando usar <strong>regresión de Cox</strong> en R. Incluye simulaciones, ajuste de modelos y
+                        una demostración de equivalencia matemática para datos emparejados con estratos.
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/reg-condicional-vs-regcox" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
@@ -159,14 +159,14 @@
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
-                        <h3>Descripcion</h3>
+                        <h3>Descripción</h3>
                         <p>
                             <strong>clogit()</strong> se usa para estudios de casos y controles emparejados, donde cada caso
                             se compara con su control dentro de un mismo estrato.
                         </p>
                         <p style="margin-top: 10px;">
-                            <strong>coxph()</strong> se usa en analisis de supervivencia, cuando interesa modelar el tiempo
-                            hasta un evento y su relacion con covariables.
+                            <strong>coxph()</strong> se usa en análisis de supervivencia, cuando interesa modelar el tiempo
+                            hasta un evento y su relación con covariables.
                         </p>
                     </article>
 
@@ -175,13 +175,13 @@
                         <ul>
                             <li>Usa <strong>clogit()</strong> si no tienes tiempo de seguimiento y hay emparejamiento por estratos.</li>
                             <li>Usa <strong>coxph()</strong> si el tiempo hasta evento es parte central de la pregunta.</li>
-                            <li>Ambos pueden conectarse matematicamente en escenarios de riesgo emparejado.</li>
-                            <li>El metodo exacto en Cox permite recuperar la formulacion condicional.</li>
+                            <li>Ambos pueden conectarse matemáticamente en escenarios de riesgo emparejado.</li>
+                            <li>El método exacto en Cox permite recuperar la formulación condicional.</li>
                         </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Ejemplo con regresion condicional</h3>
+                        <h3>Ejemplo con regresión condicional</h3>
                         <pre class="code-block"><code>library(survival)
 
 set.seed(123)
@@ -204,7 +204,7 @@ modelo_clogit &lt;- clogit(
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Demostracion de equivalencia</h3>
+                        <h3>Demostración de equivalencia</h3>
                         <pre class="code-block"><code>datos_clogit$tiempo_falso &lt;- 1
 
 modelo_cox_equivalente &lt;- coxph(
@@ -223,11 +223,11 @@ coef(modelo_cox_equivalente)</code></pre>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
                         Si tu objetivo es inferencia causal o predictiva en cohortes con tiempo de seguimiento,
-                        Cox es el marco natural. Si trabajas con diseno emparejado sin tiempo explicito,
-                        la regresion condicional es la opcion mas directa e interpretable.
+                        Cox es el marco natural. Si trabajas con diseño emparejado sin tiempo explicito,
+                        la regresión condicional es la opción mas directa e interpretable.
                     </div>
                 </article>
 

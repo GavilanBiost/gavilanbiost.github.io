@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MAE LinkedIn - Jesus F Garcia Gavilan</title>
+    <title>MAE - Jesús F García Gavilán</title>
 
     <meta name="description" content="Tutorial sobre calculo del Error Absoluto Medio (MAE) en R.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="author" content="Jesus F Garcia Gavilán">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gavilanbiost.github.io/MAE-linkedIn.html">
 
@@ -145,11 +145,11 @@
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
                     <div class="tutorial-kicker"><i class="fa-solid fa-chart-bar"></i> Tutorial</div>
-                    <h1>MAE LinkedIn</h1>
+                    <h1>MAE</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
                         Tutorial practico sobre el calculo del <strong>Error Absoluto Medio (MAE)</strong> en R.
-                        Incluye definicion de datos reales frente a predicciones, calculo manual paso a paso
-                        y visualizacion de los errores individuales con respecto al MAE global.
+                        Incluye definición de datos reales frente a predicciones, calculo manual paso a paso
+                        y visualización de los errores individuales con respecto al MAE global.
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/MAE_linkedIn" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
@@ -159,25 +159,25 @@
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
-                        <h3>Descripcion</h3>
+                        <h3>Descripción</h3>
                         <p>
                             El MAE (Mean Absolute Error) mide la magnitud promedio de los errores
-                            de un modelo de prediccion, sin considerar su direccion.
+                            de un modelo de predicción, sin considerar su dirección.
                         </p>
                         <p style="margin-top: 10px;">
-                            Es una metrica sencilla e intuitiva: cuanto menor sea su valor, mejor
-                            replica el modelo los datos reales. Util en modelos de regresion y
-                            prediccion numerica.
+                            Es una métrica sencilla e intuitiva: cuanto menor sea su valor, mejor
+                            replica el modelo los datos reales. Util en modelos de regresión y
+                            predicción numérica.
                         </p>
                     </article>
 
                     <article class="tutorial-card">
                         <h3>Contenido del tutorial</h3>
                         <ul>
-                            <li>Definicion de vectores de valores reales y predicciones.</li>
-                            <li>Calculo de errores absolutos por observacion.</li>
+                            <li>Definición de vectores de valores reales y predicciones.</li>
+                            <li>Calculo de errores absolutos por observación.</li>
                             <li>Promedio de errores: formula del MAE.</li>
-                            <li>Visualizacion de reales vs. predicciones con barras de error.</li>
+                            <li>Visualización de reales vs. predicciones con barras de error.</li>
                         </ul>
                     </article>
 
@@ -194,7 +194,7 @@ print(paste("MAE:", round(mae_resultado, 2)))
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Visualizacion</h3>
+                        <h3>Visualización</h3>
                         <pre class="code-block"><code>plot(reales, type = "b", col = "blue",
      pch = 16, ylim = c(85, 120),
      main = "Reales vs Predicciones",
@@ -209,7 +209,7 @@ for (i in seq_along(reales)) {
 }</code></pre>
                         <p style="margin-top: 10px;">
                             Las lineas verticales grises representan el error absoluto de cada
-                            observacion. El MAE es el promedio de todas esas longitudes.
+                            observación. El MAE es el promedio de todas esas longitudes.
                         </p>
                     </article>
                 </div>
@@ -219,7 +219,7 @@ for (i in seq_along(reales)) {
                     <div class="note-box">
                         A diferencia del RMSE, el MAE trata todos los errores por igual sin penalizar
                         los grandes de forma desproporcionada. Es preferible cuando los errores
-                        grandes no son especialmente perjudiciales o cuando se busca una metrica robusta.
+                        grandes no son especialmente perjudiciales o cuando se busca una métrica robusta.
                     </div>
                 </article>
 
