@@ -352,7 +352,8 @@ a:hover {
     line-height: 1.8;
     color: var(--text-main);
     
-    max-width: 900px; 
+    width: 100%;
+    max-width: 100%; 
 }
 
 /* Grid Info */
