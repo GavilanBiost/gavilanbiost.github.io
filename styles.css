@@ -686,3 +686,10 @@ footer {
         justify-content: center;
     }
 }
+
+/* Justificar texto de descripción en tutoriales */
+.tutorial-desc p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+}
