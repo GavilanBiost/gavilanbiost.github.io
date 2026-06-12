@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Confusión e Interacción en Epidemiología - Jesus F Garcia Gavilan</title>
+
+    <meta name="description" content="Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.">
+    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gavilanbiost.github.io/confusion-e-interaccion.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .tutorial-shell {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .tutorial-hero {
+            padding: 10px 0 4px;
+        }
+
+        .tutorial-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .tutorial-card {
+            background: #fff;
+            border: 1px solid rgba(171, 184, 195, 0.9);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .tutorial-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-card p,
+        .tutorial-card li {
+            color: var(--text-muted);
+        }
+
+        .tutorial-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .tutorial-card li + li {
+            margin-top: 8px;
+        }
+
+        .code-block {
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .code-block code {
+            background: transparent;
+            color: inherit;
+        }
+
+        .note-box {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--mets-orange);
+            background: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .tutorial-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 860px) {
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+        <div class="nav-container">
+            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="posts.html">Posts</a>
+                <a href="tutoriales.html">Tutoriales</a>
+                <a href="index.html#publicaciones">Papers</a>
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="news.html">Noticias</a>
+                <a href="index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section tutorial-shell">
+                <div class="tutorial-hero">
+                    <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
+                    <h1>Confusión e Interacción en Epidemiología</h1>
+                    <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
+                        Este tutorial contrasta dos conceptos estadísticos clave en epidemiología mediante simulaciones y visualizaciones en R.
+                        La <strong>confusión</strong> ocurre cuando una tercera variable distorsiona la relación aparente entre exposición y resultado,
+                        mientras que la <strong>interacción</strong> (modificación del efecto) aparece cuando el efecto de la exposición varía según el
+                        nivel de otra variable. A través de ejemplos prácticos y código reproducible, el lector aprenderá a identificar y distinguir
+                        ambos fenómenos en sus propios análisis.
+                    </p>
+                    <div class="button-row">
+                        <a href="https://github.com/GavilanBiost/confusion_e_interaccion" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
+                        <a href="https://github.com/GavilanBiost/confusion_e_interaccion/blob/main/confusion_e_interaccion.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Abrir tutorial</a>
+                    </div>
+                </div>
+
+                <div class="tutorial-grid">
+                    <article class="tutorial-card">
+                        <h3>Descripcion</h3>
+                        <p>El tutorial utiliza dos ejemplos simulados para ilustrar la diferencia entre confusión e interacción. En el primero, el tabaquismo actúa como variable confusora en la relación aparente entre consumo de café y riesgo cardiovascular: al estratificar por tabaco, la asociación desaparece.</p>
+                        <p style="margin-top: 10px;">En el segundo ejemplo, un fármaco antihipertensivo muestra efectos diferentes según el sexo biológico del paciente, evidenciando una interacción real donde la magnitud del efecto varía entre grupos.</p>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Requisitos previos</h3>
+                        <ul>
+                            <li>R instalado (version 4.0 o superior recomendada)</li>
+                            <li>RStudio para ejecutar el archivo <code>.Rmd</code></li>
+                            <li>Paquetes de R: <code>ggplot2</code>, <code>dplyr</code>, <code>gridExtra</code></li>
+                            <li>Conocimientos basicos de regresion lineal y epidemiologia analitica</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Pasos clave</h3>
+                        <ul>
+                            <li>Instalar y cargar los paquetes necesarios en R</li>
+                            <li>Simular datos con una variable confusora (cafe, tabaco y riesgo cardiovascular)</li>
+                            <li>Visualizar la asociacion cruda y la asociacion estratificada para detectar confusion</li>
+                            <li>Simular datos con modificacion del efecto (farmaco y sexo)</li>
+                            <li>Comparar las pendientes entre grupos para identificar la interaccion</li>
+                            <li>Abrir el <code>.Rmd</code> en RStudio y usar <em>Knit</em> para reproducir el documento completo</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Codigo de ejemplo</h3>
+                        <p>Simulacion de confusion: cafe y riesgo cardiovascular con tabaquismo como confusor.</p>
+                        <pre class="code-block"><code>library(ggplot2)
+library(dplyr)
+
+set.seed(42)
+n &lt;- 300
+
+# Tabaquismo como confusor
+tabaco &lt;- rbinom(n, 1, 0.5)
+cafe   &lt;- rbinom(n, 1, 0.4 + 0.3 * tabaco)
+riesgo &lt;- 10 + 8 * tabaco + rnorm(n, 0, 3)
+
+datos &lt;- data.frame(cafe, tabaco, riesgo)
+
+# Asociacion cruda (espuria)
+lm(riesgo ~ cafe, data = datos)
+
+# Asociacion ajustada por confusor
+lm(riesgo ~ cafe + tabaco, data = datos)</code></pre>
+                    </article>
+                </div>
+
+                <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
+                    <h3>Nota metodologica</h3>
+                    <div class="note-box">
+                        Confusion e interaccion son conceptos distintos que requieren respuestas distintas. La confusion es un sesgo que debe <strong>eliminarse</strong> mediante ajuste o estratificacion; ignorarla lleva a conclusiones incorrectas. La interaccion, en cambio, es un hallazgo biologico o clinico real que debe <strong>reportarse y explorarse</strong>, ya que indica que el efecto de la exposicion no es uniforme en la poblacion. Confundir ambos fenomenos es uno de los errores mas comunes en la interpretacion de estudios epidemiologicos.
+                    </div>
+                </article>
+
+                <div class="tutorial-actions" style="justify-content: center;">
+                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
