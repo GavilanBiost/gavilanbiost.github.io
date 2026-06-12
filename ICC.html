@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ICC - Jesus F Garcia Gavilan</title>
+    <title>ICC - Jesús F García Gavilán</title>
 
     <meta name="description" content="Tutorial sobre coeficiente de correlacion intraclase (ICC) en R.">
     <meta name="author" content="Jesus F Garcia Gavilan">
@@ -135,7 +135,6 @@
                 <a href="index.html#publicaciones">Papers</a>
                 <a href="index.html#proyectos">Proyectos</a>
                 <a href="news.html">Noticias</a>
-                <a href="index.html#newsletter">Newsletter</a>
                 <a href="index.html#contact">Contacto</a>
             </div>
         </div>
@@ -146,31 +145,31 @@
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
                     <div class="tutorial-kicker"><i class="fa-solid fa-chart-line"></i> Tutorial</div>
-                    <h1>Coeficiente de Correlacion Intraclase (ICC)</h1>
+                    <h1>Coeficiente de Correlación Intraclase (ICC)</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
                         Este tutorial presenta un flujo completo para calcular e interpretar el
-                        <strong>coeficiente de correlacion intraclase (ICC)</strong> en R. Incluye
-                        preparacion de datos, evaluacion de supuestos, analisis descriptivo,
-                        estimacion del ICC en diferentes configuraciones y visualizacion de
+                        <strong>coeficiente de correlación intraclase (ICC)</strong> en R. Incluye
+                        preparación de datos, evaluación de supuestos, análisis descriptivo,
+                        estimación del ICC en diferentes configuraciones y visualización de
                         resultados para estudios de confiabilidad inter-observador e intra-observador.
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/ICC" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/ICC/blob/main/ICC.html" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver fuente original</a>
+                        <a href="https://github.com/GavilanBiost/ICC/blob/main/ICC.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
                     </div>
                 </div>
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
-                        <h3>Descripcion</h3>
+                        <h3>Descripción</h3>
                         <p>
-                            El ICC cuantifica que proporcion de la variabilidad total se debe a
-                            diferencias reales entre sujetos, en lugar de error de medicion.
-                            Es clave cuando varios observadores evaluan la misma variable.
+                            El ICC cuantifica que proporción de la variabilidad total se debe a
+                            diferencias reales entre sujetos, en lugar de error de medición.
+                            Es clave cuando varios observadores evalúan la misma variable.
                         </p>
                         <p style="margin-top: 10px;">
                             El flujo del tutorial cubre comparaciones entre observadores,
-                            graficos de Bland-Altman y modelos ICC de dos vias para
+                            gráficos de Bland-Altman y modelos ICC de dos vias para
                             <strong>consistencia</strong> y <strong>acuerdo</strong>.
                         </p>
                     </article>
@@ -186,11 +185,11 @@
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Protocolo de analisis</h3>
+                        <h3>Protocolo de análisis</h3>
                         <ul>
                             <li>Importar y depurar la base de mediciones.</li>
                             <li>Explorar resumen descriptivo por observador.</li>
-                            <li>Evaluar diferencias sistematicas entre pares.</li>
+                            <li>Evaluar diferencias sistemáticas entre pares.</li>
                             <li>Calcular ICC(2,1) para consistencia y acuerdo.</li>
                             <li>Calcular ICC(2,k) para promedio de evaluadores.</li>
                             <li>Reportar valor ICC, IC 95% y p-valor.</li>
@@ -198,7 +197,7 @@
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Codigo de ejemplo</h3>
+                        <h3>Código de ejemplo</h3>
                         <p>
                             Ejemplo compacto para obtener ICC con el paquete <strong>irr</strong>.
                         </p>
@@ -223,11 +222,11 @@ print(icc_consistencia)</code></pre>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
                         El valor del ICC siempre debe interpretarse junto con su intervalo de
-                        confianza y en funcion del diseno del estudio. Un ICC alto no reemplaza
-                        una buena estandarizacion del protocolo de medicion.
+                        confianza y en función del diseño del estudio. Un ICC alto no reemplaza
+                        una buena estandarización del protocolo de medición.
                     </div>
                 </article>
 
