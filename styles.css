@@ -356,6 +356,15 @@ a:hover {
     max-width: 100%; 
 }
 
+.bio-text p {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+}
+
 /* Grid Info */
 .info-grid {
     display: grid;
