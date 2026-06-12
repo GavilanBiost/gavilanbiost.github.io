@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>L'Ecuyer-CMRG - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial local sobre reproducibilidad en computación paralela en R con L'Ecuyer-CMRG.">
+    <meta name="description" content="Tutorial sobre L'Ecuyer-CMRG.">
     <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gavilanbiost.github.io/L-Ecuyer-CMRG.html">
@@ -145,16 +145,18 @@
         <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
-                    <div class="tutorial-kicker"><i class="fa-solid fa-diagram-project"></i> Tutorial local alojado en el sitio</div>
+                    <div class="tutorial-kicker"><i class="fa-solid fa-diagram-project"></i> Tutorial</div>
                     <h1>L'Ecuyer-CMRG</h1>
                     <p class="text-small" style="max-width: 820px; font-size: 1.02rem;">
-                        Reproducibilidad en computación paralela en R mediante el generador L'Ecuyer-CMRG.
-                        Esta página resume el protocolo de implementación para que las simulaciones y los análisis
-                        paralelos devuelvan resultados deterministas y auditables.
+                        Cuando un análisis se ejecuta en paralelo, cada núcleo puede generar secuencias aleatorias distintas
+                        en cada ejecución, lo que rompe la reproducibilidad. Este tutorial permite resolverlo usando
+                        el generador <strong>L'Ecuyer-CMRG</strong> junto con el paquete <code>parallel</code> en R:
+                        sin dependencias externas y con un protocolo de cuatro pasos que garantiza resultados idénticos
+                        en cualquier máquina y en cualquier momento
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG/blob/main/README.md" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver README</a>
+                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG/blob/main/L-Ecuyer-CMRG.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
                     </div>
                 </div>
 
