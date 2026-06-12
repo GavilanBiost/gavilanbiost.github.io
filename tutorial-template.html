@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reg Condicional vs Reg Cox - Jesús F García Gavilán</title>
+    <title>TITULO TUTORIAL - Jesus F Garcia Gavilan</title>
 
-    <meta name="description" content="Tutorial en R sobre regresión logística condicional y regresión de Cox.">
-    <meta name="author" content="Jesús F García Gavilán">
+    <meta name="description" content="Descripcion corta del tutorial.">
+    <meta name="author" content="Jesus F Garcia Gavilan">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/reg-condicional-vs-reg-cox.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/SLUG-TUTORIAL.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+
     <style>
         .tutorial-shell {
             width: 100%;
@@ -125,7 +126,7 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
         <div class="nav-container">
             <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
@@ -145,91 +146,59 @@
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
                     <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
-                    <h1>Reg Condicional vs Reg Cox</h1>
+                    <h1>TITULO DEL TUTORIAL</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
-                        Este tutorial explica de forma practica cuando usar <strong>regresión logística condicional</strong>
-                        y cuando usar <strong>regresión de Cox</strong> en R. Incluye simulaciones, ajuste de modelos y
-                        una demostración de equivalencia matemática para datos emparejados con estratos.
+                        RESUMEN DEL TUTORIAL EN 2-4 FRASES. EXPLICA QUE PROBLEMA RESUELVE,
+                        A QUIEN VA DIRIGIDO Y QUE APRENDERA EL LECTOR.
                     </p>
                     <div class="button-row">
-                        <a href="https://github.com/GavilanBiost/reg-condicional-vs-regcox" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/reg-condicional-vs-regcox/blob/main/reg-condicional-vs-reg-cox.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i> Ver tutorial</a>
+                        <a href="URL_REPOSITORIO" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
+                        <a href="URL_PDF_O_TUTORIAL" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Abrir tutorial</a>
                     </div>
                 </div>
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
                         <section class="tutorial-desc">
-                        <h3>Descripción</h3>
-                        <p>
-                            <strong>clogit()</strong> se usa para estudios de casos y controles emparejados, donde cada caso
-                            se compara con su control dentro de un mismo estrato.
-                        </p>
-                        <p style="margin-top: 10px;">
-                            <strong>coxph()</strong> se usa en análisis de supervivencia, cuando interesa modelar el tiempo
-                            hasta un evento y su relación con covariables.
-                        </p>
+                        <h3>Descripcion</h3>
+                        <p>TEXTO DESCRIPTIVO DEL CONTENIDO.</p>
+                        <p style="margin-top: 10px;">DETALLE ADICIONAL DEL ENFOQUE O METODO.</p>
                     </section>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Cuando usar cada modelo</h3>
+                        <h3>Requisitos previos</h3>
                         <ul>
-                            <li>Usa <strong>clogit()</strong> si no tienes tiempo de seguimiento y hay emparejamiento por estratos.</li>
-                            <li>Usa <strong>coxph()</strong> si el tiempo hasta evento es parte central de la pregunta.</li>
-                            <li>Ambos pueden conectarse matemáticamente en escenarios de riesgo emparejado.</li>
-                            <li>El método exacto en Cox permite recuperar la formulación condicional.</li>
+                            <li>REQUISITO 1</li>
+                            <li>REQUISITO 2</li>
+                            <li>REQUISITO 3</li>
                         </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Ejemplo con regresión condicional</h3>
-                        <pre class="code-block"><code>library(survival)
-
-set.seed(123)
-n_parejas &lt;- 100
-id_pareja &lt;- rep(1:n_parejas, each = 2)
-estado &lt;- rep(c(1, 0), times = n_parejas)
-
-exposicion &lt;- ifelse(
-  estado == 1,
-  rbinom(n_parejas, 1, 0.7),
-  rbinom(n_parejas, 1, 0.3)
-)
-
-datos_clogit &lt;- data.frame(id_pareja, estado, exposicion)
-
-modelo_clogit &lt;- clogit(
-  estado ~ exposicion + strata(id_pareja),
-  data = datos_clogit
-)</code></pre>
+                        <h3>Pasos clave</h3>
+                        <ul>
+                            <li>PASO 1</li>
+                            <li>PASO 2</li>
+                            <li>PASO 3</li>
+                            <li>PASO 4</li>
+                        </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Demostración de equivalencia</h3>
-                        <pre class="code-block"><code>datos_clogit$tiempo_falso &lt;- 1
+                        <h3>Codigo de ejemplo</h3>
+                        <p>RESUMEN BREVE DEL BLOQUE DE CODIGO.</p>
+                        <pre class="code-block"><code># EJEMPLO
+# Reemplaza por tu codigo
 
-modelo_cox_equivalente &lt;- coxph(
-  Surv(tiempo_falso, estado) ~ exposicion + strata(id_pareja),
-  data = datos_clogit,
-  method = "exact"
-)
-
-coef(modelo_clogit)
-coef(modelo_cox_equivalente)</code></pre>
-                        <p style="margin-top: 10px;">
-                            En este escenario, ambos coeficientes coinciden porque el problema de
-                            riesgo condicional y el de casos-control estratificado comparten la misma base.
-                        </p>
+print("Hola tutorial")</code></pre>
                     </article>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodológica</h3>
+                    <h3>Nota metodologica</h3>
                     <div class="note-box">
-                        Si tu objetivo es inferencia causal o predictiva en cohortes con tiempo de seguimiento,
-                        Cox es el marco natural. Si trabajas con diseño emparejado sin tiempo explicito,
-                        la regresión condicional es la opción mas directa e interpretable.
+                        MENSAJE CLAVE SOBRE INTERPRETACION, LIMITACIONES O BUENAS PRACTICAS.
                     </div>
                 </article>
 
