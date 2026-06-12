@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>L'Ecuyer-CMRG - Jesús F García Gavilán</title>
+    <title>MAE LinkedIn - Jesus F Garcia Gavilan</title>
 
-    <meta name="description" content="Tutorial sobre L'Ecuyer-CMRG.">
-    <meta name="author" content="Jesús F García Gavilán">
+    <meta name="description" content="Tutorial sobre calculo del Error Absoluto Medio (MAE) en R.">
+    <meta name="author" content="Jesus F Garcia Gavilan">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/L-Ecuyer-CMRG.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/MAE-linkedIn.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,7 +125,7 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
         <div class="nav-container">
             <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
@@ -144,94 +144,82 @@
         <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
-                    <div class="tutorial-kicker"><i class="fa-solid fa-diagram-project"></i> Tutorial</div>
-                    <h1>L'Ecuyer-CMRG</h1>
+                    <div class="tutorial-kicker"><i class="fa-solid fa-chart-bar"></i> Tutorial</div>
+                    <h1>MAE LinkedIn</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
-                        Cuando un análisis se ejecuta en paralelo, cada núcleo puede generar secuencias aleatorias distintas
-                        en cada ejecución, lo que rompe la reproducibilidad. Este tutorial permite resolverlo usando
-                        el generador <strong>L'Ecuyer-CMRG</strong> junto con el paquete <code>parallel</code> en R:
-                        sin dependencias externas y con un protocolo de cuatro pasos que garantiza resultados idénticos
-                        en cualquier máquina y en cualquier momento
+                        Tutorial practico sobre el calculo del <strong>Error Absoluto Medio (MAE)</strong> en R.
+                        Incluye definicion de datos reales frente a predicciones, calculo manual paso a paso
+                        y visualizacion de los errores individuales con respecto al MAE global.
                     </p>
                     <div class="button-row">
-                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG/blob/main/L-Ecuyer-CMRG.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
+                        <a href="https://github.com/GavilanBiost/MAE_linkedIn" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
+                        <a href="https://github.com/GavilanBiost/MAE_linkedIn/blob/main/MAE_linkedIn.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Ver tutorial</a>
                     </div>
                 </div>
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
-                        <h3>Descripción</h3>
+                        <h3>Descripcion</h3>
                         <p>
-                            El protocolo está pensado para estudios de salud pública, biomedicina y ciencia de datos en los que
-                            se ejecutan simulaciones o análisis paralelos. El objetivo es evitar que cada hilo o nodo genere
-                            secuencias aleatorias distintas entre ejecuciones.
+                            El MAE (Mean Absolute Error) mide la magnitud promedio de los errores
+                            de un modelo de prediccion, sin considerar su direccion.
                         </p>
                         <p style="margin-top: 10px;">
-                            El esquema se basa en <strong>L'Ecuyer-CMRG</strong>, integrado en el paquete <strong>parallel</strong> de R base,
-                            sin dependencias externas.
+                            Es una metrica sencilla e intuitiva: cuanto menor sea su valor, mejor
+                            replica el modelo los datos reales. Util en modelos de regresion y
+                            prediccion numerica.
                         </p>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Requisitos previos</h3>
+                        <h3>Contenido del tutorial</h3>
                         <ul>
-                            <li>R instalado en una versión reciente.</li>
-                            <li>Paquete <strong>parallel</strong> disponible en R base.</li>
-                            <li>Alguna librería de visualización si quieres graficar resultados, por ejemplo <strong>ggplot2</strong>.</li>
-                            <li>Un número de núcleos suficiente para dejar recursos libres al sistema operativo.</li>
+                            <li>Definicion de vectores de valores reales y predicciones.</li>
+                            <li>Calculo de errores absolutos por observacion.</li>
+                            <li>Promedio de errores: formula del MAE.</li>
+                            <li>Visualizacion de reales vs. predicciones con barras de error.</li>
                         </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Protocolo de implementación</h3>
-                        <ul>
-                            <li>Cargar <strong>parallel</strong> y fijar el motor de RNG con <strong>RNGkind("L'Ecuyer-CMRG")</strong>.</li>
-                            <li>Sembrar el entorno principal con <strong>set.seed()</strong>.</li>
-                            <li>Crear el clúster con <strong>makeCluster()</strong> dejando al menos un núcleo libre.</li>
-                            <li>Sincronizar las semillas en cada nodo con <strong>clusterSetRNGStream()</strong>.</li>
-                            <li>Ejecutar el cálculo en paralelo con <strong>parLapply()</strong>.</li>
-                            <li>Detener siempre el clúster con <strong>stopCluster()</strong>.</li>
-                        </ul>
+                        <h3>Calculo del MAE en R</h3>
+                        <pre class="code-block"><code>reales      &lt;- c(102, 98, 110, 105, 95, 112, 101)
+predicciones &lt;- c(100, 100, 108, 110,  90, 115,  99)
+
+errores_absolutos &lt;- abs(reales - predicciones)
+mae_resultado     &lt;- mean(errores_absolutos)
+
+print(paste("MAE:", round(mae_resultado, 2)))
+# [1] "MAE: 3"</code></pre>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Código de ejemplo</h3>
-                        <p>
-                            Este bloque resume el flujo estándar que aparece en el material original del repositorio.
+                        <h3>Visualizacion</h3>
+                        <pre class="code-block"><code>plot(reales, type = "b", col = "blue",
+     pch = 16, ylim = c(85, 120),
+     main = "Reales vs Predicciones",
+     xlab = "Observacion", ylab = "Valor")
+
+lines(predicciones, type = "b",
+      col = "red", pch = 17)
+
+for (i in seq_along(reales)) {
+  lines(c(i, i), c(reales[i], predicciones[i]),
+        col = "darkgray", lty = 2)
+}</code></pre>
+                        <p style="margin-top: 10px;">
+                            Las lineas verticales grises representan el error absoluto de cada
+                            observacion. El MAE es el promedio de todas esas longitudes.
                         </p>
-                        <pre class="code-block"><code>library(parallel)
-library(ggplot2)
-
-RNGkind("L'Ecuyer-CMRG")
-set.seed(123)
-
-num_cores &lt;- detectCores() - 1
-cl &lt;- makeCluster(num_cores)
-clusterSetRNGStream(cl, iseed = 123)
-
-resultados &lt;- parLapply(cl, 1:1000, function(x) mean(rnorm(100)))
-stopCluster(cl)
-
-datos &lt;- data.frame(medias = unlist(resultados))
-
-ggplot(datos, aes(x = medias)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 30,
-                 fill = "steelblue", color = "white", alpha = 0.7) +
-  geom_density(color = "darkred", linewidth = 1) +
-  theme_minimal() +
-  labs(title = "Distribución de Medias Muestrales",
-       subtitle = "1000 iteraciones en paralelo",
-       x = "Valor de la media",
-       y = "Densidad")</code></pre>
                     </article>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodológica</h3>
+                    <h3>Nota metodologica</h3>
                     <div class="note-box">
-                        La reproducibilidad computacional no es un detalle accesorio cuando el análisis escala. En este contexto,
-                        es la base para que un flujo paralelo sea verificable, repetible y apto para trabajo científico serio.
+                        A diferencia del RMSE, el MAE trata todos los errores por igual sin penalizar
+                        los grandes de forma desproporcionada. Es preferible cuando los errores
+                        grandes no son especialmente perjudiciales o cuando se busca una metrica robusta.
                     </div>
                 </article>
 
