@@ -242,8 +242,7 @@ window.addEventListener('load', () => {
         }, 100);
     }
     
-    // Aplicar "Ver más" a las diferentes secciones
-    setupVerMas('publicaciones-content', 'ver-mas-publicaciones', 5, 'Publicaciones');
+    // Aplicar "Ver más" a secciones con expansión local
     setupVerMas('proyectos', 'ver-mas-proyectos', 3, 'Proyectos');
     // Nota: Posts y Noticias redirigen directamente a pages dedicadas.
 });

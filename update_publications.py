@@ -1,213 +1,221 @@
-import requests
-import xml.etree.ElementTree as ET
+import datetime
+import html
 import re
+import xml.etree.ElementTree as ET
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
-# Parámetros de búsqueda en PubMed
-search_term = 'garcia-gavilan j'  # ajusta el término si quieres filtrar más (p.ej., añadiendo afiliación o rango de fechas)
-email = 'gargavilan@gmail.com'
+# Parametros de busqueda en PubMed
+SEARCH_TERM = "garcia-gavilan j"
+EMAIL = "gargavilan@gmail.com"
 
-# Paso 1: Buscar artículos usando ESearch
-search_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
-search_params = {
-    'db': 'pubmed',
-    'term': search_term,
-    'sort': 'date',
-    'retmax': 10000,
-    'email': email
-}
+INDEX_PATH = "index.html"
+ARCHIVE_PATH = "publicaciones.html"
 
-print('Lanzando ESearch...')
-response = requests.get(search_url, params=search_params)
 
-if response.status_code != 200:
-    print(f'Error en la búsqueda: {response.status_code}')
-    raise SystemExit(1)
+def fetch_publications():
+    search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+    search_params = {
+        "db": "pubmed",
+        "term": SEARCH_TERM,
+        "sort": "date",
+        "retmax": 10000,
+        "email": EMAIL,
+    }
 
-root = ET.fromstring(response.content)
-pmids = [id_elem.text for id_elem in root.findall('.//Id')]
-print(f'ESearch encontró {len(pmids)} PMIDs')
+    print("Lanzando ESearch...")
+    with urlopen(f"{search_url}?{urlencode(search_params)}", timeout=30) as response:
+        response_content = response.read()
 
-if not pmids:
-    print('No se encontraron resultados para la búsqueda')
-    raise SystemExit(0)
+    root = ET.fromstring(response_content)
+    pmids = [id_elem.text for id_elem in root.findall(".//Id") if id_elem.text]
+    print(f"ESearch encontro {len(pmids)} PMIDs")
 
-# Paso 2: Obtener detalles de los artículos usando EFetch
-fetch_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
-fetch_params = {
-    'db': 'pubmed',
-    'id': ','.join(pmids),
-    'rettype': 'medline',
-    'retmode': 'xml',
-    'email': email
-}
+    if not pmids:
+        return []
 
-print('Lanzando EFetch...')
-fetch_response = requests.get(fetch_url, params=fetch_params)
+    fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    fetch_params = {
+        "db": "pubmed",
+        "id": ",".join(pmids),
+        "rettype": "medline",
+        "retmode": "xml",
+        "email": EMAIL,
+    }
 
-if fetch_response.status_code != 200:
-    print(f'Error al obtener detalles: {fetch_response.status_code}')
-    raise SystemExit(1)
+    print("Lanzando EFetch...")
+    with urlopen(f"{fetch_url}?{urlencode(fetch_params)}", timeout=60) as fetch_response:
+        fetch_content = fetch_response.read()
 
-fetch_root = ET.fromstring(fetch_response.content)
-publications = []
+    fetch_root = ET.fromstring(fetch_content)
+    cards = []
 
-for article in fetch_root.findall('.//PubmedArticle'):
-    try:
-        title_elem = article.find('.//ArticleTitle')
-        title = title_elem.text if title_elem is not None else 'Título no disponible'
+    for article in fetch_root.findall(".//PubmedArticle"):
+        try:
+            title_elem = article.find(".//ArticleTitle")
+            title = "Título no disponible"
+            if title_elem is not None:
+                title = "".join(title_elem.itertext()).strip() or title
 
-        authors = []
-        for author in article.findall('.//Author'):
-            collective = author.find('CollectiveName')
-            if collective is not None and collective.text:
-                authors.append(collective.text)
+            authors = []
+            for author in article.findall(".//Author"):
+                collective = author.find("CollectiveName")
+                if collective is not None and collective.text:
+                    authors.append(collective.text)
+                    continue
+
+                last = author.find("LastName")
+                fore = author.find("ForeName")
+                name_parts = []
+                if fore is not None and fore.text:
+                    name_parts.append(fore.text)
+                if last is not None and last.text:
+                    name_parts.append(last.text)
+                if name_parts:
+                    authors.append(" ".join(name_parts))
+
+            if len(authors) > 4:
+                authors_str = ", ".join(authors[:4]) + ", ..."
+            else:
+                authors_str = ", ".join(authors) if authors else "Autores no disponibles"
+
+            journal_elem = article.find(".//Journal/Title")
+            journal = journal_elem.text if journal_elem is not None and journal_elem.text else "Revista no disponible"
+
+            year = "Fecha no disponible"
+            year_elem = article.find(".//PubDate/Year")
+            if year_elem is None:
+                year_elem = article.find(".//ArticleDate/Year")
+            if year_elem is not None and year_elem.text:
+                year = year_elem.text
+            else:
+                medline_date = article.find(".//PubDate/MedlineDate")
+                if medline_date is not None and medline_date.text and medline_date.text[:4].isdigit():
+                    year = medline_date.text[:4]
+
+            doi_elem = article.find('.//ArticleId[@IdType="doi"]')
+            doi = doi_elem.text if doi_elem is not None and doi_elem.text else ""
+
+            pmid_elem = article.find(".//PMID")
+            pmid = pmid_elem.text if pmid_elem is not None and pmid_elem.text else ""
+
+            if not pmid:
                 continue
 
-            last = author.find('LastName')
-            fore = author.find('ForeName')
-            name_parts = []
-            if fore is not None and fore.text:
-                name_parts.append(fore.text)
-            if last is not None and last.text:
-                name_parts.append(last.text)
-            if name_parts:
-                authors.append(' '.join(name_parts))
+            link = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+            title_safe = html.escape(title)
+            authors_safe = html.escape(authors_str)
+            journal_safe = html.escape(journal.upper())
 
-        authors_str = ', '.join(authors) if authors else 'Autores no disponibles'
-        
-        # Mostrar solo los primeros 4 autores
-        if len(authors) > 4:
-            authors_str = ', '.join(authors[:4]) + ', ...'
-        else:
-            authors_str = ', '.join(authors) if authors else 'Autores no disponibles'
-
-        journal_elem = article.find('.//Journal/Title')
-        journal = journal_elem.text if journal_elem is not None else 'Revista no disponible'
-
-        year = 'Fecha no disponible'
-        year_elem = article.find('.//PubDate/Year') or article.find('.//ArticleDate/Year')
-        if year_elem is not None and year_elem.text:
-            year = year_elem.text
-        else:
-            medline_date = article.find('.//PubDate/MedlineDate')
-            if medline_date is not None and medline_date.text and medline_date.text[:4].isdigit():
-                year = medline_date.text[:4]
-
-        doi_elem = article.find('.//ArticleId[@IdType="doi"]')
-        doi = doi_elem.text if doi_elem is not None else ''
-
-        pmid_elem = article.find('.//PMID')
-        pmid = pmid_elem.text if pmid_elem is not None else ''
-
-        if pmid:
-            link = f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/'
-            
-            # Generar HTML en formato card
-            pub_html = f'<div class="card">\n'
-            pub_html += f'    <div class="pub-meta">{journal.upper()} · {year}</div>\n'
-            pub_html += f'    <a href="{link}" class="pub-title" target="_blank">{title}</a>\n'
-            pub_html += f'    <p class="text-small">{authors_str}</p>\n'
-            pub_html += f'    <div class="pub-links">\n'
+            card = []
+            card.append('<div class="card">')
+            card.append(f"    <div class=\"pub-meta\">{journal_safe} · {year}</div>")
+            card.append(f"    <a href=\"{link}\" class=\"pub-title\" target=\"_blank\">{title_safe}</a>")
+            card.append(f"    <p class=\"text-small\">{authors_safe}</p>")
+            card.append('    <div class="pub-links">')
             if doi:
-                pub_html += f'        <a href="https://doi.org/{doi}" class="btn-outline" target="_blank"><i class="fa-regular fa-file-pdf"></i> DOI</a>\n'
-            pub_html += f'        <a href="{link}" class="btn-outline" target="_blank"><i class="fa-solid fa-link"></i> PubMed</a>\n'
-            pub_html += f'    </div>\n'
-            pub_html += f'</div>'
-            
-            publications.append(pub_html)
-    except Exception as e:
-        print(f'Error procesando artículo: {e}')
-
-if not publications:
-    print('No se encontraron publicaciones en EFetch')
-    raise SystemExit(0)
-
-# Actualizar el archivo index.html
-try:
-    with open('index.html', 'r', encoding='utf-8') as file:
-        content = file.read()
-
-    # Buscar el contenedor de publicaciones usando regex
-    # El patrón busca: <div id="publicaciones-content"> ... contenido ... </div>
-    # hasta el div que cierra justo antes del botón "ver-mas-publicaciones"
-    
-    pattern = r'(<div id="publicaciones-content">)(.*?)(</div>\s*<div style="text-align: center[^>]*>\s*<button id="ver-mas-publicaciones")'
-    
-    match = re.search(pattern, content, re.DOTALL)
-    
-    if match:
-        # Reemplazar solo el contenido entre las etiquetas
-        new_content = '\n' + '\n'.join(publications) + '\n'
-        updated_content = content[:match.start(2)] + new_content + content[match.end(2):]
-        
-        with open('index.html', 'w', encoding='utf-8') as file:
-            file.write(updated_content)
-        print(f'✓ Se actualizaron {len(publications)} publicaciones en index.html')
-    else:
-        print('⚠ No se encontró la sección de publicaciones con el formato esperado')
-        print('Buscando estructura alternativa...')
-        
-        # Intentar con un patrón más simple
-        simple_pattern = r'(<div id="publicaciones-content">)(.*?)(</div>)'
-        simple_match = re.search(simple_pattern, content, re.DOTALL)
-        
-        if simple_match:
-            # Verificar que el cierre esté antes de la sección de proyectos
-            next_section_idx = content.find('<section class="content-section" id="proyectos">', simple_match.end())
-            button_idx = content.find('id="ver-mas-publicaciones"', simple_match.end())
-            
-            if button_idx != -1 and button_idx < next_section_idx:
-                # Buscar el </div> que cierra publicaciones-content (está justo antes del botón)
-                end_search_start = button_idx
-                # Buscar hacia atrás el </div> más cercano
-                close_div_idx = content.rfind('</div>', simple_match.start(2), button_idx)
-                
-                if close_div_idx > simple_match.start(2):
-                    new_content = '\n' + '\n'.join(publications) + '\n'
-                    updated_content = content[:simple_match.start(2)] + new_content + content[close_div_idx:]
-                    
-                    with open('index.html', 'w', encoding='utf-8') as file:
-                        file.write(updated_content)
-                    print(f'✓ Se actualizaron {len(publications)} publicaciones en index.html')
-                else:
-                    print('✗ Error: No se pudo determinar el cierre correcto del contenedor')
-            else:
-                print('✗ Error: No se encontró el botón ver-mas-publicaciones o la estructura es incorrecta')
-        else:
-            print('✗ No se encontró la sección de publicaciones; creando una nueva...')
-            pub_items = '\n'.join(publications)
-            new_list = (
-                '\n<section class="content-section" id="publicaciones">\n'
-                '    <div class="section-header">\n'
-                '        <h2><span class="mono-text"></span> Publicaciones</h2>\n'
-                '    </div>\n'
-                '    <!-- Lista auto-generada por update_publications.py -->\n'
-                '    <div id="publicaciones-content">\n'
-                f'{pub_items}\n'
-                '    </div>\n'
-                '    <div style="text-align: center; margin-top: 20px;">\n'
-                '        <button id="ver-mas-publicaciones" class="btn-outline" style="cursor: pointer; padding: 12px 24px; font-size: 1rem;">\n'
-                '            <i class="fa-solid fa-plus"></i> Ver más publicaciones\n'
-                '        </button>\n'
-                '    </div>\n'
-                '</section>\n\n'
+                card.append(
+                    f"        <a href=\"https://doi.org/{doi}\" class=\"btn-outline\" target=\"_blank\"><i class=\"fa-regular fa-file-pdf\"></i> DOI</a>"
+                )
+            card.append(
+                f"        <a href=\"{link}\" class=\"btn-outline\" target=\"_blank\"><i class=\"fa-solid fa-link\"></i> PubMed</a>"
             )
+            card.append("    </div>")
+            card.append("</div>")
 
-            # Buscar dónde insertar (antes de la sección de proyectos si existe, o antes de </main>)
-            proyectos_idx = content.find('<section class="content-section" id="proyectos">')
-            if proyectos_idx != -1:
-                insert_idx = proyectos_idx
-            else:
-                main_end = content.find('</main>')
-                insert_idx = main_end if main_end != -1 else content.rfind('</body>')
+            cards.append("\n".join(card))
+        except Exception as exc:
+            print(f"Error procesando articulo: {exc}")
 
-            updated_content = content[:insert_idx] + new_list + content[insert_idx:]
+    return cards
 
-            with open('index.html', 'w', encoding='utf-8') as file:
-                file.write(updated_content)
-            print(f'✓ Se creó la sección y se escribieron {len(publications)} publicaciones en index.html')
-            
-except Exception as e:
-    print(f'✗ Error al actualizar index.html: {e}')
-    import traceback
-    traceback.print_exc()
+
+def find_div_bounds(content, div_id):
+    open_tag_pattern = re.compile(rf'<div\s+id="{re.escape(div_id)}"[^>]*>', re.IGNORECASE)
+    open_match = open_tag_pattern.search(content)
+    if not open_match:
+        raise ValueError(f"No se encontro el div con id={div_id}")
+
+    open_tag_start = open_match.start()
+    open_tag_end = open_match.end()
+
+    tag_pattern = re.compile(r"<div\b[^>]*>|</div>", re.IGNORECASE)
+    depth = 1
+    for match in tag_pattern.finditer(content, open_tag_end):
+        token = match.group(0).lower()
+        if token.startswith("<div"):
+            depth += 1
+        else:
+            depth -= 1
+            if depth == 0:
+                close_tag_start = match.start()
+                close_tag_end = match.end()
+                return open_tag_start, open_tag_end, close_tag_start, close_tag_end
+
+    raise ValueError(f"No se pudo cerrar el div con id={div_id}")
+
+
+def replace_div_content(content, div_id, inner_html):
+    _, open_end, close_start, _ = find_div_bounds(content, div_id)
+    normalized_inner = "\n" + inner_html.strip() + "\n"
+    return content[:open_end] + normalized_inner + content[close_start:]
+
+
+def replace_last_updated_line(content, element_id, new_value):
+    pattern = re.compile(
+        rf'(<p[^>]*id="{re.escape(element_id)}"[^>]*>)(.*?)(</p>)',
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not pattern.search(content):
+        return content
+    return pattern.sub(rf"\1{new_value}\3", content)
+
+
+def update_index(cards, timestamp):
+    with open(INDEX_PATH, "r", encoding="utf-8") as fh:
+        content = fh.read()
+
+    latest_three = cards[:3]
+    content = replace_div_content(content, "publicaciones-content", "\n".join(latest_three))
+    content = replace_last_updated_line(content, "publicaciones-last-updated", f"Última actualización: {timestamp} UTC")
+
+    with open(INDEX_PATH, "w", encoding="utf-8") as fh:
+        fh.write(content)
+
+    print(f"✓ Se actualizaron {len(latest_three)} publicaciones en {INDEX_PATH} (últimas 3)")
+
+
+def update_archive(cards, timestamp):
+    with open(ARCHIVE_PATH, "r", encoding="utf-8") as fh:
+        content = fh.read()
+
+    content = replace_div_content(content, "publicaciones-archive-content", "\n".join(cards))
+    content = replace_last_updated_line(
+        content,
+        "publicaciones-archive-last-updated",
+        f"Última actualización: {timestamp} UTC",
+    )
+
+    with open(ARCHIVE_PATH, "w", encoding="utf-8") as fh:
+        fh.write(content)
+
+    print(f"✓ Se actualizaron {len(cards)} publicaciones en {ARCHIVE_PATH}")
+
+
+def main():
+    try:
+        cards = fetch_publications()
+        if not cards:
+            print("No se encontraron publicaciones para la búsqueda")
+            raise SystemExit(0)
+
+        timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
+        update_index(cards, timestamp)
+        update_archive(cards, timestamp)
+    except Exception as exc:
+        print(f"Error al actualizar publicaciones: {exc}")
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
