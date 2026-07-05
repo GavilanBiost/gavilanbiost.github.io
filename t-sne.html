@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>t-SNE en R - Jesus F Garcia Gavilan</title>
+
+    <meta name="description" content="Tutorial practico de t-SNE en R para reducir dimensionalidad y visualizar patrones en datos multivariables.">
+    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gavilanbiost.github.io/t-sne.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .tutorial-shell {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .tutorial-hero {
+            padding: 10px 0 4px;
+        }
+
+        .tutorial-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .tutorial-card {
+            background: #fff;
+            border: 1px solid rgba(171, 184, 195, 0.9);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .tutorial-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-card p,
+        .tutorial-card li {
+            color: var(--text-muted);
+        }
+
+        .tutorial-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .tutorial-card li + li {
+            margin-top: 8px;
+        }
+
+        .code-block {
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .code-block code {
+            background: transparent;
+            color: inherit;
+        }
+
+        .note-box {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--mets-orange);
+            background: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .tutorial-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 860px) {
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+        <div class="nav-container">
+            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="posts.html">Posts</a>
+                <a href="tutoriales.html">Tutoriales</a>
+                <a href="index.html#publicaciones">Papers</a>
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="news.html">Noticias</a>
+                <a href="index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section tutorial-shell">
+                <div class="tutorial-hero">
+                    <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
+                    <h1>t-SNE en R: visualizacion de datos de alta dimensionalidad</h1>
+                    <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
+                        Este tutorial muestra como aplicar t-SNE en R para proyectar datos multivariables en dos dimensiones
+                        y detectar estructuras, grupos y relaciones locales. Esta pensado para personas que trabajan con
+                        datos omicos, clinicos o de machine learning y necesitan una visualizacion exploratoria robusta.
+                    </p>
+                    <div class="button-row">
+                        <a href="https://github.com/GavilanBiost/t-SNE" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
+                        <a href="https://github.com/GavilanBiost/t-SNE" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-code"></i> Abrir codigo</a>
+                    </div>
+                </div>
+
+                <div class="tutorial-grid">
+                    <article class="tutorial-card">
+                        <section class="tutorial-desc">
+                            <h3>Descripcion</h3>
+                            <p>t-SNE (t-distributed Stochastic Neighbor Embedding) permite reducir dimensionalidad preservando vecindades locales, por lo que es ideal para explorar patrones no lineales.</p>
+                            <p style="margin-top: 10px;">En esta guia se cubre la preparacion de datos, la seleccion de hiperparametros clave y la visualizacion final para interpretar resultados con criterio.</p>
+                        </section>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Requisitos previos</h3>
+                        <ul>
+                            <li>Conocimientos basicos de R y manejo de data frames.</li>
+                            <li>Datos numericos escalables o matriz de caracteristicas.</li>
+                            <li>Paquetes de visualizacion en R (por ejemplo, ggplot2).</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Pasos clave</h3>
+                        <ul>
+                            <li>Limpieza y estandarizacion de variables.</li>
+                            <li>Definicion de parametros como perplexity y learning rate.</li>
+                            <li>Ejecucion de t-SNE y evaluacion de estabilidad.</li>
+                            <li>Visualizacion de clusters y lectura biologica/clinica.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Codigo de ejemplo</h3>
+                        <p>Ejemplo minimo de flujo en R para correr t-SNE sobre una matriz de datos.</p>
+                        <pre class="code-block"><code># Instalacion (si hace falta)
+# install.packages(c("Rtsne", "ggplot2"))
+
+library(Rtsne)
+library(ggplot2)
+
+set.seed(123)
+X <- scale(iris[, 1:4])
+fit <- Rtsne(X, dims = 2, perplexity = 30, verbose = FALSE)
+
+plot_df <- data.frame(
+  TSNE1 = fit$Y[, 1],
+  TSNE2 = fit$Y[, 2],
+  Species = iris$Species
+)
+
+ggplot(plot_df, aes(TSNE1, TSNE2, color = Species)) +
+  geom_point(size = 2.4, alpha = 0.9) +
+  theme_minimal(base_size = 12)</code></pre>
+                    </article>
+                </div>
+
+                <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
+                    <h3>Nota metodologica</h3>
+                    <div class="note-box">
+                        t-SNE es excelente para exploracion visual, pero no debe interpretarse como prueba inferencial.
+                        Conviene repetir analisis con distintas semillas y comparar con metodos complementarios como PCA o UMAP.
+                    </div>
+                </article>
+
+                <div class="tutorial-actions" style="justify-content: center;">
+                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

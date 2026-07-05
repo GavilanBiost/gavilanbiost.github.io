@@ -31,7 +31,13 @@
   </url>
   <url>
     <loc>https://gavilanbiost.github.io/tutoriales.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gavilanbiost.github.io/t-sne.html</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,7 +55,7 @@
   </url>
   <url>
     <loc>https://gavilanbiost.github.io/#tutoriales</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
