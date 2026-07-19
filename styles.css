@@ -507,6 +507,7 @@ a:hover {
     display: flex; 
     align-items: center; 
     gap: 15px; 
+    min-width: 0;
 }
 
 .icon-box {
@@ -522,6 +523,8 @@ a:hover {
     font-weight: 600; 
     font-size: 1.1rem;
     text-decoration: none;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .contact-link:hover {
@@ -684,6 +687,23 @@ footer {
 
     .sidebar-tags .tag-cloud {
         justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-card-layout {
+        padding: 22px 18px;
+        gap: 18px;
+    }
+
+    .contact-row {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .contact-link {
+        font-size: 1rem;
+        line-height: 1.4;
     }
 }
 
