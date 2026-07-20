@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>C-index - Jesus F Garcia Gavilan</title>
+
+    <meta name="description" content="Tutorial en R para calcular e interpretar el C-index en modelos de Cox.">
+    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/c-index.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+
+    <style>
+        .tutorial-shell {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .tutorial-hero {
+            padding: 10px 0 4px;
+        }
+
+        .tutorial-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .tutorial-card {
+            background: #fff;
+            border: 1px solid rgba(171, 184, 195, 0.9);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .tutorial-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-card p,
+        .tutorial-card li {
+            color: var(--text-muted);
+        }
+
+        .tutorial-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .tutorial-card li + li {
+            margin-top: 8px;
+        }
+
+        .code-block {
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .code-block code {
+            background: transparent;
+            color: inherit;
+        }
+
+        .note-box {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--mets-orange);
+            background: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .tutorial-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 860px) {
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+        <div class="nav-container">
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section tutorial-shell">
+                <div class="tutorial-hero">
+                    <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
+                    <h1>C-index en modelos de Cox</h1>
+                    <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
+                        Este tutorial muestra c&oacute;mo calcular e interpretar el <strong>C-index</strong> en R para evaluar
+                        la capacidad discriminativa de un modelo de Cox. El flujo incluye depuraci&oacute;n de la base,
+                        verificaci&oacute;n de supuestos, obtenci&oacute;n del predictor lineal y c&aacute;lculo de la concordancia
+                        con datos censurados usando la base <strong>lung</strong>.
+                    </p>
+                    <div class="button-row">
+                        <a href="#flujo-cindex" class="btn-outline"><i class="fa-solid fa-list-check"></i> Ver flujo del analisis</a>
+                        <a href="#codigo-cindex" class="btn-outline"><i class="fa-solid fa-code"></i> Ir al codigo</a>
+                    </div>
+                </div>
+
+                <div class="tutorial-grid">
+                    <article class="tutorial-card">
+                        <section class="tutorial-desc">
+                            <h3>Descripcion</h3>
+                            <p>
+                                El C-index resume si el modelo ordena correctamente el riesgo entre pares de pacientes:
+                                cuando uno tiene mayor riesgo predicho, deber&iacute;a presentar el evento antes.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                En supervivencia no basta con ajustar <strong>coxph()</strong>. Tambi&eacute;n hay que comprobar
+                                que el score generado discrimina bien, especialmente cuando existen observaciones censuradas.
+                            </p>
+                        </section>
+                    </article>
+
+                    <article class="tutorial-card">
+                        <h3>Requisitos previos</h3>
+                        <ul>
+                            <li>R con los paquetes <strong>survival</strong>, <strong>Hmisc</strong> y <strong>dplyr</strong>.</li>
+                            <li>Comprensi&oacute;n b&aacute;sica del objeto <strong>Surv()</strong> y del ajuste con <strong>coxph()</strong>.</li>
+                            <li>Variables de tiempo, evento y covariables sin valores perdidos en el subconjunto analizado.</li>
+                            <li>Interpretaci&oacute;n de censura y de medidas de discriminaci&oacute;n.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card" id="flujo-cindex">
+                        <h3>Pasos clave</h3>
+                        <ul>
+                            <li>Seleccionar variables relevantes y eliminar filas incompletas.</li>
+                            <li>Recodificar el evento para usar 1 como fallecimiento y 0 como censura.</li>
+                            <li>Ajustar el modelo de Cox y revisar riesgos proporcionales con <strong>cox.zph()</strong>.</li>
+                            <li>Obtener el predictor lineal con <strong>predict(..., type = "lp")</strong>.</li>
+                            <li>Calcular <strong>rcorr.cens()</strong> invirtiendo el signo del score.</li>
+                            <li>Interpretar el C-index: 0.5 azar, 0.6-0.7 modesto, 0.7-0.8 bueno, &gt; 0.8 muy bueno.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tutorial-card" id="codigo-cindex">
+                        <h3>Codigo de ejemplo</h3>
+                        <p>Ejemplo compacto con la base <strong>lung</strong> para ajustar el modelo y calcular el C-index.</p>
+                        <pre class="code-block"><code>library(survival)
+library(Hmisc)
+library(dplyr)
+
+lung_clean &lt;- lung %&gt;%
+  select(time, status, age, sex, wt.loss) %&gt;%
+  filter(complete.cases(.)) %&gt;%
+  mutate(status = if_else(status == 2, 1, 0))
+
+cox_ph &lt;- coxph(
+  Surv(time, status) ~ age + sex + wt.loss,
+  data = lung_clean
+)
+
+cox.zph(cox_ph)
+
+pred &lt;- predict(cox_ph, type = "lp")
+
+c_index &lt;- rcorr.cens(
+  -pred,
+  Surv(lung_clean$time, lung_clean$status)
+)
+
+round(c_index, 2)</code></pre>
+                    </article>
+                </div>
+
+                <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
+                    <h3>Nota metodologica</h3>
+                    <div class="note-box">
+                        El signo negativo en <strong>rcorr.cens(-pred, ...)</strong> es importante porque el predictor lineal
+                        de Cox representa mayor riesgo cuando toma valores altos, mientras que el tiempo de supervivencia
+                        se interpreta en la direcci&oacute;n opuesta. En este ejemplo, un C-index cercano a 0.61 sugiere
+                        una discriminaci&oacute;n modesta: el modelo ordena mejor que el azar, pero todav&iacute;a lejos de una
+                        capacidad predictiva fuerte. El C-index eval&uacute;a discriminaci&oacute;n, no calibraci&oacute;n.
+                    </div>
+                </article>
+
+                <div class="tutorial-actions" style="justify-content: center;">
+                    <a href="../tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
