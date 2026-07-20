@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MAE - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial sobre calculo del Error Absoluto Medio (MAE) en R.">
-    <meta name="author" content="Jesus F Garcia Gavilán">
+    <meta name="description" content="Tutorial sobre cálculo del Error Absoluto Medio (MAE) en R.">
+    <meta name="tutorial-category" content="R / MÉTRICAS DE ERROR">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/MAE_linkedIn">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/MAE-linkedIn.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/MAE.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <style>
         .tutorial-shell {
             width: 100%;
@@ -125,17 +127,17 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
-            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
-                <a href="index.html#inicio">Inicio</a>
-                <a href="posts.html">Posts</a>
-                <a href="tutoriales.html">Tutoriales</a>
-                <a href="publicaciones.html">Papers</a>
-                <a href="index.html#proyectos">Proyectos</a>
-                <a href="news.html">Noticias</a>
-                <a href="index.html#contact">Contacto</a>
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
             </div>
         </div>
     </nav>
@@ -147,8 +149,8 @@
                     <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
                     <h1>MAE</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
-                        Tutorial practico sobre el calculo del <strong>Error Absoluto Medio (MAE)</strong> en R.
-                        Incluye definición de datos reales frente a predicciones, calculo manual paso a paso
+                        Tutorial práctico sobre el cálculo del <strong>Error Absoluto Medio (MAE)</strong> en R.
+                        Incluye definición de datos reales frente a predicciones, cálculo manual paso a paso
                         y visualización de los errores individuales con respecto al MAE global.
                     </p>
                     <div class="button-row">
@@ -167,7 +169,7 @@
                         </p>
                         <p style="margin-top: 10px;">
                             Es una métrica sencilla e intuitiva: cuanto menor sea su valor, mejor
-                            replica el modelo los datos reales. Util en modelos de regresión y
+                            replica el modelo los datos reales. Útil en modelos de regresión y
                             predicción numérica.
                         </p>
                         </section>
@@ -177,14 +179,14 @@
                         <h3>Contenido del tutorial</h3>
                         <ul>
                             <li>Definición de vectores de valores reales y predicciones.</li>
-                            <li>Calculo de errores absolutos por observación.</li>
-                            <li>Promedio de errores: formula del MAE.</li>
+                            <li>Cálculo de errores absolutos por observación.</li>
+                            <li>Promedio de errores: fórmula del MAE.</li>
                             <li>Visualización de reales vs. predicciones con barras de error.</li>
                         </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Calculo del MAE en R</h3>
+                        <h3>Cálculo del MAE en R</h3>
                         <pre class="code-block"><code>reales      &lt;- c(102, 98, 110, 105, 95, 112, 101)
 predicciones &lt;- c(100, 100, 108, 110,  90, 115,  99)
 
@@ -200,7 +202,7 @@ print(paste("MAE:", round(mae_resultado, 2)))
                         <pre class="code-block"><code>plot(reales, type = "b", col = "blue",
      pch = 16, ylim = c(85, 120),
      main = "Reales vs Predicciones",
-     xlab = "Observacion", ylab = "Valor")
+    xlab = "Observación", ylab = "Valor")
 
 lines(predicciones, type = "b",
       col = "red", pch = 17)
@@ -210,14 +212,14 @@ for (i in seq_along(reales)) {
         col = "darkgray", lty = 2)
 }</code></pre>
                         <p style="margin-top: 10px;">
-                            Las lineas verticales grises representan el error absoluto de cada
+                            Las líneas verticales grises representan el error absoluto de cada
                             observación. El MAE es el promedio de todas esas longitudes.
                         </p>
                     </article>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
                         A diferencia del RMSE, el MAE trata todos los errores por igual sin penalizar
                         los grandes de forma desproporcionada. Es preferible cuando los errores
@@ -226,8 +228,8 @@ for (i in seq_along(reales)) {
                 </article>
 
                 <div class="tutorial-actions" style="justify-content: center;">
-                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
-                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                    <a href="../tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
                 </div>
             </section>
         </main>

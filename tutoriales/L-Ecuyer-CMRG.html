@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>L'Ecuyer-CMRG - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial sobre L'Ecuyer-CMRG.">
+    <meta name="description" content="Tutorial sobre L'Ecuyer-CMRG para reproducibilidad en computación en paralelo con R.">
+    <meta name="tutorial-category" content="R / COMPUTACIÓN EN PARALELO">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/L-Ecuyer-CMRG">
     <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/L-Ecuyer-CMRG.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/L-Ecuyer-CMRG.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <style>
         .tutorial-shell {
             width: 100%;
@@ -127,15 +129,15 @@
 <body class="news-page">
     <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
-            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
-                <a href="index.html#inicio">Inicio</a>
-                <a href="posts.html">Posts</a>
-                <a href="tutoriales.html">Tutoriales</a>
-                <a href="publicaciones.html">Papers</a>
-                <a href="index.html#proyectos">Proyectos</a>
-                <a href="news.html">Noticias</a>
-                <a href="index.html#contact">Contacto</a>
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
             </div>
         </div>
     </nav>
@@ -151,11 +153,11 @@
                         en cada ejecución, lo que rompe la reproducibilidad. Este tutorial permite resolverlo usando
                         el generador <strong>L'Ecuyer-CMRG</strong> junto con el paquete <code>parallel</code> en R:
                         sin dependencias externas y con un protocolo de cuatro pasos que garantiza resultados idénticos
-                        en cualquier máquina y en cualquier momento
+                        en cualquier máquina y en cualquier momento.
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG/blob/main/L-Ecuyer-CMRG.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
+                        <a href="https://github.com/GavilanBiost/L-Ecuyer-CMRG/blob/main/L-Ecuyer-CMRG.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Abrir tutorial</a>
                     </div>
                 </div>
 
@@ -238,8 +240,8 @@ ggplot(datos, aes(x = medias)) +
                 </article>
 
                 <div class="tutorial-actions" style="justify-content: center;">
-                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
-                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                    <a href="../tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
                 </div>
             </section>
         </main>

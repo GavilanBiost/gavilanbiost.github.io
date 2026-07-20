@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Confusión e Interacción en Epidemiología - Jesus F Garcia Gavilan</title>
+    <title>Confusión e Interacción en Epidemiología - Jesús F García Gavilán</title>
 
     <meta name="description" content="Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="tutorial-category" content="R / REGRESIÓN">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/confusion_e_interaccion">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/confusion-e-interaccion.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/confusion-e-interaccion.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
     <style>
         .tutorial-shell {
@@ -126,17 +128,17 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
-            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
-                <a href="index.html#inicio">Inicio</a>
-                <a href="posts.html">Posts</a>
-                <a href="tutoriales.html">Tutoriales</a>
-                <a href="publicaciones.html">Papers</a>
-                <a href="index.html#proyectos">Proyectos</a>
-                <a href="news.html">Noticias</a>
-                <a href="index.html#contact">Contacto</a>
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
             </div>
         </div>
     </nav>
@@ -163,7 +165,7 @@
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
                         <section class="tutorial-desc">
-                        <h3>Descripcion</h3>
+                        <h3>Descripción</h3>
                         <p>El tutorial utiliza dos ejemplos simulados para ilustrar la diferencia entre confusión e interacción. En el primero, el tabaquismo actúa como variable confusora en la relación aparente entre consumo de café y riesgo cardiovascular: al estratificar por tabaco, la asociación desaparece.</p>
                         <p style="margin-top: 10px;">En el segundo ejemplo, un fármaco antihipertensivo muestra efectos diferentes según el sexo biológico del paciente, evidenciando una interacción real donde la magnitud del efecto varía entre grupos.</p>
                     </section>
@@ -172,10 +174,10 @@
                     <article class="tutorial-card">
                         <h3>Requisitos previos</h3>
                         <ul>
-                            <li>R instalado (version 4.0 o superior recomendada)</li>
+                            <li>R instalado (versión 4.0 o superior recomendada)</li>
                             <li>RStudio para ejecutar el archivo <code>.Rmd</code></li>
                             <li>Paquetes de R: <code>ggplot2</code>, <code>dplyr</code>, <code>gridExtra</code></li>
-                            <li>Conocimientos basicos de regresion lineal y epidemiologia analitica</li>
+                            <li>Conocimientos básicos de regresión lineal y epidemiología analítica</li>
                         </ul>
                     </article>
 
@@ -183,17 +185,17 @@
                         <h3>Pasos clave</h3>
                         <ul>
                             <li>Instalar y cargar los paquetes necesarios en R</li>
-                            <li>Simular datos con una variable confusora (cafe, tabaco y riesgo cardiovascular)</li>
-                            <li>Visualizar la asociacion cruda y la asociacion estratificada para detectar confusion</li>
-                            <li>Simular datos con modificacion del efecto (farmaco y sexo)</li>
-                            <li>Comparar las pendientes entre grupos para identificar la interaccion</li>
+                            <li>Simular datos con una variable confusora (café, tabaco y riesgo cardiovascular)</li>
+                            <li>Visualizar la asociación cruda y la asociación estratificada para detectar confusión</li>
+                            <li>Simular datos con modificación del efecto (fármaco y sexo)</li>
+                            <li>Comparar las pendientes entre grupos para identificar la interacción</li>
                             <li>Abrir el <code>.Rmd</code> en RStudio y usar <em>Knit</em> para reproducir el documento completo</li>
                         </ul>
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Codigo de ejemplo</h3>
-                        <p>Simulacion de confusion: cafe y riesgo cardiovascular con tabaquismo como confusor.</p>
+                        <h3>Código de ejemplo</h3>
+                        <p>Simulación de confusión: café y riesgo cardiovascular con tabaquismo como confusor.</p>
                         <pre class="code-block"><code>library(ggplot2)
 library(dplyr)
 
@@ -216,15 +218,15 @@ lm(riesgo ~ cafe + tabaco, data = datos)</code></pre>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
-                        Confusion e interaccion son conceptos distintos que requieren respuestas distintas. La confusion es un sesgo que debe <strong>eliminarse</strong> mediante ajuste o estratificacion; ignorarla lleva a conclusiones incorrectas. La interaccion, en cambio, es un hallazgo biologico o clinico real que debe <strong>reportarse y explorarse</strong>, ya que indica que el efecto de la exposicion no es uniforme en la poblacion. Confundir ambos fenomenos es uno de los errores mas comunes en la interpretacion de estudios epidemiologicos.
+                        Confusión e interacción son conceptos distintos que requieren respuestas distintas. La confusión es un sesgo que debe <strong>eliminarse</strong> mediante ajuste o estratificación; ignorarla lleva a conclusiones incorrectas. La interacción, en cambio, es un hallazgo biológico o clínico real que debe <strong>reportarse y explorarse</strong>, ya que indica que el efecto de la exposición no es uniforme en la población. Confundir ambos fenómenos es uno de los errores más comunes en la interpretación de estudios epidemiológicos.
                     </div>
                 </article>
 
                 <div class="tutorial-actions" style="justify-content: center;">
-                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
-                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                    <a href="../tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
                 </div>
             </section>
         </main>

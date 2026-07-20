@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Estadistico F en regresion lineal - Jesus F Garcia Gavilan</title>
+    <title>Estadístico F en regresión lineal - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial en R sobre el estadistico F de contraste global en modelos lineales multiples.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="description" content="Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.">
+    <meta name="tutorial-category" content="R / REGRESIÓN LINEAL">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/estadistico_lm">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/estadistico-contraste.html">
 
@@ -126,7 +128,7 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
             <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
@@ -146,25 +148,25 @@
             <section class="content-section tutorial-shell">
                 <div class="tutorial-hero">
                     <div class="tutorial-kicker"><i class="fa-solid fa-book-open"></i> Tutorial</div>
-                    <h1>Estadistico F de contraste global</h1>
+                    <h1>Estadístico F de contraste global</h1>
                     <p class="text-small" style="max-width: 100%; font-size: 1.02rem; text-align: justify;">
-                        Este tutorial explica c&oacute;mo interpretar el <strong>estadistico F</strong> de un modelo lineal m&uacute;ltiple
+                        Este tutorial explica c&oacute;mo interpretar el <strong>estadístico F</strong> de un modelo lineal m&uacute;ltiple
                         en R para responder si el conjunto de covariables explica de forma significativa los niveles de HDL.
                         Incluye especificaci&oacute;n con <strong>lm()</strong>, extracci&oacute;n del test global, tabla resumen y
                         visualizaci&oacute;n de la distribuci&oacute;n F bajo la hip&oacute;tesis nula.
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/estadistico_lm" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/estadistico_lm/blob/main/estadistico_contraste.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
+                        <a href="https://github.com/GavilanBiost/estadistico_lm/blob/main/estadistico_contraste.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Abrir tutorial</a>
                     </div>
                 </div>
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
                         <section class="tutorial-desc">
-                            <h3>Descripcion</h3>
+                            <h3>Descripción</h3>
                             <p>
-                                El estadistico F compara la se&ntilde;al explicada por el modelo frente al ruido residual.
+                                El estadístico F compara la se&ntilde;al explicada por el modelo frente al ruido residual.
                                 En la pr&aacute;ctica, es el contraste global que eval&uacute;a si al menos uno de los coeficientes
                                 del modelo lineal es distinto de cero.
                             </p>
@@ -190,7 +192,7 @@
                         <h3>Pasos clave</h3>
                         <ul>
                             <li>Definir un modelo lineal m&uacute;ltiple con <strong>lm()</strong>.</li>
-                            <li>Obtener el resumen del modelo y localizar el estadistico F.</li>
+                            <li>Obtener el resumen del modelo y localizar el estadístico F.</li>
                             <li>Extraer numerador, denominador y p-valor global del contraste.</li>
                             <li>Construir una tabla legible con las m&eacute;tricas del test.</li>
                             <li>Representar la distribuci&oacute;n F te&oacute;rica y marcar el F observado.</li>
@@ -199,7 +201,7 @@
                     </article>
 
                     <article class="tutorial-card">
-                        <h3>Codigo de ejemplo</h3>
+                        <h3>Código de ejemplo</h3>
                         <p>Fragmento resumido del flujo para extraer e interpretar el contraste global del modelo.</p>
                         <pre class="code-block"><code>library(dplyr)
 library(knitr)
@@ -225,9 +227,9 @@ abline(v = f_valor, col = "#2c3e50", lwd = 3, lty = 2)</code></pre>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
-                        El estadistico F no dice qu&eacute; variable concreta impulsa la asociaci&oacute;n, sino si el modelo
+                        El estadístico F no dice qu&eacute; variable concreta impulsa la asociaci&oacute;n, sino si el modelo
                         completo aporta informaci&oacute;n frente a un modelo sin predictores. Un valor como <strong>F = 18.34</strong>
                         con <strong>p &lt; 0.001</strong> indica que el patr&oacute;n observado es muy poco compatible con azar.
                         Aun as&iacute;, la significaci&oacute;n global debe leerse junto al R-cuadrado ajustado, los residuos y la

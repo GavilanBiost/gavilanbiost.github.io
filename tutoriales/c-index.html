@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>C-index - Jesus F Garcia Gavilan</title>
+    <title>C-index - Jesús F García Gavilán</title>
 
     <meta name="description" content="Tutorial en R para calcular e interpretar el C-index en modelos de Cox.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="tutorial-category" content="R / SUPERVIVENCIA">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/c-index">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/c-index.html">
 
@@ -126,7 +128,7 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
             <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
@@ -154,15 +156,15 @@
                         con datos censurados usando la base <strong>lung</strong>.
                     </p>
                     <div class="button-row">
-                        <a href="#flujo-cindex" class="btn-outline"><i class="fa-solid fa-list-check"></i> Ver flujo del analisis</a>
-                        <a href="#codigo-cindex" class="btn-outline"><i class="fa-solid fa-code"></i> Ir al codigo</a>
+                        <a href="#flujo-cindex" class="btn-outline"><i class="fa-solid fa-list-check"></i> Ver flujo del análisis</a>
+                        <a href="#codigo-cindex" class="btn-outline"><i class="fa-solid fa-code"></i> Ir al código</a>
                     </div>
                 </div>
 
                 <div class="tutorial-grid">
                     <article class="tutorial-card">
                         <section class="tutorial-desc">
-                            <h3>Descripcion</h3>
+                            <h3>Descripción</h3>
                             <p>
                                 El C-index resume si el modelo ordena correctamente el riesgo entre pares de pacientes:
                                 cuando uno tiene mayor riesgo predicho, deber&iacute;a presentar el evento antes.
@@ -197,7 +199,7 @@
                     </article>
 
                     <article class="tutorial-card" id="codigo-cindex">
-                        <h3>Codigo de ejemplo</h3>
+                        <h3>Código de ejemplo</h3>
                         <p>Ejemplo compacto con la base <strong>lung</strong> para ajustar el modelo y calcular el C-index.</p>
                         <pre class="code-block"><code>library(survival)
 library(Hmisc)
@@ -227,7 +229,7 @@ round(c_index, 2)</code></pre>
                 </div>
 
                 <article class="tutorial-card" style="margin-top: 20px; text-align: justify;">
-                    <h3>Nota metodologica</h3>
+                    <h3>Nota metodológica</h3>
                     <div class="note-box">
                         El signo negativo en <strong>rcorr.cens(-pred, ...)</strong> es importante porque el predictor lineal
                         de Cox representa mayor riesgo cuando toma valores altos, mientras que el tiempo de supervivencia

@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ICC - Jesús F García Gavilán</title>
 
-    <meta name="description" content="Tutorial sobre coeficiente de correlacion intraclase (ICC) en R.">
-    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="description" content="Tutorial sobre coeficiente de correlación intraclase (ICC) en R.">
+    <meta name="tutorial-category" content="R / ESTADÍSTICA">
+    <meta name="tutorial-repository" content="https://github.com/GavilanBiost/ICC">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gavilanbiost.github.io/ICC.html">
+    <link rel="canonical" href="https://gavilanbiost.github.io/tutoriales/ICC.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <style>
         .tutorial-shell {
             width: 100%;
@@ -125,17 +127,17 @@
     </style>
 </head>
 <body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="nav-container">
-            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
             <div class="nav-links">
-                <a href="index.html#inicio">Inicio</a>
-                <a href="posts.html">Posts</a>
-                <a href="tutoriales.html">Tutoriales</a>
-                <a href="publicaciones.html">Papers</a>
-                <a href="index.html#proyectos">Proyectos</a>
-                <a href="news.html">Noticias</a>
-                <a href="index.html#contact">Contacto</a>
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
             </div>
         </div>
     </nav>
@@ -155,7 +157,7 @@
                     </p>
                     <div class="button-row">
                         <a href="https://github.com/GavilanBiost/ICC" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>
-                        <a href="https://github.com/GavilanBiost/ICC/blob/main/ICC.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> Ver tutorial</a>
+                        <a href="https://github.com/GavilanBiost/ICC/blob/main/ICC.pdf" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Abrir tutorial</a>
                     </div>
                 </div>
 
@@ -164,13 +166,13 @@
                         <section class="tutorial-desc">
                         <h3>Descripción</h3>
                         <p>
-                            El ICC cuantifica que proporción de la variabilidad total se debe a
+                            El ICC cuantifica qué proporción de la variabilidad total se debe a
                             diferencias reales entre sujetos, en lugar de error de medición.
                             Es clave cuando varios observadores evalúan la misma variable.
                         </p>
                         <p style="margin-top: 10px;">
                             El flujo del tutorial cubre comparaciones entre observadores,
-                            gráficos de Bland-Altman y modelos ICC de dos vias para
+                            gráficos de Bland-Altman y modelos ICC de dos vías para
                             <strong>consistencia</strong> y <strong>acuerdo</strong>.
                         </p>
                     </section>
@@ -179,7 +181,7 @@
                     <article class="tutorial-card">
                         <h3>Requisitos previos</h3>
                         <ul>
-                            <li>R en version reciente.</li>
+                            <li>R en versión reciente.</li>
                             <li>Paquetes <strong>irr</strong>, <strong>ggplot2</strong> y utilidades para manejo de datos.</li>
                             <li>Matriz o data.frame con mediciones por observador.</li>
                             <li>Criterio previo para elegir consistencia o acuerdo.</li>
@@ -233,8 +235,8 @@ print(icc_consistencia)</code></pre>
                 </article>
 
                 <div class="tutorial-actions" style="justify-content: center;">
-                    <a href="tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
-                    <a href="index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                    <a href="../tutoriales.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a tutoriales</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
                 </div>
             </section>
         </main>
