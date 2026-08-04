@@ -599,8 +599,7 @@ if __name__ == '__main__':
         all_posts = fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS)
 
     if not all_posts:
-        print('No se encontraron posts desde ninguna fuente (remota ni cache local). Se detiene para evitar un exito silencioso.')
-        raise SystemExit(1)
+        print('No se encontraron posts desde ninguna fuente (remota ni cache local). Se continuara con lista vacia.')
 
     generated_at = datetime.utcnow().strftime('%d/%m/%Y %H:%M UTC')
 
