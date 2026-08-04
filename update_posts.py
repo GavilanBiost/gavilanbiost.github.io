@@ -1,18 +1,13 @@
 import requests
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from html import escape
 from html import unescape
 import re
-import json
-import subprocess
 
 # URL del feed RSS de Substack
 SUBSTACK_FEED = 'https://gavilanbiost.substack.com/feed'
-SUBSTACK_ARCHIVE_API = 'https://gavilanbiost.substack.com/api/v1/archive'
-JINA_MIRROR_FEED = 'https://r.jina.ai/http://gavilanbiost.substack.com/feed'
-JINA_MIRROR_ARCHIVE = 'https://r.jina.ai/http://gavilanbiost.substack.com/archive'
 MAX_INDEX_POSTS = 3
 MAX_ARCHIVE_POSTS = 200
 REQUEST_TIMEOUT = 20
@@ -23,76 +18,6 @@ COMMON_HEADERS = {
     ),
     'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
 }
-
-
-def curl_get_text(url, headers=None, timeout=REQUEST_TIMEOUT, params=None):
-    command = [
-        'curl',
-        '-sS',
-        '-L',
-        '--max-time',
-        str(timeout),
-        '--connect-timeout',
-        '10',
-    ]
-
-    for key, value in (headers or {}).items():
-        command.extend(['-H', f'{key}: {value}'])
-
-    if params:
-        command.append('--get')
-        for key, value in params.items():
-            command.extend(['--data-urlencode', f'{key}={value}'])
-
-    marker = '__HTTP_STATUS__:'
-    command.extend(['-w', f'\n{marker}%{{http_code}}', url])
-
-    try:
-        result = subprocess.run(command, capture_output=True, text=True, check=False)
-    except Exception as exc:
-        print(f'Error ejecutando curl para {url}: {exc}')
-        return None, None
-
-    if result.returncode != 0:
-        err_text = result.stderr.strip() or f'codigo {result.returncode}'
-        print(f'curl fallo para {url}: {err_text}')
-        return None, None
-
-    split_token = f'\n{marker}'
-    if split_token not in result.stdout:
-        print(f'curl no devolvio marcador de estado para {url}')
-        return None, None
-
-    body, status_text = result.stdout.rsplit(split_token, 1)
-    try:
-        status_code = int(status_text.strip().splitlines()[0])
-    except (ValueError, IndexError):
-        print(f'No se pudo parsear estado HTTP de curl para {url}: {status_text!r}')
-        return None, None
-
-    return status_code, body
-
-
-def robust_get_text(url, headers=None, timeout=REQUEST_TIMEOUT, params=None, source_label='recurso'):
-    try:
-        response = requests.get(url, timeout=timeout, headers=headers, params=params)
-    except requests.RequestException as exc:
-        print(f'Error de red al obtener {source_label}: {exc}')
-    else:
-        if response.status_code == 200:
-            return 200, response.text
-        print(f'Error al obtener {source_label}: {response.status_code}')
-
-    print(f'Intentando {source_label} con curl...')
-    curl_status, curl_text = curl_get_text(url, headers=headers, timeout=timeout, params=params)
-    if curl_status is None:
-        return None, None
-
-    if curl_status != 200:
-        print(f'curl devolvio estado {curl_status} para {source_label}')
-        return curl_status, None
-
-    return curl_status, curl_text
 
 
 def clean_description(text):
@@ -223,139 +148,41 @@ def build_cards_html(posts):
     return '\n'.join(cards)
 
 
-def fetch_substack_posts_from_jina_mirror(limit):
-    print('Intentando fallback final via espejo de lectura (r.jina.ai)...')
-
-    candidates = []
-    for mirror_url in (JINA_MIRROR_FEED, JINA_MIRROR_ARCHIVE):
-        status_code, text = robust_get_text(
-            mirror_url,
-            timeout=REQUEST_TIMEOUT + 10,
-            headers={
-                **COMMON_HEADERS,
-                'Accept': 'text/plain, text/markdown, */*',
-            },
-            source_label=f'espejo {mirror_url}',
-        )
-
-        if status_code != 200 or not text:
-            if status_code not in (None,):
-                print(f'Espejo devolvio estado {status_code} para {mirror_url}')
-            continue
-
-        candidates.append(text)
-
-    if not candidates:
-        print('No fue posible recuperar contenido desde el espejo')
-        return []
-
-    link_pattern = re.compile(r'\[([^\]]+)\]\((https?://gavilanbiost\.substack\.com/p/[^)\s]+)\)')
-    posts = []
-
-    for text in candidates:
-        for title, link in link_pattern.findall(text):
-            title_clean = re.sub(r'\s+', ' ', title).strip()
-            if not title_clean or title_clean.lower().startswith('http'):
-                continue
-
-            posts.append(
-                format_post_entry(
-                    title=title_clean,
-                    link=link.strip(),
-                    pub_dt=datetime.min,
-                    pub_date='Fecha no disponible',
-                    description='',
-                )
-            )
-
-    posts = dedupe_and_sort_posts(posts)
-    for post in posts[:limit]:
-        print(f"✓ Post encontrado (espejo): {post['title']}")
-    return posts[:limit]
-
-
-def fetch_substack_posts_from_api(limit):
-    print('Intentando fallback con API publica de Substack...')
-
-    status_code, text = robust_get_text(
-        SUBSTACK_ARCHIVE_API,
-        params={'sort': 'new'},
-        timeout=REQUEST_TIMEOUT,
-        headers={
-            **COMMON_HEADERS,
-            'Accept': 'application/json, text/plain, */*',
-        },
-        source_label='API publica de Substack',
-    )
-
-    if status_code != 200 or not text:
-        if status_code not in (None,):
-            print(f'Fallback API devolvio estado {status_code}')
-        return fetch_substack_posts_from_jina_mirror(limit)
-
-    try:
-        payload = json.loads(text)
-    except json.JSONDecodeError as exc:
-        print(f'Fallback API devolvio JSON invalido: {exc}')
-        return fetch_substack_posts_from_jina_mirror(limit)
-
-    items = payload if isinstance(payload, list) else payload.get('posts', [])
-    posts = []
-
-    for item in items[:limit]:
-        title = item.get('title') or 'Sin título'
-        link = item.get('canonical_url') or item.get('post_url') or ''
-        if not link and item.get('slug'):
-            link = f'https://gavilanbiost.substack.com/p/{item.get("slug")}'
-
-        pub_dt, pub_date = parse_date_value(item.get('post_date') or item.get('published_at') or item.get('created_at'))
-        description = clean_description(item.get('subtitle') or item.get('description') or item.get('body_html') or '')
-
-        posts.append(
-            format_post_entry(
-                title=title,
-                link=link,
-                pub_dt=pub_dt,
-                pub_date=pub_date,
-                description=description,
-            )
-        )
-
-    posts = dedupe_and_sort_posts(posts)
-    for post in posts[:limit]:
-        print(f"✓ Post encontrado (API): {post['title']}")
-
-    if posts:
-        return posts[:limit]
-    return fetch_substack_posts_from_jina_mirror(limit)
-
-
 def fetch_substack_posts(limit=MAX_ARCHIVE_POSTS):
     print('Obteniendo posts de Substack...')
 
-    status_code, text = robust_get_text(
-        SUBSTACK_FEED,
-        timeout=REQUEST_TIMEOUT,
-        headers={
-            **COMMON_HEADERS,
-            'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
-        },
-        source_label='feed RSS',
-    )
+    try:
+        response = requests.get(
+            SUBSTACK_FEED,
+            timeout=REQUEST_TIMEOUT,
+            headers={
+                **COMMON_HEADERS,
+                'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+            },
+        )
+    except requests.RequestException as exc:
+        print(f'Error de red al obtener feed RSS: {exc}')
+        return []
 
-    if status_code != 200 or not text:
-        if status_code not in (None,):
-            print(f'Error al obtener el feed: {status_code}')
-        return fetch_substack_posts_from_api(limit)
+    if response.status_code != 200 or not response.text:
+        print(f'Error al obtener feed RSS: {response.status_code}')
+        return []
+
+    text = response.text
 
     try:
         root = ET.fromstring(text)
     except ET.ParseError as exc:
         print(f'Error parseando XML del feed: {exc}')
-        return fetch_substack_posts_from_api(limit)
+        return []
 
     posts = []
-    for item in root.findall('.//item')[:limit]:
+    items = root.findall('.//item')
+    # Algunos feeds RSS usan namespace; este fallback evita perder items por variaciones de formato.
+    if not items:
+        items = root.findall('.//{*}item')
+
+    for item in items[:limit]:
         try:
             title_elem = item.find('title')
             title = title_elem.text.strip() if title_elem is not None and title_elem.text else 'Sin título'
@@ -388,8 +215,8 @@ def fetch_substack_posts(limit=MAX_ARCHIVE_POSTS):
     if posts:
         return posts[:limit]
 
-    print('Feed RSS no devolvio items utilizables. Intentando fallback API...')
-    return fetch_substack_posts_from_api(limit)
+    print('Feed RSS no devolvio items utilizables.')
+    return []
 
 
 def update_index_html(posts, generated_at):
@@ -627,16 +454,18 @@ def fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS):
 
 
 if __name__ == '__main__':
-    all_posts = fetch_substack_posts(limit=MAX_ARCHIVE_POSTS)
+    feed_posts = fetch_substack_posts(limit=MAX_ARCHIVE_POSTS)
+    cached_posts = fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS)
 
-    if not all_posts:
-        all_posts = fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS)
+    # Mantener historico: combinar feed (fuente remota principal) + cache local del repo.
+    all_posts = dedupe_and_sort_posts(feed_posts + cached_posts)
+    all_posts = all_posts[:MAX_ARCHIVE_POSTS]
 
     if not all_posts:
         print('No se encontraron posts desde ninguna fuente (remota ni cache local). Se detiene para evitar un exito silencioso.')
         raise SystemExit(1)
 
-    generated_at = datetime.utcnow().strftime('%d/%m/%Y %H:%M UTC')
+    generated_at = datetime.now(timezone.utc).strftime('%d/%m/%Y %H:%M UTC')
 
     try:
         update_index_html(all_posts, generated_at)
