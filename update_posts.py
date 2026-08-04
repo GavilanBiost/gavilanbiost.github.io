@@ -20,18 +20,6 @@ COMMON_HEADERS = {
 }
 
 
-def clean_description(text):
-    if not text:
-        return ''
-
-    desc_text = unescape(text)
-    desc_text = re.sub(r'<[^>]+>', '', desc_text)
-    desc_text = re.sub(r'\s+', ' ', desc_text).strip()
-    description = desc_text[:200].strip()
-    if len(desc_text) > 200:
-        description += '...'
-    return description
-
 def parse_date_value(date_text):
     if date_text is None or date_text == '':
         return datetime.min, 'Fecha no disponible'
@@ -64,7 +52,9 @@ def parse_date_value(date_text):
             dt = dt.astimezone().replace(tzinfo=None)
         return dt, dt.strftime('%d/%m/%Y')
     except ValueError:
-        return datetime.min, text[:10] if len(text) >= 10 else text
+        if text.lower().startswith('fecha no'):
+            return datetime.min, 'Fecha no disponible'
+        return datetime.min, text
 
 
 def parse_rss_pub_date(raw_date):
@@ -80,13 +70,12 @@ def parse_rss_pub_date(raw_date):
         return datetime.min, 'Fecha no disponible'
 
 
-def format_post_entry(title, link, pub_dt, pub_date, description):
+def format_post_entry(title, link, pub_dt, pub_date):
     return {
         'title': title or 'Sin título',
         'link': link or '',
         'pub_dt': pub_dt if pub_dt else datetime.min,
         'pub_date': pub_date or 'Fecha no disponible',
-        'description': description or '',
     }
 
 
@@ -98,13 +87,10 @@ def build_post_card(post):
     safe_title = escape(post.get('title') or 'Sin título')
     safe_link = escape(link, quote=True)
     safe_date = escape(post.get('pub_date') or 'Fecha no disponible')
-    safe_description = escape(post.get('description') or '')
 
     post_html = '<div class="card">\n'
     post_html += f'    <div class="pub-meta">SUBSTACK · {safe_date}</div>\n'
     post_html += f'    <a href="{safe_link}" class="pub-title" target="_blank" rel="noopener noreferrer">{safe_title}</a>\n'
-    if safe_description:
-        post_html += f'    <p class="text-small">{safe_description}</p>\n'
     post_html += '    <div class="pub-links">\n'
     post_html += (
         f'        <a href="{safe_link}" class="btn-outline" target="_blank" '
@@ -130,8 +116,6 @@ def dedupe_and_sort_posts(posts):
 
         # Mantener el que tenga mejor fecha o mejor descripción.
         if post.get('pub_dt', datetime.min) > existing.get('pub_dt', datetime.min):
-            unique[link] = post
-        elif len(post.get('description', '')) > len(existing.get('description', '')):
             unique[link] = post
 
     deduped = list(unique.values())
@@ -193,16 +177,12 @@ def fetch_substack_posts(limit=MAX_ARCHIVE_POSTS):
             pub_date_elem = item.find('pubDate')
             pub_dt, pub_date = parse_rss_pub_date(pub_date_elem.text if pub_date_elem is not None else '')
 
-            description_elem = item.find('description')
-            description = clean_description(description_elem.text if description_elem is not None else '')
-
             posts.append(
                 format_post_entry(
                     title=title,
                     link=link,
                     pub_dt=pub_dt,
                     pub_date=pub_date,
-                    description=description,
                 )
             )
         except Exception as exc:
@@ -367,7 +347,6 @@ def parse_posts_from_html(content):
 
     title_pattern = re.compile(r'<a href="([^"]+)" class="pub-title"[^>]*>(.*?)</a>', re.DOTALL)
     date_pattern = re.compile(r'<div class="pub-meta">\s*SUBSTACK\s*·\s*(.*?)\s*</div>', re.DOTALL)
-    desc_pattern = re.compile(r'<p class="text-small">(.*?)</p>', re.DOTALL)
 
     for title_match in title_pattern.finditer(content):
         link = unescape(title_match.group(1).strip())
@@ -387,16 +366,12 @@ def parse_posts_from_html(content):
         raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
         pub_dt, pub_date = parse_date_value(raw_date)
 
-        desc_match = desc_pattern.search(nearby)
-        description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
-
         posts.append(
             format_post_entry(
                 title=title,
                 link=link,
                 pub_dt=pub_dt,
                 pub_date=pub_date,
-                description=description,
             )
         )
 
@@ -416,16 +391,12 @@ def parse_posts_from_html(content):
             raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
             pub_dt, pub_date = parse_date_value(raw_date)
 
-            desc_match = desc_pattern.search(nearby)
-            description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
-
             posts.append(
                 format_post_entry(
                     title=title,
                     link=link,
                     pub_dt=pub_dt,
                     pub_date=pub_date,
-                    description=description,
                 )
             )
 

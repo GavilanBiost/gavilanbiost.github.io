@@ -6,7 +6,7 @@ env:
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 1"  # Ejecutar todos los lunes a las 9 AM UTC
+    - cron: "0 9 1 * *"  # Ejecutar el dia 1 de cada mes a las 9 AM UTC
 
 permissions:
   contents: write
@@ -26,34 +26,6 @@ jobs:
 
       - name: Update posts from Substack
         run: python update_posts.py
-
-      - name: Debug posts block in index.html
-        run: |
-          python - <<'PY'
-          import re
-          from pathlib import Path
-
-          content = Path('index.html').read_text(encoding='utf-8')
-          match = re.search(
-              r'(<div id="posts-content">)(.*?)(</div>\s*<div style="text-align: center; margin-top: 20px;">\s*(?:<button id="ver-mas-posts"|<a href="posts\.html"))',
-              content,
-              re.DOTALL,
-          )
-
-          if not match:
-              print('DEBUG: No se encontro el bloque posts-content en index.html')
-              raise SystemExit(1)
-
-          block = match.group(2)
-          cards = len(re.findall(r'<div class="card">', block))
-          print(f'DEBUG: Tarjetas detectadas en posts-content: {cards}')
-
-          preview = re.sub(r'\s+', ' ', block).strip()
-          if preview:
-              print(f'DEBUG: Vista previa bloque posts-content: {preview[:250]}')
-          else:
-              print('DEBUG: El bloque posts-content esta vacio')
-          PY
 
       - name: Commit and push changes
         run: |
