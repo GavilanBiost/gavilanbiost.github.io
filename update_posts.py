@@ -5,6 +5,8 @@ from email.utils import parsedate_to_datetime
 from html import escape
 from html import unescape
 import re
+import json
+import subprocess
 
 # URL del feed RSS de Substack
 SUBSTACK_FEED = 'https://gavilanbiost.substack.com/feed'
@@ -21,6 +23,76 @@ COMMON_HEADERS = {
     ),
     'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
 }
+
+
+def curl_get_text(url, headers=None, timeout=REQUEST_TIMEOUT, params=None):
+    command = [
+        'curl',
+        '-sS',
+        '-L',
+        '--max-time',
+        str(timeout),
+        '--connect-timeout',
+        '10',
+    ]
+
+    for key, value in (headers or {}).items():
+        command.extend(['-H', f'{key}: {value}'])
+
+    if params:
+        command.append('--get')
+        for key, value in params.items():
+            command.extend(['--data-urlencode', f'{key}={value}'])
+
+    marker = '__HTTP_STATUS__:'
+    command.extend(['-w', f'\n{marker}%{{http_code}}', url])
+
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, check=False)
+    except Exception as exc:
+        print(f'Error ejecutando curl para {url}: {exc}')
+        return None, None
+
+    if result.returncode != 0:
+        err_text = result.stderr.strip() or f'codigo {result.returncode}'
+        print(f'curl fallo para {url}: {err_text}')
+        return None, None
+
+    split_token = f'\n{marker}'
+    if split_token not in result.stdout:
+        print(f'curl no devolvio marcador de estado para {url}')
+        return None, None
+
+    body, status_text = result.stdout.rsplit(split_token, 1)
+    try:
+        status_code = int(status_text.strip().splitlines()[0])
+    except (ValueError, IndexError):
+        print(f'No se pudo parsear estado HTTP de curl para {url}: {status_text!r}')
+        return None, None
+
+    return status_code, body
+
+
+def robust_get_text(url, headers=None, timeout=REQUEST_TIMEOUT, params=None, source_label='recurso'):
+    try:
+        response = requests.get(url, timeout=timeout, headers=headers, params=params)
+    except requests.RequestException as exc:
+        print(f'Error de red al obtener {source_label}: {exc}')
+    else:
+        if response.status_code == 200:
+            return 200, response.text
+        print(f'Error al obtener {source_label}: {response.status_code}')
+
+    print(f'Intentando {source_label} con curl...')
+    curl_status, curl_text = curl_get_text(url, headers=headers, timeout=timeout, params=params)
+    if curl_status is None:
+        return None, None
+
+    if curl_status != 200:
+        print(f'curl devolvio estado {curl_status} para {source_label}')
+        return curl_status, None
+
+    return curl_status, curl_text
 
 
 def clean_description(text):
@@ -52,6 +124,13 @@ def parse_date_value(date_text):
     text = str(date_text).strip()
     if not text:
         return datetime.min, 'Fecha no disponible'
+
+    for fmt in ('%d/%m/%Y', '%d/%m/%Y %H:%M UTC'):
+        try:
+            dt = datetime.strptime(text, fmt)
+            return dt, dt.strftime('%d/%m/%Y')
+        except ValueError:
+            pass
 
     try:
         normalized = text.replace('Z', '+00:00')
@@ -149,24 +228,22 @@ def fetch_substack_posts_from_jina_mirror(limit):
 
     candidates = []
     for mirror_url in (JINA_MIRROR_FEED, JINA_MIRROR_ARCHIVE):
-        try:
-            response = requests.get(
-                mirror_url,
-                timeout=REQUEST_TIMEOUT + 10,
-                headers={
-                    **COMMON_HEADERS,
-                    'Accept': 'text/plain, text/markdown, */*',
-                },
-            )
-        except requests.RequestException as exc:
-            print(f'Error de red con {mirror_url}: {exc}')
+        status_code, text = robust_get_text(
+            mirror_url,
+            timeout=REQUEST_TIMEOUT + 10,
+            headers={
+                **COMMON_HEADERS,
+                'Accept': 'text/plain, text/markdown, */*',
+            },
+            source_label=f'espejo {mirror_url}',
+        )
+
+        if status_code != 200 or not text:
+            if status_code not in (None,):
+                print(f'Espejo devolvio estado {status_code} para {mirror_url}')
             continue
 
-        if response.status_code != 200:
-            print(f'Espejo devolvio estado {response.status_code} para {mirror_url}')
-            continue
-
-        candidates.append(response.text)
+        candidates.append(text)
 
     if not candidates:
         print('No fue posible recuperar contenido desde el espejo')
@@ -200,27 +277,25 @@ def fetch_substack_posts_from_jina_mirror(limit):
 def fetch_substack_posts_from_api(limit):
     print('Intentando fallback con API publica de Substack...')
 
-    try:
-        response = requests.get(
-            SUBSTACK_ARCHIVE_API,
-            params={'sort': 'new'},
-            timeout=REQUEST_TIMEOUT,
-            headers={
-                **COMMON_HEADERS,
-                'Accept': 'application/json, text/plain, */*',
-            },
-        )
-    except requests.RequestException as exc:
-        print(f'Error de red en fallback API: {exc}')
-        return fetch_substack_posts_from_jina_mirror(limit)
+    status_code, text = robust_get_text(
+        SUBSTACK_ARCHIVE_API,
+        params={'sort': 'new'},
+        timeout=REQUEST_TIMEOUT,
+        headers={
+            **COMMON_HEADERS,
+            'Accept': 'application/json, text/plain, */*',
+        },
+        source_label='API publica de Substack',
+    )
 
-    if response.status_code != 200:
-        print(f'Fallback API devolvio estado {response.status_code}')
+    if status_code != 200 or not text:
+        if status_code not in (None,):
+            print(f'Fallback API devolvio estado {status_code}')
         return fetch_substack_posts_from_jina_mirror(limit)
 
     try:
-        payload = response.json()
-    except ValueError as exc:
+        payload = json.loads(text)
+    except json.JSONDecodeError as exc:
         print(f'Fallback API devolvio JSON invalido: {exc}')
         return fetch_substack_posts_from_jina_mirror(limit)
 
@@ -258,25 +333,23 @@ def fetch_substack_posts_from_api(limit):
 def fetch_substack_posts(limit=MAX_ARCHIVE_POSTS):
     print('Obteniendo posts de Substack...')
 
-    try:
-        response = requests.get(
-            SUBSTACK_FEED,
-            timeout=REQUEST_TIMEOUT,
-            headers={
-                **COMMON_HEADERS,
-                'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
-            },
-        )
-    except requests.RequestException as exc:
-        print(f'Error de red al obtener el feed: {exc}')
-        return fetch_substack_posts_from_api(limit)
+    status_code, text = robust_get_text(
+        SUBSTACK_FEED,
+        timeout=REQUEST_TIMEOUT,
+        headers={
+            **COMMON_HEADERS,
+            'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+        },
+        source_label='feed RSS',
+    )
 
-    if response.status_code != 200:
-        print(f'Error al obtener el feed: {response.status_code}')
+    if status_code != 200 or not text:
+        if status_code not in (None,):
+            print(f'Error al obtener el feed: {status_code}')
         return fetch_substack_posts_from_api(limit)
 
     try:
-        root = ET.fromstring(response.content)
+        root = ET.fromstring(text)
     except ET.ParseError as exc:
         print(f'Error parseando XML del feed: {exc}')
         return fetch_substack_posts_from_api(limit)
@@ -462,11 +535,71 @@ def create_posts_page(all_posts, generated_at):
         file.write(html_content)
 
 
+def parse_posts_from_html(content):
+    posts = []
+
+    card_pattern = re.compile(r'<div class="card">(.*?)</div>', re.DOTALL)
+    title_pattern = re.compile(r'<a href="([^"]+)" class="pub-title"[^>]*>(.*?)</a>', re.DOTALL)
+    date_pattern = re.compile(r'<div class="pub-meta">\s*SUBSTACK\s*·\s*(.*?)\s*</div>', re.DOTALL)
+    desc_pattern = re.compile(r'<p class="text-small">(.*?)</p>', re.DOTALL)
+
+    for card_body in card_pattern.findall(content):
+        title_match = title_pattern.search(card_body)
+        if not title_match:
+            continue
+
+        link = unescape(title_match.group(1).strip())
+        title = re.sub(r'\s+', ' ', unescape(title_match.group(2))).strip()
+
+        date_match = date_pattern.search(card_body)
+        raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
+        pub_dt, pub_date = parse_date_value(raw_date)
+
+        desc_match = desc_pattern.search(card_body)
+        description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
+
+        posts.append(
+            format_post_entry(
+                title=title,
+                link=link,
+                pub_dt=pub_dt,
+                pub_date=pub_date,
+                description=description,
+            )
+        )
+
+    return posts
+
+
+def fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS):
+    print('Intentando fallback local desde posts existentes en el repositorio...')
+
+    cached_posts = []
+    for path in ('posts.html', 'index.html'):
+        try:
+            with open(path, 'r', encoding='utf-8') as file:
+                content = file.read()
+        except FileNotFoundError:
+            continue
+
+        cached_posts.extend(parse_posts_from_html(content))
+
+    cached_posts = dedupe_and_sort_posts(cached_posts)
+
+    for post in cached_posts[:limit]:
+        print(f"✓ Post recuperado (cache local): {post['title']}")
+
+    return cached_posts[:limit]
+
+
 if __name__ == '__main__':
     all_posts = fetch_substack_posts(limit=MAX_ARCHIVE_POSTS)
 
     if not all_posts:
-        print('No se encontraron posts desde ninguna fuente. Se detiene para evitar un exito silencioso.')
+        all_posts = fetch_posts_from_local_cache(limit=MAX_ARCHIVE_POSTS)
+
+    if not all_posts:
+        print('No se encontraron posts desde ninguna fuente (remota ni cache local). Se detiene para evitar un exito silencioso.')
         raise SystemExit(1)
 
     generated_at = datetime.utcnow().strftime('%d/%m/%Y %H:%M UTC')
