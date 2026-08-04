@@ -538,24 +538,29 @@ def create_posts_page(all_posts, generated_at):
 def parse_posts_from_html(content):
     posts = []
 
-    card_pattern = re.compile(r'<div class="card">(.*?)</div>', re.DOTALL)
     title_pattern = re.compile(r'<a href="([^"]+)" class="pub-title"[^>]*>(.*?)</a>', re.DOTALL)
     date_pattern = re.compile(r'<div class="pub-meta">\s*SUBSTACK\s*·\s*(.*?)\s*</div>', re.DOTALL)
     desc_pattern = re.compile(r'<p class="text-small">(.*?)</p>', re.DOTALL)
 
-    for card_body in card_pattern.findall(content):
-        title_match = title_pattern.search(card_body)
-        if not title_match:
+    for title_match in title_pattern.finditer(content):
+        link = unescape(title_match.group(1).strip())
+        if 'substack.com/p/' not in link:
             continue
 
-        link = unescape(title_match.group(1).strip())
         title = re.sub(r'\s+', ' ', unescape(title_match.group(2))).strip()
+        if not title:
+            title = 'Sin título'
 
-        date_match = date_pattern.search(card_body)
+        # Buscar metadatos cercanos al enlace sin depender de limites de tarjetas HTML.
+        start = max(0, title_match.start() - 700)
+        end = min(len(content), title_match.end() + 1200)
+        nearby = content[start:end]
+
+        date_match = date_pattern.search(nearby)
         raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
         pub_dt, pub_date = parse_date_value(raw_date)
 
-        desc_match = desc_pattern.search(card_body)
+        desc_match = desc_pattern.search(nearby)
         description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
 
         posts.append(
@@ -567,6 +572,35 @@ def parse_posts_from_html(content):
                 description=description,
             )
         )
+
+    # Fallback adicional: detectar enlaces de Substack incluso sin clase pub-title.
+    if not posts:
+        generic_link_pattern = re.compile(r'href="(https?://gavilanbiost\.substack\.com/p/[^"]+)"', re.IGNORECASE)
+        for link_match in generic_link_pattern.finditer(content):
+            link = unescape(link_match.group(1).strip())
+            start = max(0, link_match.start() - 400)
+            end = min(len(content), link_match.end() + 800)
+            nearby = content[start:end]
+
+            title_match = re.search(r'>([^<]{3,200})</a>', nearby)
+            title = re.sub(r'\s+', ' ', unescape(title_match.group(1))).strip() if title_match else 'Sin título'
+
+            date_match = date_pattern.search(nearby)
+            raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
+            pub_dt, pub_date = parse_date_value(raw_date)
+
+            desc_match = desc_pattern.search(nearby)
+            description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
+
+            posts.append(
+                format_post_entry(
+                    title=title,
+                    link=link,
+                    pub_dt=pub_dt,
+                    pub_date=pub_date,
+                    description=description,
+                )
+            )
 
     return posts
 
