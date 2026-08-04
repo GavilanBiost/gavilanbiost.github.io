@@ -119,7 +119,7 @@ def dedupe_and_sort_posts(posts):
             unique[link] = post
 
     deduped = list(unique.values())
-    deduped.sort(key=lambda x: x.get('pub_dt', datetime.min), reverse=True)
+    deduped.sort(key=lambda x: (x.get('pub_dt', datetime.min) != datetime.min, x.get('pub_dt', datetime.min)), reverse=True)
     return deduped
 
 
@@ -366,6 +366,12 @@ def parse_posts_from_html(content):
         raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
         pub_dt, pub_date = parse_date_value(raw_date)
 
+<<<<<<< HEAD
+=======
+        desc_match = desc_pattern.search(nearby)
+        description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
+
+>>>>>>> a2bd073 (Actualizar posts de Substack en la home y el archivo de posts)
         posts.append(
             format_post_entry(
                 title=title,
@@ -391,12 +397,22 @@ def parse_posts_from_html(content):
             raw_date = re.sub(r'\s+', ' ', unescape(date_match.group(1))).strip() if date_match else 'Fecha no disponible'
             pub_dt, pub_date = parse_date_value(raw_date)
 
+<<<<<<< HEAD
+=======
+            desc_match = desc_pattern.search(nearby)
+            description = clean_description(unescape(desc_match.group(1))) if desc_match else ''
+
+>>>>>>> a2bd073 (Actualizar posts de Substack en la home y el archivo de posts)
             posts.append(
                 format_post_entry(
                     title=title,
                     link=link,
                     pub_dt=pub_dt,
                     pub_date=pub_date,
+<<<<<<< HEAD
+=======
+                    description=description,
+>>>>>>> a2bd073 (Actualizar posts de Substack en la home y el archivo de posts)
                 )
             )
 
