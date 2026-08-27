@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Deep learning y ciencias ómicas - Jesus F Garcia Gavilan</title>
+
+    <meta name="description" content="Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.">
+    <meta name="post-category" content="BLOG">
+    <meta name="post-date" content="2026-09-07">
+    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gavilanbiost.com/posts/deep-learning-ciencias-omicas.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+
+    <style>
+        .post-shell {
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .post-hero {
+            padding: 10px 0 4px;
+        }
+
+        .post-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .post-meta-line {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .post-body {
+            margin-top: 28px;
+            font-size: 1.04rem;
+            line-height: 1.75;
+            color: var(--text-main);
+        }
+
+        .post-body p {
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .post-body h2 {
+            margin: 34px 0 14px;
+            font-size: 1.35rem;
+        }
+
+        .post-body h3 {
+            margin: 26px 0 12px;
+            font-size: 1.1rem;
+        }
+
+        .post-body ul,
+        .post-body ol {
+            margin: 0 0 18px 20px;
+        }
+
+        .post-body li + li {
+            margin-top: 6px;
+        }
+
+        .post-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .post-body blockquote {
+            margin: 20px 0;
+            padding: 14px 18px;
+            border-left: 4px solid var(--mets-orange);
+            background: var(--bg-alt);
+            border-radius: 12px;
+            color: var(--text-muted);
+        }
+
+        .post-body pre {
+            margin: 18px 0;
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .post-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 36px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section post-shell">
+                <div class="post-hero">
+                    <div class="post-kicker"><i class="fa-solid fa-pen-nib"></i> Blog</div>
+                    <h1>Deep learning y ciencias ómicas</h1>
+                    <p class="post-meta-line">BLOG · 07/09/2026</p>
+                </div>
+
+                <article class="post-body" id="post-body">
+                    <p>Este verano he aprovechado para aprender sobre el uso del deep learning en ciencias ómicas. No es un tema sencillo. Son modelos que pueden aportar mucho, pero que, de buenas a primeras, no tienen una implementación sencilla.</p>
+
+                    <p>El deep learning es el método de moda &ldquo;actual&rdquo; y se ha convertido en la elección para muchas tareas ómicas porque los datos genómicos, transcriptómicos y proteómicos son de alta dimensionalidad (p >> n), no lineales y multimodales, condiciones en las que las redes neuronales profundas aprenden representaciones útiles que los métodos lineales no captan.</p>
+
+                    <p>Las arquitecturas más conocidas son CNN para secuencias regulatorias (DeepBind, Basenji), autoencoders/VAE para single-cell e integración (scVI), transformers/modelos de lenguaje (Enformer, DNABERT, Geneformer, scGPT, ESMFold) y GNN para redes de interacción, y luego tenemos AlphaFold2, que revolucionó la proteómica estructural.</p>
+
+                    <p>Principalmente se trabaja con Python: PyTorch, TensorFlow/Keras, scvi-tools/scanpy), pero también existe la opción de usar R vía keras/torch.</p>
+
+                    <p>Profundicemos, pues, en este primer post-verano sobre este tema.</p>
+
+                    <h2>¿Qué es el deep learning y por qué encaja con las ómicas?</h2>
+
+                    <p>El deep learning es una rama del aprendizaje automático basada en redes neuronales artificiales con múltiples capas (también llamadas capas &ldquo;profundas&rdquo;). Su rasgo distintivo es el aprendizaje de representaciones: en lugar de que un experto defina qué características medir, la red aprende automáticamente jerarquías de características cada vez más abstractas a partir de los datos crudos, componiendo patrones simples en representaciones complejas capa a capa.</p>
+
+                    <p>Los datos ómicos presentan cuatro propiedades que los hacen especialmente adecuados para el deep learning.</p>
+
+                    <ul>
+                        <li><strong>Primero, alta dimensionalidad con p >> n:</strong> un experimento de RNA-seq mide decenas de miles de genes simultáneamente, a menudo con muchas más variables (genes) que muestras (pacientes).</li>
+                        <li><strong>Segundo, no linealidad:</strong> las interacciones entre genes, proteínas y elementos regulatorios rara vez son aditivas.</li>
+                        <li><strong>Tercero, datos multimodales:</strong> genómica, transcriptómica, epigenómica, proteómica y metabolómica ofrecen &ldquo;vistas&rdquo; complementarias del mismo sistema biológico.</li>
+                        <li><strong>Cuarto, volumen creciente:</strong> el menor coste de la secuenciación ha generado conjuntos de datos masivos que las redes profundas pueden explotar.</li>
+                    </ul>
+
+                    <p>Por estas razones, el deep learning se está convirtiendo en el método de elección para muchas tareas de modelado genómico, como la predicción del impacto de variantes genéticas en los mecanismos regulatorios, la accesibilidad del ADN y el splicing, y permite emplear arquitecturas adaptadas directamente de la visión por computadora y del procesamiento del lenguaje natural.</p>
+
+                    <h2>Tipos de modelos más usados en ómicas</h2>
+
+                    <p>En términos generales, los modelos no son nuevos, son los mismos que se emplean para otras funciones en áreas como logística, finanzas o en el propio ChatGPT. El matiz está en los datos, que aportan direccionalidad y foco. Haré un pequeño recorrido por cada una de ellas:</p>
+
+                    <h3>Redes neuronales convolucionales (CNN) para secuencias de ADN</h3>
+                    <p>Las CNN se diseñaron originalmente para la visión por computadora, es decir, para imitar con un algoritmo la visión humana de las imágenes. Detectan motivos de secuencia (análogos a los filtros de imagen) a lo largo de las secuencias de ADN. El pionero para este fin fue DeepBind, capaz de predecir las especificidades de unión de proteínas a ADN y ARN y de superar a los métodos previos, incluso entrenando con datos in vitro y evaluando in vivo. También tenemos DeepSEA, que predice los efectos de variantes no codificantes sobre la cromatina, y más tarde apareció Basenji, que extendió estas ideas a la predicción de la actividad regulatoria a lo largo de los cromosomas mediante convoluciones dilatadas para capturar un contexto genómico más amplio.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/cnn.png" alt="Esquema de una CNN aplicada a secuencias de ADN: one-hot encoding, filtros convolucionales, motivos detectados, pooling, capa densa y predicción final.">
+
+                    <h3>RNN/LSTM para datos secuenciales</h3>
+                    <p>Las redes neuronales recurrentes y las LSTM son otro tipo de redes neuronales que procesan secuencias manteniendo un &ldquo;estado de memoria&rdquo;, lo cual resulta útil para datos en los que el orden importa (secuencias biológicas y series temporales de expresión). En proteómica se usan, por ejemplo, para modelar propiedades dependientes de la secuencia peptídica como los tiempos de retención cromatográfica.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/rnn-lstm.png" alt="Diagrama de una red RNN/LSTM procesando una entrada secuencial, mostrando el estado oculto y la memoria propagándose entre celdas a lo largo del tiempo.">
+
+                    <h3>Autoencoders y VAE para la reducción de dimensionalidad y la integración</h3>
+                    <p>Los autoencoders variacionales (VAE) aprenden representaciones latentes compactas de datos de alta dimensionalidad. scVI es el ejemplo canónico: utiliza optimización estocástica y redes neuronales profundas para representar probabilísticamente la expresión génica en células individuales, corrigiendo los batch effects y modelando el ruido técnico. Se usa para la corrección de lote, la visualización, el clustering y la expresión diferencial, y constituye la base de la integración multiómica en single-cell.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/autoencoders-vae.png" alt="Esquema de un autoencoder variacional (VAE): un encoder comprime los datos de alta dimensión en un espacio latente (mu, sigma), se muestrea y un decoder reconstruye los datos originales.">
+
+                    <h3>Transformers y modelos de lenguaje biológicos</h3>
+                    <p>Los transformers, con su mecanismo de atención, capturan dependencias a largo alcance. Aquí tenemos Enformer de DeepMind, que se entrena a resolución de 128 pb sobre 200 kb de secuencia de entrada. También tenemos DNABERT, que adapta BERT al &ldquo;lenguaje&rdquo; del ADN no codificante, o Geneformer, un modelo de atención preentrenado sobre el corpus Genecorpus-30M, que contiene aproximadamente 29,9 millones (29.900.531) de transcriptomas humanos de célula única ensamblados en junio de 2021 (la versión V2 se amplió después a unos 104 millones) que permite hacer predicciones con datos limitados y ha identificado dianas terapéuticas candidatas para cardiomiopatía. Por no extenderme mucho en este punto, os dejo otros modelos similares: scGPT (Cui et al., Nat Methods 2024), un modelo fundacional preentrenado aplicable a la anotación de tipos celulares, la integración multilote y multiómica y la predicción de la respuesta a perturbaciones; el famoso AlphaFold2, que resolvió el problema del plegamiento de proteínas; y ESMFold, que utiliza un modelo de lenguaje de proteínas escalado para predecir la estructura a partir de una única secuencia.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/transformers.png" alt="Arquitectura de un transformer aplicado a secuencias biológicas: tokens (k-mers, genes o proteínas), codificación posicional, self-attention multi-head, bloques transformer y cabeza de tarea para la predicción final.">
+
+                    <h3>Redes neuronales de grafos (GNN)</h3>
+                    <p>Las GNN operan sobre datos estructurados, como grafos (redes de interacción proteína-proteína, redes regulatorias, grafos moleculares atómicos&hellip;), y son especialmente populares en el descubrimiento de fármacos, la predicción de la interacción fármaco-diana (DTI), la predicción de la afinidad de unión proteína-ligando y la clasificación de subtipos de cáncer mediante la integración multiómica.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/gnn.png" alt="Esquema de una GNN: grafo de entrada con nodos y aristas, message passing entre vecinos a lo largo de varios pasos, embeddings de nodos, agregación global (readout) y predicción.">
+
+                    <h3>GAN</h3>
+                    <p>Las redes generativas antagónicas se han aplicado a la aumentación de datos ómicos y al diseño molecular (por ejemplo, en plataformas de descubrimiento de dianas), aunque su uso es más limitado que el de los VAE y los transformers.</p>
+                    <img src="../img/posts/deep-learning-ciencias-omicas/gan.png" alt="Esquema de una GAN: un generador crea muestras sintéticas a partir de ruido, un discriminador las compara con datos reales y clasifica como real o falso, retroalimentando el entrenamiento adversarial.">
+
+                    <h2>Ejemplos de uso en Python y R</h2>
+
+                    <p>El lenguaje predilecto para trabajar con estos modelos es, de lejos, Python. Los dos frameworks de base son PyTorch y TensorFlow/Keras. Sobre ellos se construyen los ecosistemas especializados:</p>
+
+                    <ul>
+                        <li><strong>scanpy</strong>, toolkit escalable para análisis de expresión de célula única que maneja más de un millón de células y usa la estructura AnnData.</li>
+                        <li><strong>scvi-tools</strong>, librería de Python para análisis probabilístico de datos ómicos de célula única que implementa scVI y modelos relacionados.</li>
+                        <li><strong>DeepChem</strong> para química y descubrimiento de fármacos.</li>
+                        <li><strong>PyTorch Geometric</strong> para GNN.</li>
+                        <li><strong>Hugging Face</strong> para acceder a modelos biológicos preentrenados (DNABERT, ESM, Geneformer, scGPT).</li>
+                    </ul>
+
+                    <p>El flujo típico en single-cell combina scanpy para el preprocesamiento y scvi-tools para el modelado con redes neuronales.</p>
+
+                    <p>No obstante, R sigue vivo, sobre todo en bioestadística y Bioconductor. Posit mantiene los paquetes keras/tensorflow para R desde 2017 (interfaz a Keras vía reticulate) y, desde 2020, torch para R, una implementación nativa construida sobre libtorch en C++ que no requiere Python. En 2024 se lanzó keras3 para R, con soporte para múltiples backends (TensorFlow, JAX, PyTorch). En el ecosistema Bioconductor/CRAN existen varios paquetes que envuelven redes neuronales para ómicas:</p>
+
+                    <ul>
+                        <li><strong>DeepPINCS</strong> usa Keras/TensorFlow para predecir interacciones compuesto-proteína desde secuencias.</li>
+                        <li><strong>scDHA</strong> implementa un autoencoder jerárquico para el análisis de scRNA-seq (clustering, reducción de dimensionalidad, clasificación y pseudotempo).</li>
+                    </ul>
+
+                    <p>Con Python se desarrollan modelos; con R se realiza la validación estadística y se construyen pipelines con Bioconductor.</p>
+
+                    <h2>Limitaciones</h2>
+
+                    <p>Llegamos al punto clave: ¿cuán fácil es utilizar estos modelos? Respuesta rápida: poco.</p>
+
+                    <ul>
+                        <li>Las redes profundas son difíciles de interpretar. Se usan técnicas de IA explicable (importancia por atención, mapas de saliencia, valores SHAP), pero la interpretabilidad se aplica, a menudo, ad hoc. Algunos autores recomiendan emplear varios métodos de interpretabilidad y comparar sus resultados, en lugar de confiar en un solo método.</li>
+                        <li>El gran caballo de Troya: los datos. Se requieren grandes volúmenes de datos y un alto coste computacional. Modelos como Enformer, AlphaFold2 y los modelos fundacionales requieren recursos computacionales considerables (GPU/TPU) para entrenarse, lo que constituye una GRAN barrera de entrada.</li>
+                        <li>Otra limitación: cuando hay muchas más variables que muestras, los modelos pueden memorizar ruido en lugar de aprender una señal generalizable. Esto exige regularización y validación cruzada rigurosas y conjuntos de prueba independientes. Los datos genómicos, además, suelen estar muy desbalanceados (pocas variantes patogénicas frente a muchas benignas), lo que obliga a usar métricas como la precisión y el recall.</li>
+                        <li>Otra de las limitaciones es la presencia de efectos de lote (variaciones técnicas entre experimentos, plataformas o laboratorios), que pueden confundirse con señal biológica. Modelos como scVI incorporan corrección de lote, pero evaluar y mitigar estos efectos en estudios ómicos a gran escala sigue siendo un problema importante para la reproducibilidad.</li>
+                        <li>La genómica humana está fuertemente sesgada hacia la ascendencia europea. El 67% de los estudios de este tipo incluyen exclusivamente participantes de ascendencia europea, otro 19% solo de ascendencia asiática oriental y apenas el 3,8% corresponde a cohortes de poblaciones africanas, hispanas o indígenas. En consecuencia, los polygenic risk scores derivados de datos europeos rinden significativamente peor en muestras no europeas (por ejemplo, en muestras de ascendencia africana: t = &minus;5,97; df = 24; p = 3,7 &times; 10&#8315;&sup6;). Esto amenaza directamente la equidad de las aplicaciones clínicas basadas en modelos entrenados con datos sesgados.</li>
+                        <li>También se peca de falta de validación clínica y externa y de generalización. Muchos modelos solo se validan internamente. La transferencia a nuevas poblaciones, tecnologías de secuenciación o tejidos suele degradar el rendimiento, lo que limita su uso clínico real y exige una validación externa prospectiva.</li>
+                    </ul>
+
+                    <h2>Mis recomendaciones</h2>
+
+                    <ul>
+                        <li>Lo mejor para empezar en single-cell es adoptar el stack de Python scanpy + scvi-tools. Es el estándar de facto, bien documentado y con corrección de batch effects incorporada. Benchmark de referencia: comparar siempre con métodos lineales (PCA, Harmony) antes de asumir que la red profunda aporta valor.</li>
+                        <li>Para la genómica regulatoria y la predicción de variantes, quizá lo más eficiente sea usar modelos preentrenados (Enformer, DNABERT vía Hugging Face) mediante fine-tuning antes de entrenar desde cero, dado el coste computacional que probablemente no tengamos.</li>
+                        <li>Para otras áreas, como la proteómica estructural, usar AlphaFold2/ESMFold e interpretar siempre las puntuaciones de confianza por residuo (pLDDT). Mejor no tratar las predicciones de baja confianza como estructuras resueltas.</li>
+                        <li>Si el equipo trabaja con R (como me pasa generalmente a mí), tenemos las opciones de keras3/torch para modelos estándar, pero para modelos de vanguardia conviene interoperar con Python. Reserva R para el análisis estadístico, la visualización y los pipelines de Bioconductor. Más allá de eso, perderás horas de tu vida (créeme, ya pasé por eso).</li>
+                    </ul>
+
+                    <blockquote>
+                        Si vamos al ámbito clínico, antes de realizar cualquier afirmación, mi consejo es que valides externamente en otras cohortes, reportes la composición ancestral del conjunto de entrenamiento y apliques varios métodos de interpretabilidad. Si el rendimiento cae de forma sustancial (p. ej., la exactitud predictiva se reduce en más del 50%, como se ha documentado al aplicar scores europeos a poblaciones africanas) al validar en una población o tecnología distinta, ni te molestes en desplegar sin reentrenamiento y recalibración.
+                    </blockquote>
+                </article>
+
+                <div class="post-actions">
+                    <a href="../posts.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a posts</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
