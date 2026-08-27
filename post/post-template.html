@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TITULO DEL POST - Jesus F Garcia Gavilan</title>
+
+    <meta name="description" content="Descripcion corta del post (1-2 frases, se usa en las tarjetas de listado).">
+    <meta name="post-category" content="BLOG">
+    <meta name="post-date" content="YYYY-MM-DD">
+    <meta name="author" content="Jesus F Garcia Gavilan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gavilanbiost.com/posts/SLUG-DEL-POST.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+
+    <style>
+        .post-shell {
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .post-hero {
+            padding: 10px 0 4px;
+        }
+
+        .post-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .post-meta-line {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .post-body {
+            margin-top: 28px;
+            font-size: 1.04rem;
+            line-height: 1.75;
+            color: var(--text-main);
+        }
+
+        .post-body p {
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .post-body h2 {
+            margin: 34px 0 14px;
+            font-size: 1.35rem;
+        }
+
+        .post-body h3 {
+            margin: 26px 0 12px;
+            font-size: 1.1rem;
+        }
+
+        .post-body ul,
+        .post-body ol {
+            margin: 0 0 18px 20px;
+        }
+
+        .post-body li + li {
+            margin-top: 6px;
+        }
+
+        .post-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .post-body blockquote {
+            margin: 20px 0;
+            padding: 14px 18px;
+            border-left: 4px solid var(--mets-orange);
+            background: var(--bg-alt);
+            border-radius: 12px;
+            color: var(--text-muted);
+        }
+
+        .post-body pre {
+            margin: 18px 0;
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .post-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 36px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="news-page">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <a href="../index.html" class="brand">JFGG <span class="highlight"></span></a>
+            <div class="nav-links">
+                <a href="../index.html#inicio">Inicio</a>
+                <a href="../posts.html">Posts</a>
+                <a href="../tutoriales.html">Tutoriales</a>
+                <a href="../publicaciones.html">Papers</a>
+                <a href="../index.html#proyectos">Proyectos</a>
+                <a href="../news.html">Noticias</a>
+                <a href="../index.html#contact">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
+        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
+            <section class="content-section post-shell">
+                <div class="post-hero">
+                    <div class="post-kicker"><i class="fa-solid fa-pen-nib"></i> Blog</div>
+                    <h1>TITULO DEL POST</h1>
+                    <p class="post-meta-line">BLOG · DD/MM/AAAA</p>
+                </div>
+
+                <article class="post-body" id="post-body">
+                    <p>
+                        PRIMER PARRAFO DEL POST. Este bloque (id="post-body") es el que
+                        Make/Airtable rellena con el HTML del articulo (parrafos, h2/h3,
+                        listas, imagenes, etc.).
+                    </p>
+                </article>
+
+                <div class="post-actions">
+                    <a href="../posts.html" class="btn-outline"><i class="fa-solid fa-arrow-left"></i> Volver a posts</a>
+                    <a href="../index.html" class="btn-outline"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
