@@ -2,83 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://gavilanbiost.github.io/</loc>
+    <loc>https://gavilanbiost.com/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.github.io/img/IMG_9589.jpg</image:loc>
+      <image:loc>https://gavilanbiost.com/img/IMG_9589.jpg</image:loc>
       <image:title>Jesús F García Gavilán</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/index.html</loc>
+    <loc>https://gavilanbiost.com/index.html</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/biolink.html</loc>
+    <loc>https://gavilanbiost.com/biolink.html</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/posts.html</loc>
+    <loc>https://gavilanbiost.com/posts.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/tutoriales.html</loc>
+    <loc>https://gavilanbiost.com/tutoriales.html</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/publicaciones.html</loc>
+    <loc>https://gavilanbiost.com/publicaciones.html</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/t-sne.html</loc>
+    <loc>https://gavilanbiost.com/t-sne.html</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#inicio</loc>
+    <loc>https://gavilanbiost.com/#inicio</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#posts</loc>
+    <loc>https://gavilanbiost.com/#posts</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#tutoriales</loc>
+    <loc>https://gavilanbiost.com/#tutoriales</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#publicaciones</loc>
+    <loc>https://gavilanbiost.com/#publicaciones</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#proyectos</loc>
+    <loc>https://gavilanbiost.com/#proyectos</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gavilanbiost.github.io/#contact</loc>
+    <loc>https://gavilanbiost.com/#contact</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
