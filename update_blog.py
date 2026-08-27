@@ -3,8 +3,6 @@ import html
 import re
 from pathlib import Path
 
-from update_sitemap import generate_sitemap
-
 INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("posts.html")
 POSTS_DIR = Path("posts")
@@ -91,6 +89,7 @@ def parse_date(date_text):
 
 def load_posts():
     posts = []
+    today = datetime.datetime.now(datetime.UTC).date()
 
     for path in sorted(POSTS_DIR.glob("*.html")):
         if path.name in EXCLUDED_FILES:
@@ -102,8 +101,14 @@ def load_posts():
         description = extract_meta(content, "description") or extract_first_paragraph(content)
         category = extract_meta(content, "post-category") or DEFAULT_CATEGORY
         raw_date = extract_meta(content, "post-date")
-        post_dt = parse_date(raw_date) or datetime.datetime.min
-        pub_date = post_dt.strftime("%d/%m/%Y") if post_dt != datetime.datetime.min else "Fecha no disponible"
+        post_dt = parse_date(raw_date)
+
+        if post_dt is not None and post_dt.date() > today:
+            print(f"⏳ {path.name} programado para {post_dt.date().isoformat()}, todavía no se publica")
+            continue
+
+        sort_dt = post_dt or datetime.datetime.min
+        pub_date = sort_dt.strftime("%d/%m/%Y") if sort_dt != datetime.datetime.min else "Fecha no disponible"
 
         posts.append(
             {
@@ -112,7 +117,7 @@ def load_posts():
                 "category": category,
                 "post_url": f"posts/{path.name}",
                 "pub_date": pub_date,
-                "sort_dt": post_dt,
+                "sort_dt": sort_dt,
             }
         )
 
@@ -171,7 +176,6 @@ def main():
     timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
     update_index(posts, timestamp)
     update_archive(posts, timestamp)
-    generate_sitemap()
     print(f"✓ Se actualizaron {min(len(posts), MAX_INDEX_POSTS)} posts en index.html")
     print(f"✓ Se actualizaron {len(posts)} posts en posts.html")
 
