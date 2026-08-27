@@ -4,6 +4,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from update_sitemap import generate_sitemap
+
 INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("tutoriales.html")
 TUTORIALS_DIR = Path("tutoriales")
@@ -232,6 +234,7 @@ def main():
     timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
     update_index(tutorials, timestamp)
     update_archive(tutorials, timestamp)
+    generate_sitemap()
     print(f"✓ Se actualizaron {min(len(tutorials), MAX_INDEX_TUTORIALS)} tutoriales en index.html")
     print(f"✓ Se actualizaron {len(tutorials)} tutoriales en tutoriales.html")
 

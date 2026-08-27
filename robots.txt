@@ -1,13 +1,8 @@
-User-agent: *
-Allow: /
+User-Agent: *
+Disallow: /cpx.php
+Disallow: /medios1.php
+Disallow: /toolbar.php
+Disallow: /check_image.php
+Disallow: /check_popunder.php
 
-# Sitemap
 Sitemap: https://gavilanbiost.com/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-
-# Archivos específicos
-Disallow: /node_modules/
-Disallow: /*.json$
-Disallow: /README.md

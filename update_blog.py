@@ -3,6 +3,8 @@ import html
 import re
 from pathlib import Path
 
+from update_sitemap import generate_sitemap
+
 INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("posts.html")
 POSTS_DIR = Path("posts")
@@ -169,6 +171,7 @@ def main():
     timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
     update_index(posts, timestamp)
     update_archive(posts, timestamp)
+    generate_sitemap()
     print(f"✓ Se actualizaron {min(len(posts), MAX_INDEX_POSTS)} posts en index.html")
     print(f"✓ Se actualizaron {len(posts)} posts en posts.html")
 
