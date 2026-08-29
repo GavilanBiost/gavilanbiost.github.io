@@ -6,12 +6,34 @@ from datetime import datetime
 from datetime import timedelta
 from email.utils import parsedate_to_datetime
 from urllib.parse import quote_plus
+from urllib.parse import urlparse
 
 import requests
 
 MAX_NEWS = 400  # Obtener mas noticias para cubrir historico
 MAX_INDEX_NEWS = 3  # Mostrar solo últimas 3 en index
-GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419"
+NEWS_PROVIDERS = [
+    {
+        "name": "Google News",
+        "rss_template": "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419",
+        "supports_date_windows": True,
+    },
+    {
+        "name": "Bing News",
+        "rss_template": "https://www.bing.com/news/search?q={query}&format=rss&setlang=es-es",
+        "supports_date_windows": False,
+    },
+    {
+        "name": "Yahoo News",
+        "rss_template": "https://news.search.yahoo.com/rss?p={query}",
+        "supports_date_windows": False,
+    },
+    {
+        "name": "GDELT",
+        "rss_template": "https://api.gdeltproject.org/api/v2/doc/doc?query={query}&mode=ArtList&format=rss&maxrecords=50",
+        "supports_date_windows": False,
+    },
+]
 MIN_HISTORY_YEAR = 2010
 NAME_QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
@@ -184,13 +206,38 @@ def get_item_text(item: ET.Element, tag_name: str) -> str:
     return elem.text.strip()
 
 
-def build_search_queries() -> list[str]:
+def build_dedupe_key(
+    title: str,
+    link: str,
+    pub_date: str,
+    source: str,
+) -> str:
+    normalized_title = normalize_text(title or "sin titulo")
+    if len(normalized_title) > 140:
+        normalized_title = normalized_title[:140]
+
+    domain = ""
+    if link:
+        parsed = urlparse(link)
+        domain = (parsed.netloc or "").lower()
+        if domain.startswith("www."):
+            domain = domain[4:]
+
+    if not domain:
+        domain = normalize_text(source or "desconocido")
+
+    normalized_date = pub_date if pub_date and pub_date != "Fecha no disponible" else ""
+    return f"{normalized_title}|{domain}|{normalized_date}"
+
+
+def build_search_queries(use_date_windows: bool = True) -> list[str]:
     current_year = datetime.utcnow().year
     date_windows = [""]
 
     # Dividir por año fuerza a Google News a devolver resultados historicos.
-    for year in range(current_year, MIN_HISTORY_YEAR - 1, -1):
-        date_windows.append(f" after:{year}-01-01 before:{year + 1}-01-01")
+    if use_date_windows:
+        for year in range(current_year, MIN_HISTORY_YEAR - 1, -1):
+            date_windows.append(f" after:{year}-01-01 before:{year + 1}-01-01")
 
     queries = []
     seen = set()
@@ -206,57 +253,74 @@ def build_search_queries() -> list[str]:
 def fetch_news() -> list[dict]:
     all_news = {}
 
-    for query_term in build_search_queries():
-        strict_query = '"' in query_term
-        feed_url = GOOGLE_NEWS_RSS.format(query=quote_plus(query_term))
-        print(f"Consultando: {query_term}")
+    for provider in NEWS_PROVIDERS:
+        provider_name = provider["name"]
+        rss_template = provider["rss_template"]
+        use_date_windows = provider.get("supports_date_windows", False)
 
-        response = requests.get(feed_url, timeout=20)
-        if response.status_code != 200:
-            print(f"  Error en feed ({response.status_code})")
-            continue
+        for query_term in build_search_queries(use_date_windows=use_date_windows):
+            strict_query = '"' in query_term
+            feed_url = rss_template.format(query=quote_plus(query_term))
+            print(f"[{provider_name}] Consultando: {query_term}")
 
-        root = ET.fromstring(response.content)
-        items = root.findall(".//item")
-
-        for item in items:
-            title = get_item_text(item, "title")
-            link = get_item_text(item, "link")
-            description = get_item_text(item, "description")
-            source = get_item_text(item, "source") or "Google News"
-            pub_date_raw = (
-                get_item_text(item, "pubDate")
-                or get_item_text(item, "published")
-                or get_item_text(item, "updated")
-            )
-
-            combined_text = f"{title} {description}"
-            # Cuando la consulta usa frase exacta, Google ya aplica una fuerte
-            # restriccion semantica y muchos snippets no repiten el nombre.
-            if not strict_query and not contains_name_variant(combined_text):
+            try:
+                response = requests.get(feed_url, timeout=20)
+                response.raise_for_status()
+            except requests.RequestException as exc:
+                print(f"  [{provider_name}] Error en feed: {exc}")
                 continue
 
-            if not title and not description:
+            try:
+                root = ET.fromstring(response.content)
+            except ET.ParseError as exc:
+                print(f"  [{provider_name}] XML invalido: {exc}")
                 continue
 
-            pub_dt, pub_date = format_pub_date(pub_date_raw)
-            if pub_dt == datetime.min:
-                pub_dt, pub_date = extract_date_from_text(f"{title} {description}")
-            if pub_dt == datetime.min:
-                pub_dt, pub_date = extract_relative_date_from_text(f"{title} {description}")
+            items = root.findall(".//item")
 
-            key = link or normalize_text(title)
-            existing = all_news.get(key)
-            candidate = {
-                "title": title,
-                "link": link,
-                "source": source,
-                "pub_date": pub_date,
-                "pub_dt": pub_dt,
-            }
+            for item in items:
+                title = get_item_text(item, "title")
+                link = get_item_text(item, "link")
+                description = get_item_text(item, "description")
+                source = get_item_text(item, "source") or provider_name
+                pub_date_raw = (
+                    get_item_text(item, "pubDate")
+                    or get_item_text(item, "published")
+                    or get_item_text(item, "updated")
+                )
 
-            if existing is None or candidate["pub_dt"] > existing["pub_dt"]:
-                all_news[key] = candidate
+                combined_text = f"{title} {description}"
+                # Cuando la consulta usa frase exacta, el buscador ya aplica
+                # una restriccion semantica fuerte.
+                if not strict_query and not contains_name_variant(combined_text):
+                    continue
+
+                if not title and not description:
+                    continue
+
+                pub_dt, pub_date = format_pub_date(pub_date_raw)
+                if pub_dt == datetime.min:
+                    pub_dt, pub_date = extract_date_from_text(f"{title} {description}")
+                if pub_dt == datetime.min:
+                    pub_dt, pub_date = extract_relative_date_from_text(f"{title} {description}")
+
+                key = build_dedupe_key(
+                    title=title,
+                    link=link,
+                    pub_date=pub_date,
+                    source=source,
+                )
+                existing = all_news.get(key)
+                candidate = {
+                    "title": title,
+                    "link": link,
+                    "source": source,
+                    "pub_date": pub_date,
+                    "pub_dt": pub_dt,
+                }
+
+                if existing is None or candidate["pub_dt"] > existing["pub_dt"]:
+                    all_news[key] = candidate
 
     deduped = list(all_news.values())
     deduped.sort(key=lambda x: x["pub_dt"], reverse=True)
