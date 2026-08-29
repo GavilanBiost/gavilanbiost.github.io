@@ -469,7 +469,7 @@ def create_news_page(all_news: list[dict]) -> None:
                 <a href="posts.html">Posts</a>
                 <a href="tutoriales.html">Tutoriales</a>
                 <a href="publicaciones.html">Publicaciones</a>
-                <a href="#proyectos">Proyectos</a>
+                <a href="index.html#proyectos">Proyectos</a>
                 <a href="news.html">Noticias</a>
                 <a href="index.html#contact">Contacto</a>
             </div>
