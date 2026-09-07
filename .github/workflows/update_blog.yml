@@ -11,10 +11,10 @@ on:
     branches:
       - main
     paths:
-      - 'posts/*.html'
+      - 'post/*.html'
       - 'update_blog.py'
       - '.github/workflows/update_blog.yml'
-      - '!posts/post-template.html'
+      - '!post/post-template.html'
 
 permissions:
   contents: write

@@ -5,7 +5,7 @@ from pathlib import Path
 
 INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("posts.html")
-POSTS_DIR = Path("posts")
+POSTS_DIR = Path("post")
 MAX_INDEX_POSTS = 3
 EXCLUDED_FILES = {"post-template.html"}
 DEFAULT_CATEGORY = "BLOG"
@@ -115,7 +115,7 @@ def load_posts():
                 "title": title,
                 "description": description,
                 "category": category,
-                "post_url": f"posts/{path.name}",
+                "post_url": f"post/{path.name}",
                 "pub_date": pub_date,
                 "sort_dt": sort_dt,
             }
