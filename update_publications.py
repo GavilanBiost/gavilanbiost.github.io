@@ -15,6 +15,39 @@ EMAIL = "gavilanbiost@gmail.com"
 ARCHIVE_PATH = "publicaciones.html"
 
 
+MAX_VISIBLE_AUTHORS = 4
+
+
+def format_authors(authors):
+    """Recorta la lista de autores conservando siempre al autor del sitio.
+
+    PubMed devuelve la autoría completa, pero en la tarjeta solo caben unos
+    pocos nombres. Si el autor del sitio queda fuera del corte se le añade
+    detrás, para que sus propias publicaciones no acaben sin mencionarle.
+    """
+    if not authors:
+        return "Autores no disponibles"
+
+    if len(authors) <= MAX_VISIBLE_AUTHORS:
+        return ", ".join(authors)
+
+    shown = list(authors[:MAX_VISIBLE_AUTHORS])
+    own = next(
+        (i for i, name in enumerate(authors) if layout.AUTHOR_NAME_PATTERN.search(name)),
+        None,
+    )
+
+    if own is None or own < MAX_VISIBLE_AUTHORS:
+        return ", ".join(shown) + ", ..."
+
+    if own > MAX_VISIBLE_AUTHORS:
+        shown.append("...")
+    shown.append(authors[own])
+    if own < len(authors) - 1:
+        shown.append("...")
+    return ", ".join(shown)
+
+
 def extract_publication_year(article):
     date_patterns = [
         ".//PubDate/Year",
@@ -102,10 +135,7 @@ def fetch_publications():
                 if name_parts:
                     authors.append(" ".join(name_parts))
 
-            if len(authors) > 4:
-                authors_str = ", ".join(authors[:4]) + ", ..."
-            else:
-                authors_str = ", ".join(authors) if authors else "Autores no disponibles"
+            authors_str = format_authors(authors)
 
             journal_elem = article.find(".//Journal/Title")
             journal = journal_elem.text if journal_elem is not None and journal_elem.text else "Revista no disponible"

@@ -7,6 +7,15 @@ páginas en la raíz como para las que viven en post/ o tutoriales/.
 """
 
 import html
+import re
+
+# PubMed devuelve el nombre con muchas grafías (con o sin acentos, inicial o
+# nombre completo), así que el resaltado las contempla todas.
+AUTHOR_NAME_PATTERN = re.compile(
+    r"(?:Jes[u\u00fa]s(?:\s+Francisco)?|J\.?)\s+"
+    r"(?:F(?:rancisco)?\.?\s+)?"
+    r"Garc[i\u00ed]a-Gavil[a\u00e1]n"
+)
 
 SITE_URL = "https://gavilanbiost.com"
 SITE_NAME = "Jesús F. García Gavilán"
@@ -44,6 +53,13 @@ ICON_MENU = (
 
 def esc(value, quote=False):
     return html.escape(value or "", quote=quote)
+
+
+def highlight_author(text):
+    """Pone en negrita el nombre del autor dentro de un texto YA escapado."""
+    return AUTHOR_NAME_PATTERN.sub(
+        lambda match: f'<strong class="author-name">{match.group(0)}</strong>', text
+    )
 
 
 def head(title, description, canonical, extra_head=""):
@@ -135,7 +151,7 @@ def card(title, url, meta="", description="", links=(), year="", external=False,
         parts.append(f'    <div class="pub-meta">{esc(meta)}</div>')
     parts.append(f'    <a href="{esc(url, quote=True)}" class="pub-title"{target}>{esc(title)}</a>')
     if description:
-        parts.append(f'    <p class="text-small">{esc(description)}</p>')
+        parts.append(f'    <p class="text-small">{highlight_author(esc(description))}</p>')
     if links:
         parts.append('    <div class="pub-links">')
         for label, link_url, link_external in links:
