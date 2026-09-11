@@ -16,6 +16,8 @@ Se escriben dos archivos con la misma forma de tarjeta:
 - data/content-counts.json: cuántos elementos tiene cada sección. Es diminuto, así
   que la portada sí lo carga de entrada para enseñar cifras reales (por ejemplo el
   total de publicaciones en el apartado "Sobre mí").
+- data/topics.json: la nube de temas, recalculada a partir de todo el contenido
+  indexado (ver topics.py).
 
 Las secciones que no aparezcan usan el contenido incluido en el bundle, de modo
 que 'proyectos' se sigue manteniendo a mano desde el proyecto React.
@@ -23,6 +25,8 @@ que 'proyectos' se sigue manteniendo a mano desde el proyecto React.
 
 import json
 from pathlib import Path
+
+import topics
 
 HOME_DATA_PATH = Path("data/home-content.json")
 SEARCH_INDEX_PATH = Path("data/search-index.json")
@@ -78,7 +82,8 @@ def update_section(section_id, cards):
 
     Recibe el archivo completo de la sección: la portada se queda con las
     MAX_HOME_CARDS primeras, el índice de búsqueda con todas y el contador con el
-    total. Devuelve cuántas tarjetas quedan visibles en la portada.
+    total; además se rehace la nube de temas. Devuelve cuántas tarjetas quedan
+    visibles en la portada.
     """
     cards = list(cards)
 
@@ -93,5 +98,9 @@ def update_section(section_id, cards):
     counts = read_counts()
     counts[section_id] = len(cards)
     _write_json(COUNTS_PATH, counts)
+
+    # La nube de temas mira TODO el índice, así que se recalcula al vuelo cada vez
+    # que cambia cualquier sección.
+    topics.update_topics()
 
     return len(home[section_id])
