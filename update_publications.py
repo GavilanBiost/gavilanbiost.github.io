@@ -7,10 +7,36 @@ from urllib.request import urlopen
 
 # Parametros de busqueda en PubMed
 SEARCH_TERM = "garcia-gavilan j"
-EMAIL = "gargavilan@gmail.com"
+EMAIL = "gavilanbiost@gmail.com"
 
 INDEX_PATH = "index.html"
 ARCHIVE_PATH = "publicaciones.html"
+
+
+def extract_publication_year(article):
+    date_patterns = [
+        ".//PubDate/Year",
+        ".//ArticleDate/Year",
+        ".//PubDate/MedlineDate",
+        ".//ArticleDate/MedlineDate",
+        ".//History/PubMedPubDate/Year",
+        ".//History/PubMedPubDate/MedlineDate",
+        ".//PubDate/Month",
+        ".//ArticleDate/Month",
+    ]
+
+    for pattern in date_patterns:
+        for elem in article.findall(pattern):
+            if elem is None or elem.text is None:
+                continue
+            value = elem.text.strip()
+            if not value:
+                continue
+            match = re.search(r"(\d{4})", value)
+            if match:
+                return match.group(1)
+
+    return None
 
 
 def fetch_publications():
@@ -82,16 +108,7 @@ def fetch_publications():
             journal_elem = article.find(".//Journal/Title")
             journal = journal_elem.text if journal_elem is not None and journal_elem.text else "Revista no disponible"
 
-            year = "Fecha no disponible"
-            year_elem = article.find(".//PubDate/Year")
-            if year_elem is None:
-                year_elem = article.find(".//ArticleDate/Year")
-            if year_elem is not None and year_elem.text:
-                year = year_elem.text
-            else:
-                medline_date = article.find(".//PubDate/MedlineDate")
-                if medline_date is not None and medline_date.text and medline_date.text[:4].isdigit():
-                    year = medline_date.text[:4]
+            year = extract_publication_year(article)
 
             doi_elem = article.find('.//ArticleId[@IdType="doi"]')
             doi = doi_elem.text if doi_elem is not None and doi_elem.text else ""
@@ -109,7 +126,11 @@ def fetch_publications():
 
             card = []
             card.append('<div class="card">')
-            card.append(f"    <div class=\"pub-meta\">{journal_safe} · {year}</div>")
+            pub_meta_parts = [journal_safe]
+            if year:
+                pub_meta_parts.append(year)
+            if pub_meta_parts:
+                card.append(f"    <div class=\"pub-meta\">{' · '.join(pub_meta_parts)}</div>")
             card.append(f"    <a href=\"{link}\" class=\"pub-title\" target=\"_blank\">{title_safe}</a>")
             card.append(f"    <p class=\"text-small\">{authors_safe}</p>")
             card.append('    <div class="pub-links">')
@@ -202,6 +223,11 @@ def update_archive(cards, timestamp):
     print(f"✓ Se actualizaron {len(cards)} publicaciones en {ARCHIVE_PATH}")
 
 
+def sync_publication_pages(cards, timestamp):
+    update_index(cards, timestamp)
+    update_archive(cards, timestamp)
+
+
 def main():
     try:
         cards = fetch_publications()
@@ -210,8 +236,7 @@ def main():
             raise SystemExit(0)
 
         timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
-        update_index(cards, timestamp)
-        update_archive(cards, timestamp)
+        sync_publication_pages(cards, timestamp)
     except Exception as exc:
         print(f"Error al actualizar publicaciones: {exc}")
         raise SystemExit(1)

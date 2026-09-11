@@ -192,15 +192,10 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             const container = document.getElementById(containerId);
             const verMasBtn = document.getElementById(buttonId);
-            
-            console.log(`[${itemName}] Container encontrado:`, container);
-            console.log(`[${itemName}] Botón encontrado:`, verMasBtn);
-            
+
             if (container && verMasBtn) {
                 const items = container.querySelectorAll('.card');
-                
-                console.log(`[${itemName}] Total de items encontrados:`, items.length);
-                
+
                 // Ocultar items después de los primeros maxVisible
                 if (items.length > maxVisible) {
                     items.forEach((item, index) => {
@@ -210,34 +205,29 @@ window.addEventListener('load', () => {
                             item.style.visibility = 'hidden';
                         }
                     });
-                    console.log(`[${itemName}] Se ocultaron`, items.length - maxVisible, 'items');
                 } else {
                     // Si hay maxVisible o menos items, ocultar el botón
                     verMasBtn.style.display = 'none';
-                    console.log(`[${itemName}] Hay ${maxVisible} o menos items, botón ocultado`);
                 }
-                
+
                 // Evento click para mostrar todos los items
                 verMasBtn.addEventListener('click', () => {
-                    console.log(`[${itemName}] Clic en ver más`);
                     const hiddenItems = container.querySelectorAll('.hidden-item');
-                    
+
                     hiddenItems.forEach(item => {
                         item.style.display = 'block';
                         item.style.visibility = 'visible';
                         item.classList.remove('hidden-item');
                     });
-                    
+
                     // Ocultar el botón después de mostrar todas
                     verMasBtn.style.display = 'none';
-                    
+
                     // Scroll suave hacia los items recién mostrados
                     if (hiddenItems.length > 0) {
                         hiddenItems[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
-            } else {
-                console.error(`[${itemName}] No se encontró el contenedor o el botón`);
             }
         }, 100);
     }
@@ -256,30 +246,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!banner || !overlay || !acceptBtn || !declineBtn) return;
 
-    const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-    const GTM_ID = 'GTM-IM5FCFZW';
-
-    const loadGoogleAnalytics = () => {
-        if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
-        const gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-        document.head.appendChild(gaScript);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){window.dataLayer.push(arguments);} // eslint-disable-line no-inner-declarations
-        gtag('js', new Date());
-        gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
-    };
+    const GTM_ID = 'GTM-TMSFCFZW';
 
     const loadGtm = () => {
-        if (!GTM_ID) return;
+        if (!GTM_ID || window.gtmLoaded) return;
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
         const gtmScript = document.createElement('script');
         gtmScript.async = true;
         gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
         document.head.appendChild(gtmScript);
+        window.gtmLoaded = true;
     };
 
     const consent = localStorage.getItem('cookie_consent');
@@ -288,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'block';
     }
     if (consent === 'accepted') {
-        loadGoogleAnalytics();
         loadGtm();
     }
 
@@ -300,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     acceptBtn.addEventListener('click', () => {
         saveConsent('accepted');
-        loadGoogleAnalytics();
         loadGtm();
     });
     declineBtn.addEventListener('click', () => saveConsent('declined'));

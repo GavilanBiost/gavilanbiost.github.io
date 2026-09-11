@@ -206,6 +206,47 @@ def get_item_text(item: ET.Element, tag_name: str) -> str:
     return elem.text.strip()
 
 
+def resolve_article_url(raw_url: str) -> str:
+    """Resuelve links de Google News a la URL final del artículo cuando es posible."""
+    if not raw_url:
+        return ""
+
+    parsed = urlparse(raw_url)
+    if parsed.netloc.lower() not in {"news.google.com", "www.news.google.com"}:
+        return raw_url
+
+    try:
+        response = requests.get(
+            raw_url,
+            timeout=15,
+            allow_redirects=True,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; JFGG-NewsBot/1.0; +https://github.com/GavilanBiost/gavilanbiost.github.io)"
+            },
+        )
+        if response.ok:
+            final_url = response.url or raw_url
+            return final_url
+    except requests.RequestException:
+        pass
+
+    try:
+        response = requests.get(
+            raw_url,
+            timeout=15,
+            allow_redirects=True,
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+        if response.ok:
+            final_url = response.url or raw_url
+            if final_url and "news.google.com" not in final_url:
+                return final_url
+    except requests.RequestException:
+        pass
+
+    return raw_url
+
+
 def build_dedupe_key(
     title: str,
     link: str,
@@ -280,7 +321,7 @@ def fetch_news() -> list[dict]:
 
             for item in items:
                 title = get_item_text(item, "title")
-                link = get_item_text(item, "link")
+                link = resolve_article_url(get_item_text(item, "link"))
                 description = get_item_text(item, "description")
                 source = get_item_text(item, "source") or provider_name
                 pub_date_raw = (
