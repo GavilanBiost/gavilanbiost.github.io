@@ -20,69 +20,69 @@
   ],
   "tutoriales": [
     {
-      "title": "Estadístico F de contraste global",
-      "url": "/tutoriales/estadistico-contraste.html",
-      "meta": "R / REGRESIÓN LINEAL",
-      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
+      "url": "/tutoriales/t-sne.html",
+      "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
+      "description": "Tutorial práctico de t-SNE en R para reducir dimensionalidad y visualizar patrones en datos multivariables.",
       "links": [
         {
           "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/estadistico_lm"
+          "url": "https://github.com/GavilanBiost/t-SNE"
         },
         {
           "label": "Abrir tutorial",
-          "url": "/tutoriales/estadistico-contraste.html"
+          "url": "/tutoriales/t-sne.html"
         }
       ],
-      "originalTitle": "Estadístico F de contraste global",
+      "originalTitle": "t-SNE en R: visualización de datos de alta dimensionalidad",
       "year": "2026",
       "tags": [
         "r",
-        "regresión lineal"
+        "reducción de dimensionalidad"
       ]
     },
     {
-      "title": "Confusión e Interacción en Epidemiología",
-      "url": "/tutoriales/confusion-e-interaccion.html",
-      "meta": "R / REGRESIÓN",
-      "description": "Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.",
+      "title": "Reg Condicional vs Reg Cox",
+      "url": "/tutoriales/reg-condicional-vs-reg-cox.html",
+      "meta": "R / SUPERVIVENCIA Y CASOS-CONTROLES",
+      "description": "Tutorial en R sobre regresión logística condicional y regresión de Cox.",
       "links": [
         {
           "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/confusion_e_interaccion"
+          "url": "https://github.com/GavilanBiost/reg-condicional-vs-regcox"
         },
         {
           "label": "Abrir tutorial",
-          "url": "/tutoriales/confusion-e-interaccion.html"
+          "url": "/tutoriales/reg-condicional-vs-reg-cox.html"
         }
       ],
-      "originalTitle": "Confusión e Interacción en Epidemiología",
+      "originalTitle": "Reg Condicional vs Reg Cox",
       "year": "2026",
       "tags": [
         "r",
-        "regresión"
+        "supervivencia y casos-controles"
       ]
     },
     {
-      "title": "C-index en modelos de Cox",
-      "url": "/tutoriales/c-index.html",
-      "meta": "R / SUPERVIVENCIA",
-      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "title": "MAE",
+      "url": "/tutoriales/MAE.html",
+      "meta": "R / MÉTRICAS DE ERROR",
+      "description": "Tutorial sobre cálculo del Error Absoluto Medio (MAE) en R.",
       "links": [
         {
           "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/c-index"
+          "url": "https://github.com/GavilanBiost/MAE_linkedIn"
         },
         {
           "label": "Abrir tutorial",
-          "url": "/tutoriales/c-index.html"
+          "url": "/tutoriales/MAE.html"
         }
       ],
-      "originalTitle": "C-index en modelos de Cox",
+      "originalTitle": "MAE",
       "year": "2026",
       "tags": [
         "r",
-        "supervivencia"
+        "métricas de error"
       ]
     }
   ],
