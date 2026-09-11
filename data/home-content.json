@@ -20,6 +20,50 @@
   ],
   "tutoriales": [
     {
+      "title": "Estadístico F de contraste global",
+      "url": "/tutoriales/estadistico-contraste.html",
+      "meta": "R / REGRESIÓN LINEAL",
+      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/estadistico_lm"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/estadistico-contraste.html"
+        }
+      ],
+      "originalTitle": "Estadístico F de contraste global",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión lineal"
+      ]
+    },
+    {
+      "title": "C-index en modelos de Cox",
+      "url": "/tutoriales/c-index.html",
+      "meta": "R / SUPERVIVENCIA",
+      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/c-index"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/c-index.html"
+        }
+      ],
+      "originalTitle": "C-index en modelos de Cox",
+      "year": "2026",
+      "tags": [
+        "r",
+        "supervivencia"
+      ]
+    },
+    {
       "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
       "url": "/tutoriales/t-sne.html",
       "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
@@ -39,50 +83,6 @@
       "tags": [
         "r",
         "reducción de dimensionalidad"
-      ]
-    },
-    {
-      "title": "Reg Condicional vs Reg Cox",
-      "url": "/tutoriales/reg-condicional-vs-reg-cox.html",
-      "meta": "R / SUPERVIVENCIA Y CASOS-CONTROLES",
-      "description": "Tutorial en R sobre regresión logística condicional y regresión de Cox.",
-      "links": [
-        {
-          "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/reg-condicional-vs-regcox"
-        },
-        {
-          "label": "Abrir tutorial",
-          "url": "/tutoriales/reg-condicional-vs-reg-cox.html"
-        }
-      ],
-      "originalTitle": "Reg Condicional vs Reg Cox",
-      "year": "2026",
-      "tags": [
-        "r",
-        "supervivencia y casos-controles"
-      ]
-    },
-    {
-      "title": "MAE",
-      "url": "/tutoriales/MAE.html",
-      "meta": "R / MÉTRICAS DE ERROR",
-      "description": "Tutorial sobre cálculo del Error Absoluto Medio (MAE) en R.",
-      "links": [
-        {
-          "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/MAE_linkedIn"
-        },
-        {
-          "label": "Abrir tutorial",
-          "url": "/tutoriales/MAE.html"
-        }
-      ],
-      "originalTitle": "MAE",
-      "year": "2026",
-      "tags": [
-        "r",
-        "métricas de error"
       ]
     }
   ],

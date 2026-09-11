@@ -20,6 +20,50 @@
   ],
   "tutoriales": [
     {
+      "title": "Estadístico F de contraste global",
+      "url": "/tutoriales/estadistico-contraste.html",
+      "meta": "R / REGRESIÓN LINEAL",
+      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/estadistico_lm"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/estadistico-contraste.html"
+        }
+      ],
+      "originalTitle": "Estadístico F de contraste global",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión lineal"
+      ]
+    },
+    {
+      "title": "C-index en modelos de Cox",
+      "url": "/tutoriales/c-index.html",
+      "meta": "R / SUPERVIVENCIA",
+      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/c-index"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/c-index.html"
+        }
+      ],
+      "originalTitle": "C-index en modelos de Cox",
+      "year": "2026",
+      "tags": [
+        "r",
+        "supervivencia"
+      ]
+    },
+    {
       "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
       "url": "/tutoriales/t-sne.html",
       "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
@@ -108,28 +152,6 @@
       ]
     },
     {
-      "title": "Estadístico F de contraste global",
-      "url": "/tutoriales/estadistico-contraste.html",
-      "meta": "R / REGRESIÓN LINEAL",
-      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
-      "links": [
-        {
-          "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/estadistico_lm"
-        },
-        {
-          "label": "Abrir tutorial",
-          "url": "/tutoriales/estadistico-contraste.html"
-        }
-      ],
-      "originalTitle": "Estadístico F de contraste global",
-      "year": "2026",
-      "tags": [
-        "r",
-        "regresión lineal"
-      ]
-    },
-    {
       "title": "Confusión e Interacción en Epidemiología",
       "url": "/tutoriales/confusion-e-interaccion.html",
       "meta": "R / REGRESIÓN",
@@ -171,28 +193,6 @@
       "tags": [
         "r",
         "estadística"
-      ]
-    },
-    {
-      "title": "C-index en modelos de Cox",
-      "url": "/tutoriales/c-index.html",
-      "meta": "R / SUPERVIVENCIA",
-      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
-      "links": [
-        {
-          "label": "Ver repositorio",
-          "url": "https://github.com/GavilanBiost/c-index"
-        },
-        {
-          "label": "Abrir tutorial",
-          "url": "/tutoriales/c-index.html"
-        }
-      ],
-      "originalTitle": "C-index en modelos de Cox",
-      "year": "2026",
-      "tags": [
-        "r",
-        "supervivencia"
       ]
     }
   ],

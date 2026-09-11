@@ -1,7 +1,6 @@
 import datetime
 import html
 import re
-import subprocess
 from pathlib import Path
 
 import home_data
@@ -98,20 +97,6 @@ def parse_date(date_text):
         return None
 
 
-def get_git_last_modified(path):
-    try:
-        result = subprocess.run(
-            ["git", "log", "-1", "--format=%cI", "--", str(path)],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return datetime.datetime.min
-
-    return parse_date(result.stdout.strip()) or datetime.datetime.min
-
-
 def normalize_href_key(href):
     clean = href.strip().split("#", 1)[0].split("?", 1)[0]
     return Path(clean).name.lower()
@@ -162,7 +147,15 @@ def load_tutorials():
         description = extract_meta(content, "description") or legacy_entry.get("description") or extract_first_paragraph(content)
         category = extract_meta(content, "tutorial-category") or legacy_entry.get("category") or DEFAULT_CATEGORY
         repo_url = extract_meta(content, "tutorial-repository") or extract_repo_link(content) or legacy_entry.get("repo_url") or ""
-        sort_dt = parse_date(extract_meta(content, "tutorial-date")) or get_git_last_modified(path)
+        # El orden sale solo del contenido del archivo. Antes se recurría a la
+        # fecha del último commit, pero esa depende del entorno: daba un orden
+        # distinto en local y en GitHub Actions, y la lista entera se reescribía
+        # provocando conflictos al subir.
+        sort_dt = parse_date(extract_meta(content, "tutorial-date"))
+        if sort_dt is None:
+            print(f"⚠ {path.name} no tiene tutorial-date (AAAA-MM-DD); se ordenará el último")
+            sort_dt = datetime.datetime.min
+
 
         tutorials.append(
             {
