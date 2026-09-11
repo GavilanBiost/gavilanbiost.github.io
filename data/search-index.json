@@ -1,0 +1,1493 @@
+{
+  "posts": [
+    {
+      "title": "Deep learning y ciencias ómicas",
+      "url": "/post/deep-learning-ciencias-omicas.html",
+      "meta": "BLOG · 07/09/2026",
+      "description": "Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/deep-learning-ciencias-omicas.html"
+        }
+      ],
+      "originalTitle": "Deep learning y ciencias ómicas",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    }
+  ],
+  "tutoriales": [
+    {
+      "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
+      "url": "/tutoriales/t-sne.html",
+      "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
+      "description": "Tutorial práctico de t-SNE en R para reducir dimensionalidad y visualizar patrones en datos multivariables.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/t-SNE"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/t-sne.html"
+        }
+      ],
+      "originalTitle": "t-SNE en R: visualización de datos de alta dimensionalidad",
+      "year": "2026",
+      "tags": [
+        "r",
+        "reducción de dimensionalidad"
+      ]
+    },
+    {
+      "title": "Reg Condicional vs Reg Cox",
+      "url": "/tutoriales/reg-condicional-vs-reg-cox.html",
+      "meta": "R / SUPERVIVENCIA Y CASOS-CONTROLES",
+      "description": "Tutorial en R sobre regresión logística condicional y regresión de Cox.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/reg-condicional-vs-regcox"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/reg-condicional-vs-reg-cox.html"
+        }
+      ],
+      "originalTitle": "Reg Condicional vs Reg Cox",
+      "year": "2026",
+      "tags": [
+        "r",
+        "supervivencia y casos-controles"
+      ]
+    },
+    {
+      "title": "MAE",
+      "url": "/tutoriales/MAE.html",
+      "meta": "R / MÉTRICAS DE ERROR",
+      "description": "Tutorial sobre cálculo del Error Absoluto Medio (MAE) en R.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/MAE_linkedIn"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/MAE.html"
+        }
+      ],
+      "originalTitle": "MAE",
+      "year": "2026",
+      "tags": [
+        "r",
+        "métricas de error"
+      ]
+    },
+    {
+      "title": "L'Ecuyer-CMRG",
+      "url": "/tutoriales/L-Ecuyer-CMRG.html",
+      "meta": "R / COMPUTACIÓN EN PARALELO",
+      "description": "Tutorial sobre L'Ecuyer-CMRG para reproducibilidad en computación en paralelo con R.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/L-Ecuyer-CMRG"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/L-Ecuyer-CMRG.html"
+        }
+      ],
+      "originalTitle": "L'Ecuyer-CMRG",
+      "year": "2026",
+      "tags": [
+        "r",
+        "computación en paralelo"
+      ]
+    },
+    {
+      "title": "Estadístico F de contraste global",
+      "url": "/tutoriales/estadistico-contraste.html",
+      "meta": "R / REGRESIÓN LINEAL",
+      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/estadistico_lm"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/estadistico-contraste.html"
+        }
+      ],
+      "originalTitle": "Estadístico F de contraste global",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión lineal"
+      ]
+    },
+    {
+      "title": "Confusión e Interacción en Epidemiología",
+      "url": "/tutoriales/confusion-e-interaccion.html",
+      "meta": "R / REGRESIÓN",
+      "description": "Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/confusion_e_interaccion"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/confusion-e-interaccion.html"
+        }
+      ],
+      "originalTitle": "Confusión e Interacción en Epidemiología",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión"
+      ]
+    },
+    {
+      "title": "Coeficiente de Correlación Intraclase (ICC)",
+      "url": "/tutoriales/ICC.html",
+      "meta": "R / ESTADÍSTICA",
+      "description": "Tutorial sobre coeficiente de correlación intraclase (ICC) en R.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/ICC"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/ICC.html"
+        }
+      ],
+      "originalTitle": "Coeficiente de Correlación Intraclase (ICC)",
+      "year": "2026",
+      "tags": [
+        "r",
+        "estadística"
+      ]
+    },
+    {
+      "title": "C-index en modelos de Cox",
+      "url": "/tutoriales/c-index.html",
+      "meta": "R / SUPERVIVENCIA",
+      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/c-index"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/c-index.html"
+        }
+      ],
+      "originalTitle": "C-index en modelos de Cox",
+      "year": "2026",
+      "tags": [
+        "r",
+        "supervivencia"
+      ]
+    }
+  ],
+  "publicaciones": [
+    {
+      "title": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42155850/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
+      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Jordi Salas-Salvadó",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2026.156649"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42155850/"
+        }
+      ],
+      "originalTitle": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/",
+      "meta": "DIABETES CARE · 2026",
+      "description": "Ariadna Curto, Jadwiga Konieczna, Antoni Colom, Itziar Abete, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.2337/dc25-2497"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/"
+        }
+      ],
+      "originalTitle": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
+      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Josué A Pérez-Acosta, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2026.156599"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/"
+        }
+      ],
+      "originalTitle": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Inflammatory dietary potential and gut microbiota in older adults with overweight or obesity and metabolic syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41606898/",
+      "meta": "FOOD RESEARCH INTERNATIONAL (OTTAWA, ONT.) · 2025",
+      "description": "Héctor Vázquez-Lorente, Adrián Hernández-Cacho, Jesús F García-Gavilán, Jun Li, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.foodres.2025.117263"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41606898/"
+        }
+      ],
+      "originalTitle": "Inflammatory dietary potential and gut microbiota in older adults with overweight or obesity and metabolic syndrome.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "The Gut Microbiota as a Mediator in the Relationship Between Dietary Patterns and Depression.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41574026/",
+      "meta": "MEDCOMM · 2026",
+      "description": "Adrián Hernández-Cacho, Jiaqi Ni, Jesús F García-Gavilán, Prokopis Konstanti, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/mco2.70562"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41574026/"
+        }
+      ],
+      "originalTitle": "The Gut Microbiota as a Mediator in the Relationship Between Dietary Patterns and Depression.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Combined versus Individual Effects of Dietary Energy Reduction and Physical Activity on Body Composition in Older Adults with Metabolic Syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41469225/",
+      "meta": "JOURNAL OF OBESITY & METABOLIC SYNDROME · 2026",
+      "description": "Jadwiga Konieczna, Victor de la O, Miguel Ruiz-Canela, Jordi Salas-Salvadó, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.7570/jomes25027"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41469225/"
+        }
+      ],
+      "originalTitle": "Combined versus Individual Effects of Dietary Energy Reduction and Physical Activity on Body Composition in Older Adults with Metabolic Syndrome.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Sarcopenic Obesity and Longitudinal Trajectories on Cognitive Performance and Subtle Cognitive Impairment Over 6 Years in Older Adults.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41361860/",
+      "meta": "JOURNAL OF CACHEXIA, SARCOPENIA AND MUSCLE · 2025",
+      "description": "Héctor Vázquez-Lorente, Indira Paz-Graniel, Hernando J Margara-Escudero, Miguel Ángel Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/jcsm.70158"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41361860/"
+        }
+      ],
+      "originalTitle": "Sarcopenic Obesity and Longitudinal Trajectories on Cognitive Performance and Subtle Cognitive Impairment Over 6 Years in Older Adults.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Plasma neurology-related proteins associated with cognition are modulated by lifestyle in adults.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40972225/",
+      "meta": "EBIOMEDICINE · 2025",
+      "description": "Hernando Joaquin Margara-Escudero, Indira Paz-Graniel, Jesús Francisco García-Gavilán, Montse Fitó, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ebiom.2025.105933"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40972225/"
+        }
+      ],
+      "originalTitle": "Plasma neurology-related proteins associated with cognition are modulated by lifestyle in adults.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Comparison of an Energy-Reduced Mediterranean Diet and Physical Activity Versus an Ad Libitum Mediterranean Diet in the Prevention of Type 2 Diabetes : A Secondary Analysis of a Randomized Controlled Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40854218/",
+      "meta": "ANNALS OF INTERNAL MEDICINE · 2025",
+      "description": "Miguel Ruiz-Canela, Dolores Corella, Miguel Ángel Martínez-González, Nancy Babio, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.7326/ANNALS-25-00388"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40854218/"
+        }
+      ],
+      "originalTitle": "Comparison of an Energy-Reduced Mediterranean Diet and Physical Activity Versus an Ad Libitum Mediterranean Diet in the Prevention of Type 2 Diabetes : A Secondary Analysis of a Randomized Controlled Trial.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Multi-omics approach identifies gut microbiota variations associated with depression.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40295565/",
+      "meta": "NPJ BIOFILMS AND MICROBIOMES · 2025",
+      "description": "Adrián Hernández-Cacho, Jesús F García-Gavilán, Alessandro Atzeni, Prokopis Konstanti, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1038/s41522-025-00707-9"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40295565/"
+        }
+      ],
+      "originalTitle": "Multi-omics approach identifies gut microbiota variations associated with depression.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Cross-sectional associations between Mediterranean diet and body composition in preschool children. CORAL study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40259686/",
+      "meta": "PEDIATRIC OBESITY · 2025",
+      "description": "Alicia Larruy-García, María L Miguel-Berges, Isabel Rueda-De Torre, Belén Pastor-Villaescusa, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1111/ijpo.70014"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40259686/"
+        }
+      ],
+      "originalTitle": "Cross-sectional associations between Mediterranean diet and body composition in preschool children. CORAL study.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Mediterranean Diet, Physical Activity, and Bone Health in Older Adults: A Secondary Analysis of a Randomized Clinical Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40198072/",
+      "meta": "JAMA NETWORK OPEN · 2025",
+      "description": "Héctor Vázquez-Lorente, Jesús F García-Gavilán, Sangeetha Shyam, Jadwiga Konieczna, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1001/jamanetworkopen.2025.3710"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40198072/"
+        }
+      ],
+      "originalTitle": "Mediterranean Diet, Physical Activity, and Bone Health in Older Adults: A Secondary Analysis of a Randomized Clinical Trial.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "A multi-metabolite signature robustly predicts long-term mortality in the PREDIMED trial and several US cohorts.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40107652/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2025",
+      "description": "Gonzalo Fernández-Duval, Cristina Razquin, Fenglei Wang, Huan Yun, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2025.156195"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40107652/"
+        }
+      ],
+      "originalTitle": "A multi-metabolite signature robustly predicts long-term mortality in the PREDIMED trial and several US cohorts.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Effect of nut consumption on blood lipids: An updated systematic review and meta-analysis of randomized controlled trials.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39638677/",
+      "meta": "NUTRITION, METABOLISM, AND CARDIOVASCULAR DISEASES : NMCD · 2025",
+      "description": "Stephanie K Nishi, Indira Paz-Graniel, Jiaqi Ni, Cristina Valle-Hita, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.numecd.2024.10.009"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39638677/"
+        }
+      ],
+      "originalTitle": "Effect of nut consumption on blood lipids: An updated systematic review and meta-analysis of randomized controlled trials.",
+      "year": "2025",
+      "tags": []
+    },
+    {
+      "title": "Objectively Measured Sleep Duration and Health-Related Quality of Life in Older Adults with Metabolic Syndrome: A One-Year Longitudinal Analysis of the PREDIMED-Plus Cohort.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39203769/",
+      "meta": "NUTRIENTS · 2024",
+      "description": "Alba Marcos-Delgado, Vicente Martín-Sánchez, Miguel Ángel Martínez-González, Dolores Corella, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/nu16162631"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39203769/"
+        }
+      ],
+      "originalTitle": "Objectively Measured Sleep Duration and Health-Related Quality of Life in Older Adults with Metabolic Syndrome: A One-Year Longitudinal Analysis of the PREDIMED-Plus Cohort.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "Gut microbiota dynamics and association with chronic kidney disease: A longitudinal study within the PREDIMED-Plus trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38908788/",
+      "meta": "LIFE SCIENCES · 2024",
+      "description": "Alessandro Atzeni, Andrés Díaz-López, Adrián Hernández Cacho, Nancy Babio, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.lfs.2024.122863"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38908788/"
+        }
+      ],
+      "originalTitle": "Gut microbiota dynamics and association with chronic kidney disease: A longitudinal study within the PREDIMED-Plus trial.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "Effect of 1-year lifestyle intervention with energy-reduced Mediterranean diet and physical activity promotion on the gut metabolome and microbiota: a randomized clinical trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38428742/",
+      "meta": "THE AMERICAN JOURNAL OF CLINICAL NUTRITION · 2024",
+      "description": "Jesús F García-Gavilán, Alessandro Atzeni, Nancy Babio, Liming Liang, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ajcnut.2024.02.021"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38428742/"
+        }
+      ],
+      "originalTitle": "Effect of 1-year lifestyle intervention with energy-reduced Mediterranean diet and physical activity promotion on the gut metabolome and microbiota: a randomized clinical trial.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "Plasma metabolite profile of legume consumption and future risk of type 2 diabetes and cardiovascular disease.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38245716/",
+      "meta": "CARDIOVASCULAR DIABETOLOGY · 2024",
+      "description": "Hernando J Margara-Escudero, Indira Paz-Graniel, Jesús García-Gavilán, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12933-023-02111-z"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38245716/"
+        }
+      ],
+      "originalTitle": "Plasma metabolite profile of legume consumption and future risk of type 2 diabetes and cardiovascular disease.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "Intensive Weight-Loss Lifestyle Intervention Using Mediterranean Diet and COVID-19 Risk in Older Adults: Secondary Analysis of PREDIMED-Plus Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38151866/",
+      "meta": "THE JOURNAL OF NUTRITION, HEALTH & AGING · 2023",
+      "description": "S Shyam, J F García-Gavilán, I Paz-Graniel, J J Gaforio, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s12603-023-2044-4"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38151866/"
+        }
+      ],
+      "originalTitle": "Intensive Weight-Loss Lifestyle Intervention Using Mediterranean Diet and COVID-19 Risk in Older Adults: Secondary Analysis of PREDIMED-Plus Trial.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Olive oil consumption, plasma metabolites, and risk of type 2 diabetes and cardiovascular disease.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38093289/",
+      "meta": "CARDIOVASCULAR DIABETOLOGY · 2023",
+      "description": "Jesús F García-Gavilán, Nancy Babio, Estefanía Toledo, Zhila Semnani-Azad, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12933-023-02066-1"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38093289/"
+        }
+      ],
+      "originalTitle": "Olive oil consumption, plasma metabolites, and risk of type 2 diabetes and cardiovascular disease.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Plasma metabolite predictors of metabolic syndrome incidence and reversion.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38007148/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2024",
+      "description": "Zhila Semnani-Azad, Estefanía Toledo, Nancy Babio, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2023.155742"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38007148/"
+        }
+      ],
+      "originalTitle": "Plasma metabolite predictors of metabolic syndrome incidence and reversion.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "Adherence to the Mediterranean diet and nuclear magnetic resonance spectroscopy biomarkers in older individuals at high cardiovascular disease risk: cross-sectional and longitudinal analyses.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37949173/",
+      "meta": "THE AMERICAN JOURNAL OF CLINICAL NUTRITION · 2024",
+      "description": "Indira Paz-Graniel, Jesús F García-Gavilán, Emilio Ros, Margery A Connelly, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ajcnut.2023.11.003"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37949173/"
+        }
+      ],
+      "originalTitle": "Adherence to the Mediterranean diet and nuclear magnetic resonance spectroscopy biomarkers in older individuals at high cardiovascular disease risk: cross-sectional and longitudinal analyses.",
+      "year": "2024",
+      "tags": []
+    },
+    {
+      "title": "An Energy-Reduced Mediterranean Diet, Physical Activity, and Body Composition: An Interim Subgroup Analysis of the PREDIMED-Plus Randomized Clinical Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37851444/",
+      "meta": "JAMA NETWORK OPEN · 2023",
+      "description": "Jadwiga Konieczna, Miguel Ruiz-Canela, Aina M Galmes-Panades, Itziar Abete, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1001/jamanetworkopen.2023.37994"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37851444/"
+        }
+      ],
+      "originalTitle": "An Energy-Reduced Mediterranean Diet, Physical Activity, and Body Composition: An Interim Subgroup Analysis of the PREDIMED-Plus Randomized Clinical Trial.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Association of adiposity and its changes over time with COVID-19 risk in older adults with overweight/obesity and metabolic syndrome: a longitudinal evaluation in the PREDIMED-Plus cohort.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37833678/",
+      "meta": "BMC MEDICINE · 2023",
+      "description": "Sangeetha Shyam, Jesús Francisco García-Gavilán, Indira Paz-Graniel, José J Gaforio, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12916-023-03079-z"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37833678/"
+        }
+      ],
+      "originalTitle": "Association of adiposity and its changes over time with COVID-19 risk in older adults with overweight/obesity and metabolic syndrome: a longitudinal evaluation in the PREDIMED-Plus cohort.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Plasma metabolite profiles associated with the World Cancer Research Fund/American Institute for Cancer Research lifestyle score and future risk of cardiovascular disease and type 2 diabetes.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37716984/",
+      "meta": "CARDIOVASCULAR DIABETOLOGY · 2023",
+      "description": "Santiago Rios, Jesús F García-Gavilán, Nancy Babio, Indira Paz-Graniel, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12933-023-01912-6"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37716984/"
+        }
+      ],
+      "originalTitle": "Plasma metabolite profiles associated with the World Cancer Research Fund/American Institute for Cancer Research lifestyle score and future risk of cardiovascular disease and type 2 diabetes.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Two-Year Changes in Physical Activity and Concurrent Changes in Cognitive Function in a Cohort of Adults with Metabolic Syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37661880/",
+      "meta": "JOURNAL OF ALZHEIMER'S DISEASE : JAD · 2023",
+      "description": "Teresa Rognoni, Marta Fernández-Matarrubia, Miguel Ángel Martinez-González, Jordi Salas-Salvadó, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3233/JAD-230105"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37661880/"
+        }
+      ],
+      "originalTitle": "Two-Year Changes in Physical Activity and Concurrent Changes in Cognitive Function in a Cohort of Adults with Metabolic Syndrome.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Gut microbiota in nonalcoholic fatty liver disease: a PREDIMED-Plus trial sub analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37345236/",
+      "meta": "GUT MICROBES · 2023",
+      "description": "Ana María Gómez-Pérez, Patricia Ruiz-Limón, Jordi Salas-Salvadó, Jesús Vioque, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/19490976.2023.2223339"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37345236/"
+        }
+      ],
+      "originalTitle": "Gut microbiota in nonalcoholic fatty liver disease: a PREDIMED-Plus trial sub analysis.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Estimated Phytate Intake Is Associated with Bone Mineral Density in Mediterranean Postmenopausal Women.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37049631/",
+      "meta": "NUTRIENTS · 2023",
+      "description": "Pilar Sanchis, Rafael María Prieto, Jadwiga Konieczna, Félix Grases, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/nu15071791"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37049631/"
+        }
+      ],
+      "originalTitle": "Estimated Phytate Intake Is Associated with Bone Mineral Density in Mediterranean Postmenopausal Women.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Plasma levels of neurology-related proteins are associated with cognitive performance in an older population with overweight/obesity and metabolic syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36964401/",
+      "meta": "GEROSCIENCE · 2023",
+      "description": "Martí Llaurador-Coll, Santiago Rios, Jesus F García-Gavilán, Nancy Babio, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s11357-023-00764-y"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36964401/"
+        }
+      ],
+      "originalTitle": "Plasma levels of neurology-related proteins are associated with cognitive performance in an older population with overweight/obesity and metabolic syndrome.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Impact of COVID-19 pandemic on the PREDIMED-Plus randomized clinical trial: Effects on the interventions, participants follow-up, and adiposity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36712515/",
+      "meta": "FRONTIERS IN NUTRITION · 2022",
+      "description": "Indira Paz-Graniel, Montserrat Fitó, Emilio Ros, Pilar Buil-Cosiales, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3389/fnut.2022.1098269"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36712515/"
+        }
+      ],
+      "originalTitle": "Impact of COVID-19 pandemic on the PREDIMED-Plus randomized clinical trial: Effects on the interventions, participants follow-up, and adiposity.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Circulating Amino Acids and Risk of Peripheral Artery Disease in the PREDIMED Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36613713/",
+      "meta": "INTERNATIONAL JOURNAL OF MOLECULAR SCIENCES · 2022",
+      "description": "Cristina Razquin, Miguel Ruiz-Canela, Estefania Toledo, Clary B Clish, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/ijms24010270"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36613713/"
+        }
+      ],
+      "originalTitle": "Circulating Amino Acids and Risk of Peripheral Artery Disease in the PREDIMED Trial.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Cross-sectional and longitudinal assessment of the association between DDR1 variants and processing speed in patients with early psychosis and healthy controls.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36571911/",
+      "meta": "JOURNAL OF PSYCHIATRIC RESEARCH · 2023",
+      "description": "Cinta Gas, Rosa Ayesa-Arriola, Javier Vázquez-Bourgon, Benedicto Crespo-Facorro, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.jpsychires.2022.12.020"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36571911/"
+        }
+      ],
+      "originalTitle": "Cross-sectional and longitudinal assessment of the association between DDR1 variants and processing speed in patients with early psychosis and healthy controls.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Loss of Visceral Fat is Associated with a Reduction in Inflammatory Status in Patients with Metabolic Syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36416291/",
+      "meta": "MOLECULAR NUTRITION & FOOD RESEARCH · 2023",
+      "description": "Sara Castro-Barquero, Rosa Casas, Eric B Rimm, Anna Tresserra-Rimbau, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/mnfr.202200264"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36416291/"
+        }
+      ],
+      "originalTitle": "Loss of Visceral Fat is Associated with a Reduction in Inflammatory Status in Patients with Metabolic Syndrome.",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "Correction: Nut consumption is associated with a shift of the NMR lipoprotein subfraction profile to a less atherogenic pattern among older individuals at high CVD risk.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36289490/",
+      "meta": "CARDIOVASCULAR DIABETOLOGY · 2022",
+      "description": "Jesus F Garcia-Gavilan, Margery A Connelly, Nancy Babio, Christos S Mantzoros, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12933-022-01659-6"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36289490/"
+        }
+      ],
+      "originalTitle": "Correction: Nut consumption is associated with a shift of the NMR lipoprotein subfraction profile to a less atherogenic pattern among older individuals at high CVD risk.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Plasma Metabolite Profiles Associated with the Amount and Source of Meat and Fish Consumption and the Risk of Type 2 Diabetes.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36214069/",
+      "meta": "MOLECULAR NUTRITION & FOOD RESEARCH · 2022",
+      "description": "Jesús García-Gavilán, Stephanie K Nishi, Indira Paz-Graniel, Marta Guasch-Ferré, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/mnfr.202200145"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36214069/"
+        }
+      ],
+      "originalTitle": "Plasma Metabolite Profiles Associated with the Amount and Source of Meat and Fish Consumption and the Risk of Type 2 Diabetes.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Morbid liver manifestations are intrinsically bound to metabolic syndrome and nutrient intake based on a machine-learning cluster analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36147576/",
+      "meta": "FRONTIERS IN ENDOCRINOLOGY · 2022",
+      "description": "Víctor Micó, Rodrigo San-Cristobal, Roberto Martín, Miguel Ángel Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3389/fendo.2022.936956"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36147576/"
+        }
+      ],
+      "originalTitle": "Morbid liver manifestations are intrinsically bound to metabolic syndrome and nutrient intake based on a machine-learning cluster analysis.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Nut consumption is associated with a shift of the NMR lipoprotein subfraction profile to a less atherogenic pattern among older individuals at high CVD risk.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36127725/",
+      "meta": "CARDIOVASCULAR DIABETOLOGY · 2022",
+      "description": "Jesús F García-Gavilán, Margery A Connelly, Nancy Babio, Christos S Mantzoros, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s12933-022-01624-3"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36127725/"
+        }
+      ],
+      "originalTitle": "Nut consumption is associated with a shift of the NMR lipoprotein subfraction profile to a less atherogenic pattern among older individuals at high CVD risk.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "One-year longitudinal association between changes in dietary choline or betaine intake and cardiometabolic variables in the PREvención con DIeta MEDiterránea-Plus (PREDIMED-Plus) trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36124652/",
+      "meta": "THE AMERICAN JOURNAL OF CLINICAL NUTRITION · 2022",
+      "description": "Laura Díez-Ricote, Rodrigo San-Cristobal, M José Concejo, Miguel Á Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/ajcn/nqac255"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36124652/"
+        }
+      ],
+      "originalTitle": "One-year longitudinal association between changes in dietary choline or betaine intake and cardiometabolic variables in the PREvención con DIeta MEDiterránea-Plus (PREDIMED-Plus) trial.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Longitudinal association of dietary carbohydrate quality with visceral fat deposition and other adiposity indicators.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36084360/",
+      "meta": "CLINICAL NUTRITION (EDINBURGH, SCOTLAND) · 2022",
+      "description": "Rocío Zamanillo-Campos, Alice Chaplin, Dora Romaguera, Itziar Abete, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.clnu.2022.08.008"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36084360/"
+        }
+      ],
+      "originalTitle": "Longitudinal association of dietary carbohydrate quality with visceral fat deposition and other adiposity indicators.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Vitamin K dietary intake is associated with cognitive function in an older adult Mediterranean population.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35180284/",
+      "meta": "AGE AND AGEING · 2022",
+      "description": "Lucía Camacho-Barcia, Jesús García-Gavilán, Miguel Ángel Martínez-González, Fernando Fernández-Aranda, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/ageing/afab246"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35180284/"
+        }
+      ],
+      "originalTitle": "Vitamin K dietary intake is associated with cognitive function in an older adult Mediterranean population.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Total dairy consumption in relation to overweight and obesity in children and adolescents: A systematic review and meta-analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34881504/",
+      "meta": "OBESITY REVIEWS : AN OFFICIAL JOURNAL OF THE INTERNATIONAL ASSOCIATION FOR THE STUDY OF OBESITY · 2022",
+      "description": "Nancy Babio, Nerea Becerra-Tomás, Stephanie K Nishi, Leyre López-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1111/obr.13400"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34881504/"
+        }
+      ],
+      "originalTitle": "Total dairy consumption in relation to overweight and obesity in children and adolescents: A systematic review and meta-analysis.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Factors associated with successful dietary changes in an energy-reduced Mediterranean diet intervention: a longitudinal analysis in the PREDIMED-Plus trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34846603/",
+      "meta": "EUROPEAN JOURNAL OF NUTRITION · 2022",
+      "description": "Cesar I Fernandez-Lazaro, Estefanía Toledo, Pilar Buil-Cosiales, Jordi Salas-Salvadó, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s00394-021-02697-8"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34846603/"
+        }
+      ],
+      "originalTitle": "Factors associated with successful dietary changes in an energy-reduced Mediterranean diet intervention: a longitudinal analysis in the PREDIMED-Plus trial.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Inflammatory potential of diet and bone mineral density in a senior Mediterranean population: a cross-sectional analysis of PREDIMED-Plus study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34842966/",
+      "meta": "EUROPEAN JOURNAL OF NUTRITION · 2022",
+      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Nancy Babio, Dora Romaguera, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s00394-021-02751-5"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34842966/"
+        }
+      ],
+      "originalTitle": "Inflammatory potential of diet and bone mineral density in a senior Mediterranean population: a cross-sectional analysis of PREDIMED-Plus study.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Tricarboxylic acid cycle related-metabolites and risk of atrial fibrillation and heart failure.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34678258/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2021",
+      "description": "Mònica Bulló, Christopher Papandreou, Jesus García-Gavilán, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2021.154915"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34678258/"
+        }
+      ],
+      "originalTitle": "Tricarboxylic acid cycle related-metabolites and risk of atrial fibrillation and heart failure.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Interplay between cognition and weight reduction in individuals following a Mediterranean Diet: Three-year follow-up of the PREDIMED-Plus trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34474192/",
+      "meta": "CLINICAL NUTRITION (EDINBURGH, SCOTLAND) · 2021",
+      "description": "Natalia Soldevila-Domenech, Laura Forcano, Cristina Vintró-Alcaraz, Aida Cuenca-Royo, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.clnu.2021.07.020"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34474192/"
+        }
+      ],
+      "originalTitle": "Interplay between cognition and weight reduction in individuals following a Mediterranean Diet: Three-year follow-up of the PREDIMED-Plus trial.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Pro-vegetarian food patterns and cardiometabolic risk in the PREDIMED-Plus study: a cross-sectional baseline analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34368892/",
+      "meta": "EUROPEAN JOURNAL OF NUTRITION · 2022",
+      "description": "Alejandro Oncina-Cánovas, Jesús Vioque, Sandra González-Palacios, Miguel Ángel Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s00394-021-02647-4"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34368892/"
+        }
+      ],
+      "originalTitle": "Pro-vegetarian food patterns and cardiometabolic risk in the PREDIMED-Plus study: a cross-sectional baseline analysis.",
+      "year": "2022",
+      "tags": []
+    },
+    {
+      "title": "Effects of the Mediterranean Diet or Nut Consumption on Gut Microbiota Composition and Fecal Metabolites and their Relationship with Cardiometabolic Risk Factors.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34331403/",
+      "meta": "MOLECULAR NUTRITION & FOOD RESEARCH · 2021",
+      "description": "Serena Galié, Jesús García-Gavilán, Lucía Camacho-Barcía, Alessandro Atzeni, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/mnfr.202000982"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34331403/"
+        }
+      ],
+      "originalTitle": "Effects of the Mediterranean Diet or Nut Consumption on Gut Microbiota Composition and Fecal Metabolites and their Relationship with Cardiometabolic Risk Factors.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Changes in Circulating Metabolites During Weight Loss are Associated with Adiposity Improvement, and Body Weight and Adiposity Regain During Weight Loss Maintenance: The SATIN Study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34184401/",
+      "meta": "MOLECULAR NUTRITION & FOOD RESEARCH · 2021",
+      "description": "Christopher Papandreou, Jesús García-Gavilán, Lucía Camacho-Barcia, Thea Toft Hansen, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/mnfr.202001154"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34184401/"
+        }
+      ],
+      "originalTitle": "Changes in Circulating Metabolites During Weight Loss are Associated with Adiposity Improvement, and Body Weight and Adiposity Regain During Weight Loss Maintenance: The SATIN Study.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Effects of Mediterranean Diet on plasma metabolites and their relationship with insulin resistance and gut microbiota composition in a crossover randomized clinical trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34130026/",
+      "meta": "CLINICAL NUTRITION (EDINBURGH, SCOTLAND) · 2021",
+      "description": "Serena Galié, Jesús García-Gavilán, Christopher Papandreou, Lucía Camacho-Barcía, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.clnu.2021.04.028"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34130026/"
+        }
+      ],
+      "originalTitle": "Effects of Mediterranean Diet on plasma metabolites and their relationship with insulin resistance and gut microbiota composition in a crossover randomized clinical trial.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Circulating Metabolites Associated with Body Fat and Lean Mass in Adults with Overweight/Obesity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34068443/",
+      "meta": "METABOLITES · 2021",
+      "description": "Christopher Papandreou, Jesús García-Gavilán, Lucía Camacho-Barcia, Thea T Hansen, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/metabo11050317"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34068443/"
+        }
+      ],
+      "originalTitle": "Circulating Metabolites Associated with Body Fat and Lean Mass in Adults with Overweight/Obesity.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Circulating Metabolites Associated with Postprandial Satiety in Overweight/Obese Participants: The SATIN Study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33567505/",
+      "meta": "NUTRIENTS · 2021",
+      "description": "Lucía Camacho-Barcia, Jesús García-Gavilán, Christopher Papandreou, Thea T Hansen, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/nu13020549"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33567505/"
+        }
+      ],
+      "originalTitle": "Circulating Metabolites Associated with Postprandial Satiety in Overweight/Obese Participants: The SATIN Study.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "U-Shaped Association between Dietary Acid Load and Risk of Osteoporotic Fractures in 2 Populations at High Cardiovascular Risk.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33296471/",
+      "meta": "THE JOURNAL OF NUTRITION · 2021",
+      "description": "Jesús Francisco García-Gavilán, Alfredo Martínez, Jadwiga Konieczna, Rafael Mico-Perez, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/jn/nxaa335"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33296471/"
+        }
+      ],
+      "originalTitle": "U-Shaped Association between Dietary Acid Load and Risk of Osteoporotic Fractures in 2 Populations at High Cardiovascular Risk.",
+      "year": "2021",
+      "tags": []
+    },
+    {
+      "title": "Adherence to the Mediterranean Lifestyle and Desired Body Weight Loss in a Mediterranean Adult Population with Overweight: A PREDIMED-Plus Study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32708828/",
+      "meta": "NUTRIENTS · 2020",
+      "description": "Cristina Bouzas, Maria Del Mar Bibiloni, Alicia Julibert, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/nu12072114"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32708828/"
+        }
+      ],
+      "originalTitle": "Adherence to the Mediterranean Lifestyle and Desired Body Weight Loss in a Mediterranean Adult Population with Overweight: A PREDIMED-Plus Study.",
+      "year": "2020",
+      "tags": []
+    },
+    {
+      "title": "Leisure-Time Physical Activity, Sedentary Behaviour and Diet Quality are Associated with Metabolic Syndrome Severity: The PREDIMED-Plus Study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32272653/",
+      "meta": "NUTRIENTS · 2020",
+      "description": "Laura Gallardo-Alfaro, Maria Del Mar Bibiloni, Catalina M Mascaró, Sofía Montemayor, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/nu12041013"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32272653/"
+        }
+      ],
+      "originalTitle": "Leisure-Time Physical Activity, Sedentary Behaviour and Diet Quality are Associated with Metabolic Syndrome Severity: The PREDIMED-Plus Study.",
+      "year": "2020",
+      "tags": []
+    },
+    {
+      "title": "Is reduction in appetite beneficial for body weight management in the context of overweight and obesity? Yes, according to the SATIN (Satiety Innovation) study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32042406/",
+      "meta": "JOURNAL OF NUTRITIONAL SCIENCE · 2019",
+      "description": "Thea Toft Hansen, Bethan R Mead, Jesús Francisco García-Gavilán, Sanne Kellebjerg Korndal, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1017/jns.2019.36"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32042406/"
+        }
+      ],
+      "originalTitle": "Is reduction in appetite beneficial for body weight management in the context of overweight and obesity? Yes, according to the SATIN (Satiety Innovation) study.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Impact of Nutrition on Telomere Health: Systematic Review of Observational Cohort Studies and Randomized Clinical Trials.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31688893/",
+      "meta": "ADVANCES IN NUTRITION (BETHESDA, MD.) · 2020",
+      "description": "Serena Galiè, Silvia Canudas, Jananee Muralidharan, Jesús García-Gavilán, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/advances/nmz107"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31688893/"
+        }
+      ],
+      "originalTitle": "Impact of Nutrition on Telomere Health: Systematic Review of Observational Cohort Studies and Randomized Clinical Trials.",
+      "year": "2020",
+      "tags": []
+    },
+    {
+      "title": "Plasma metabolites associated with homeostatic model assessment of insulin resistance: metabolite-model design and external validation.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31554919/",
+      "meta": "SCIENTIFIC REPORTS · 2019",
+      "description": "Pablo Hernández-Alonso, Jesús García-Gavilán, Lucía Camacho-Barcia, Anders Sjödin, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1038/s41598-019-50260-7"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31554919/"
+        }
+      ],
+      "originalTitle": "Plasma metabolites associated with homeostatic model assessment of insulin resistance: metabolite-model design and external validation.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Cross-sectional association between non-soy legume consumption, serum uric acid and hyperuricemia: the PREDIMED-Plus study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31385063/",
+      "meta": "EUROPEAN JOURNAL OF NUTRITION · 2020",
+      "description": "Nerea Becerra-Tomás, Guillermo Mena-Sánchez, Andrés Díaz-López, Miguel Ángel Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s00394-019-02070-w"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31385063/"
+        }
+      ],
+      "originalTitle": "Cross-sectional association between non-soy legume consumption, serum uric acid and hyperuricemia: the PREDIMED-Plus study.",
+      "year": "2020",
+      "tags": []
+    },
+    {
+      "title": "Predictors of successful weight loss with relative maintenance of fat-free mass in individuals with overweight and obesity on an 8-week low-energy diet.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31242952/",
+      "meta": "THE BRITISH JOURNAL OF NUTRITION · 2019",
+      "description": "Thea Toft Hansen, Mads Fiil Hjorth, Karoline Sandby, Sarah Vold Andersen, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1017/S0007114519001296"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31242952/"
+        }
+      ],
+      "originalTitle": "Predictors of successful weight loss with relative maintenance of fat-free mass in individuals with overweight and obesity on an 8-week low-energy diet.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Pistachio consumption modulates DNA oxidation and genes related to telomere maintenance: a crossover randomized clinical trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31051499/",
+      "meta": "THE AMERICAN JOURNAL OF CLINICAL NUTRITION · 2019",
+      "description": "Silvia Canudas, Pablo Hernández-Alonso, Serena Galié, Jananee Muralidharan, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/ajcn/nqz048"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31051499/"
+        }
+      ],
+      "originalTitle": "Pistachio consumption modulates DNA oxidation and genes related to telomere maintenance: a crossover randomized clinical trial.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Circulating metabolites associated with objectively measured sleep duration and sleep variability in overweight/obese participants: a metabolomics approach within the SATIN study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30722060/",
+      "meta": "SLEEP · 2019",
+      "description": "Christopher Papandreou, Lucia Camacho-Barcia, Jesús García-Gavilán, Thea Toft Hansen, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/sleep/zsz030"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30722060/"
+        }
+      ],
+      "originalTitle": "Circulating metabolites associated with objectively measured sleep duration and sleep variability in overweight/obese participants: a metabolomics approach within the SATIN study.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Cohort Profile: Design and methods of the PREDIMED-Plus randomized trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30476123/",
+      "meta": "INTERNATIONAL JOURNAL OF EPIDEMIOLOGY · 2019",
+      "description": "Miguel A Martínez-González, Pilar Buil-Cosiales, Dolores Corella, Monica Bulló, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/ije/dyy225"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30476123/"
+        }
+      ],
+      "originalTitle": "Cohort Profile: Design and methods of the PREDIMED-Plus randomized trial.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Effect of a Lifestyle Intervention Program With Energy-Restricted Mediterranean Diet and Exercise on Weight Loss and Cardiovascular Risk Factors: One-Year Results of the PREDIMED-Plus Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30389673/",
+      "meta": "DIABETES CARE · 2019",
+      "description": "Jordi Salas-Salvadó, Andrés Díaz-López, Miguel Ruiz-Canela, Josep Basora, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.2337/dc18-0836"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30389673/"
+        }
+      ],
+      "originalTitle": "Effect of a Lifestyle Intervention Program With Energy-Restricted Mediterranean Diet and Exercise on Weight Loss and Cardiovascular Risk Factors: One-Year Results of the PREDIMED-Plus Trial.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Higher dietary glycemic index and glycemic load values increase the risk of osteoporotic fracture in the PREvención con DIeta MEDiterránea (PREDIMED)-Reus trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29746627/",
+      "meta": "THE AMERICAN JOURNAL OF CLINICAL NUTRITION · 2018",
+      "description": "Jesús Francisco García-Gavilán, Mònica Bulló, Lucia Camacho-Barcia, Nuria Rosique-Esteban, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1093/ajcn/nqy043"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29746627/"
+        }
+      ],
+      "originalTitle": "Higher dietary glycemic index and glycemic load values increase the risk of osteoporotic fracture in the PREvención con DIeta MEDiterránea (PREDIMED)-Reus trial.",
+      "year": "2018",
+      "tags": []
+    },
+    {
+      "title": "Mediterranean Diet and Cardiovascular Disease Prevention: What Do We Know?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29678447/",
+      "meta": "PROGRESS IN CARDIOVASCULAR DISEASES · 2018",
+      "description": "Jordi Salas-Salvadó, Nerea Becerra-Tomás, Jesús Francisco García-Gavilán, Mònica Bulló, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.pcad.2018.04.006"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29678447/"
+        }
+      ],
+      "originalTitle": "Mediterranean Diet and Cardiovascular Disease Prevention: What Do We Know?",
+      "year": "2018",
+      "tags": []
+    },
+    {
+      "title": "Dairy products intake and the risk of incident cataracts surgery in an elderly Mediterranean population: results from the PREDIMED study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29589119/",
+      "meta": "EUROPEAN JOURNAL OF NUTRITION · 2019",
+      "description": "Lucía Camacho-Barcia, Mònica Bulló, Jesús F García-Gavilán, Miguel A Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s00394-018-1647-8"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29589119/"
+        }
+      ],
+      "originalTitle": "Dairy products intake and the risk of incident cataracts surgery in an elderly Mediterranean population: results from the PREDIMED study.",
+      "year": "2019",
+      "tags": []
+    },
+    {
+      "title": "Association of Dietary Vitamin K1 Intake With the Incidence of Cataract Surgery in an Adult Mediterranean Population: A Secondary Analysis of a Randomized Clinical Trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28494067/",
+      "meta": "JAMA OPHTHALMOLOGY · 2017",
+      "description": "María L Camacho-Barcia, Mònica Bulló, Jesús F Garcia-Gavilán, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1001/jamaophthalmol.2017.1076"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28494067/"
+        }
+      ],
+      "originalTitle": "Association of Dietary Vitamin K1 Intake With the Incidence of Cataract Surgery in an Adult Mediterranean Population: A Secondary Analysis of a Randomized Clinical Trial.",
+      "year": "2017",
+      "tags": []
+    },
+    {
+      "title": "Extra virgin olive oil consumption reduces the risk of osteoporotic fractures in the PREDIMED trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28143667/",
+      "meta": "CLINICAL NUTRITION (EDINBURGH, SCOTLAND) · 2018",
+      "description": "J F García-Gavilán, M Bulló, S Canudas, M A Martínez-González, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.clnu.2016.12.030"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28143667/"
+        }
+      ],
+      "originalTitle": "Extra virgin olive oil consumption reduces the risk of osteoporotic fractures in the PREDIMED trial.",
+      "year": "2018",
+      "tags": []
+    }
+  ]
+}

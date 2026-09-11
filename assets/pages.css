@@ -138,6 +138,11 @@
   flex: 0 1 auto;
   width: auto;
 }
+/* Los nombres de revista son largos: el desplegable no debe desbordar en móvil */
+.archive-filters .journal-select {
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
 
 .archive-empty {
   padding: 20px 0;

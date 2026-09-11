@@ -14,7 +14,6 @@ import home_data
 import layout
 
 MAX_NEWS = 400  # Obtener mas noticias para cubrir historico
-MAX_INDEX_NEWS = home_data.MAX_HOME_CARDS  # Mostrar solo las ultimas en la portada
 NEWS_PROVIDERS = [
     {
         "name": "Google News",
@@ -386,7 +385,7 @@ def build_news_card(item: dict) -> str:
 
 
 def update_home(news_items: list[dict]) -> None:
-    """Guarda las últimas noticias en el JSON que lee la portada."""
+    """Guarda las noticias en los JSON que leen la portada y el buscador."""
     cards = [
         home_data.card_entry(
             title=item["title"] or "Sin título",
@@ -395,7 +394,7 @@ def update_home(news_items: list[dict]) -> None:
             description=item["source"] or "",
             year=news_year(item),
         )
-        for item in news_items[:MAX_INDEX_NEWS]
+        for item in news_items
     ]
     count = home_data.update_section("noticias", cards)
     print(f"✓ Se actualizaron {count} noticias en la portada")

@@ -37,6 +37,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/home-content.json tutoriales.html sitemap.xml
+          git add data/home-content.json data/search-index.json data/content-counts.json tutoriales.html sitemap.xml
           git diff --staged --quiet || git commit -m "chore: update tutorials"
           git push

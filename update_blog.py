@@ -9,7 +9,6 @@ from update_sitemap import generate_sitemap
 
 ARCHIVE_PATH = Path("posts.html")
 POSTS_DIR = Path("post")
-MAX_INDEX_POSTS = home_data.MAX_HOME_CARDS
 EXCLUDED_FILES = {"post-template.html"}
 DEFAULT_CATEGORY = "BLOG"
 
@@ -154,7 +153,7 @@ def update_home(posts):
             year=post_year(post),
             tags=[post["category"].lower()],
         )
-        for post in posts[:MAX_INDEX_POSTS]
+        for post in posts
     ]
     return home_data.update_section("posts", cards)
 

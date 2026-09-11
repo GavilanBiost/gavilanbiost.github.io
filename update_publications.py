@@ -163,6 +163,7 @@ def build_card(publication):
         links=publication_links(publication),
         year=publication["year"],
         external=True,
+        journal=publication["journal"],
     )
 
 
@@ -217,7 +218,7 @@ def update_home(publications):
             links=[(label, url) for label, url, _ in publication_links(publication)],
             year=publication["year"],
         )
-        for publication in publications[: home_data.MAX_HOME_CARDS]
+        for publication in publications
     ]
     count = home_data.update_section("publicaciones", cards)
     print(f"✓ Se actualizaron {count} publicaciones en la portada")
@@ -229,6 +230,15 @@ def update_archive(publications, timestamp):
 
     cards_html = "\n".join(build_card(publication) for publication in publications)
     content = replace_div_content(content, "publicaciones-archive-content", cards_html)
+
+    years = sorted({p["year"] for p in publications if p["year"]}, reverse=True)
+    journals = sorted({p["journal"] for p in publications if p["journal"]})
+    content = replace_div_content(
+        content,
+        "publicaciones-archive-filters",
+        # Sin sangría: el contenido regenerado de esta página va a columna cero.
+        layout.archive_filter_controls("Título, autor o revista", years, journals, indent=""),
+    )
     content = replace_last_updated_line(
         content,
         "publicaciones-archive-last-updated",

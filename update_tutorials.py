@@ -10,7 +10,6 @@ from update_sitemap import generate_sitemap
 
 ARCHIVE_PATH = Path("tutoriales.html")
 TUTORIALS_DIR = Path("tutoriales")
-MAX_INDEX_TUTORIALS = home_data.MAX_HOME_CARDS
 EXCLUDED_FILES = {"tutorial-template.html"}
 DEFAULT_CATEGORY = "R / TUTORIAL"
 
@@ -214,7 +213,7 @@ def update_home(tutorials):
             year=tutorial_year(tutorial),
             tags=[part.strip().lower() for part in re.split(r"[/·]", tutorial["category"]) if part.strip()],
         )
-        for tutorial in tutorials[:MAX_INDEX_TUTORIALS]
+        for tutorial in tutorials
     ]
     return home_data.update_section("tutoriales", cards)
 

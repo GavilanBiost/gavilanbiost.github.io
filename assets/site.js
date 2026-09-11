@@ -21,6 +21,7 @@
 
   var search = root.querySelector('[data-archive-search]');
   var yearFilter = root.querySelector('[data-archive-year]');
+  var journalFilter = root.querySelector('[data-archive-journal]');
   var counter = root.querySelector('[data-archive-count]');
   var empty = root.querySelector('[data-archive-empty]');
   var cards = Array.prototype.slice.call(root.querySelectorAll('.card'));
@@ -33,12 +34,14 @@
   function apply() {
     var term = normalize(search ? search.value.trim() : '');
     var year = yearFilter ? yearFilter.value : 'all';
+    var journal = journalFilter ? journalFilter.value : 'all';
     var shown = 0;
 
     cards.forEach(function (card) {
       var matchesTerm = !term || card.dataset.haystack.indexOf(term) !== -1;
       var matchesYear = year === 'all' || card.dataset.year === year;
-      var visible = matchesTerm && matchesYear;
+      var matchesJournal = journal === 'all' || card.dataset.journal === journal;
+      var visible = matchesTerm && matchesYear && matchesJournal;
       card.hidden = !visible;
       if (visible) shown += 1;
     });
@@ -66,6 +69,7 @@
 
   if (search) search.addEventListener('input', apply);
   if (yearFilter) yearFilter.addEventListener('change', apply);
+  if (journalFilter) journalFilter.addEventListener('change', apply);
 
   var initial = new URLSearchParams(window.location.search).get('q');
   if (initial && search) {

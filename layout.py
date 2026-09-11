@@ -124,12 +124,13 @@ def footer():
 </html>"""
 
 
-def card(title, url, meta="", description="", links=(), year="", external=False):
+def card(title, url, meta="", description="", links=(), year="", external=False, journal=""):
     """Tarjeta de contenido con el mismo marcado que la portada."""
     target = ' target="_blank" rel="noopener noreferrer"' if external else ""
     year_attr = f' data-year="{esc(year, quote=True)}"' if year else ""
+    journal_attr = f' data-journal="{esc(journal, quote=True)}"' if journal else ""
 
-    parts = [f'<article class="card content-card"{year_attr}>']
+    parts = [f'<article class="card content-card"{year_attr}{journal_attr}>']
     if meta:
         parts.append(f'    <div class="pub-meta">{esc(meta)}</div>')
     parts.append(f'    <a href="{esc(url, quote=True)}" class="pub-title"{target}>{esc(title)}</a>')
@@ -148,26 +149,48 @@ def card(title, url, meta="", description="", links=(), year="", external=False)
     return "\n".join(parts)
 
 
-def archive_filters(placeholder, years=()):
-    """Buscador y filtro por año para las páginas de archivo."""
+def archive_filter_controls(placeholder, years=(), journals=(), indent=" " * 20):
+    """Buscador y desplegables de una página de archivo.
+
+    Se genera aparte del contenedor para que los scripts de actualización puedan
+    reescribir solo los controles y las opciones sigan el contenido real. `indent`
+    es la sangría de las líneas siguientes a la primera.
+    """
     search_icon = (
         '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" '
         'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
         '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>'
     )
 
-    year_select = ""
+    controls = [
+        f'<div class="filter-search">{search_icon}'
+        f'<input type="search" data-archive-search placeholder="{esc(placeholder, quote=True)}" '
+        f'aria-label="{esc(placeholder, quote=True)}"></div>'
+    ]
+
     if years:
         options = "".join(f'<option value="{esc(y, quote=True)}">{esc(y)}</option>' for y in years)
-        year_select = (
+        controls.append(
             '<select data-archive-year aria-label="Filtrar por año">'
             '<option value="all">Todos los años</option>'
             f"{options}</select>"
         )
 
+    if journals:
+        options = "".join(f'<option value="{esc(j, quote=True)}">{esc(j)}</option>' for j in journals)
+        controls.append(
+            '<select data-archive-journal aria-label="Filtrar por revista" class="journal-select">'
+            '<option value="all">Todas las revistas</option>'
+            f"{options}</select>"
+        )
+
+    return ("\n" + indent).join(controls)
+
+
+def archive_filters(placeholder, years=(), journals=()):
+    """Bloque completo de filtros para las páginas de archivo."""
     return f"""                <div class="archive-filters">
-                    <div class="filter-search">{search_icon}<input type="search" data-archive-search placeholder="{esc(placeholder, quote=True)}" aria-label="{esc(placeholder, quote=True)}"></div>
-                    {year_select}
+                    {archive_filter_controls(placeholder, years, journals)}
                 </div>
                 <p class="result-count" data-archive-count role="status"></p>"""
 
