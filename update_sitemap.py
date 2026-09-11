@@ -1,4 +1,6 @@
 import datetime
+import html
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -27,6 +29,37 @@ def build_entry(url_path: str, file_path: Path, changefreq: str, priority: str, 
         "priority": priority,
         "image": image_url,
     }
+
+
+def extract_meta(content: str, name: str) -> str:
+    pattern = re.compile(
+        rf'<meta\s+name="{re.escape(name)}"\s+content="([^"]*)"\s*/?>',
+        re.IGNORECASE,
+    )
+    match = pattern.search(content)
+    return html.unescape(match.group(1).strip()) if match else ""
+
+
+def parse_date(date_text: str):
+    if not date_text:
+        return None
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y"):
+        try:
+            return datetime.datetime.strptime(date_text.strip(), fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def should_include_post(path: Path) -> bool:
+    content = path.read_text(encoding="utf-8")
+    raw_date = extract_meta(content, "post-date")
+    post_dt = parse_date(raw_date)
+    if post_dt is None:
+        return True
+
+    today = datetime.datetime.now(datetime.UTC).date()
+    return post_dt.date() <= today
 
 
 def collect_entries() -> list[dict]:
@@ -68,6 +101,8 @@ def collect_entries() -> list[dict]:
             if path.name not in EXCLUDED_POST_FILES
         )
         for path in post_files:
+            if not should_include_post(path):
+                continue
             entries.append(
                 build_entry(
                     f"/post/{path.name}",
