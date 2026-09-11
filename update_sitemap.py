@@ -66,7 +66,7 @@ def collect_entries() -> list[dict]:
     entries = []
 
     static_pages = [
-        ("/", Path("index.html"), "weekly", "1.0", f"{BASE_URL}/img/IMG_9589.jpg"),
+        ("/", Path("index.html"), "weekly", "1.0", f"{BASE_URL}/img/jesus.jpg"),
         ("/posts.html", Path("posts.html"), "weekly", "0.9", ""),
         ("/tutoriales.html", Path("tutoriales.html"), "weekly", "0.9", ""),
         ("/publicaciones.html", Path("publicaciones.html"), "weekly", "0.9", ""),

@@ -4,12 +4,13 @@ import re
 import subprocess
 from pathlib import Path
 
+import home_data
+import layout
 from update_sitemap import generate_sitemap
 
-INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("tutoriales.html")
 TUTORIALS_DIR = Path("tutoriales")
-MAX_INDEX_TUTORIALS = 3
+MAX_INDEX_TUTORIALS = home_data.MAX_HOME_CARDS
 EXCLUDED_FILES = {"tutorial-template.html"}
 DEFAULT_CATEGORY = "R / TUTORIAL"
 
@@ -123,12 +124,12 @@ def parse_legacy_cards():
 
     content = ARCHIVE_PATH.read_text(encoding="utf-8")
     pattern = re.compile(
-        r'<div class="card">\s*'
+        r'<article class="card content-card"[^>]*>\s*'
         r'<div class="pub-meta">(.*?)</div>\s*'
-        r'<a href="([^"]+)" class="pub-title">(.*?)</a>\s*'
+        r'<a href="([^"]+)" class="pub-title"[^>]*>(.*?)</a>\s*'
         r'<p class="text-small">(.*?)</p>\s*'
         r'<div class="pub-links">(.*?)</div>\s*'
-        r'</div>',
+        r'</article>',
         re.IGNORECASE | re.DOTALL,
     )
 
@@ -179,38 +180,43 @@ def load_tutorials():
     return tutorials
 
 
+def tutorial_links(tutorial):
+    links = []
+    if tutorial["repo_url"]:
+        links.append(("Ver repositorio", tutorial["repo_url"], True))
+    links.append(("Abrir tutorial", f"/{tutorial['tutorial_url']}", False))
+    return links
+
+
+def tutorial_year(tutorial):
+    return tutorial["sort_dt"].strftime("%Y") if tutorial["sort_dt"] != datetime.datetime.min else ""
+
+
 def build_card(tutorial):
-    title = html.escape(tutorial["title"])
-    description = html.escape(tutorial["description"])
-    category = html.escape(tutorial["category"])
-    tutorial_url = html.escape(tutorial["tutorial_url"], quote=True)
-    repo_url = html.escape(tutorial["repo_url"], quote=True)
-
-    card = []
-    card.append('<div class="card">')
-    card.append(f'    <div class="pub-meta">{category}</div>')
-    card.append(f'    <a href="{tutorial_url}" class="pub-title">{title}</a>')
-    if description:
-        card.append(f'    <p class="text-small">{description}</p>')
-    card.append('    <div class="pub-links">')
-    if repo_url:
-        card.append(
-            f'        <a href="{repo_url}" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Ver repositorio</a>'
-        )
-    card.append(
-        f'        <a href="{tutorial_url}" class="btn-outline"><i class="fa-solid fa-book"></i> Abrir tutorial</a>'
+    return layout.card(
+        title=tutorial["title"],
+        url=f"/{tutorial['tutorial_url']}",
+        meta=tutorial["category"],
+        description=tutorial["description"],
+        links=tutorial_links(tutorial),
+        year=tutorial_year(tutorial),
     )
-    card.append('    </div>')
-    card.append('</div>')
-    return "\n".join(card)
 
 
-def update_index(tutorials, timestamp):
-    content = INDEX_PATH.read_text(encoding="utf-8")
-    cards_html = "\n".join(build_card(tutorial) for tutorial in tutorials[:MAX_INDEX_TUTORIALS])
-    content = replace_div_content(content, "tutoriales-content", cards_html)
-    content = replace_last_updated_line(content, "tutoriales-last-updated", f"Ultima actualizacion: {timestamp} UTC")
-    INDEX_PATH.write_text(content, encoding="utf-8")
+def update_home(tutorials):
+    cards = [
+        home_data.card_entry(
+            title=tutorial["title"],
+            url=f"/{tutorial['tutorial_url']}",
+            meta=tutorial["category"],
+            description=tutorial["description"],
+            links=[(label, url) for label, url, _ in tutorial_links(tutorial)],
+            year=tutorial_year(tutorial),
+            tags=[part.strip().lower() for part in re.split(r"[/·]", tutorial["category"]) if part.strip()],
+        )
+        for tutorial in tutorials[:MAX_INDEX_TUTORIALS]
+    ]
+    return home_data.update_section("tutoriales", cards)
 
 
 def update_archive(tutorials, timestamp):
@@ -232,10 +238,10 @@ def main():
         raise SystemExit(0)
 
     timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
-    update_index(tutorials, timestamp)
+    home_count = update_home(tutorials)
     update_archive(tutorials, timestamp)
     generate_sitemap()
-    print(f"✓ Se actualizaron {min(len(tutorials), MAX_INDEX_TUTORIALS)} tutoriales en index.html")
+    print(f"✓ Se actualizaron {home_count} tutoriales en la portada")
     print(f"✓ Se actualizaron {len(tutorials)} tutoriales en tutoriales.html")
 
 

@@ -1,0 +1,490 @@
+/* Estilos para las páginas estáticas (archivos, posts y tutoriales).
+   Reutiliza los tokens y componentes definidos en site.css. */
+
+.page-shell {
+  max-width: 1100px;
+  width: 100%;
+  margin: 36px auto 60px;
+  padding: 0 25px;
+}
+
+.page-shell main {
+  min-width: 0;
+}
+
+/* Navegación móvil sin React: panel desplegable bajo la barra */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 25px 18px;
+}
+
+.mobile-nav a {
+  padding: 13px 0;
+  font-size: 17px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.mobile-nav a:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 901px) {
+  .mobile-nav {
+    display: none !important;
+  }
+}
+
+/* Cabecera de página */
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-header .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin: 12px 0 10px;
+}
+
+.page-header p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555c67;
+  max-width: 62ch;
+}
+
+.page-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #626872;
+  margin-bottom: 22px;
+}
+
+/* Agrupación por año dentro de los archivos */
+.archive-year {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin: 38px 0 4px;
+}
+
+.archive-year:first-of-type {
+  margin-top: 6px;
+}
+
+/* Búsqueda y filtros en los archivos */
+.archive-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.archive-filters .filter-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 200px;
+  min-width: 0;
+  border: 1px solid #b8bec9;
+  border-radius: 4px;
+  background: white;
+  padding: 0 11px;
+  color: #626872;
+}
+
+.archive-filters input,
+.archive-filters select {
+  border: 0;
+  outline: 0;
+  background: none;
+  height: 40px;
+  font-size: 14px;
+  min-width: 0;
+  width: 100%;
+  color: var(--foreground);
+}
+
+.archive-filters .filter-search:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.archive-filters select {
+  border: 1px solid #b8bec9;
+  border-radius: 4px;
+  background: white;
+  height: 42px;
+  padding: 0 10px;
+  flex: 0 1 auto;
+  width: auto;
+}
+
+.archive-empty {
+  padding: 20px 0;
+  font-size: 16px;
+  color: #626872;
+}
+
+/* Acciones al pie de cada página */
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+}
+
+/* Artículos: posts y tutoriales */
+.article-shell {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.article-kicker,
+.post-kicker,
+.tutorial-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #f0eff7;
+  padding: 6px 14px;
+  margin-bottom: 18px;
+}
+
+.article-hero h1,
+.post-hero h1,
+.tutorial-hero h1 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.article-hero,
+.post-hero,
+.tutorial-hero {
+  border-bottom: 2px solid #b6bdc9;
+  padding-bottom: 26px;
+  margin-bottom: 30px;
+}
+
+.post-meta-line,
+.article-meta-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.025em;
+  color: var(--primary);
+  margin-bottom: 0;
+}
+
+.article-hero p,
+.tutorial-hero p,
+.post-hero > p:not(.post-meta-line) {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #555c67;
+  text-align: left;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Bloques de contenido de los tutoriales */
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.tutorial-card {
+  background: #f5f5f5;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.tutorial-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.tutorial-card p,
+.tutorial-card li {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.tutorial-card p + p {
+  margin-top: 12px;
+}
+
+.tutorial-card ul,
+.tutorial-card ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tutorial-card ul {
+  list-style: disc;
+}
+
+.tutorial-card ol {
+  list-style: decimal;
+}
+
+.tutorial-card li + li {
+  margin-top: 8px;
+}
+
+.tutorial-card pre,
+.code-block {
+  margin: 16px 0 0;
+  padding: 18px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #e8e8f0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.code-block code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.note-box {
+  border-left: 3px solid var(--accent);
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+  padding: 16px 18px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a5059;
+}
+
+.tutorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .tutorial-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.post-body,
+.article-body {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--foreground);
+}
+
+.article-body p {
+  margin-bottom: 20px;
+}
+
+.article-body h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 40px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-body h3 {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 30px 0 12px;
+}
+
+.article-body h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 20px;
+  padding-left: 24px;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 8px;
+}
+
+.article-body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 24px 0;
+  background: white;
+}
+
+.article-body blockquote {
+  margin: 24px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  background: #f0eff7;
+  border-radius: 0 4px 4px 0;
+  color: #4a5059;
+}
+
+.article-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article-body pre {
+  margin: 22px 0;
+  padding: 20px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #e8e8f0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: #ededf1;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+.article-body pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 15px;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.article-body th {
+  background: #ededf1;
+  font-weight: 600;
+}
+
+.article-body figcaption {
+  font-size: 14px;
+  color: #626872;
+  margin-top: -14px;
+  margin-bottom: 24px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    padding: 0 20px;
+    margin-top: 28px;
+  }
+
+  .article-body {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 0 18px;
+  }
+
+  .mobile-nav {
+    padding: 4px 18px 16px;
+  }
+
+  .article-body {
+    font-size: 16px;
+  }
+
+  .article-body h2 {
+    font-size: 23px;
+  }
+
+  .article-body h3 {
+    font-size: 19px;
+  }
+
+  .page-actions .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}

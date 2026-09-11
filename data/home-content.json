@@ -1,0 +1,180 @@
+{
+  "posts": [
+    {
+      "title": "Deep learning y ciencias ómicas",
+      "url": "/post/deep-learning-ciencias-omicas.html",
+      "meta": "BLOG · 07/09/2026",
+      "description": "Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/deep-learning-ciencias-omicas.html"
+        }
+      ],
+      "originalTitle": "Deep learning y ciencias ómicas",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    }
+  ],
+  "tutoriales": [
+    {
+      "title": "Estadístico F de contraste global",
+      "url": "/tutoriales/estadistico-contraste.html",
+      "meta": "R / REGRESIÓN LINEAL",
+      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/estadistico_lm"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/estadistico-contraste.html"
+        }
+      ],
+      "originalTitle": "Estadístico F de contraste global",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión lineal"
+      ]
+    },
+    {
+      "title": "Confusión e Interacción en Epidemiología",
+      "url": "/tutoriales/confusion-e-interaccion.html",
+      "meta": "R / REGRESIÓN",
+      "description": "Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/confusion_e_interaccion"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/confusion-e-interaccion.html"
+        }
+      ],
+      "originalTitle": "Confusión e Interacción en Epidemiología",
+      "year": "2026",
+      "tags": [
+        "r",
+        "regresión"
+      ]
+    },
+    {
+      "title": "C-index en modelos de Cox",
+      "url": "/tutoriales/c-index.html",
+      "meta": "R / SUPERVIVENCIA",
+      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "links": [
+        {
+          "label": "Ver repositorio",
+          "url": "https://github.com/GavilanBiost/c-index"
+        },
+        {
+          "label": "Abrir tutorial",
+          "url": "/tutoriales/c-index.html"
+        }
+      ],
+      "originalTitle": "C-index en modelos de Cox",
+      "year": "2026",
+      "tags": [
+        "r",
+        "supervivencia"
+      ]
+    }
+  ],
+  "noticias": [
+    {
+      "title": "Los sobres de comida para bebés con boquilla tienen demasiada azúcar y pocos nutrientes, según un estudio - La Voz de Galicia",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxQOTNmTlNBaC1sU0F0REI2RHJvNmJQaGlKbmlXY2tsT2lQSHJZRkdUVnIzNjQ2RGRiWWI5a2w0LXFCMUpYYmk1ajI3SUFGZjdxU0NDVDA2anZBbXVUVEFCaFNscTU5WXY4X2h0OG5FYV9SVVpSVkVhbko2NUtJYkg5Qzk3MGhROFQwMG9QVzlFR0JSdEhMUW1SS1lsLURNb1dzVlFhbWNzd1AxRldUMmtjYUtCcW0zanhsR2RyRV9EakRRcXhIZjR1aExuclJtZjU5WVZCV1dHSVAyY1FlSTc3dWlqXzZGODV6YzdOeXZteDlYbmNWVlE?oc=5",
+      "meta": "La Voz de Galicia · 26/08/2026",
+      "description": "La Voz de Galicia",
+      "links": [],
+      "originalTitle": "Los sobres de comida para bebés con boquilla tienen demasiada azúcar y pocos nutrientes, según un estudio - La Voz de Galicia",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Una prueba de sangre detecta riesgo de mortalidad por diabetes e insulina - infoperiodistas",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPek9qMkhYTy1TMDk4WGVxWHBZbm1UcDFibjN2ZlRERlVnQ2FjUzJMd0xzY05GTTduZFkwN3ZJWk53Y3dWaVdNVUVrOXUydTNUOFVMSmVhSl9mR0xmRWl6ZS1zd25ZRVhsME1QbzdFdmJyUDBQekRhTW5oaF9nSlRkUXd1N2NrZmhZZFgxRXFKdVRwMVNxRkhyY0tuS3ZwUWpaV2F3SFRuMmlxQlNOU3NR?oc=5",
+      "meta": "infoperiodistas · 28/07/2026",
+      "description": "infoperiodistas",
+      "links": [],
+      "originalTitle": "Una prueba de sangre detecta riesgo de mortalidad por diabetes e insulina - infoperiodistas",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Encuentran una huella bioquímica que determina un mayor riesgo de mortalidad en pacientes con diabetes - La Razón",
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQLXJSYlp1d015eUJ1WERyTjN1QXhkM042TnpQVEI5NnpyRGI1cXg5a1JES3AwS2ZoRDdmcF96WFF0MVJ0NGZpNHA3cE9VSWJpWUQ5QTZGREpnalJqWS1lZm9OYmJQQkdCSnkxVUZLVzJjcmplbXlTeGxYSnByTU1VTU1IWk1sdWdocWxZelBvVEF5ZE95RGFkeGhDOTVwWEdjSkNEVjdHMl9YdmZhbmtrVlMza2t6MHppaF9TU2xDQ2FEUDI0Y05PWEtwdzB6VzRZNzV1N0lpSDBCQldud081eEZCQ1lnR3IxVDRJ0gH_AUFVX3lxTE9wZ1pGSjNBQlJiMWw2aDlrN0t0UFljSVZNdC1pZ3JEM2VQNU9EMUdvWGROWmVtOExXTk1pSEQ5R05RZVVvV3FrUDZ3NXFsRk1LRmI3SmFzZkVYZEFDSzFyVVZ4bkhHbzVWWVk1ZWNTdXo4VUpYdDZBMHNJTUpRWkZCTHNGNzNXNXFvZmc0VFJkS3RUNkQyUXlCaUhXNHVyOFVITTVaMjNqSjlzRkJrRVR1V1Rfa0I0a1JyYmwzblZzSGI1ZHkyZlBXNU5YTjV1LXg0QUVwS0p1LVlkeUhVRXpHR1VNRkFuOHM5dUdZNkV5UkZMUW9zc3JyaXVIdlgxYw?oc=5",
+      "meta": "La Razón · 27/07/2026",
+      "description": "La Razón",
+      "links": [],
+      "originalTitle": "Encuentran una huella bioquímica que determina un mayor riesgo de mortalidad en pacientes con diabetes - La Razón",
+      "year": "2026",
+      "tags": []
+    }
+  ],
+  "publicaciones": [
+    {
+      "title": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42155850/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
+      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Jordi Salas-Salvadó",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2026.156649"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42155850/"
+        }
+      ],
+      "originalTitle": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/",
+      "meta": "DIABETES CARE · 2026",
+      "description": "Ariadna Curto, Jadwiga Konieczna, Antoni Colom, Itziar Abete, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.2337/dc25-2497"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/"
+        }
+      ],
+      "originalTitle": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/",
+      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
+      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Josué A Pérez-Acosta, Miguel Ruiz-Canela, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.metabol.2026.156599"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/"
+        }
+      ],
+      "originalTitle": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
+      "year": "2026",
+      "tags": []
+    }
+  ]
+}

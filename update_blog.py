@@ -3,12 +3,13 @@ import html
 import re
 from pathlib import Path
 
+import home_data
+import layout
 from update_sitemap import generate_sitemap
 
-INDEX_PATH = Path("index.html")
 ARCHIVE_PATH = Path("posts.html")
 POSTS_DIR = Path("post")
-MAX_INDEX_POSTS = 3
+MAX_INDEX_POSTS = home_data.MAX_HOME_CARDS
 EXCLUDED_FILES = {"post-template.html"}
 DEFAULT_CATEGORY = "BLOG"
 
@@ -127,34 +128,35 @@ def load_posts():
     return posts
 
 
+def post_year(post):
+    return post["sort_dt"].strftime("%Y") if post["sort_dt"] != datetime.datetime.min else ""
+
+
 def build_card(post):
-    title = html.escape(post["title"])
-    description = html.escape(post["description"])
-    category = html.escape(post["category"])
-    pub_date = html.escape(post["pub_date"])
-    post_url = html.escape(post["post_url"], quote=True)
-
-    card = []
-    card.append('<div class="card">')
-    card.append(f'    <div class="pub-meta">{category} · {pub_date}</div>')
-    card.append(f'    <a href="{post_url}" class="pub-title">{title}</a>')
-    if description:
-        card.append(f'    <p class="text-small">{description}</p>')
-    card.append('    <div class="pub-links">')
-    card.append(
-        f'        <a href="{post_url}" class="btn-outline"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer post</a>'
+    return layout.card(
+        title=post["title"],
+        url=f"/{post['post_url']}",
+        meta=f"{post['category']} · {post['pub_date']}",
+        description=post["description"],
+        links=[("Leer post", f"/{post['post_url']}", False)],
+        year=post_year(post),
     )
-    card.append('    </div>')
-    card.append('</div>')
-    return "\n".join(card)
 
 
-def update_index(posts, timestamp):
-    content = INDEX_PATH.read_text(encoding="utf-8")
-    cards_html = "\n".join(build_card(post) for post in posts[:MAX_INDEX_POSTS])
-    content = replace_div_content(content, "posts-content", cards_html)
-    content = replace_last_updated_line(content, "posts-last-updated", f"Ultima actualizacion: {timestamp} UTC")
-    INDEX_PATH.write_text(content, encoding="utf-8")
+def update_home(posts):
+    cards = [
+        home_data.card_entry(
+            title=post["title"],
+            url=f"/{post['post_url']}",
+            meta=f"{post['category']} · {post['pub_date']}",
+            description=post["description"],
+            links=[("Leer post", f"/{post['post_url']}")],
+            year=post_year(post),
+            tags=[post["category"].lower()],
+        )
+        for post in posts[:MAX_INDEX_POSTS]
+    ]
+    return home_data.update_section("posts", cards)
 
 
 def update_archive(posts, timestamp):
@@ -176,10 +178,10 @@ def main():
         raise SystemExit(0)
 
     timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
-    update_index(posts, timestamp)
+    home_count = update_home(posts)
     update_archive(posts, timestamp)
     generate_sitemap()
-    print(f"✓ Se actualizaron {min(len(posts), MAX_INDEX_POSTS)} posts en index.html")
+    print(f"✓ Se actualizaron {home_count} posts en la portada")
     print(f"✓ Se actualizaron {len(posts)} posts en posts.html")
 
 

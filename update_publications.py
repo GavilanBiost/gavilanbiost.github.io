@@ -5,11 +5,13 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
+import home_data
+import layout
+
 # Parametros de busqueda en PubMed
 SEARCH_TERM = "garcia-gavilan j"
 EMAIL = "gavilanbiost@gmail.com"
 
-INDEX_PATH = "index.html"
 ARCHIVE_PATH = "publicaciones.html"
 
 
@@ -120,35 +122,48 @@ def fetch_publications():
                 continue
 
             link = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
-            title_safe = html.escape(title)
-            authors_safe = html.escape(authors_str)
-            journal_safe = html.escape(journal.upper())
 
-            card = []
-            card.append('<div class="card">')
-            pub_meta_parts = [journal_safe]
-            if year:
-                pub_meta_parts.append(year)
-            if pub_meta_parts:
-                card.append(f"    <div class=\"pub-meta\">{' · '.join(pub_meta_parts)}</div>")
-            card.append(f"    <a href=\"{link}\" class=\"pub-title\" target=\"_blank\">{title_safe}</a>")
-            card.append(f"    <p class=\"text-small\">{authors_safe}</p>")
-            card.append('    <div class="pub-links">')
-            if doi:
-                card.append(
-                    f"        <a href=\"https://doi.org/{doi}\" class=\"btn-outline\" target=\"_blank\"><i class=\"fa-regular fa-file-pdf\"></i> DOI</a>"
-                )
-            card.append(
-                f"        <a href=\"{link}\" class=\"btn-outline\" target=\"_blank\"><i class=\"fa-solid fa-link\"></i> PubMed</a>"
+            cards.append(
+                {
+                    "title": title,
+                    "authors": authors_str,
+                    "journal": journal.upper(),
+                    "year": year or "",
+                    "doi": doi,
+                    "link": link,
+                }
             )
-            card.append("    </div>")
-            card.append("</div>")
-
-            cards.append("\n".join(card))
         except Exception as exc:
             print(f"Error procesando articulo: {exc}")
 
     return cards
+
+
+def publication_meta(publication):
+    parts = [publication["journal"]]
+    if publication["year"]:
+        parts.append(publication["year"])
+    return " · ".join(parts)
+
+
+def publication_links(publication):
+    links = []
+    if publication["doi"]:
+        links.append(("DOI", f"https://doi.org/{publication['doi']}", True))
+    links.append(("PubMed", publication["link"], True))
+    return links
+
+
+def build_card(publication):
+    return layout.card(
+        title=publication["title"],
+        url=publication["link"],
+        meta=publication_meta(publication),
+        description=publication["authors"],
+        links=publication_links(publication),
+        year=publication["year"],
+        external=True,
+    )
 
 
 def find_div_bounds(content, div_id):
@@ -192,25 +207,28 @@ def replace_last_updated_line(content, element_id, new_value):
     return pattern.sub(rf"\1{new_value}\3", content)
 
 
-def update_index(cards, timestamp):
-    with open(INDEX_PATH, "r", encoding="utf-8") as fh:
-        content = fh.read()
+def update_home(publications):
+    cards = [
+        home_data.card_entry(
+            title=publication["title"],
+            url=publication["link"],
+            meta=publication_meta(publication),
+            description=publication["authors"],
+            links=[(label, url) for label, url, _ in publication_links(publication)],
+            year=publication["year"],
+        )
+        for publication in publications[: home_data.MAX_HOME_CARDS]
+    ]
+    count = home_data.update_section("publicaciones", cards)
+    print(f"✓ Se actualizaron {count} publicaciones en la portada")
 
-    latest_three = cards[:3]
-    content = replace_div_content(content, "publicaciones-content", "\n".join(latest_three))
-    content = replace_last_updated_line(content, "publicaciones-last-updated", f"Última actualización: {timestamp} UTC")
 
-    with open(INDEX_PATH, "w", encoding="utf-8") as fh:
-        fh.write(content)
-
-    print(f"✓ Se actualizaron {len(latest_three)} publicaciones en {INDEX_PATH} (últimas 3)")
-
-
-def update_archive(cards, timestamp):
+def update_archive(publications, timestamp):
     with open(ARCHIVE_PATH, "r", encoding="utf-8") as fh:
         content = fh.read()
 
-    content = replace_div_content(content, "publicaciones-archive-content", "\n".join(cards))
+    cards_html = "\n".join(build_card(publication) for publication in publications)
+    content = replace_div_content(content, "publicaciones-archive-content", cards_html)
     content = replace_last_updated_line(
         content,
         "publicaciones-archive-last-updated",
@@ -220,12 +238,12 @@ def update_archive(cards, timestamp):
     with open(ARCHIVE_PATH, "w", encoding="utf-8") as fh:
         fh.write(content)
 
-    print(f"✓ Se actualizaron {len(cards)} publicaciones en {ARCHIVE_PATH}")
+    print(f"✓ Se actualizaron {len(publications)} publicaciones en {ARCHIVE_PATH}")
 
 
-def sync_publication_pages(cards, timestamp):
-    update_index(cards, timestamp)
-    update_archive(cards, timestamp)
+def sync_publication_pages(publications, timestamp):
+    update_home(publications)
+    update_archive(publications, timestamp)
 
 
 def main():

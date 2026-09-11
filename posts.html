@@ -4,106 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Posts - Jesús F García Gavilán</title>
-    <meta name="description" content="Explora los artículos y análisis de bioinformática, data science, ciencias ómicas y salud publicados por Jesús F García Gavilán.">
+    <title>Posts · Jesús F. García Gavilán</title>
+
+    <meta name="description" content="Artículos y análisis de bioinformática, data science y ciencias ómicas de Jesús F. García Gavilán.">
+    <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://gavilanbiost.com/posts.html">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gavilanbiost.com/posts.html">
-    <meta property="og:title" content="Posts - Jesús F García Gavilán">
-    <meta property="og:description" content="Artículos y análisis de bioinformática, data science y ciencias ómicas en el blog de Jesús F García Gavilán.">
-    <meta property="og:image" content="https://gavilanbiost.com/img/IMG_9589.jpg">
-    <meta property="og:site_name" content="Jesús F García Gavilán">
+    <meta property="og:title" content="Posts · Jesús F. García Gavilán">
+    <meta property="og:description" content="Artículos y análisis de bioinformática, data science y ciencias ómicas de Jesús F. García Gavilán.">
+    <meta property="og:image" content="https://gavilanbiost.com/img/jesus.jpg">
+    <meta property="og:site_name" content="Jesús F. García Gavilán">
     <meta property="og:locale" content="es_ES">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/posts.html">
-    <meta name="twitter:title" content="Posts - Jesús F García Gavilán">
-    <meta name="twitter:description" content="Artículos y análisis de bioinformática, data science y ciencias ómicas en el blog de Jesús F García Gavilán.">
-    <meta name="twitter:image" content="https://gavilanbiost.com/img/IMG_9589.jpg">
+    <meta name="twitter:title" content="Posts · Jesús F. García Gavilán">
+    <meta name="twitter:description" content="Artículos y análisis de bioinformática, data science y ciencias ómicas de Jesús F. García Gavilán.">
+    <meta name="twitter:image" content="https://gavilanbiost.com/img/jesus.jpg">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/jf-icon.png" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/pages.css">
 </head>
-<body class="news-page">
-    <nav class="navbar" role="navigation" aria-label="Navegacion principal">
+<body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="brand">JFGG <span class="highlight"></span></a>
-            <div class="nav-links">
-                <a href="index.html#inicio">Inicio</a>
-                <a href="posts.html">Posts</a>
-                <a href="tutoriales.html">Tutoriales</a>
-                <a href="publicaciones.html">Publicaciones</a>
-                <a href="index.html#proyectos">Proyectos</a>
-                <a href="news.html">Noticias</a>
-                <a href="index.html#contact">Contacto</a>
-            </div>
+            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <nav class="nav-links desktop-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/posts.html" aria-current="page">Posts</a><a href="/tutoriales.html">Tutoriales</a><a href="/publicaciones.html">Publicaciones</a><a href="/#proyectos">Proyectos</a><a href="/news.html">Noticias</a><a href="/#contact">Contacto</a></nav>
+            <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
-    </nav>
-
-    <div class="main-container" style="display:block;width:100%;max-width:1200px;">
-        <main role="main" aria-label="Contenido principal" style="width:100%;max-width:none;">
-            <section class="content-section" id="posts-archive" style="width:100%;max-width:none;">
-                <div class="section-header">
-                    <h2><span class="mono-text"></span> Posts</h2>
+        <nav class="mobile-nav" id="mobile-navigation" hidden aria-label="Navegación móvil">
+        <a href="/">Inicio</a>
+        <a href="/posts.html">Posts</a>
+        <a href="/tutoriales.html">Tutoriales</a>
+        <a href="/publicaciones.html">Publicaciones</a>
+        <a href="/#proyectos">Proyectos</a>
+        <a href="/news.html">Noticias</a>
+        <a href="/#contact">Contacto</a>
+        </nav>
+    </header>
+    <div class="page-shell">
+        <main id="main-content">
+            <section class="content-section" id="posts" data-archive aria-labelledby="posts-heading">
+                <div class="page-header">
+                    <p class="eyebrow">BLOG · DIVULGACIÓN</p>
+                    <h1 id="posts-heading">Posts</h1>
+                    <p>Artículos y análisis sobre bioinformática, ciencia de datos, ciencias ómicas y salud.</p>
                 </div>
-
-                <!-- Lista auto-generada por update_blog.py (posts nuevos, nativos en la web) -->
-                <p class="text-small" id="posts-archive-last-updated" style="margin-bottom: 16px;">Última actualización: 11/09/2026 13:04 UTC</p>
+                <p class="page-meta" id="posts-archive-last-updated">Última actualización: 11/09/2026 17:06 UTC</p>
+                <div class="archive-filters">
+                    <div class="filter-search"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" data-archive-search placeholder="Buscar por título o palabra clave" aria-label="Buscar por título o palabra clave"></div>
+                    <select data-archive-year aria-label="Filtrar por año"><option value="all">Todos los años</option><option value="2026">2026</option></select>
+                </div>
+                <p class="result-count" data-archive-count role="status"></p>
                 <div id="posts-archive-content">
-<div class="card">
+<article class="card content-card" data-year="2026">
     <div class="pub-meta">BLOG · 07/09/2026</div>
-    <a href="post/deep-learning-ciencias-omicas.html" class="pub-title">Deep learning y ciencias ómicas</a>
+    <a href="/post/deep-learning-ciencias-omicas.html" class="pub-title">Deep learning y ciencias ómicas</a>
     <p class="text-small">Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.</p>
     <div class="pub-links">
-        <a href="post/deep-learning-ciencias-omicas.html" class="btn-outline"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer post</a>
+        <a class="btn-outline" href="/post/deep-learning-ciencias-omicas.html">Leer post<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
     </div>
+</article>
 </div>
-</div>
-
-                <div class="section-header"><h3>2026</h3></div>
-<div class="card">
-    <div class="pub-meta">SUBSTACK · 22/07/2026</div>
-    <a href="https://gavilanbiost.substack.com/p/hablemos-del-t-sne-un-poco-mas" class="pub-title" target="_blank" rel="noopener noreferrer">Hablemos del t-SNE (un poco más...)</a>
-    <p class="text-small">El t-Distributed Stochastic Neighbor Embedding (t-SNE) es una técnica no lineal de reducción de dimensionalidad muy utilizada para visualizar datos complejos en 2 o 3 dimensiones.</p>
-    <div class="pub-links">
-        <a href="https://gavilanbiost.substack.com/p/hablemos-del-t-sne-un-poco-mas" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer Post</a>
+                <h3 class="archive-year">2026</h3>
+                <article class="card content-card" data-year="2026">
+                    <div class="pub-meta">SUBSTACK · 22/07/2026</div>
+                    <a href="https://gavilanbiost.substack.com/p/hablemos-del-t-sne-un-poco-mas" class="pub-title" target="_blank" rel="noopener noreferrer">Hablemos del t-SNE (un poco más...)</a>
+                    <p class="text-small">El t-Distributed Stochastic Neighbor Embedding (t-SNE) es una técnica no lineal de reducción de dimensionalidad muy utilizada para visualizar datos complejos en 2 o 3 dimensiones.</p>
+                    <div class="pub-links">
+                        <a class="btn-outline" href="https://gavilanbiost.substack.com/p/hablemos-del-t-sne-un-poco-mas" target="_blank" rel="noopener noreferrer">Leer Post<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+                    </div>
+                </article>
+                <article class="card content-card" data-year="2026">
+                    <div class="pub-meta">SUBSTACK · 24/06/2026</div>
+                    <a href="https://gavilanbiost.substack.com/p/cuando-la-biologia-empezo-a-hablar" class="pub-title" target="_blank" rel="noopener noreferrer">Cuando la biología empezó a hablar en datos...</a>
+                    <p class="text-small">Durante buena parte del siglo XX, la biología avanzó fijándose en pequeños eventos con gran impacto: un gen, una proteína, una mutación, una vía metabólica...</p>
+                    <div class="pub-links">
+                        <a class="btn-outline" href="https://gavilanbiost.substack.com/p/cuando-la-biologia-empezo-a-hablar" target="_blank" rel="noopener noreferrer">Leer Post<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+                    </div>
+                </article>
+                <article class="card content-card" data-year="2026">
+                    <div class="pub-meta">SUBSTACK · 22/05/2026</div>
+                    <a href="https://gavilanbiost.substack.com/p/la-ilusion-del-vibe-coding-por-que" class="pub-title" target="_blank" rel="noopener noreferrer">La Ilusión del “Vibe Coding”: Por qué la Inteligencia Artificial es un Excelente Asistente, pero un Pésimo Maestro</a>
+                    <p class="text-small">La industria del desarrollo de software no está experimentando una simple mejora tecnológica.</p>
+                    <div class="pub-links">
+                        <a class="btn-outline" href="https://gavilanbiost.substack.com/p/la-ilusion-del-vibe-coding-por-que" target="_blank" rel="noopener noreferrer">Leer Post<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+                    </div>
+                </article>
+                <article class="card content-card" data-year="2026">
+                    <div class="pub-meta">SUBSTACK · 04/05/2026</div>
+                    <a href="https://gavilanbiost.substack.com/p/lo-que-tus-heces-saben-de-tu-dieta" class="pub-title" target="_blank" rel="noopener noreferrer">Lo que tus heces saben de tu dieta</a>
+                    <p class="text-small">La ciencia de la nutrición ha tenido un problema casi cómico y, a la vez, creo que bastante decisivo: para saber qué come una persona, hay que preguntárselo.</p>
+                    <div class="pub-links">
+                        <a class="btn-outline" href="https://gavilanbiost.substack.com/p/lo-que-tus-heces-saben-de-tu-dieta" target="_blank" rel="noopener noreferrer">Leer Post<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+                    </div>
+                </article>
+                <p class="archive-empty" data-archive-empty hidden>Sin coincidencias. Prueba otra palabra clave o quita los filtros.</p>
+    <div class="page-actions">
+        <a class="btn-outline" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Volver al inicio</a>
     </div>
-</div>
-<div class="card">
-    <div class="pub-meta">SUBSTACK · 24/06/2026</div>
-    <a href="https://gavilanbiost.substack.com/p/cuando-la-biologia-empezo-a-hablar" class="pub-title" target="_blank" rel="noopener noreferrer">Cuando la biología empezó a hablar en datos...</a>
-    <p class="text-small">Durante buena parte del siglo XX, la biología avanzó fijándose en pequeños eventos con gran impacto: un gen, una proteína, una mutación, una vía metabólica...</p>
-    <div class="pub-links">
-        <a href="https://gavilanbiost.substack.com/p/cuando-la-biologia-empezo-a-hablar" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer Post</a>
-    </div>
-</div>
-<div class="card">
-    <div class="pub-meta">SUBSTACK · 22/05/2026</div>
-    <a href="https://gavilanbiost.substack.com/p/la-ilusion-del-vibe-coding-por-que" class="pub-title" target="_blank" rel="noopener noreferrer">La Ilusión del “Vibe Coding”: Por qué la Inteligencia Artificial es un Excelente Asistente, pero un Pésimo Maestro</a>
-    <p class="text-small">La industria del desarrollo de software no está experimentando una simple mejora tecnológica.</p>
-    <div class="pub-links">
-        <a href="https://gavilanbiost.substack.com/p/la-ilusion-del-vibe-coding-por-que" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer Post</a>
-    </div>
-</div>
-<div class="card">
-    <div class="pub-meta">SUBSTACK · 04/05/2026</div>
-    <a href="https://gavilanbiost.substack.com/p/lo-que-tus-heces-saben-de-tu-dieta" class="pub-title" target="_blank" rel="noopener noreferrer">Lo que tus heces saben de tu dieta</a>
-    <p class="text-small">La ciencia de la nutrición ha tenido un problema casi cómico y, a la vez, creo que bastante decisivo: para saber qué come una persona, hay que preguntárselo.</p>
-    <div class="pub-links">
-        <a href="https://gavilanbiost.substack.com/p/lo-que-tus-heces-saben-de-tu-dieta" class="btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Leer Post</a>
-    </div>
-</div>
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="index.html" class="btn-outline">
-                        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
-                    </a>
-                </div>
             </section>
         </main>
     </div>
+    <footer>
+        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <span>© 2026 Jesús F. García Gavilán</span>
+        <span>Ciencia rigurosa. Ideas claras.</span>
+    </footer>
+    <script src="/assets/site.js"></script>
 </body>
 </html>
