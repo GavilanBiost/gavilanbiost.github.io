@@ -193,6 +193,10 @@
   margin-bottom: 14px;
 }
 
+.post-hero h1 {
+  text-align: center;
+}
+
 .article-hero,
 .post-hero,
 .tutorial-hero {
@@ -326,6 +330,10 @@
   font-size: 18px;
   line-height: 1.8;
   color: var(--foreground);
+}
+
+.post-body {
+  text-align: justify;
 }
 
 .article-body p {
