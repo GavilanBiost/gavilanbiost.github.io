@@ -1,0 +1,18 @@
+#inicio .bio-text {
+  max-width: 62ch;
+  width: min(100%, 62ch);
+  text-align: left;
+}
+
+#inicio .bio-text p {
+  margin-bottom: 1.25rem;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1200px) {
+  #inicio .bio-text {
+    max-width: 58ch;
+    width: min(100%, 58ch);
+  }
+}
