@@ -402,7 +402,7 @@ def update_home(news_items: list[dict]) -> None:
 
 def create_news_page(all_news: list[dict]) -> None:
     """Crea la página news.html con todas las noticias agrupadas por año."""
-    generated_at = datetime.utcnow().strftime("%d/%m/%Y %H:%M UTC")
+    generated_at = layout.last_updated_timestamp()
 
     # Agrupar noticias por año, de más reciente a más antiguo.
     news_by_year: dict[int, list[dict]] = {}

@@ -272,7 +272,7 @@ def update_archive(publications, timestamp):
     content = replace_last_updated_line(
         content,
         "publicaciones-archive-last-updated",
-        f"Última actualización: {timestamp} UTC",
+        f"Última actualización: {timestamp}",
     )
 
     with open(ARCHIVE_PATH, "w", encoding="utf-8") as fh:
@@ -293,7 +293,7 @@ def main():
             print("No se encontraron publicaciones para la búsqueda")
             raise SystemExit(0)
 
-        timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
+        timestamp = layout.last_updated_timestamp()
         sync_publication_pages(cards, timestamp)
     except Exception as exc:
         print(f"Error al actualizar publicaciones: {exc}")

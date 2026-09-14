@@ -165,7 +165,7 @@ def update_archive(posts, timestamp):
     content = replace_last_updated_line(
         content,
         "posts-archive-last-updated",
-        f"Última actualización: {timestamp} UTC",
+        f"Última actualización: {timestamp}",
     )
     ARCHIVE_PATH.write_text(content, encoding="utf-8")
 
@@ -176,7 +176,7 @@ def main():
         print("No se encontraron posts para actualizar")
         raise SystemExit(0)
 
-    timestamp = datetime.datetime.now(datetime.UTC).strftime("%d/%m/%Y %H:%M")
+    timestamp = layout.last_updated_timestamp()
     home_count = update_home(posts)
     update_archive(posts, timestamp)
     generate_sitemap()

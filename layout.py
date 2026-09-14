@@ -6,8 +6,10 @@ absolutos desde la raíz del dominio, así que el mismo HTML sirve tanto para
 páginas en la raíz como para las que viven en post/ o tutoriales/.
 """
 
+import datetime
 import html
 import re
+from zoneinfo import ZoneInfo
 
 # PubMed devuelve el nombre con muchas grafías (con o sin acentos, inicial o
 # nombre completo), así que el resaltado las contempla todas.
@@ -20,6 +22,11 @@ AUTHOR_NAME_PATTERN = re.compile(
 SITE_URL = "https://gavilanbiost.com"
 SITE_NAME = "Jesús F. García Gavilán"
 DEFAULT_IMAGE = f"{SITE_URL}/img/jesus.jpg"
+SPAIN_TIMEZONE = ZoneInfo("Europe/Madrid")
+
+
+def last_updated_timestamp():
+    return datetime.datetime.now(SPAIN_TIMEZONE).strftime("%d/%m/%Y %H:%M %Z")
 
 NAV_ITEMS = [
     ("/", "Inicio"),
