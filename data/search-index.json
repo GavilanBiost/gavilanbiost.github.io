@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
+      "url": "/post/metabolomica-biomarcadores.html",
+      "meta": "BLOG · 14/09/2026",
+      "description": "La metabolómica puede medir miles de señales, pero identificar biomarcadores reproducibles exige resolver problemas de anotación, confusión, estabilidad temporal y utilidad clínica.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/metabolomica-biomarcadores.html"
+        }
+      ],
+      "originalTitle": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Deep learning y ciencias ómicas",
       "url": "/post/deep-learning-ciencias-omicas.html",
       "meta": "BLOG · 07/09/2026",
