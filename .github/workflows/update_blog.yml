@@ -10,11 +10,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'post/*.html'
-      - 'update_blog.py'
-      - '.github/workflows/update_blog.yml'
-      - '!post/post-template.html'
 
 permissions:
   contents: write
