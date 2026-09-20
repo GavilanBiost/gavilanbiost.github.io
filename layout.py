@@ -22,6 +22,7 @@ AUTHOR_NAME_PATTERN = re.compile(
 SITE_URL = "https://gavilanbiost.com"
 SITE_NAME = "Jesús F. García Gavilán"
 DEFAULT_IMAGE = f"{SITE_URL}/img/jesus.jpg"
+DEFAULT_IMAGE_ALT = SITE_NAME
 SPAIN_TIMEZONE = ZoneInfo("Europe/Madrid")
 
 
@@ -69,11 +70,39 @@ def highlight_author(text):
     )
 
 
-def head(title, description, canonical, extra_head=""):
-    """Cabecera HTML común a todas las páginas estáticas."""
+def social_image_tags(image=None, image_alt=None, image_width=None, image_height=None):
+    """Etiquetas og:image/twitter:image. `image` debe ser SIEMPRE una URL absoluta
+    (https://gavilanbiost.com/...); LinkedIn descarta las relativas. Si no se indica,
+    cae en la foto genérica del sitio.
+    """
+    image_safe = esc(image or DEFAULT_IMAGE, quote=True)
+    alt_safe = esc(image_alt or DEFAULT_IMAGE_ALT, quote=True)
+
+    lines = [
+        f'    <meta property="og:image" content="{image_safe}">',
+        f'    <meta property="og:image:alt" content="{alt_safe}">',
+    ]
+    if image_width:
+        lines.append(f'    <meta property="og:image:width" content="{image_width}">')
+    if image_height:
+        lines.append(f'    <meta property="og:image:height" content="{image_height}">')
+    og_lines = "\n".join(lines)
+
+    return f"""{og_lines}
+    <meta name="twitter:image" content="{image_safe}">"""
+
+
+def head(title, description, canonical, extra_head="", image=None, image_alt=None, image_width=None, image_height=None):
+    """Cabecera HTML común a todas las páginas estáticas.
+
+    `image` (si se indica) debe ser una URL absoluta y sustituye a la foto
+    genérica en og:image/twitter:image; se usa por ejemplo para dar a cada
+    post su propia imagen social.
+    """
     title_safe = esc(title, quote=True)
     description_safe = esc(description, quote=True)
     canonical_safe = esc(canonical, quote=True)
+    og_image_block = social_image_tags(image, image_alt, image_width, image_height)
 
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -92,7 +121,7 @@ def head(title, description, canonical, extra_head=""):
     <meta property="og:url" content="{canonical_safe}">
     <meta property="og:title" content="{title_safe}">
     <meta property="og:description" content="{description_safe}">
-    <meta property="og:image" content="{DEFAULT_IMAGE}">
+{og_image_block}
     <meta property="og:site_name" content="{SITE_NAME}">
     <meta property="og:locale" content="es_ES">
 
@@ -100,7 +129,6 @@ def head(title, description, canonical, extra_head=""):
     <meta name="twitter:url" content="{canonical_safe}">
     <meta name="twitter:title" content="{title_safe}">
     <meta name="twitter:description" content="{description_safe}">
-    <meta name="twitter:image" content="{DEFAULT_IMAGE}">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/jf-icon.png" sizes="any">
