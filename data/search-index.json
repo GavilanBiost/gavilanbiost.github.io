@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Cuarenta años preguntando qué comes",
+      "url": "/post/dieta-en-la-sangre-metabolomica-ingesta.html",
+      "meta": "BLOG · 21/09/2026",
+      "description": "Qué pueden y qué no pueden hacer las firmas metabolómicas de la ingesta para medir la dieta real de las personas.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/dieta-en-la-sangre-metabolomica-ingesta.html"
+        }
+      ],
+      "originalTitle": "Cuarenta años preguntando qué comes",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
       "url": "/post/metabolomica-biomarcadores.html",
       "meta": "BLOG · 14/09/2026",
