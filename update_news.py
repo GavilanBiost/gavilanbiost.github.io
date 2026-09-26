@@ -67,6 +67,45 @@ NAME_QUERY_TERMS = [
     '"Garcia-Gavilan"',
 ]
 
+# Palabras clave (normalizadas) usadas para decidir si vale la pena descargar
+# el cuerpo de un articulo cuando el titular no menciona su nombre. Los
+# comunicados de prensa (CIBER, universidades, etc.) rara vez incluyen el
+# nombre del investigador en el titular, solo en el cuerpo de la noticia.
+HEALTH_TOPIC_HINTS = [
+    "dieta",
+    "nutricion",
+    "nutricional",
+    "alimentacion",
+    "alimento",
+    "mediterranea",
+    "mediterraneo",
+    "cardiovascular",
+    "diabetes",
+    "insulina",
+    "obesidad",
+    "microbiota",
+    "colesterol",
+    "biomarcador",
+    "cognitiv",
+    "metabolic",
+    "metabolismo",
+    "metabolom",
+    "envejecimiento",
+    "epidemiolog",
+    "ciberobn",
+    "predimed",
+    "legumbre",
+    "aceite de oliva",
+    "sardina",
+    "pescado",
+    "carne roja",
+    "azucar",
+    "salud osea",
+    "osteoporo",
+    "deterioro cognitivo",
+    "saciedad",
+]
+
 SPANISH_MONTHS = {
     "enero": 1,
     "febrero": 2,
@@ -110,6 +149,36 @@ def contains_name_variant(text: str) -> bool:
     ]
 
     return any(re.search(pattern, normalized) for pattern in patterns)
+
+
+def looks_health_related(text: str) -> bool:
+    normalized = normalize_text(text)
+    return any(hint in normalized for hint in HEALTH_TOPIC_HINTS)
+
+
+def fetch_article_body_text(url: str, *, max_chars: int = 20000) -> str:
+    """Descarga un articulo y devuelve texto plano (best-effort, sin dependencias externas)."""
+    if not url:
+        return ""
+
+    try:
+        response = requests.get(
+            url,
+            timeout=15,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; JFGG-NewsBot/1.0; +https://github.com/GavilanBiost/gavilanbiost.github.io)"
+            },
+        )
+        response.raise_for_status()
+    except requests.RequestException:
+        return ""
+
+    raw_html = response.text[: max_chars * 4]
+    raw_html = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", raw_html)
+    text = re.sub(r"(?s)<[^>]+>", " ", raw_html)
+    text = html.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:max_chars]
 
 
 def format_pub_date(raw_date: str) -> tuple[datetime, str]:
@@ -320,7 +389,15 @@ def register_candidate(
     # la consulta: siempre se revalida localmente para evitar falsos
     # positivos (p. ej. articulos que solo comparten "Jesus"/"Garcia").
     if not contains_name_variant(combined_text):
-        return
+        # Los comunicados de prensa sobre su investigacion casi nunca lo
+        # nombran en el titular, solo en el cuerpo. Si el titular sugiere un
+        # tema de su area, se descarga el articulo para buscar su nombre ahi
+        # antes de descartarlo.
+        if not looks_health_related(combined_text):
+            return
+        body_text = fetch_article_body_text(link)
+        if not body_text or not contains_name_variant(body_text):
+            return
 
     pub_dt, pub_date = format_pub_date(pub_date_raw)
     if pub_dt == datetime.min:
