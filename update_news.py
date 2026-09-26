@@ -1,4 +1,5 @@
 import html
+import json
 import re
 import time
 import unicodedata
@@ -67,7 +68,46 @@ NEWS_PROVIDERS = [
         # verificacion falla en Python; es un feed publico de solo lectura.
         "verify_tls": False,
     },
+    {
+        "name": "NewsTerceraEdad",
+        "rss_template": "https://www.news3edad.com/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+    },
+    {
+        "name": "Salud a Diario",
+        "rss_template": "https://www.saludadiario.es/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+    },
+    {
+        "name": "Geriatricarea",
+        "rss_template": "https://www.geriatricarea.com/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+    },
+    {
+        "name": "Nova Ciencia",
+        "rss_template": "https://novaciencia.es/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+    },
+    # Feed de autor de SMC Espana: reacciones como experto. Todo el feed es
+    # suyo, pero el nombre solo aparece en la ficha de la cita (que no es una
+    # noticia), asi que se omite la validacion por nombre y se saltan esas
+    # fichas ("Jesus Francisco Garcia - potitos").
+    {
+        "name": "SMC España",
+        "rss_template": "https://sciencemediacentre.es/taxonomy/term/1426/feed",
+        "query_terms": [""],
+        "trusted_feed": True,
+        "skip_title_pattern": r"^jesus francisco garcia\b",
+    },
 ]
+
+# Noticias que ningun feed encuentra (medios sin RSS de busqueda). Se
+# comprobo a mano que cada una menciona el nombre; se mezclan con el resto.
+MANUAL_NEWS_FILE = "data/news_manual.json"
 
 CONTENT_ENCODED_TAG = "{http://purl.org/rss/1.0/modules/content/}encoded"
 
@@ -130,6 +170,10 @@ HEALTH_TOPIC_HINTS = [
     "saciedad",
 ]
 
+HOMONYM_PATTERNS = [
+    r"\bjose\s+manuel\s+garcia\b",
+]
+
 SPANISH_MONTHS = {
     "enero": 1,
     "febrero": 2,
@@ -165,6 +209,11 @@ def contains_name_variant(text: str) -> bool:
     # falsos positivos, p. ej. noticias sobre "Mons. Garcia Cuerva" que en
     # otra parte del texto mencionaban un "gavilan"); siempre se exige que
     # "Garcia" y "Gavilan" aparezcan adyacentes, como apellido compuesto.
+    # Homonimos conocidos: con "garcia gavilan" a secas colaban noticias
+    # suyas (p. ej. el directivo de Blue Prism en 2020).
+    if any(re.search(pattern, normalized) for pattern in HOMONYM_PATTERNS):
+        return False
+
     patterns = [
         r"\bjesus\s+f(?:rancisco)?\s+garcia\s+gavilan\b",
         r"\bjesus\s+garcia\s+gavilan\b",
@@ -331,7 +380,9 @@ def resolve_article_url(raw_url: str) -> str:
         )
         if response.ok:
             final_url = response.url or raw_url
-            return final_url
+            # Desde IPs europeas Google redirige a su pagina de consentimiento.
+            if "consent.google.com" not in final_url:
+                return final_url
     except requests.RequestException:
         pass
 
@@ -344,7 +395,7 @@ def resolve_article_url(raw_url: str) -> str:
         )
         if response.ok:
             final_url = response.url or raw_url
-            if final_url and "news.google.com" not in final_url:
+            if final_url and "google.com" not in urlparse(final_url).netloc:
                 return final_url
     except requests.RequestException:
         pass
@@ -405,6 +456,7 @@ def register_candidate(
     source: str,
     pub_date_raw: str,
     content: str = "",
+    trusted: bool = False,
 ) -> None:
     if not title and not description:
         return
@@ -418,7 +470,7 @@ def register_candidate(
     # No confiar en que el proveedor (Bing/GDELT) respete la frase exacta de
     # la consulta: siempre se revalida localmente para evitar falsos
     # positivos (p. ej. articulos que solo comparten "Jesus"/"Garcia").
-    if not contains_name_variant(f"{combined_text} {content}"):
+    if not trusted and not contains_name_variant(f"{combined_text} {content}"):
         # Los comunicados de prensa sobre su investigacion casi nunca lo
         # nombran en el titular, solo en el cuerpo. Si el titular sugiere un
         # tema de su area, se descarga el articulo para buscar su nombre ahi
@@ -431,7 +483,8 @@ def register_candidate(
 
     pub_dt, pub_date = format_pub_date(pub_date_raw)
     if pub_dt == datetime.min:
-        pub_dt, pub_date = extract_date_from_text(combined_text)
+        # Algunos feeds (p. ej. SMC Espana) usan "26/08/2026 - 00:30".
+        pub_dt, pub_date = extract_date_from_text(f"{pub_date_raw} {combined_text}")
     if pub_dt == datetime.min:
         pub_dt, pub_date = extract_relative_date_from_text(combined_text)
 
@@ -447,6 +500,27 @@ def register_candidate(
 
     if existing is None or candidate["pub_dt"] > existing["pub_dt"]:
         all_news[key] = candidate
+
+
+def drop_google_duplicates(news_items: list[dict]) -> list[dict]:
+    """Quita las entradas de Google News cuyo articulo ya llega con enlace directo.
+
+    Google titula "Titular - Medio" y enlaza a news.google.com, asi que no
+    coincide con la clave de deduplicado de la misma noticia en otra fuente.
+    """
+    direct_titles = {
+        normalize_text(item["title"])
+        for item in news_items
+        if "news.google.com" not in (item["link"] or "")
+    }
+    kept = []
+    for item in news_items:
+        if "news.google.com" in (item["link"] or ""):
+            headline = item["title"].rsplit(" - ", 1)[0]
+            if normalize_text(headline) in direct_titles:
+                continue
+        kept.append(item)
+    return kept
 
 
 def fetch_news() -> list[dict]:
@@ -494,10 +568,14 @@ def fetch_news() -> list[dict]:
                 if not items:
                     break
 
+                skip_title_pattern = provider.get("skip_title_pattern")
                 for item in items:
+                    title = get_item_text(item, "title")
+                    if skip_title_pattern and re.search(skip_title_pattern, normalize_text(title)):
+                        continue
                     register_candidate(
                         all_news,
-                        title=get_item_text(item, "title"),
+                        title=title,
                         link=resolve_article_url(get_item_text(item, "link")),
                         description=get_item_text(item, "description"),
                         source=get_item_text(item, "source") or provider_name,
@@ -507,9 +585,26 @@ def fetch_news() -> list[dict]:
                             or get_item_text(item, "updated")
                         ),
                         content=get_item_text(item, CONTENT_ENCODED_TAG),
+                        trusted=provider.get("trusted_feed", False),
                     )
 
-    deduped = list(all_news.values())
+    try:
+        with open(MANUAL_NEWS_FILE, encoding="utf-8") as f:
+            manual_news = json.load(f)
+    except FileNotFoundError:
+        manual_news = []
+    for entry in manual_news:
+        register_candidate(
+            all_news,
+            title=entry["title"],
+            link=entry["link"],
+            description="",
+            source=entry["source"],
+            pub_date_raw=entry["date"],
+            trusted=True,
+        )
+
+    deduped = drop_google_duplicates(list(all_news.values()))
     deduped.sort(key=lambda x: x["pub_dt"], reverse=True)
     return deduped[:MAX_NEWS]
 
