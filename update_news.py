@@ -1,5 +1,6 @@
 import html
 import re
+import time
 import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -9,6 +10,9 @@ from urllib.parse import quote_plus
 from urllib.parse import urlparse
 
 import requests
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 import home_data
 import layout
@@ -36,16 +40,36 @@ NEWS_PROVIDERS = [
         "supports_date_windows": False,
     },
     {
-        "name": "Yahoo News",
-        "rss_template": "https://news.search.yahoo.com/rss?p={query}",
-        "supports_date_windows": False,
-    },
-    {
         "name": "GDELT",
         "rss_template": "https://api.gdeltproject.org/api/v2/doc/doc?query={query}&mode=ArtList&format=rss&maxrecords=50",
         "supports_date_windows": False,
+        # GDELT limita a ~1 peticion cada 5 s y devuelve 429 con muchas
+        # consultas seguidas; una sola frase amplia basta porque
+        # contains_name_variant descarta los homonimos.
+        "query_terms": ['"Garcia Gavilan"'],
+        "delay_seconds": 6,
+    },
+    # Buscadores internos de WordPress (?s=...&feed=rss2): notas de prensa
+    # institucionales que casi nunca salen en los agregadores. El feed trae el
+    # cuerpo completo en content:encoded, donde aparece el nombre.
+    {
+        "name": "Diari Digital URV",
+        "rss_template": "https://diaridigital.urv.cat/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+    },
+    {
+        "name": "IISPV",
+        "rss_template": "https://www.iispv.cat/?s={query}&feed=rss2&paged={page}",
+        "query_terms": ["Garcia-Gavilan"],
+        "max_pages": 5,
+        # iispv.cat no sirve el certificado intermedio (HARICA) y la
+        # verificacion falla en Python; es un feed publico de solo lectura.
+        "verify_tls": False,
     },
 ]
+
+CONTENT_ENCODED_TAG = "{http://purl.org/rss/1.0/modules/content/}encoded"
 
 MIN_HISTORY_YEAR = 2010
 NAME_QUERY_TERMS = [
@@ -380,15 +404,21 @@ def register_candidate(
     description: str,
     source: str,
     pub_date_raw: str,
+    content: str = "",
 ) -> None:
     if not title and not description:
+        return
+
+    # Las fichas de perfil (p. ej. la pagina del investigador en el IISPV)
+    # salen en las busquedas internas pero no son noticias.
+    if contains_name_variant(title) and len(normalize_text(title).split()) <= 5:
         return
 
     combined_text = f"{title} {description}"
     # No confiar en que el proveedor (Bing/GDELT) respete la frase exacta de
     # la consulta: siempre se revalida localmente para evitar falsos
     # positivos (p. ej. articulos que solo comparten "Jesus"/"Garcia").
-    if not contains_name_variant(combined_text):
+    if not contains_name_variant(f"{combined_text} {content}"):
         # Los comunicados de prensa sobre su investigacion casi nunca lo
         # nombran en el titular, solo en el cuerpo. Si el titular sugiere un
         # tema de su area, se descarga el articulo para buscar su nombre ahi
@@ -426,39 +456,58 @@ def fetch_news() -> list[dict]:
         provider_name = provider["name"]
         rss_template = provider["rss_template"]
         use_date_windows = provider.get("supports_date_windows", False)
+        query_terms = provider.get("query_terms") or build_search_queries(
+            use_date_windows=use_date_windows
+        )
+        max_pages = provider.get("max_pages", 1)
+        delay_seconds = provider.get("delay_seconds", 0)
 
-        for query_term in build_search_queries(use_date_windows=use_date_windows):
-            feed_url = rss_template.format(query=quote_plus(query_term))
-            print(f"[{provider_name}] Consultando: {query_term}")
+        for query_term in query_terms:
+            for page in range(1, max_pages + 1):
+                feed_url = rss_template.format(query=quote_plus(query_term), page=page)
+                print(f"[{provider_name}] Consultando: {query_term} (pagina {page})")
 
-            try:
-                response = requests.get(feed_url, timeout=20)
-                response.raise_for_status()
-            except requests.RequestException as exc:
-                print(f"  [{provider_name}] Error en feed: {exc}")
-                continue
+                if delay_seconds:
+                    time.sleep(delay_seconds)
 
-            try:
-                root = ET.fromstring(response.content)
-            except ET.ParseError as exc:
-                print(f"  [{provider_name}] XML invalido: {exc}")
-                continue
+                try:
+                    response = requests.get(
+                        feed_url,
+                        timeout=20,
+                        headers={"User-Agent": "Mozilla/5.0"},
+                        verify=provider.get("verify_tls", True),
+                    )
+                    response.raise_for_status()
+                except requests.RequestException as exc:
+                    # WordPress responde 404 al pasar de la ultima pagina.
+                    if page == 1:
+                        print(f"  [{provider_name}] Error en feed: {exc}")
+                    break
 
-            items = root.findall(".//item")
+                try:
+                    root = ET.fromstring(response.content)
+                except ET.ParseError as exc:
+                    print(f"  [{provider_name}] XML invalido: {exc}")
+                    break
 
-            for item in items:
-                register_candidate(
-                    all_news,
-                    title=get_item_text(item, "title"),
-                    link=resolve_article_url(get_item_text(item, "link")),
-                    description=get_item_text(item, "description"),
-                    source=get_item_text(item, "source") or provider_name,
-                    pub_date_raw=(
-                        get_item_text(item, "pubDate")
-                        or get_item_text(item, "published")
-                        or get_item_text(item, "updated")
-                    ),
-                )
+                items = root.findall(".//item")
+                if not items:
+                    break
+
+                for item in items:
+                    register_candidate(
+                        all_news,
+                        title=get_item_text(item, "title"),
+                        link=resolve_article_url(get_item_text(item, "link")),
+                        description=get_item_text(item, "description"),
+                        source=get_item_text(item, "source") or provider_name,
+                        pub_date_raw=(
+                            get_item_text(item, "pubDate")
+                            or get_item_text(item, "published")
+                            or get_item_text(item, "updated")
+                        ),
+                        content=get_item_text(item, CONTENT_ENCODED_TAG),
+                    )
 
     deduped = list(all_news.values())
     deduped.sort(key=lambda x: x["pub_dt"], reverse=True)
