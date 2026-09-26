@@ -6,7 +6,7 @@ env:
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *"  # comprobar cada día si algún post programado ya toca publicarse
+    - cron: "37 4 * * *"  # 06:37 hora de Madrid (CEST/UTC+2): comprobar si algún post programado ya toca publicarse
   push:
     branches:
       - main
