@@ -24,11 +24,17 @@ NEWS_PROVIDERS = [
         "name": "Google News",
         "rss_template": "https://news.google.com/rss/search?q={query}&hl=es-419&gl=ES&ceid=ES:es-419",
         "supports_date_windows": True,
+        # Google respeta la frase exacta y sus titulares casi nunca repiten el
+        # nombre, asi que se confia en las consultas con nombre de pila.
+        "trust_full_name_queries": True,
     },
     {
         "name": "Google News (EN)",
         "rss_template": "https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en",
         "supports_date_windows": True,
+        # Google respeta la frase exacta y sus titulares casi nunca repiten el
+        # nombre, asi que se confia en las consultas con nombre de pila.
+        "trust_full_name_queries": True,
     },
     {
         "name": "Bing News",
@@ -200,6 +206,18 @@ def normalize_text(value: str) -> str:
     return normalized
 
 
+def is_homonym(text: str) -> bool:
+    # Homonimos conocidos: con "garcia gavilan" a secas colaban noticias
+    # suyas (p. ej. el directivo de Blue Prism en 2020).
+    normalized = normalize_text(text)
+    return any(re.search(pattern, normalized) for pattern in HOMONYM_PATTERNS)
+
+
+def is_full_name_query(query_term: str) -> bool:
+    lowered = query_term.lower()
+    return '"' in lowered and ("jesus" in lowered or re.search(r"\bj\.?\s*f\b", lowered) is not None)
+
+
 def contains_name_variant(text: str) -> bool:
     normalized = normalize_text(text)
 
@@ -209,9 +227,7 @@ def contains_name_variant(text: str) -> bool:
     # falsos positivos, p. ej. noticias sobre "Mons. Garcia Cuerva" que en
     # otra parte del texto mencionaban un "gavilan"); siempre se exige que
     # "Garcia" y "Gavilan" aparezcan adyacentes, como apellido compuesto.
-    # Homonimos conocidos: con "garcia gavilan" a secas colaban noticias
-    # suyas (p. ej. el directivo de Blue Prism en 2020).
-    if any(re.search(pattern, normalized) for pattern in HOMONYM_PATTERNS):
+    if is_homonym(normalized):
         return False
 
     patterns = [
@@ -461,6 +477,9 @@ def register_candidate(
     if not title and not description:
         return
 
+    if is_homonym(f"{title} {description} {content}"):
+        return
+
     # Las fichas de perfil (p. ej. la pagina del investigador en el IISPV)
     # salen en las busquedas internas pero no son noticias.
     if contains_name_variant(title) and len(normalize_text(title).split()) <= 5:
@@ -585,7 +604,11 @@ def fetch_news() -> list[dict]:
                             or get_item_text(item, "updated")
                         ),
                         content=get_item_text(item, CONTENT_ENCODED_TAG),
-                        trusted=provider.get("trusted_feed", False),
+                        trusted=provider.get("trusted_feed", False)
+                        or (
+                            provider.get("trust_full_name_queries", False)
+                            and is_full_name_query(query_term)
+                        ),
                     )
 
     try:
