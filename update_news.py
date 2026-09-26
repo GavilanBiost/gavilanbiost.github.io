@@ -115,6 +115,10 @@ NEWS_PROVIDERS = [
 # comprobo a mano que cada una menciona el nombre; se mezclan con el resto.
 MANUAL_NEWS_FILE = "data/news_manual.json"
 
+# Titulares que los buscadores asocian al nombre pero no lo mencionan
+# (p. ej. por un enlace lateral a otra noticia suya del mismo medio).
+EXCLUDED_NEWS_FILE = "data/news_excluded.json"
+
 CONTENT_ENCODED_TAG = "{http://purl.org/rss/1.0/modules/content/}encoded"
 
 MIN_HISTORY_YEAR = 2010
@@ -627,7 +631,17 @@ def fetch_news() -> list[dict]:
             trusted=True,
         )
 
-    deduped = drop_google_duplicates(list(all_news.values()))
+    try:
+        with open(EXCLUDED_NEWS_FILE, encoding="utf-8") as f:
+            excluded = [normalize_text(title) for title in json.load(f)]
+    except FileNotFoundError:
+        excluded = []
+
+    deduped = [
+        item
+        for item in drop_google_duplicates(list(all_news.values()))
+        if not any(fragment in normalize_text(item["title"]) for fragment in excluded)
+    ]
     deduped.sort(key=lambda x: x["pub_dt"], reverse=True)
     return deduped[:MAX_NEWS]
 
