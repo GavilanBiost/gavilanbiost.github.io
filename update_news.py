@@ -95,25 +95,18 @@ def normalize_text(value: str) -> str:
 
 def contains_name_variant(text: str) -> bool:
     normalized = normalize_text(text)
-    token_set = set(normalized.split())
 
-    # Normalization already removes accents and punctuation, so equivalent variants
-    # like Garcia-Gavilan / García-Gavilán collapse to the same token pattern.
-    has_gavilan = "gavilan" in token_set
-    has_garcia = "garcia" in token_set
-    has_jesus = "jesus" in token_set
-    has_initials = bool(re.search(r"\bj\s+f\b", normalized))
-
-    # Strict match: require both surnames and Jesus (or initials J F).
-    if has_gavilan and has_garcia and (has_jesus or has_initials):
-        return True
-
+    # "Gavilan" tambien es una palabra comun del espanol (el ave rapaz), y
+    # "Garcia"/"Jesus" son extremadamente frecuentes en noticias. Por eso NO
+    # basta con que las palabras aparezcan sueltas en el texto (eso genero
+    # falsos positivos, p. ej. noticias sobre "Mons. Garcia Cuerva" que en
+    # otra parte del texto mencionaban un "gavilan"); siempre se exige que
+    # "Garcia" y "Gavilan" aparezcan adyacentes, como apellido compuesto.
     patterns = [
         r"\bjesus\s+f(?:rancisco)?\s+garcia\s+gavilan\b",
         r"\bjesus\s+garcia\s+gavilan\b",
         r"\bj\s*f\s+garcia\s+gavilan\b",
         r"\bgarcia\s+gavilan\b",
-        r"\bjesus\s+f\s+garcia\b",
     ]
 
     return any(re.search(pattern, normalized) for pattern in patterns)
@@ -318,15 +311,15 @@ def register_candidate(
     description: str,
     source: str,
     pub_date_raw: str,
-    strict_query: bool,
 ) -> None:
     if not title and not description:
         return
 
     combined_text = f"{title} {description}"
-    # Cuando la consulta usa frase exacta, el buscador ya aplica
-    # una restriccion semantica fuerte.
-    if not strict_query and not contains_name_variant(combined_text):
+    # No confiar en que el proveedor (Bing/GDELT) respete la frase exacta de
+    # la consulta: siempre se revalida localmente para evitar falsos
+    # positivos (p. ej. articulos que solo comparten "Jesus"/"Garcia").
+    if not contains_name_variant(combined_text):
         return
 
     pub_dt, pub_date = format_pub_date(pub_date_raw)
@@ -358,10 +351,6 @@ def fetch_news() -> list[dict]:
         use_date_windows = provider.get("supports_date_windows", False)
 
         for query_term in build_search_queries(use_date_windows=use_date_windows):
-            # Solo las frases con nombre de pila o iniciales son lo bastante
-            # especificas para saltarse contains_name_variant; las de solo
-            # apellido ("Garcia Gavilan") siguen filtrandose por si hay homonimos.
-            strict_query = '"' in query_term and ("jesus" in query_term.lower() or " j f " in f" {query_term.lower()} " or "j. f." in query_term.lower())
             feed_url = rss_template.format(query=quote_plus(query_term))
             print(f"[{provider_name}] Consultando: {query_term}")
 
@@ -392,7 +381,6 @@ def fetch_news() -> list[dict]:
                         or get_item_text(item, "published")
                         or get_item_text(item, "updated")
                     ),
-                    strict_query=strict_query,
                 )
 
     deduped = list(all_news.values())
