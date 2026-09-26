@@ -21,8 +21,18 @@ NEWS_PROVIDERS = [
         "supports_date_windows": True,
     },
     {
+        "name": "Google News (EN)",
+        "rss_template": "https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en",
+        "supports_date_windows": True,
+    },
+    {
         "name": "Bing News",
         "rss_template": "https://www.bing.com/news/search?q={query}&format=rss&setlang=es-es",
+        "supports_date_windows": False,
+    },
+    {
+        "name": "Bing News (EN)",
+        "rss_template": "https://www.bing.com/news/search?q={query}&format=rss&setlang=en-us",
         "supports_date_windows": False,
     },
     {
@@ -36,6 +46,7 @@ NEWS_PROVIDERS = [
         "supports_date_windows": False,
     },
 ]
+
 MIN_HISTORY_YEAR = 2010
 NAME_QUERY_TERMS = [
     '"Jesus F Garcia Gavilan"',
@@ -48,6 +59,12 @@ NAME_QUERY_TERMS = [
     '"J. F. Garcia Gavilan"',
     '"J F Garcia-Gavilan"',
     '"J. F. Garcia-Gavilan"',
+    # Frase corta: los medios a veces citan solo el apellido compuesto (sin
+    # nombre de pila), p. ej. "el investigador Garcia-Gavilan". Es mas amplia,
+    # asi que NO se trata como strict_query: sigue pasando por
+    # contains_name_variant para descartar homonimos (otros "Garcia Gavilan").
+    '"Garcia Gavilan"',
+    '"Garcia-Gavilan"',
 ]
 
 SPANISH_MONTHS = {
@@ -293,6 +310,45 @@ def build_search_queries(use_date_windows: bool = True) -> list[str]:
     return queries
 
 
+def register_candidate(
+    all_news: dict,
+    *,
+    title: str,
+    link: str,
+    description: str,
+    source: str,
+    pub_date_raw: str,
+    strict_query: bool,
+) -> None:
+    if not title and not description:
+        return
+
+    combined_text = f"{title} {description}"
+    # Cuando la consulta usa frase exacta, el buscador ya aplica
+    # una restriccion semantica fuerte.
+    if not strict_query and not contains_name_variant(combined_text):
+        return
+
+    pub_dt, pub_date = format_pub_date(pub_date_raw)
+    if pub_dt == datetime.min:
+        pub_dt, pub_date = extract_date_from_text(combined_text)
+    if pub_dt == datetime.min:
+        pub_dt, pub_date = extract_relative_date_from_text(combined_text)
+
+    key = build_dedupe_key(title=title, link=link, pub_date=pub_date, source=source)
+    existing = all_news.get(key)
+    candidate = {
+        "title": title,
+        "link": link,
+        "source": source,
+        "pub_date": pub_date,
+        "pub_dt": pub_dt,
+    }
+
+    if existing is None or candidate["pub_dt"] > existing["pub_dt"]:
+        all_news[key] = candidate
+
+
 def fetch_news() -> list[dict]:
     all_news = {}
 
@@ -302,7 +358,10 @@ def fetch_news() -> list[dict]:
         use_date_windows = provider.get("supports_date_windows", False)
 
         for query_term in build_search_queries(use_date_windows=use_date_windows):
-            strict_query = '"' in query_term
+            # Solo las frases con nombre de pila o iniciales son lo bastante
+            # especificas para saltarse contains_name_variant; las de solo
+            # apellido ("Garcia Gavilan") siguen filtrandose por si hay homonimos.
+            strict_query = '"' in query_term and ("jesus" in query_term.lower() or " j f " in f" {query_term.lower()} " or "j. f." in query_term.lower())
             feed_url = rss_template.format(query=quote_plus(query_term))
             print(f"[{provider_name}] Consultando: {query_term}")
 
@@ -322,48 +381,19 @@ def fetch_news() -> list[dict]:
             items = root.findall(".//item")
 
             for item in items:
-                title = get_item_text(item, "title")
-                link = resolve_article_url(get_item_text(item, "link"))
-                description = get_item_text(item, "description")
-                source = get_item_text(item, "source") or provider_name
-                pub_date_raw = (
-                    get_item_text(item, "pubDate")
-                    or get_item_text(item, "published")
-                    or get_item_text(item, "updated")
+                register_candidate(
+                    all_news,
+                    title=get_item_text(item, "title"),
+                    link=resolve_article_url(get_item_text(item, "link")),
+                    description=get_item_text(item, "description"),
+                    source=get_item_text(item, "source") or provider_name,
+                    pub_date_raw=(
+                        get_item_text(item, "pubDate")
+                        or get_item_text(item, "published")
+                        or get_item_text(item, "updated")
+                    ),
+                    strict_query=strict_query,
                 )
-
-                combined_text = f"{title} {description}"
-                # Cuando la consulta usa frase exacta, el buscador ya aplica
-                # una restriccion semantica fuerte.
-                if not strict_query and not contains_name_variant(combined_text):
-                    continue
-
-                if not title and not description:
-                    continue
-
-                pub_dt, pub_date = format_pub_date(pub_date_raw)
-                if pub_dt == datetime.min:
-                    pub_dt, pub_date = extract_date_from_text(f"{title} {description}")
-                if pub_dt == datetime.min:
-                    pub_dt, pub_date = extract_relative_date_from_text(f"{title} {description}")
-
-                key = build_dedupe_key(
-                    title=title,
-                    link=link,
-                    pub_date=pub_date,
-                    source=source,
-                )
-                existing = all_news.get(key)
-                candidate = {
-                    "title": title,
-                    "link": link,
-                    "source": source,
-                    "pub_date": pub_date,
-                    "pub_dt": pub_dt,
-                }
-
-                if existing is None or candidate["pub_dt"] > existing["pub_dt"]:
-                    all_news[key] = candidate
 
     deduped = list(all_news.values())
     deduped.sort(key=lambda x: x["pub_dt"], reverse=True)
