@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "El modelo que se niega a creer en el consumidor medio",
+      "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html",
+      "meta": "BLOG · 28/09/2026",
+      "description": "Cómo el logit con parámetros aleatorios captura la diversidad de gustos en la elección alimentaria y por qué las ciencias ómicas podrían, algún día, explicarla.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html"
+        }
+      ],
+      "originalTitle": "El modelo que se niega a creer en el consumidor medio",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Cuarenta años preguntando qué comes",
       "url": "/post/dieta-en-la-sangre-metabolomica-ingesta.html",
       "meta": "BLOG · 21/09/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "Deep learning y ciencias ómicas",
-      "url": "/post/deep-learning-ciencias-omicas.html",
-      "meta": "BLOG · 07/09/2026",
-      "description": "Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/deep-learning-ciencias-omicas.html"
-        }
-      ],
-      "originalTitle": "Deep learning y ciencias ómicas",
       "year": "2026",
       "tags": [
         "blog"
