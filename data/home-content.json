@@ -154,6 +154,44 @@
   ],
   "publicaciones": [
     {
+      "title": "Metabolomic profiling of ultra-processed food consumption and cardiovascular risk in Spanish preschool children: a cross-sectional study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42777335/",
+      "meta": "EBIOMEDICINE · 2026",
+      "description": "Josué A Pérez-Acosta, Jesús F García-Gavilán, Hernando J Margara-Escudero, Concepción M Aguilera, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ebiom.2026.106488"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42777335/"
+        }
+      ],
+      "originalTitle": "Metabolomic profiling of ultra-processed food consumption and cardiovascular risk in Spanish preschool children: a cross-sectional study.",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "The Role of the Gut Microbiome in the Relationship Between the Mediterranean Diet and Cardiovascular Disease Risk.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42726368/",
+      "meta": "CURRENT ATHEROSCLEROSIS REPORTS · 2026",
+      "description": "Adrián Hernández-Cacho, Jiaqi Ni, Jesús F García-Gavilán, Josué Alberto Pérez-Acosta, ...",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s11883-026-01463-7"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42726368/"
+        }
+      ],
+      "originalTitle": "The Role of the Gut Microbiome in the Relationship Between the Mediterranean Diet and Cardiovascular Disease Risk.",
+      "year": "2026",
+      "tags": []
+    },
+    {
       "title": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42155850/",
       "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
@@ -169,44 +207,6 @@
         }
       ],
       "originalTitle": "Reply to letter to the editor: Metabolomic signatures of type 2 diabetes and mortality: Methodological considerations and unresolved questions.",
-      "year": "2026",
-      "tags": []
-    },
-    {
-      "title": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/",
-      "meta": "DIABETES CARE · 2026",
-      "description": "Ariadna Curto, Jadwiga Konieczna, Antoni Colom, Itziar Abete, ..., Jesús F García-Gavilán, ...",
-      "links": [
-        {
-          "label": "DOI",
-          "url": "https://doi.org/10.2337/dc25-2497"
-        },
-        {
-          "label": "PubMed",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/42012390/"
-        }
-      ],
-      "originalTitle": "Long-term Air Pollution and Overall and Regional Body Composition in Older Adults With Overweight or Obesity and Metabolic Syndrome.",
-      "year": "2026",
-      "tags": []
-    },
-    {
-      "title": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/",
-      "meta": "METABOLISM: CLINICAL AND EXPERIMENTAL · 2026",
-      "description": "Jesús F García-Gavilán, Indira Paz-Graniel, Josué A Pérez-Acosta, Miguel Ruiz-Canela, ...",
-      "links": [
-        {
-          "label": "DOI",
-          "url": "https://doi.org/10.1016/j.metabol.2026.156599"
-        },
-        {
-          "label": "PubMed",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/41881293/"
-        }
-      ],
-      "originalTitle": "Metabolomics profiles of type 2 diabetes and insulin resistance and their associations with total mortality.",
       "year": "2026",
       "tags": []
     }
