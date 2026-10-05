@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Cada cuánto sabemos que nos hemos equivocado",
+      "url": "/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html",
+      "meta": "BLOG · 05/10/2026",
+      "description": "Aprendizaje por refuerzo y metabolómica: por qué la retroalimentación lenta de las cohortes limita a los agentes y en qué escenarios sí encaja.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html"
+        }
+      ],
+      "originalTitle": "Cada cuánto sabemos que nos hemos equivocado",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "El modelo que se niega a creer en el consumidor medio",
       "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html",
       "meta": "BLOG · 28/09/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Cuarenta años preguntando qué comes",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
-      "url": "/post/metabolomica-biomarcadores.html",
-      "meta": "BLOG · 14/09/2026",
-      "description": "La metabolómica puede medir miles de señales, pero identificar biomarcadores reproducibles exige resolver problemas de anotación, confusión, estabilidad temporal y utilidad clínica.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/metabolomica-biomarcadores.html"
-        }
-      ],
-      "originalTitle": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
       "year": "2026",
       "tags": [
         "blog"
