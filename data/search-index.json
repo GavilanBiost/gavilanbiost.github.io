@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Entre un diez y un veinte por ciento",
+      "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html",
+      "meta": "BLOG · 12/10/2026",
+      "description": "La microbiota explica, como mucho, un 10–20 % del efecto cardiovascular de la dieta mediterránea. Qué sabemos, qué no y por qué esa cifra quizá sea optimista.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html"
+        }
+      ],
+      "originalTitle": "Entre un diez y un veinte por ciento",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Cada cuánto sabemos que nos hemos equivocado",
       "url": "/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html",
       "meta": "BLOG · 05/10/2026",
