@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "El problema de nutrición personalizada está en «personalizada»",
+      "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html",
+      "meta": "BLOG · 19/10/2026",
+      "description": "Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html"
+        }
+      ],
+      "originalTitle": "El problema de nutrición personalizada está en «personalizada»",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Entre un diez y un veinte por ciento",
       "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html",
       "meta": "BLOG · 12/10/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Cada cuánto sabemos que nos hemos equivocado",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "El modelo que se niega a creer en el consumidor medio",
-      "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html",
-      "meta": "BLOG · 28/09/2026",
-      "description": "Cómo el logit con parámetros aleatorios captura la diversidad de gustos en la elección alimentaria y por qué las ciencias ómicas podrían, algún día, explicarla.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html"
-        }
-      ],
-      "originalTitle": "El modelo que se niega a creer en el consumidor medio",
       "year": "2026",
       "tags": [
         "blog"
