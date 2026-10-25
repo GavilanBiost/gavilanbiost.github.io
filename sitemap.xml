@@ -7,7 +7,6 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/jesus.jpg</image:loc>
-      <image:title>Jesús F García Gavilán</image:title>
     </image:image>
   </url>
   <url>
@@ -87,41 +86,113 @@
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/Imagen%201.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%202.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%203.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%204.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/Imagen%205.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/rnn-lstm.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/transformers.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gnn.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gan.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/dieta-en-la-sangre-metabolomica-ingesta.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/correlacion_metabolitos_ingesta_por_alimento.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/recorrido_alimento_metaboloma_modelo_estimacion.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/Imagen%20de%20ChatGPT%2026%20sept%202026,%2017_44_29.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/Pasted%20image%2020260926175342.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/entre-un-diez-y-un-veinte-por-ciento.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/entre-un-diez-y-un-veinte-por-ciento/microbiota-quien-esta-que-fabrica.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/entre-un-diez-y-un-veinte-por-ciento/dieta-microbiota-metabolitos-huesped.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/entre-un-diez-y-un-veinte-por-ciento/microbiota-mediador-modificador.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/metabolomica-biomarcadores.html</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/Captura%20de%20pantalla%202026-09-13%20a%20las%2021.56.46.png</image:loc>
+    </image:image>
   </url>
 </urlset>

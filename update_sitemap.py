@@ -2,7 +2,9 @@ import datetime
 import html
 import re
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urljoin, urlsplit
 
 BASE_URL = "https://gavilanbiost.com"
 SITEMAP_PATH = Path("sitemap.xml")
@@ -38,6 +40,38 @@ def extract_meta(content: str, name: str) -> str:
     )
     match = pattern.search(content)
     return html.unescape(match.group(1).strip()) if match else ""
+
+
+class ArticleImages(HTMLParser):
+    """Collect the primary image URL of each figure, excluding site logos."""
+
+    def __init__(self, page_url: str):
+        super().__init__()
+        self.page_url = page_url
+        self.in_article = False
+        self.urls = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "article":
+            self.in_article = True
+        if tag != "img" or not self.in_article:
+            return
+        src = dict(attrs).get("src", "").strip()
+        if not src:
+            return
+        url = urljoin(self.page_url, src)
+        if urlsplit(url).scheme in {"http", "https"} and url not in self.urls:
+            self.urls.append(url)
+
+    def handle_endtag(self, tag):
+        if tag == "article":
+            self.in_article = False
+
+
+def extract_article_images(path: Path) -> list[str]:
+    parser = ArticleImages(f"{BASE_URL}/{path.as_posix()}")
+    parser.feed(path.read_text(encoding="utf-8"))
+    return parser.urls
 
 
 def parse_date(date_text: str):
@@ -102,14 +136,11 @@ def collect_entries() -> list[dict]:
         for path in post_files:
             if not should_include_post(path):
                 continue
-            entries.append(
-                build_entry(
-                    f"/post/{path.name}",
-                    path,
-                    "monthly",
-                    "0.8",
-                )
+            entry = build_entry(
+                f"/post/{path.name}", path, "monthly", "0.8"
             )
+            entry["images"] = extract_article_images(path)
+            entries.append(entry)
 
     return entries
 
@@ -128,10 +159,12 @@ def write_sitemap(entries: list[dict]) -> None:
         ET.SubElement(url_node, f"{{{NS_SITEMAP}}}priority").text = entry["priority"]
 
         image_url = entry.get("image", "")
-        if image_url:
+        image_urls = entry.get("images", [])
+        if image_url and image_url not in image_urls:
+            image_urls = [image_url, *image_urls]
+        for image_url in image_urls:
             image_node = ET.SubElement(url_node, f"{{{NS_IMAGE}}}image")
             ET.SubElement(image_node, f"{{{NS_IMAGE}}}loc").text = image_url
-            ET.SubElement(image_node, f"{{{NS_IMAGE}}}title").text = "Jesús F García Gavilán"
 
     tree = ET.ElementTree(urlset)
     ET.indent(tree, space="  ")

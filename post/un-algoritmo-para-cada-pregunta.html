@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Un algoritmo para cada pregunta · Jesús F. García Gavilán</title>
+    <title>Un algoritmo para cada pregunta: medicina de precisión</title>
 
     <meta name="description" content="Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber: regularización, árboles, SVM, redes bayesianas y deep learning.">
     <meta name="author" content="Jesús F García Gavilán">
-    <meta name="keywords" content="medicina de precisión, machine learning, interpretabilidad, ómicas, R vs Python">
+    <meta name="keywords" content="medicina de precisión, machine learning, selección de algoritmos, interpretabilidad, ómicas">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://gavilanbiost.com/post/un-algoritmo-para-cada-pregunta.html">
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://gavilanbiost.com/post/un-algoritmo-para-cada-pregunta.html">
-    <meta property="og:title" content="Un algoritmo para cada pregunta · Jesús F. García Gavilán">
+    <meta property="og:title" content="Un algoritmo para cada pregunta: medicina de precisión">
     <meta property="og:description" content="Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber: regularización, árboles, SVM, redes bayesianas y deep learning.">
-    <meta property="og:image" content="https://gavilanbiost.com/img/posts/un%20algoritmo%20para%20cada%20pregunta/Gu%C3%ADa%20visual_%20pregunta%20y%20algoritmo.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="Guía visual: según lo que se quiere saber (biomarcadores, predicción tabular, pocos pacientes, explicación, imágenes o texto), el algoritmo recomendado.">
+    <meta property="og:image" content="https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Guía de cinco objetivos y sus modelos: biomarcadores con elastic net, predicción tabular con gradient boosting, pocos pacientes con SVM, relaciones con redes bayesianas e imágenes, texto o secuencias con deep learning.">
     <meta property="og:site_name" content="Jesús F. García Gavilán">
     <meta property="og:locale" content="es_ES">
     <meta property="article:published_time" content="2026-10-26">
@@ -27,14 +29,14 @@
     <meta property="article:tag" content="machine learning">
     <meta property="article:tag" content="interpretabilidad">
     <meta property="article:tag" content="ómicas">
-    <meta property="article:tag" content="R vs Python">
+    <meta property="article:tag" content="selección de algoritmos">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/post/un-algoritmo-para-cada-pregunta.html">
-    <meta name="twitter:title" content="Un algoritmo para cada pregunta · Jesús F. García Gavilán">
+    <meta name="twitter:title" content="Un algoritmo para cada pregunta: medicina de precisión">
     <meta name="twitter:description" content="Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber: regularización, árboles, SVM, redes bayesianas y deep learning.">
-    <meta name="twitter:image" content="https://gavilanbiost.com/img/posts/un%20algoritmo%20para%20cada%20pregunta/Gu%C3%ADa%20visual_%20pregunta%20y%20algoritmo.png">
-    <meta name="twitter:image:alt" content="Guía visual: según lo que se quiere saber (biomarcadores, predicción tabular, pocos pacientes, explicación, imágenes o texto), el algoritmo recomendado.">
+    <meta name="twitter:image" content="https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg">
+    <meta name="twitter:image:alt" content="Guía de cinco objetivos y sus modelos: biomarcadores con elastic net, predicción tabular con gradient boosting, pocos pacientes con SVM, relaciones con redes bayesianas e imágenes, texto o secuencias con deep learning.">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/jf-icon.png" sizes="any">
@@ -44,8 +46,8 @@
     <link rel="stylesheet" href="/assets/pages.css">
     <meta name="post-category" content="BLOG">
     <meta name="post-date" content="2026-10-26">
-    <meta name="post-image" content="https://gavilanbiost.com/img/posts/un%20algoritmo%20para%20cada%20pregunta/Gu%C3%ADa%20visual_%20pregunta%20y%20algoritmo.png">
-    <meta name="post-image-alt" content="Guía visual: según lo que se quiere saber (biomarcadores, predicción tabular, pocos pacientes, explicación, imágenes o texto), el algoritmo recomendado.">
+    <meta name="post-image" content="https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg">
+    <meta name="post-image-alt" content="Guía de cinco objetivos y sus modelos: biomarcadores con elastic net, predicción tabular con gradient boosting, pocos pacientes con SVM, relaciones con redes bayesianas e imágenes, texto o secuencias con deep learning.">
 
     <script type="application/ld+json">
     {
@@ -54,11 +56,52 @@
         "headline": "Un algoritmo para cada pregunta",
         "alternativeHeadline": "Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber",
         "description": "Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber: regularización, árboles, SVM, redes bayesianas y deep learning.",
-        "image": ["https://gavilanbiost.com/img/posts/un%20algoritmo%20para%20cada%20pregunta/Gu%C3%ADa%20visual_%20pregunta%20y%20algoritmo.png"],
+        "image": [
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg",
+                "contentUrl": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg",
+                "width": 1200,
+                "height": 630,
+                "caption": "Guía de cinco objetivos y sus modelos: biomarcadores con elastic net, predicción tabular con gradient boosting, pocos pacientes con SVM, relaciones con redes bayesianas e imágenes, texto o secuencias con deep learning."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision.webp",
+                "width": 1774,
+                "height": 887,
+                "caption": "Figura 1. Cinco objetivos de análisis y los modelos que se presentan para cada uno."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/datos-omicos-historia-clinica-senales.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/datos-omicos-historia-clinica-senales.webp",
+                "width": 1536,
+                "height": 1024,
+                "caption": "Figura 2. Retos de los datos ómicos, la historia clínica y las señales continuas."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/lasso-elastic-net-genes-correlacionados.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/lasso-elastic-net-genes-correlacionados.webp",
+                "width": 1774,
+                "height": 887,
+                "caption": "Figura 3. Esquema ilustrativo de LASSO y elastic net ante cinco genes correlacionados: selección de uno frente a conservación del grupo."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/red-bayesiana-genes-diagnostico.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/red-bayesiana-genes-diagnostico.webp",
+                "width": 1536,
+                "height": 1024,
+                "caption": "Figura 4. Red bayesiana ilustrativa con genes, antecedentes, enfermedad, síntomas, pruebas clínicas y diagnóstico."
+            }
+        ],
         "datePublished": "2026-10-26",
         "dateModified": "2026-10-26",
         "inLanguage": "es",
-        "keywords": "medicina de precisión, machine learning, interpretabilidad, ómicas, R vs Python",
+        "keywords": "medicina de precisión, machine learning, selección de algoritmos, interpretabilidad, ómicas",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://gavilanbiost.com/post/un-algoritmo-para-cada-pregunta.html"
@@ -72,7 +115,8 @@
             "@type": "Person",
             "name": "Jesús F. García Gavilán",
             "url": "https://gavilanbiost.com/"
-        }
+        },
+        "articleSection": "Medicina de precisión"
     }
     </script>
 </head>
@@ -111,8 +155,8 @@
                     <p>La pregunta "¿qué algoritmo uso?" aparece enseguida en cualquier proyecto de este tipo, y la respuesta es el ya conocido "<em>depende de los datos que tengas y de lo que quieras saber</em>". No es lo mismo predecir que explicar, ni una matriz de 20.000 genes y 200 pacientes que una historia clínica con miles de pacientes y huecos por todas partes (<em>real-world data</em>). En este post repaso los modelos más usados y para qué pregunta dirijo cada uno.</p>
 
                     <figure style="margin: 0;">
-                        <img src="../img/posts/un%20algoritmo%20para%20cada%20pregunta/Gu%C3%ADa%20visual_%20pregunta%20y%20algoritmo.png" alt="Guía visual: según lo que se quiere saber (biomarcadores, predicción tabular, pocos pacientes, explicación, imágenes o texto), el algoritmo recomendado." fetchpriority="high" decoding="async">
-                        <figcaption>Figura 1. Primero la pregunta, después el algoritmo.</figcaption>
+                        <img src="/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision.webp" srcset="/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-860.webp 860w, /img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision.webp 1774w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1774" height="887" alt="Guía de cinco objetivos y sus modelos: biomarcadores con elastic net, predicción tabular con gradient boosting, pocos pacientes con SVM, relaciones con redes bayesianas e imágenes, texto o secuencias con deep learning." fetchpriority="high" decoding="async">
+                        <figcaption>Figura 1. Cinco objetivos de análisis y los modelos que se presentan para cada uno.</figcaption>
                     </figure>
 
                     <h2>Paso 1: los datos</h2>
@@ -120,8 +164,8 @@
                     <p>Antes de decidir y aplicar el algoritmo, conviene saber con qué se trabaja, porque cada tipo de dato trae sus propios problemas. Los datos ómicos tienen más dimensiones de características (variables) que de observaciones (por ejemplo, pacientes), suelen tener mucho ruido técnico y las características están muy correlacionadas (genes co-regulados, metabolitos de una misma ruta...). La historia clínica electrónica mezcla datos estructurados y texto libre, variables categóricas con muchísimos niveles y fechas que no deberían tratarse como texto, sino como "tiempo desde el último evento". Y, sobre todo, tiene muchos (muchísimos) datos que están ausentes no de forma aleatoria, sino porque el/la clínic@ correspondiente no consideró necesaria una prueba determinada, y eso ya es información (imputar con la media, por ejemplo, aquí, introduce sesgos). Las señales continuas de la UCI o de los dispositivos portátiles, por su parte, son series temporales llenas de artefactos cuya distribución cambia con el tiempo, por ejemplo, cuando el paciente empeora.</p>
 
                     <figure style="margin: 0;">
-                        <img src="../img/posts/un%20algoritmo%20para%20cada%20pregunta/Tres%20tipos%20de%20datos%2C%20tres%20retos.png" alt="Tres tarjetas con los tipos de datos y su problema principal: ómicas (más variables que pacientes, colinealidad), historia clínica (datos faltantes no al azar) y señales continuas (artefactos, distribución cambiante)." loading="lazy" decoding="async">
-                        <figcaption>Figura 2. Cada tipo de dato trae sus propios problemas.</figcaption>
+                        <img src="/img/posts/un-algoritmo-para-cada-pregunta/datos-omicos-historia-clinica-senales.webp" srcset="/img/posts/un-algoritmo-para-cada-pregunta/datos-omicos-historia-clinica-senales-860.webp 860w, /img/posts/un-algoritmo-para-cada-pregunta/datos-omicos-historia-clinica-senales.webp 1536w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1536" height="1024" alt="Tres tarjetas: ómicas con más variables que pacientes y colinealidad; historia clínica con datos faltantes no al azar; señales continuas con artefactos y distribución cambiante." loading="lazy" decoding="async">
+                        <figcaption>Figura 2. Retos de los datos ómicos, la historia clínica y las señales continuas.</figcaption>
                     </figure>
 
                     <h2>Paso 2.1: si quieres seleccionar biomarcadores...</h2>
@@ -134,8 +178,8 @@
                     </ul>
 
                     <figure style="margin: 0;">
-                        <img src="../img/posts/un%20algoritmo%20para%20cada%20pregunta/LASSO%20y%20Elastic%20Net_%20genes%20correlacionados.png" alt="Trayectorias de coeficientes de lasso frente a elastic net con un grupo de genes correlacionados: lasso se queda con uno y elastic net mantiene el grupo." loading="lazy" decoding="async">
-                        <figcaption>Figura 3. Con variables correlacionadas, lasso elige una casi al azar y elastic net reparte el peso (simulación propia en R con <code>glmnet</code>).</figcaption>
+                        <img src="/img/posts/un-algoritmo-para-cada-pregunta/lasso-elastic-net-genes-correlacionados.webp" srcset="/img/posts/un-algoritmo-para-cada-pregunta/lasso-elastic-net-genes-correlacionados-860.webp 860w, /img/posts/un-algoritmo-para-cada-pregunta/lasso-elastic-net-genes-correlacionados.webp 1774w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1774" height="887" alt="Esquema de coeficientes al reducir la penalización: LASSO selecciona un gen y elastic net conserva un grupo de cinco genes correlacionados." loading="lazy" decoding="async">
+                        <figcaption>Figura 3. Esquema ilustrativo de LASSO y elastic net ante cinco genes correlacionados: selección de uno frente a conservación del grupo.</figcaption>
                     </figure>
 
 <pre><code>library(glmnet)
@@ -188,13 +232,13 @@ plot(enet, xvar = "lambda", main = "Elastic net")</code></pre>
                     <p>El <em>deep learning</em> destaca en la predicción, pero las redes bayesianas destacan en la explicación. Son grafos en los que los nodos representan variables (síntomas, genes y enfermedades) y las flechas, dependencias condicionales. Permiten actualizar la probabilidad de un diagnóstico a medida que llega nueva información y, si el grafo se construye con conocimiento causal, simular intervenciones del tipo "¿qué pasa si damos el fármaco X?". Además, manejan los datos faltantes sin necesidad de imputación. Se han usado en sistemas de apoyo al diagnóstico y, por ejemplo, para <a href="https://doi.org/10.1093/pnasnexus/pgad133" target="_blank" rel="noopener noreferrer">predecir la respuesta a la inmunoterapia</a> en cáncer de pulmón no microcítico, con un modelo de "caja blanca" que, además de ser más preciso que los métodos previos, permite ver qué variables influyen en cada predicción.</p>
 
                     <figure style="margin: 0;">
-                        <img src="../img/posts/un%20algoritmo%20para%20cada%20pregunta/Red%20bayesiana%20de%20genes%20y%20diagn%C3%B3stico.png" alt="Red bayesiana sencilla con nodos de genes, síntomas y diagnóstico unidos por flechas de dependencia condicional." loading="lazy" decoding="async">
-                        <figcaption>Figura 4. Una red bayesiana sencilla: genes, síntomas y diagnóstico conectados por dependencias condicionales.</figcaption>
+                        <img src="/img/posts/un-algoritmo-para-cada-pregunta/red-bayesiana-genes-diagnostico.webp" srcset="/img/posts/un-algoritmo-para-cada-pregunta/red-bayesiana-genes-diagnostico-860.webp 860w, /img/posts/un-algoritmo-para-cada-pregunta/red-bayesiana-genes-diagnostico.webp 1536w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1536" height="1024" alt="Red bayesiana: genes y antecedentes apuntan a enfermedad; enfermedad a síntomas y pruebas clínicas; ambos a diagnóstico." loading="lazy" decoding="async">
+                        <figcaption>Figura 4. Red bayesiana ilustrativa con genes, antecedentes, enfermedad, síntomas, pruebas clínicas y diagnóstico.</figcaption>
                     </figure>
 
                     <h2>Paso 2.5: si trabajas con imágenes, texto o secuencias</h2>
 
-                    <p>Aquí el aprendizaje profundo no tiene rival. Las redes convolucionales (CNN) para histopatología o retinopatía diabética, las redes recurrentes (RNN) para electrocardiogramas o historias longitudinales, los <em>autoencoders</em> para comprimir miles de genes en un espacio latente y las redes de grafos para predecir propiedades moleculares. Su gran pega es la interpretabilidad. Una salida intermedia interesante son los árboles de decisión suaves: se entrena una red compleja y se "destila" su conocimiento en un árbol que imita sus predicciones, pero cuya lógica se puede inspeccionar.</p>
+                    <p>Aquí el <a href="/post/deep-learning-ciencias-omicas.html">aprendizaje profundo</a> no tiene rival. Las redes convolucionales (CNN) para histopatología o retinopatía diabética, las redes recurrentes (RNN) para electrocardiogramas o historias longitudinales, los <em>autoencoders</em> para comprimir miles de genes en un espacio latente y las redes de grafos para predecir propiedades moleculares. Su gran pega es la interpretabilidad. Una salida intermedia interesante son los árboles de decisión suaves: se entrena una red compleja y se "destila" su conocimiento en un árbol que imita sus predicciones, pero cuya lógica se puede inspeccionar.</p>
 
                     <p>Y si los datos no paran de llegar, como en la monitorización continua, hacen falta algoritmos de <em>clustering</em> en flujo que den más peso a los datos recientes para detectar cambios agudos. En Python, la biblioteca <a href="https://jmlr.csail.mit.edu/papers/volume22/20-1380/20-1380.pdf" target="_blank" rel="noopener noreferrer">River</a> es la referencia para el aprendizaje incremental y en R, el paquete <code>stream</code>.</p>
 
