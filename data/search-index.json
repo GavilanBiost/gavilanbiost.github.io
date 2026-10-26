@@ -1649,6 +1649,26 @@
   ],
   "noticias": [
     {
+      "title": "García Gavilán y Machrouh lideran los resultados de la Carrera Urbana de Málaga - 101tv Sevilla",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQTGk1TExpSnNHLWdaN1hHdk5hbml4bGhqTUFFUF9lV0VDdFZUTDlsR25VVXZDeEJMX0lsVlN6UGZVcGlmSC1hdE8xaW1IeWJyenV3VkRBNF8tVFVMWGxlSDliSXVXamN6aTNDWklycEltRTFZZ0tuaUdxR2F4TVg2aU9KZ0tKdW5OUGdDN19iXzhIQWlwYl8tbC05cDZxcmFydmVvMlZGMA?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "meta": "101tv Sevilla · 25/10/2026",
+      "description": "101tv Sevilla",
+      "links": [],
+      "originalTitle": "García Gavilán y Machrouh lideran los resultados de la Carrera Urbana de Málaga - 101tv Sevilla",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "El marbellí Daniel García Gavilán corona la Carrera Urbana El Corte Inglés de Málaga - Marbella Directo",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOdXlndHFnSUU4Qkd5cjFrQVN6eEZlRm9UOFhKamVYZkVNeDFaRV9tM3NITUZXZnVXQ2YyXzhSQS1iNG92N0dUR1dNLWdGcVdpZ2RHMF9YSlZCSzRRZ1dwbFlEeGR6ZnBXaFl5RlJHbFNVTlhvWkdzMGJ3Ny1rdklCaTRwcm5GaU9SUXFBMkoxWkZKTE9zNzR0WVg3d29DZjRuLTR5MnlWSlA5Zzh0OEtJdTlGaw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "meta": "Marbella Directo · 25/10/2026",
+      "description": "Marbella Directo",
+      "links": [],
+      "originalTitle": "El marbellí Daniel García Gavilán corona la Carrera Urbana El Corte Inglés de Málaga - Marbella Directo",
+      "year": "2026",
+      "tags": []
+    },
+    {
       "title": "Relacionan el consumo de ultraprocesados con cambios en el metabolismo de los niños - Diari digital de la URV",
       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVHdUM0hLRXg4RlR0Um1YSFE5NklyQTJDandSM0VGc0F2N2F2UUdYWXRVSEw4OTMtRndqMjlmTHd0NjY4X0pPUThvRjZrX1A0NTBtT1YybGdxRVNhbnVQcnpNYXJhUks5UjNlM05OU1F3Y2REbk1YMnpVSDdDQ1N3VHVyM0NIUms0R0VhM0VUZXYyUUlHeGdVMmxscUNYVnJpUjR6MkVqcURSZjgtWmNPSW1iN1lGcDg?oc=5&hl=en-US&gl=US&ceid=US:en",
       "meta": "Diari digital de la URV · 22/10/2026",
@@ -1665,16 +1685,6 @@
       "description": "Centro de Investigación Biomédica en Red (CIBER)",
       "links": [],
       "originalTitle": "Relacionan el consumo de ultraprocesados con cambios en el metabolismo de los niños - Centro de Investigación Biomédica en Red (CIBER)",
-      "year": "2026",
-      "tags": []
-    },
-    {
-      "title": "El consum d’aliments ultraprocessats s’associa a diferències en el metabolisme dels infants",
-      "url": "https://www.irbcatsud.cat/el-consum-daliments-ultraprocessats-sassocia-a-diferencies-en-el-metabolisme-dels-infants/",
-      "meta": "IISPV · 22/10/2026",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "El consum d’aliments ultraprocessats s’associa a diferències en el metabolisme dels infants",
       "year": "2026",
       "tags": []
     },
@@ -1759,16 +1769,6 @@
       "tags": []
     },
     {
-      "title": "Una petjada bioquímica identifica les persones amb diabetis i resistència a la insulina amb més risc de mortalitat",
-      "url": "https://www.irbcatsud.cat/una-petjada-bioquimica-identifica-les-persones-amb-diabetis-i-resistencia-a-la-insulina-amb-mes-risc-de-mortalitat/",
-      "meta": "IISPV · 24/07/2026",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Una petjada bioquímica identifica les persones amb diabetis i resistència a la insulina amb més risc de mortalitat",
-      "year": "2026",
-      "tags": []
-    },
-    {
       "title": "Una huella bioquímica identifica a las personas con diabetes y resistencia a la insulina con mayor riesgo de mortalidad",
       "url": "https://www.news3edad.com/2026/07/24/una-huella-bioquimica-identifica-a-las-personas-con-diabetes-y-resistencia-a-la-insulina-con-mayor-riesgo-de-mortalidad/?utm_source=rss&utm_medium=rss&utm_campaign=una-huella-bioquimica-identifica-a-las-personas-con-diabetes-y-resistencia-a-la-insulina-con-mayor-riesgo-de-mortalidad",
       "meta": "NewsTerceraEdad · 24/07/2026",
@@ -1815,16 +1815,6 @@
       "description": "NetMD",
       "links": [],
       "originalTitle": "La microbiota intestinal puede explicar parte de la relación entre dieta y depresión",
-      "year": "2026",
-      "tags": []
-    },
-    {
-      "title": "Un estudi identifica el paper de la microbiota en la relació entre dieta i depressió",
-      "url": "https://www.irbcatsud.cat/un-estudi-identifica-el-paper-de-la-microbiota-en-la-relacio-entre-dieta-i-depressio/",
-      "meta": "IISPV · 23/03/2026",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Un estudi identifica el paper de la microbiota en la relació entre dieta i depressió",
       "year": "2026",
       "tags": []
     },
@@ -1900,7 +1890,7 @@
     },
     {
       "title": "ELOY GARCIA GAVILAN ISMAEL NAVA GOMEZ CB",
-      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6addf674f55e42aea7b06c276d9768b0&url=https%3a%2f%2fcincodias.elpais.com%2fdirectorio-empresas%2fempresa%2f3945168%2feloy-garcia-gavilan-ismael-nava-gomez&c=4955839427214226716&mkt=es-us",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6adf5ea75eba4f158f9643558d258764&url=https%3a%2f%2fcincodias.elpais.com%2fdirectorio-empresas%2fempresa%2f3945168%2feloy-garcia-gavilan-ismael-nava-gomez&c=4955839427214226716&mkt=es-us",
       "meta": "Bing News · 22/03/2026",
       "description": "Bing News",
       "links": [],
@@ -1985,16 +1975,6 @@
       "description": "Salud a Diario",
       "links": [],
       "originalTitle": "La obesidad sarcopénica acelera el deterioro cognitivo en personas mayores",
-      "year": "2025",
-      "tags": []
-    },
-    {
-      "title": "L’obesitat sarcopènica accelera el deteriorament cognitiu en persones grans",
-      "url": "https://www.irbcatsud.cat/lobesitat-sarcopenica-accelera-el-deteriorament-cognitiu-en-persones-grans/",
-      "meta": "IISPV · 15/12/2025",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "L’obesitat sarcopènica accelera el deteriorament cognitiu en persones grans",
       "year": "2025",
       "tags": []
     },
@@ -2189,32 +2169,12 @@
       "tags": []
     },
     {
-      "title": "Un estudi internacional pretén canviar els sistemes de salut públics i incloure la ingesta de fruita seca en els protocols de prevenció de malalties cròniques i no transmissibles",
-      "url": "https://www.irbcatsud.cat/un-estudi-internacional-preten-canviar-els-sistemes-de-salut-publics-i-incloure-la-ingesta-de-fruita-seca-en-els-protocols-de-prevencio-de-malalties-croniques-i-no-transmissibles/",
-      "meta": "IISPV · 05/09/2024",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Un estudi internacional pretén canviar els sistemes de salut públics i incloure la ingesta de fruita seca en els protocols de prevenció de malalties cròniques i no transmissibles",
-      "year": "2024",
-      "tags": []
-    },
-    {
       "title": "Estudiarán el papel de la dieta en la modulación de proteínas que pueden predecir el deterioro cognitivo",
       "url": "https://www.news3edad.com/2024/06/14/estudiaran-el-papel-de-la-dieta-en-la-modulacion-de-proteinas-que-pueden-predecir-el-deterioro-cognitivo/?utm_source=rss&utm_medium=rss&utm_campaign=estudiaran-el-papel-de-la-dieta-en-la-modulacion-de-proteinas-que-pueden-predecir-el-deterioro-cognitivo",
       "meta": "NewsTerceraEdad · 14/06/2024",
       "description": "NewsTerceraEdad",
       "links": [],
       "originalTitle": "Estudiarán el papel de la dieta en la modulación de proteínas que pueden predecir el deterioro cognitivo",
-      "year": "2024",
-      "tags": []
-    },
-    {
-      "title": "Estudiaran el paper de la dieta en la modulació de proteïnes que poden predir el deteriorament cognitiu",
-      "url": "https://www.irbcatsud.cat/estudiaran-el-paper-de-la-dieta-en-la-modulacio-de-proteines-que-poden-predir-el-deteriorament-cognitiu/",
-      "meta": "IISPV · 14/06/2024",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Estudiaran el paper de la dieta en la modulació de proteïnes que poden predir el deteriorament cognitiu",
       "year": "2024",
       "tags": []
     },
@@ -2320,16 +2280,6 @@
     },
     {
       "title": "La microbiota intestinal, clau en els beneficis cardiovasculars derivats de la dieta mediterrània i l’exercici físic",
-      "url": "https://www.irbcatsud.cat/la-microbiota-intestinal-clau-en-els-beneficis-cardiovasculars-derivats-de-la-dieta-mediterrania-i-lexercici-fisic/",
-      "meta": "IISPV · 21/03/2024",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "La microbiota intestinal, clau en els beneficis cardiovasculars derivats de la dieta mediterrània i l’exercici físic",
-      "year": "2024",
-      "tags": []
-    },
-    {
-      "title": "La microbiota intestinal, clau en els beneficis cardiovasculars derivats de la dieta mediterrània i l’exercici físic",
       "url": "https://diaridigital.urv.cat/la-microbiota-intestinal-clau-en-els-beneficis-cardiovasculars-derivats-de-la-dieta-mediterrania-i-lexercici-fisic/",
       "meta": "Diari Digital URV · 21/03/2024",
       "description": "Diari Digital URV",
@@ -2400,16 +2350,6 @@
     },
     {
       "title": "Descobreixen el procés mitjançant el qual els llegums ajuden a reduir el risc de patir diabetis tipus 2",
-      "url": "https://www.irbcatsud.cat/descobreixen-el-proces-mitjancant-el-qual-els-llegums-ajuden-a-reduir-el-risc-de-patir-diabetis-tipus-2/",
-      "meta": "IISPV · 12/02/2024",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Descobreixen el procés mitjançant el qual els llegums ajuden a reduir el risc de patir diabetis tipus 2",
-      "year": "2024",
-      "tags": []
-    },
-    {
-      "title": "Descobreixen el procés mitjançant el qual els llegums ajuden a reduir el risc de patir diabetis tipus 2",
       "url": "https://diaridigital.urv.cat/descobreixen-el-proces-mitjancant-el-qual-els-llegums-ajuden-a-reduir-el-risc-de-patir-diabetis-tipus-2/",
       "meta": "Diari Digital URV · 12/02/2024",
       "description": "Diari Digital URV",
@@ -2425,16 +2365,6 @@
       "description": "NewsTerceraEdad",
       "links": [],
       "originalTitle": "Las personas con peso y perímetro de cintura excesivos tienen más riesgo de contraer el COVID-19",
-      "year": "2023",
-      "tags": []
-    },
-    {
-      "title": "Les persones amb pes i perímetre de cintura excessius tenen més risc de contraure el COVID-19",
-      "url": "https://www.irbcatsud.cat/les-persones-amb-pes-i-perimetre-de-cintura-excessius-tenen-mes-risc-de-contraure-el-covid-19/",
-      "meta": "IISPV · 16/11/2023",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Les persones amb pes i perímetre de cintura excessius tenen més risc de contraure el COVID-19",
       "year": "2023",
       "tags": []
     },
@@ -2465,16 +2395,6 @@
       "description": "NewsTerceraEdad",
       "links": [],
       "originalTitle": "Seguir una dieta mediterránea hipocalórica y practicar ejercicio retrasa la pérdida de masa muscular asociada a la edad",
-      "year": "2023",
-      "tags": []
-    },
-    {
-      "title": "Seguir una dieta mediterrània hipocalòrica i fer exercici retarda la pèrdua de massa muscular associada a l’edat",
-      "url": "https://www.irbcatsud.cat/seguir-una-dieta-mediterrania-hipocalorica-i-fer-exercici-retarda-la-perdua-de-massa-muscular-associada-a-ledat/",
-      "meta": "IISPV · 19/10/2023",
-      "description": "IISPV",
-      "links": [],
-      "originalTitle": "Seguir una dieta mediterrània hipocalòrica i fer exercici retarda la pèrdua de massa muscular associada a l’edat",
       "year": "2023",
       "tags": []
     },
@@ -2523,16 +2443,6 @@
       "url": "https://diaridigital.urv.cat/identifiquen-biomarcadors-per-pronosticar-precocment-el-deteriorament-cognitiu-en-persones-grans/",
       "meta": "Diari Digital URV · 27/04/2023",
       "description": "Diari Digital URV",
-      "links": [],
-      "originalTitle": "Identifiquen biomarcadors per pronosticar precoçment el deteriorament cognitiu en persones grans",
-      "year": "2023",
-      "tags": []
-    },
-    {
-      "title": "Identifiquen biomarcadors per pronosticar precoçment el deteriorament cognitiu en persones grans",
-      "url": "https://www.irbcatsud.cat/identifiquen-biomarcadors-per-pronosticar-precocment-el-deteriorament-cognitiu-en-persones-grans/",
-      "meta": "IISPV · 27/04/2023",
-      "description": "IISPV",
       "links": [],
       "originalTitle": "Identifiquen biomarcadors per pronosticar precoçment el deteriorament cognitiu en persones grans",
       "year": "2023",
