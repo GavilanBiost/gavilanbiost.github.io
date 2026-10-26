@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Un algoritmo para cada pregunta",
+      "url": "/post/un-algoritmo-para-cada-pregunta.html",
+      "meta": "BLOG · 26/10/2026",
+      "description": "Cómo elegir modelo en medicina de precisión según los datos y lo que se quiere saber: regularización, árboles, SVM, redes bayesianas y deep learning.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/un-algoritmo-para-cada-pregunta.html"
+        }
+      ],
+      "originalTitle": "Un algoritmo para cada pregunta",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "El problema de nutrición personalizada está en «personalizada»",
       "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html",
       "meta": "BLOG · 19/10/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Entre un diez y un veinte por ciento",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "Cada cuánto sabemos que nos hemos equivocado",
-      "url": "/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html",
-      "meta": "BLOG · 05/10/2026",
-      "description": "Aprendizaje por refuerzo y metabolómica: por qué la retroalimentación lenta de las cohortes limita a los agentes y en qué escenarios sí encaja.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html"
-        }
-      ],
-      "originalTitle": "Cada cuánto sabemos que nos hemos equivocado",
       "year": "2026",
       "tags": [
         "blog"
