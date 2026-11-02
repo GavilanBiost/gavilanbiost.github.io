@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "El script que compila y la estadística que no",
+      "url": "/post/el-script-que-compila.html",
+      "meta": "BLOG · 02/11/2026",
+      "description": "Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/el-script-que-compila.html"
+        }
+      ],
+      "originalTitle": "El script que compila y la estadística que no",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Un algoritmo para cada pregunta",
       "url": "/post/un-algoritmo-para-cada-pregunta.html",
       "meta": "BLOG · 26/10/2026",

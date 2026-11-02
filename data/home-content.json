@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "El script que compila y la estadística que no",
+      "url": "/post/el-script-que-compila.html",
+      "meta": "BLOG · 02/11/2026",
+      "description": "Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/el-script-que-compila.html"
+        }
+      ],
+      "originalTitle": "El script que compila y la estadística que no",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "Un algoritmo para cada pregunta",
       "url": "/post/un-algoritmo-para-cada-pregunta.html",
       "meta": "BLOG · 26/10/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "El problema de nutrición personalizada está en «personalizada»",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "Entre un diez y un veinte por ciento",
-      "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html",
-      "meta": "BLOG · 12/10/2026",
-      "description": "La microbiota explica, como mucho, un 10–20 % del efecto cardiovascular de la dieta mediterránea. Qué sabemos, qué no y por qué esa cifra quizá sea optimista.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html"
-        }
-      ],
-      "originalTitle": "Entre un diez y un veinte por ciento",
       "year": "2026",
       "tags": [
         "blog"
