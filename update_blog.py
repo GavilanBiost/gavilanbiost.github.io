@@ -9,6 +9,7 @@ from update_sitemap import generate_sitemap
 
 ARCHIVE_PATH = Path("posts.html")
 POSTS_DIR = Path("post")
+SCHEDULED_POSTS_DIR = Path("_scheduled")
 EXCLUDED_FILES = {"post-template.html"}
 DEFAULT_CATEGORY = "BLOG"
 
@@ -87,6 +88,21 @@ def parse_date(date_text):
         except ValueError:
             continue
     return None
+
+
+def publish_scheduled_posts():
+    today = datetime.datetime.now(datetime.UTC).date()
+    for path in sorted(SCHEDULED_POSTS_DIR.glob("*.html")):
+        content = path.read_text(encoding="utf-8")
+        post_dt = parse_date(extract_meta(content, "post-date"))
+        if post_dt is None or post_dt.date() > today:
+            continue
+
+        published_path = POSTS_DIR / path.name
+        if published_path.exists():
+            raise FileExistsError(f"Ya existe el post publicado: {published_path}")
+        path.replace(published_path)
+        print(f"✓ Publicado post programado: {published_path.name}")
 
 
 def load_posts():
@@ -171,6 +187,7 @@ def update_archive(posts, timestamp):
 
 
 def main():
+    publish_scheduled_posts()
     posts = load_posts()
     if not posts:
         print("No se encontraron posts para actualizar")
