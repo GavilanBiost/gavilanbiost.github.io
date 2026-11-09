@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Pocos pacientes, muchas variables",
+      "url": "/post/pocos-pacientes-muchas-variables.html",
+      "meta": "BLOG · 09/11/2026",
+      "description": "Qué puede y qué no puede hacer la ciencia de datos en las enfermedades raras: cohortes pequeñas, alta dimensionalidad, desequilibrio y validación rigurosa.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/pocos-pacientes-muchas-variables.html"
+        }
+      ],
+      "originalTitle": "Pocos pacientes, muchas variables",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "El script que compila y la estadística que no",
       "url": "/post/el-script-que-compila.html",
       "meta": "BLOG · 02/11/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Un algoritmo para cada pregunta",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "El problema de nutrición personalizada está en «personalizada»",
-      "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html",
-      "meta": "BLOG · 19/10/2026",
-      "description": "Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html"
-        }
-      ],
-      "originalTitle": "El problema de nutrición personalizada está en «personalizada»",
       "year": "2026",
       "tags": [
         "blog"
