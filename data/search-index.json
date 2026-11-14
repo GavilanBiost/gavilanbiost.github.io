@@ -1684,9 +1684,9 @@
   "noticias": [
     {
       "title": "Los atletas del Trops-Cueva de Nerja Daniel García Gavilán y Cristina Salazar se imponen en la Media Maratón de Fuengirola",
-      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6af72a2a7ded4ce78ecc8d0365a88c20&url=https%3a%2f%2fcadenaser.com%2fandalucia%2f2026%2f11%2f11%2flos-atletas-del-trops-cueva-de-nerja-daniel-garcia-gavilan-y-cristina-salazar-se-imponen-en-la-media-maraton-de-fuengirola-ser-malaga%2f&c=8975494366221607303&mkt=en-us",
-      "meta": "Bing News (EN) · 11/11/2026",
-      "description": "Bing News (EN)",
+      "url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6af86a8e669443529fbcf400fa1474d7&url=https%3a%2f%2fcadenaser.com%2fandalucia%2f2026%2f11%2f11%2flos-atletas-del-trops-cueva-de-nerja-daniel-garcia-gavilan-y-cristina-salazar-se-imponen-en-la-media-maraton-de-fuengirola-ser-malaga%2f&c=8975494366221607303&mkt=es-us",
+      "meta": "Bing News · 11/11/2026",
+      "description": "Bing News",
       "links": [],
       "originalTitle": "Los atletas del Trops-Cueva de Nerja Daniel García Gavilán y Cristina Salazar se imponen en la Media Maratón de Fuengirola",
       "year": "2026",
@@ -1759,16 +1759,6 @@
       "description": "Centro de Investigación Biomédica en Red (CIBER)",
       "links": [],
       "originalTitle": "Relacionan el consumo de ultraprocesados con cambios en el metabolismo de los niños - Centro de Investigación Biomédica en Red (CIBER)",
-      "year": "2026",
-      "tags": []
-    },
-    {
-      "title": "Relacionan el consumo de ultraprocesados con cambios en el metabolismo de los niños - Diari digital de la URV",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVHdUM0hLRXg4RlR0Um1YSFE5NklyQTJDandSM0VGc0F2N2F2UUdYWXRVSEw4OTMtRndqMjlmTHd0NjY4X0pPUThvRjZrX1A0NTBtT1YybGdxRVNhbnVQcnpNYXJhUks5UjNlM05OU1F3Y2REbk1YMnpVSDdDQ1N3VHVyM0NIUms0R0VhM0VUZXYyUUlHeGdVMmxscUNYVnJpUjR6MkVqcURSZjgtWmNPSW1iN1lGcDg?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "meta": "Diari digital de la URV · 22/10/2026",
-      "description": "Diari digital de la URV",
-      "links": [],
-      "originalTitle": "Relacionan el consumo de ultraprocesados con cambios en el metabolismo de los niños - Diari digital de la URV",
       "year": "2026",
       "tags": []
     },
@@ -1879,6 +1869,16 @@
       "description": "El Mundo",
       "links": [],
       "originalTitle": "Consumo lanza a consulta pública el anteproyecto de ley que plantea prohibir la venta de bebidas energéticas a menores de 16 años - El Mundo",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "El vínculo entre la dieta mediterránea y la depresión se refuerza: “La microbiota conecta alimentación y salud mental” - ConSalud",
+      "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxNWHZ0TXVJb1dhdkZSaFZzMDhFMUkxRExyVkZselhRRGpQdHluam1CUGpvNWhqU2l6U01zNGhDR0d1ZGZKVURSOFVSRDdqOXpSOXQ0Snl3YWNWVTE3ZnZGdnk5MnJDYlRFOVYtbVA4X1UzWFo2VkpuRFY1dldUTXZGZi15dXRsTUxTakQ1MUdUUUVGX1MxSndGTnNKNHBFeUJCQnNUd2RhekRsZDNqano0T1k4MElrdGczOEMtTXp6WThIZUVjb2tqQVktcWpqclFpa04wd3RsVXNQT3lIZjlOejFVRE8xQUZvZDBvVXViVFltVTBydkhSNHplYUs4YzRkZEE?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "meta": "ConSalud · 09/05/2026",
+      "description": "ConSalud",
+      "links": [],
+      "originalTitle": "El vínculo entre la dieta mediterránea y la depresión se refuerza: “La microbiota conecta alimentación y salud mental” - ConSalud",
       "year": "2026",
       "tags": []
     },
@@ -2213,6 +2213,16 @@
       "tags": []
     },
     {
+      "title": "Una investigación internacional estudiará el impacto del consumo de frutos secos en la prevención de enfermedades crónicas - Diari digital de la URV",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOZHpSaEdmejlpS3k3eTQzUVlIbVJwWF9aZXlxczF4dzE1UnNqOFRnc3BMZURZeEZ5Zl9saDZ3OVJ4bWsxYWlVblNtejJiRl9rOFJCNHhZTUtiLXFTWF9iZm0wZkRFelJRRDAyN2tPY01VVlJhY1I0S0F6RDFnbVBNRA?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "meta": "Diari digital de la URV · 05/09/2024",
+      "description": "Diari digital de la URV",
+      "links": [],
+      "originalTitle": "Una investigación internacional estudiará el impacto del consumo de frutos secos en la prevención de enfermedades crónicas - Diari digital de la URV",
+      "year": "2024",
+      "tags": []
+    },
+    {
       "title": "Estudiarán el papel de la dieta en la modulación de proteínas que pueden predecir el deterioro cognitivo",
       "url": "https://www.news3edad.com/2024/06/14/estudiaran-el-papel-de-la-dieta-en-la-modulacion-de-proteinas-que-pueden-predecir-el-deterioro-cognitivo/?utm_source=rss&utm_medium=rss&utm_campaign=estudiaran-el-papel-de-la-dieta-en-la-modulacion-de-proteinas-que-pueden-predecir-el-deterioro-cognitivo",
       "meta": "NewsTerceraEdad · 14/06/2024",
@@ -2269,16 +2279,6 @@
       "description": "Newtral",
       "links": [],
       "originalTitle": "Sustituir parte de la carne roja por pescado azul como sardinas evitaría hasta 750.000 muertes al año - Newtral",
-      "year": "2024",
-      "tags": []
-    },
-    {
-      "title": "Sustituir parte del consumo de carne roja por sardinas y anchoas evitaría hasta 750.000 muertes en 2050 - El Mundo",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5Qc2JsU2RjUWlSN3VJTGlhbEk2Vnd2SzJPRmQ4LWw4ZURWY2o3eDdZU0dTRkhra2pSWlVwMUE1OUlYS1FxSTNCWnhoOFVuX3l3dUxRZzM4VlJzbl9kZ3BKdXI0M0NNOWFnNExCNW9POEtMbzVfX1Jxc9IBeEFVX3lxTE5kc01VU25VcTZCVkVxUkFsWnNWRFBFbmxIc2JfeG1Ta2NzcHFKRXEwekItMVFEQ2FGQ1MyNGJXWThzY1pwRmZ1UGN2UW9mUThFemdvLU9hUUJfSXpuOXNjd2FhMTFFdzZ6TUNiX3MyZWY5WUxHNlFhXw?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "meta": "El Mundo · 10/04/2024",
-      "description": "El Mundo",
-      "links": [],
-      "originalTitle": "Sustituir parte del consumo de carne roja por sardinas y anchoas evitaría hasta 750.000 muertes en 2050 - El Mundo",
       "year": "2024",
       "tags": []
     },
@@ -2449,6 +2449,16 @@
       "description": "Diari Digital URV",
       "links": [],
       "originalTitle": "Seguir una dieta mediterrània hipocalòrica i practicar exercici retarda la pèrdua de massa muscular associada a l’edat",
+      "year": "2023",
+      "tags": []
+    },
+    {
+      "title": "La dieta mediterránea mejora la salud de nuestro hígado y este hecho está relacionada con los cambios en la microbiota, según investigadores del IBIMA Plataforma Bionand - 103malaga.com",
+      "url": "https://news.google.com/rss/articles/CBMioAJBVV95cUxOOTJBMUdPeDdPNkR2Nkc5emMtQkZ1UXA1N01nRkpmeF9PNnFQb0YzNzMwOUk4Tl9GSE0yRk1jUnNvZEJoTTJfOEtnSVNHeTFSX1ZsVDJURzFTYmNRZmNQUHJjanBKRlFYNFJEV1VXUkJsV19pTl9DSy14MEtDeUEzbUgxTFRQM2o2NGJLOVpnV2xJLUt0WWJfbkI1TWhRbDZuT3BJeHd3aTVaVUJBVHdyb0lNVlljZXdiRzZPaHVvUER2d253bXY3bVhKUGxTdC1ab0FKUzMteDFaY0tBaHBoMXJJV3hkV1BYNXF1V3BZXzBsMG5kY1BVal9nZmZEelFXX2R3a2xQRXhjbWVMdFJLQll6QlFnUEpZa0U0Rkwzelk?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "meta": "103malaga.com · 18/09/2023",
+      "description": "103malaga.com",
+      "links": [],
+      "originalTitle": "La dieta mediterránea mejora la salud de nuestro hígado y este hecho está relacionada con los cambios en la microbiota, según investigadores del IBIMA Plataforma Bionand - 103malaga.com",
       "year": "2023",
       "tags": []
     },
