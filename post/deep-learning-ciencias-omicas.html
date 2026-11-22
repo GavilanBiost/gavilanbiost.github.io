@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Deep learning y ciencias ómicas · Jesús F. García Gavilán</title>
+    <title>Deep learning en ciencias ómicas: seis arquitecturas</title>
 
     <meta name="description" content="Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.">
     <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html">
-    <meta property="og:title" content="Deep learning y ciencias ómicas · Jesús F. García Gavilán">
+    <meta property="og:title" content="Deep learning en ciencias ómicas: seis arquitecturas">
     <meta property="og:description" content="Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.">
-    <meta property="og:image" content="https://gavilanbiost.com/img/jesus.jpg">
+    <meta property="og:image" content="https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg">
     <meta property="og:site_name" content="Jesús F. García Gavilán">
     <meta property="og:locale" content="es_ES">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html">
-    <meta name="twitter:title" content="Deep learning y ciencias ómicas · Jesús F. García Gavilán">
+    <meta name="twitter:title" content="Deep learning en ciencias ómicas: seis arquitecturas">
     <meta name="twitter:description" content="Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.">
-    <meta name="twitter:image" content="https://gavilanbiost.com/img/jesus.jpg">
+    <meta name="twitter:image" content="https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/jf-icon.png" sizes="any">
@@ -33,12 +33,102 @@
     <link rel="stylesheet" href="/assets/pages.css">
     <meta name="post-category" content="BLOG">
     <meta name="post-date" content="2026-09-07">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción.">
+    <meta name="twitter:image:alt" content="CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html#article",
+        "url": "https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html",
+        "headline": "Deep learning y ciencias ómicas",
+        "name": "Deep learning en ciencias ómicas: seis arquitecturas",
+        "description": "Guía práctica de deep learning en ciencias ómicas: arquitecturas (CNN, VAE, transformers, GNN), herramientas en Python/R, limitaciones y recomendaciones.",
+        "inLanguage": "es",
+        "author": {
+            "@type": "Person",
+            "name": "Jesús F. García Gavilán",
+            "url": "https://gavilanbiost.com/"
+        },
+        "datePublished": "2026-09-07",
+        "dateModified": "2026-11-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html"
+        },
+        "image": [
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg",
+                "width": 1200,
+                "height": 630,
+                "caption": "CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "Red RNN/LSTM con entradas y salidas secuenciales, estado oculto y memoria que se propagan entre celdas."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "Autoencoder variacional: el encoder estima una distribución latente, se muestrea un vector y el decoder reconstruye los datos."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/transformers.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/transformers.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "Transformer para secuencias biológicas: tokens, codificación posicional, atención, bloques transformer y predicción."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gnn.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gnn.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "Red de grafos: nodos y aristas, intercambio de mensajes entre vecinos, representaciones de nodos, agregación global y predicción."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gan.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gan.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "GAN con un generador de muestras sintéticas y un discriminador que las compara con datos reales durante el entrenamiento adversarial."
+            }
+        ]
+    }
+    </script>
+    <meta name="post-image" content="https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg">
+    <meta name="post-image-alt" content="CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción.">
+    <meta property="article:published_time" content="2026-09-07">
+    <meta property="article:modified_time" content="2026-11-22">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="" width="96" height="38"></a>
             <nav class="nav-links desktop-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/posts.html" aria-current="page">Posts</a><a href="/tutoriales.html">Tutoriales</a><a href="/publicaciones.html">Publicaciones</a><a href="/#proyectos">Proyectos</a><a href="/news.html">Noticias</a><a href="/#contact">Contacto</a></nav>
             <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
@@ -93,27 +183,27 @@
 
                     <h3>Redes neuronales convolucionales (CNN) para secuencias de ADN</h3>
                     <p>Las CNN se diseñaron originalmente para la visión por computadora, es decir, para imitar con un algoritmo la visión humana de las imágenes. Detectan motivos de secuencia (análogos a los filtros de imagen) a lo largo de las secuencias de ADN. El pionero para este fin fue DeepBind, capaz de predecir las especificidades de unión de proteínas a ADN y ARN y de superar a los métodos previos, incluso entrenando con datos in vitro y evaluando in vivo. También tenemos DeepSEA, que predice los efectos de variantes no codificantes sobre la cromatina, y más tarde apareció Basenji, que extendió estas ideas a la predicción de la actividad regulatoria a lo largo de los cromosomas mediante convoluciones dilatadas para capturar un contexto genómico más amplio.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/cnn.png" alt="Esquema de una CNN aplicada a secuencias de ADN: one-hot encoding, filtros convolucionales, motivos detectados, pooling, capa densa y predicción final.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/cnn-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/cnn.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="CNN para secuencias de ADN: codificación one-hot, filtros convolucionales, motivos, pooling, capa densa y predicción." decoding="async" fetchpriority="high" height="1086" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/cnn.webp" srcset="/img/posts/deep-learning-ciencias-omicas/cnn-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/cnn.webp 1448w" width="1448"/></picture>
 
                     <h3>RNN/LSTM para datos secuenciales</h3>
                     <p>Las redes neuronales recurrentes y las LSTM son otro tipo de redes neuronales que procesan secuencias manteniendo un &ldquo;estado de memoria&rdquo;, lo cual resulta útil para datos en los que el orden importa (secuencias biológicas y series temporales de expresión). En proteómica se usan, por ejemplo, para modelar propiedades dependientes de la secuencia peptídica como los tiempos de retención cromatográfica.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/rnn-lstm.png" alt="Diagrama de una red RNN/LSTM procesando una entrada secuencial, mostrando el estado oculto y la memoria propagándose entre celdas a lo largo del tiempo.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/rnn-lstm-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Red RNN/LSTM con entradas y salidas secuenciales, estado oculto y memoria que se propagan entre celdas." decoding="async" height="1086" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp" srcset="/img/posts/deep-learning-ciencias-omicas/rnn-lstm-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp 1448w" width="1448"/></picture>
 
                     <h3>Autoencoders y VAE para la reducción de dimensionalidad y la integración</h3>
                     <p>Los autoencoders variacionales (VAE) aprenden representaciones latentes compactas de datos de alta dimensionalidad. scVI es el ejemplo canónico: utiliza optimización estocástica y redes neuronales profundas para representar probabilísticamente la expresión génica en células individuales, corrigiendo los batch effects y modelando el ruido técnico. Se usa para la corrección de lote, la visualización, el clustering y la expresión diferencial, y constituye la base de la integración multiómica en single-cell.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/autoencoders-vae.png" alt="Esquema de un autoencoder variacional (VAE): un encoder comprime los datos de alta dimensión en un espacio latente (mu, sigma), se muestrea y un decoder reconstruye los datos originales.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/autoencoders-vae-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Autoencoder variacional: el encoder estima una distribución latente, se muestrea un vector y el decoder reconstruye los datos." decoding="async" height="1086" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp" srcset="/img/posts/deep-learning-ciencias-omicas/autoencoders-vae-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp 1448w" width="1448"/></picture>
 
                     <h3>Transformers y modelos de lenguaje biológicos</h3>
                     <p>Los transformers, con su mecanismo de atención, capturan dependencias a largo alcance. Aquí tenemos Enformer de DeepMind, que se entrena a resolución de 128 pb sobre 200 kb de secuencia de entrada. También tenemos DNABERT, que adapta BERT al &ldquo;lenguaje&rdquo; del ADN no codificante, o Geneformer, un modelo de atención preentrenado sobre el corpus Genecorpus-30M, que contiene aproximadamente 29,9 millones (29.900.531) de transcriptomas humanos de célula única ensamblados en junio de 2021 (la versión V2 se amplió después a unos 104 millones) que permite hacer predicciones con datos limitados y ha identificado dianas terapéuticas candidatas para cardiomiopatía. Por no extenderme mucho en este punto, os dejo otros modelos similares: scGPT (Cui et al., Nat Methods 2024), un modelo fundacional preentrenado aplicable a la anotación de tipos celulares, la integración multilote y multiómica y la predicción de la respuesta a perturbaciones; el famoso AlphaFold2, que resolvió el problema del plegamiento de proteínas; y ESMFold, que utiliza un modelo de lenguaje de proteínas escalado para predecir la estructura a partir de una única secuencia.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/transformers.png" alt="Arquitectura de un transformer aplicado a secuencias biológicas: tokens (k-mers, genes o proteínas), codificación posicional, self-attention multi-head, bloques transformer y cabeza de tarea para la predicción final.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/transformers-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/transformers.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Transformer para secuencias biológicas: tokens, codificación posicional, atención, bloques transformer y predicción." decoding="async" height="1086" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/transformers.webp" srcset="/img/posts/deep-learning-ciencias-omicas/transformers-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/transformers.webp 1448w" width="1448"/></picture>
 
                     <h3>Redes neuronales de grafos (GNN)</h3>
                     <p>Las GNN operan sobre datos estructurados, como grafos (redes de interacción proteína-proteína, redes regulatorias, grafos moleculares atómicos&hellip;), y son especialmente populares en el descubrimiento de fármacos, la predicción de la interacción fármaco-diana (DTI), la predicción de la afinidad de unión proteína-ligando y la clasificación de subtipos de cáncer mediante la integración multiómica.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/gnn.png" alt="Esquema de una GNN: grafo de entrada con nodos y aristas, message passing entre vecinos a lo largo de varios pasos, embeddings de nodos, agregación global (readout) y predicción.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/gnn-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/gnn.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Red de grafos: nodos y aristas, intercambio de mensajes entre vecinos, representaciones de nodos, agregación global y predicción." decoding="async" height="1086" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/gnn.webp" srcset="/img/posts/deep-learning-ciencias-omicas/gnn-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/gnn.webp 1448w" width="1448"/></picture>
 
                     <h3>GAN</h3>
                     <p>Las redes generativas antagónicas se han aplicado a la aumentación de datos ómicos y al diseño molecular (por ejemplo, en plataformas de descubrimiento de dianas), aunque su uso es más limitado que el de los VAE y los transformers.</p>
-                    <img src="../img/posts/deep-learning-ciencias-omicas/gan.png" alt="Esquema de una GAN: un generador crea muestras sintéticas a partir de ruido, un discriminador las compara con datos reales y clasifica como real o falso, retroalimentando el entrenamiento adversarial.">
+                    <picture><source type="image/webp" srcset="/img/posts/deep-learning-ciencias-omicas/gan-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/gan.webp 1448w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="GAN con un generador de muestras sintéticas y un discriminador que las compara con datos reales durante el entrenamiento adversarial." decoding="async" height="1086" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/deep-learning-ciencias-omicas/gan.webp" srcset="/img/posts/deep-learning-ciencias-omicas/gan-860.webp 860w, /img/posts/deep-learning-ciencias-omicas/gan.webp 1448w" width="1448"/></picture>
 
                     <h2>Ejemplos de uso en Python y R</h2>
 
@@ -171,7 +261,7 @@
         </main>
     </div>
     <footer>
-        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <img src="/img/jfg-logo.png" alt="" width="96" height="38">
         <span>© 2026 Jesús F. García Gavilán</span>
         <span>Ciencia rigurosa. Ideas claras.</span>
     </footer>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>El problema de nutrición personalizada está en «personalizada» · Jesús F. García Gavilán</title>
+    <title>Nutrición personalizada: fiabilidad y respuesta glucémica</title>
 
-    <meta name="description" content="Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.">
+    <meta name="description" content="Nutrición personalizada y respuesta glucémica: qué aportan los sensores y la metabolómica, y cómo la fiabilidad de las mediciones limita la predicción.">
     <meta name="author" content="Jesús F García Gavilán">
     <meta name="keywords" content="nutrición de precisión, nutrición personalizada, reproducibilidad, ICC test-retest, respuesta glucémica, epidemiología nutricional">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -14,8 +14,8 @@
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://gavilanbiost.com/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html">
-    <meta property="og:title" content="El problema de nutrición personalizada está en «personalizada» · Jesús F. García Gavilán">
-    <meta property="og:description" content="Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.">
+    <meta property="og:title" content="Nutrición personalizada: fiabilidad y respuesta glucémica">
+    <meta property="og:description" content="Nutrición personalizada y respuesta glucémica: qué aportan los sensores y la metabolómica, y cómo la fiabilidad de las mediciones limita la predicción.">
     <meta property="og:image" content="https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
@@ -32,8 +32,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html">
-    <meta name="twitter:title" content="El problema de nutrición personalizada está en «personalizada» · Jesús F. García Gavilán">
-    <meta name="twitter:description" content="Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.">
+    <meta name="twitter:title" content="Nutrición personalizada: fiabilidad y respuesta glucémica">
+    <meta name="twitter:description" content="Nutrición personalizada y respuesta glucémica: qué aportan los sensores y la metabolómica, y cómo la fiabilidad de las mediciones limita la predicción.">
     <meta name="twitter:image" content="https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg">
     <meta name="twitter:image:alt" content="Persona con un sensor continuo de glucosa en el brazo junto a un plato de pescado y verduras.">
 
@@ -53,16 +53,59 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "El problema de nutrición personalizada está en «personalizada»",
-        "description": "Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.",
-        "image": {
-            "@type": "ImageObject",
-            "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg",
-            "width": 1200,
-            "height": 630,
-            "caption": "Sensor continuo de glucosa en el brazo de una persona junto a un plato de comida."
-        },
+        "description": "Nutrición personalizada y respuesta glucémica: qué aportan los sensores y la metabolómica, y cómo la fiabilidad de las mediciones limita la predicción.",
+        "image": [
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg",
+                "width": 1200,
+                "height": 630,
+                "caption": "Persona con un sensor continuo de glucosa en el brazo junto a un plato de pescado y verduras.",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg"
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.webp",
+                "width": 1672,
+                "height": 941,
+                "caption": "Persona con un sensor continuo de glucosa en el brazo junto a un plato de pescado y verduras."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.webp",
+                "width": 1672,
+                "height": 941,
+                "caption": "Dispersión de la respuesta glucémica en la primera toma y su repetición, con una diagonal de igualdad y la anotación r ≈ 0,45; datos simulados."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.webp",
+                "width": 1672,
+                "height": 941,
+                "caption": "Tres barras del coeficiente de variación poblacional: triglicéridos, 103 %; glucosa, 68 %; insulina, 59 %."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.webp",
+                "width": 1983,
+                "height": 793,
+                "caption": "Patata, uvas, arroz y pan sobre curvas ilustrativas con rótulos de resistencia o sensibilidad a la insulina, mayor respuesta media y presión arterial más alta."
+            },
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.webp",
+                "contentUrl": "https://gavilanbiost.com/img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.webp",
+                "width": 1448,
+                "height": 1086,
+                "caption": "Escala de 0 a 1 con un marcador en ICC ≈ 0,2, un tramo gris a la izquierda y un área rayada rotulada «ajuste al ruido» a la derecha."
+            }
+        ],
         "datePublished": "2026-10-19",
-        "dateModified": "2026-10-19",
+        "dateModified": "2026-11-22",
         "inLanguage": "es",
         "keywords": "nutrición de precisión, nutrición personalizada, reproducibilidad, ICC test-retest, respuesta glucémica, epidemiología nutricional",
         "mainEntityOfPage": {
@@ -81,12 +124,13 @@
         }
     }
     </script>
+    <meta property="article:modified_time" content="2026-11-22">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="" width="96" height="38"></a>
             <nav class="nav-links desktop-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/posts.html" aria-current="page">Posts</a><a href="/tutoriales.html">Tutoriales</a><a href="/publicaciones.html">Publicaciones</a><a href="/#proyectos">Proyectos</a><a href="/news.html">Noticias</a><a href="/#contact">Contacto</a></nav>
             <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
@@ -117,7 +161,7 @@
                     <figure style="margin: 0;">
                         <picture>
                             <source type="image/webp" srcset="../img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-860.webp 860w, ../img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.webp 1672w" sizes="(max-width: 900px) 100vw, 860px">
-                            <img src="../img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.png" alt="Persona con un sensor continuo de glucosa en el brazo junto a un plato de pescado y verduras." width="1672" height="941" fetchpriority="high" decoding="async">
+                            <img alt="Persona con un sensor continuo de glucosa en el brazo junto a un plato de pescado y verduras." decoding="async" fetchpriority="high" height="941" src="../img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.png" width="1672"/>
                         </picture>
                         <figcaption>Figura 1. Sensor continuo de glucosa en el brazo de una persona junto a un plato de comida.</figcaption>
                     </figure>
@@ -127,7 +171,7 @@
                     <figure style="margin: 0;">
                         <picture>
                             <source type="image/webp" srcset="../img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas-860.webp 860w, ../img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.webp 1672w" sizes="(max-width: 900px) 100vw, 860px">
-                            <img src="../img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.png" alt="Dispersión de la respuesta glucémica en la primera toma y su repetición, con una diagonal de igualdad y la anotación r ≈ 0,45; datos simulados." width="1672" height="941" loading="lazy" decoding="async">
+                            <img alt="Dispersión de la respuesta glucémica en la primera toma y su repetición, con una diagonal de igualdad y la anotación r ≈ 0,45; datos simulados." decoding="async" height="941" loading="lazy" src="../img/posts/nutricion_personalizada/respuesta-glucemica-comidas-repetidas.png" width="1672"/>
                         </picture>
                         <figcaption>Figura 2. Comparación ilustrativa de la respuesta glucémica a una comida y a su repetición. La diagonal indica igualdad entre ambas tomas; la dispersión muestra diferencias. Datos simulados.</figcaption>
                     </figure>
@@ -143,7 +187,7 @@
                     <figure style="margin: 0;">
                         <picture>
                             <source type="image/webp" srcset="../img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1-860.webp 860w, ../img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.webp 1672w" sizes="(max-width: 900px) 100vw, 860px">
-                            <img src="../img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.png" alt="Tres barras del coeficiente de variación poblacional: triglicéridos, 103 %; glucosa, 68 %; insulina, 59 %." width="1672" height="941" loading="lazy" decoding="async">
+                            <img alt="Tres barras del coeficiente de variación poblacional: triglicéridos, 103 %; glucosa, 68 %; insulina, 59 %." decoding="async" height="941" loading="lazy" src="../img/posts/nutricion_personalizada/variabilidad-posprandial-predict-1.png" width="1672"/>
                         </picture>
                         <figcaption>Figura 3. Coeficiente de variación de las respuestas posprandiales en PREDICT 1: triglicéridos, 103 %; glucosa, 68 %; insulina, 59 %. Fuente: Berry et al., Nature Medicine, 2020.</figcaption>
                     </figure>
@@ -157,7 +201,7 @@
                     <figure style="margin: 0;">
                         <picture>
                             <source type="image/webp" srcset="../img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico-860.webp 860w, ../img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.webp 1983w" sizes="(max-width: 900px) 100vw, 860px">
-                            <img src="../img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.png" alt="Patata, uvas, arroz y pan sobre curvas ilustrativas con rótulos de resistencia o sensibilidad a la insulina, mayor respuesta media y presión arterial más alta." width="1983" height="793" loading="lazy" decoding="async">
+                            <img alt="Patata, uvas, arroz y pan sobre curvas ilustrativas con rótulos de resistencia o sensibilidad a la insulina, mayor respuesta media y presión arterial más alta." decoding="async" height="793" loading="lazy" src="../img/posts/nutricion_personalizada/alimentos-fenotipo-metabolico.png" width="1983"/>
                         </picture>
                         <figcaption>Figura 4. Patata, uvas, arroz y pan asociados a distintos perfiles metabólicos. Las curvas ilustran el concepto y no representan datos cuantitativos. Basado en Wu et al., Nature Medicine, 2025.</figcaption>
                     </figure>
@@ -184,7 +228,7 @@
                     <figure style="margin: 0;">
                         <picture>
                             <source type="image/webp" srcset="../img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido-860.webp 860w, ../img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.webp 1448w" sizes="(max-width: 900px) 100vw, 860px">
-                            <img src="../img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.png" alt="Escala de 0 a 1 con un marcador en ICC ≈ 0,2, un tramo gris a la izquierda y un área rayada rotulada «ajuste al ruido» a la derecha." width="1448" height="1086" loading="lazy" decoding="async">
+                            <img alt="Escala de 0 a 1 con un marcador en ICC ≈ 0,2, un tramo gris a la izquierda y un área rayada rotulada «ajuste al ruido» a la derecha." decoding="async" height="1086" loading="lazy" src="../img/posts/nutricion_personalizada/fiabilidad-test-retest-ajuste-ruido.png" width="1448"/>
                         </picture>
                         <figcaption>Figura 5. Fiabilidad test-retest y ajuste al ruido, representados de forma conceptual con ICC ≈ 0,2. El valor ilustra la fiabilidad de la medición; su relación con el rendimiento predictivo depende de la métrica y de los supuestos del modelo.</figcaption>
                     </figure>
@@ -211,7 +255,7 @@
         </main>
     </div>
     <footer>
-        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <img src="/img/jfg-logo.png" alt="" width="96" height="38">
         <span>© 2026 Jesús F. García Gavilán</span>
         <span>Ciencia rigurosa. Ideas claras.</span>
     </footer>

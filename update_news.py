@@ -703,8 +703,8 @@ def create_news_page(all_news: list[dict]) -> None:
     page = "\n".join(
         [
             layout.head(
-                "Noticias · Jesús F. García Gavilán",
-                "Menciones en prensa y divulgación de la investigación de Jesús F. García Gavilán.",
+                "Noticias y divulgación · Jesús F. García Gavilán",
+                "Noticias, entrevistas y menciones en prensa sobre investigaciones en nutrición, metabolómica y salud en las que participa Jesús F. García Gavilán.",
                 f"{layout.SITE_URL}/news.html",
             ),
             layout.navbar(current="/news.html"),

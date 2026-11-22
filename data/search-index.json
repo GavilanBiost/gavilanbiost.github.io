@@ -72,7 +72,7 @@
       "title": "El problema de nutrición personalizada está en «personalizada»",
       "url": "/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html",
       "meta": "BLOG · 19/10/2026",
-      "description": "Antes de predecir cómo responde cada persona a cada alimento, conviene comprobar si esa respuesta se repite. Fiabilidad test-retest, ICC y los límites de la nutrición personalizada.",
+      "description": "Nutrición personalizada y respuesta glucémica: qué aportan los sensores y la metabolómica, y cómo la fiabilidad de las mediciones limita la predicción.",
       "links": [
         {
           "label": "Leer post",
@@ -89,7 +89,7 @@
       "title": "Entre un diez y un veinte por ciento",
       "url": "/post/entre-un-diez-y-un-veinte-por-ciento.html",
       "meta": "BLOG · 12/10/2026",
-      "description": "La microbiota explica, como mucho, un 10–20 % del efecto cardiovascular de la dieta mediterránea. Qué sabemos, qué no y por qué esa cifra quizá sea optimista.",
+      "description": "Microbiota y dieta mediterránea: reviso la evidencia compatible con mediación parcial del beneficio cardiovascular, sus límites y la incertidumbre del 10–20 %.",
       "links": [
         {
           "label": "Leer post",
@@ -123,7 +123,7 @@
       "title": "El modelo que se niega a creer en el consumidor medio",
       "url": "/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html",
       "meta": "BLOG · 28/09/2026",
-      "description": "Cómo el logit con parámetros aleatorios captura la diversidad de gustos en la elección alimentaria y por qué las ciencias ómicas podrían, algún día, explicarla.",
+      "description": "Los modelos logit mixtos describen preferencias individuales. Reviso su relación con la elección alimentaria y el posible papel de la genética y las ómicas.",
       "links": [
         {
           "label": "Leer post",
@@ -140,7 +140,7 @@
       "title": "Cuarenta años preguntando qué comes",
       "url": "/post/dieta-en-la-sangre-metabolomica-ingesta.html",
       "meta": "BLOG · 21/09/2026",
-      "description": "Qué pueden y qué no pueden hacer las firmas metabolómicas de la ingesta para medir la dieta real de las personas.",
+      "description": "¿Puede la metabolómica estimar la ingesta alimentaria? Reviso qué miden las firmas metabólicas y cómo la calidad de las etiquetas condiciona la predicción.",
       "links": [
         {
           "label": "Leer post",
@@ -157,7 +157,7 @@
       "title": "Doscientos ochenta y ocho: por qué encontrar biomarcadores en metabolómica es mucho más difícil de lo que parece",
       "url": "/post/metabolomica-biomarcadores.html",
       "meta": "BLOG · 14/09/2026",
-      "description": "La metabolómica puede medir miles de señales, pero identificar biomarcadores reproducibles exige resolver problemas de anotación, confusión, estabilidad temporal y utilidad clínica.",
+      "description": "Metabolómica y biomarcadores: por qué anotar metabolitos importa para comparar resultados, interpretar asociaciones y valorar el Plasma Benchmark.",
       "links": [
         {
           "label": "Leer post",
@@ -193,7 +193,7 @@
       "title": "Estadístico F de contraste global",
       "url": "/tutoriales/estadistico-contraste.html",
       "meta": "R / REGRESIÓN LINEAL",
-      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "description": "Interpreta el estadístico F de una regresión lineal múltiple en R: extrae el contraste global, sus grados de libertad y el p-valor con un ejemplo de HDL.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -215,7 +215,7 @@
       "title": "C-index en modelos de Cox",
       "url": "/tutoriales/c-index.html",
       "meta": "R / SUPERVIVENCIA",
-      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "description": "Calcula e interpreta el C-index en R para modelos de Cox: datos censurados, predictor lineal, concordancia y evaluación de la capacidad discriminativa.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -237,7 +237,7 @@
       "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
       "url": "/tutoriales/t-sne.html",
       "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
-      "description": "Tutorial práctico de t-SNE en R para reducir dimensionalidad y visualizar patrones en datos multivariables.",
+      "description": "Aplica t-SNE en R para explorar datos de alta dimensión: estandarización, elección de parámetros, visualización de grupos y evaluación de la estabilidad.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -259,7 +259,7 @@
       "title": "Reg Condicional vs Reg Cox",
       "url": "/tutoriales/reg-condicional-vs-reg-cox.html",
       "meta": "R / SUPERVIVENCIA Y CASOS-CONTROLES",
-      "description": "Tutorial en R sobre regresión logística condicional y regresión de Cox.",
+      "description": "Compara la regresión logística condicional y la regresión de Cox en R: diseños emparejados, datos estratificados y un ejemplo de equivalencia.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -281,7 +281,7 @@
       "title": "MAE",
       "url": "/tutoriales/MAE.html",
       "meta": "R / MÉTRICAS DE ERROR",
-      "description": "Tutorial sobre cálculo del Error Absoluto Medio (MAE) en R.",
+      "description": "Calcula el error absoluto medio (MAE) en R paso a paso, compara valores reales y predicciones y visualiza los errores de un modelo de regresión.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -303,7 +303,7 @@
       "title": "L'Ecuyer-CMRG",
       "url": "/tutoriales/L-Ecuyer-CMRG.html",
       "meta": "R / COMPUTACIÓN EN PARALELO",
-      "description": "Tutorial sobre L'Ecuyer-CMRG para reproducibilidad en computación en paralelo con R.",
+      "description": "Configura L’Ecuyer-CMRG en R para simulaciones paralelas reproducibles: semillas, creación del clúster y sincronización con clusterSetRNGStream.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -325,7 +325,7 @@
       "title": "Confusión e Interacción en Epidemiología",
       "url": "/tutoriales/confusion-e-interaccion.html",
       "meta": "R / REGRESIÓN",
-      "description": "Tutorial sobre confusión e interacción en epidemiología mediante simulaciones y visualizaciones en R.",
+      "description": "Distingue confusión e interacción en epidemiología con simulaciones en R: asociaciones crudas, análisis estratificado y modificación del efecto.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -347,7 +347,7 @@
       "title": "Coeficiente de Correlación Intraclase (ICC)",
       "url": "/tutoriales/ICC.html",
       "meta": "R / ESTADÍSTICA",
-      "description": "Tutorial sobre coeficiente de correlación intraclase (ICC) en R.",
+      "description": "Calcula e interpreta el coeficiente de correlación intraclase (ICC) en R: acuerdo, consistencia e intervalos de confianza para estudios de fiabilidad.",
       "links": [
         {
           "label": "Ver repositorio",

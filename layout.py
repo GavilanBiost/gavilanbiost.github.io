@@ -8,6 +8,7 @@ páginas en la raíz como para las que viven en post/ o tutoriales/.
 
 import datetime
 import html
+import json
 import re
 from zoneinfo import ZoneInfo
 
@@ -21,8 +22,8 @@ AUTHOR_NAME_PATTERN = re.compile(
 
 SITE_URL = "https://gavilanbiost.com"
 SITE_NAME = "Jesús F. García Gavilán"
-DEFAULT_IMAGE = f"{SITE_URL}/img/jesus.jpg"
-DEFAULT_IMAGE_ALT = SITE_NAME
+DEFAULT_IMAGE = f"{SITE_URL}/img/jesus-garcia-gavilan-og.jpg"
+DEFAULT_IMAGE_ALT = "Jesús F. García Gavilán: bioinformática, bioestadística y ciencia de datos."
 SPAIN_TIMEZONE = ZoneInfo("Europe/Madrid")
 
 
@@ -77,6 +78,9 @@ def social_image_tags(image=None, image_alt=None, image_width=None, image_height
     """
     image_safe = esc(image or DEFAULT_IMAGE, quote=True)
     alt_safe = esc(image_alt or DEFAULT_IMAGE_ALT, quote=True)
+    if not image or image == DEFAULT_IMAGE:
+        image_width = image_width or 1200
+        image_height = image_height or 630
 
     lines = [
         f'    <meta property="og:image" content="{image_safe}">',
@@ -86,10 +90,13 @@ def social_image_tags(image=None, image_alt=None, image_width=None, image_height
         lines.append(f'    <meta property="og:image:width" content="{image_width}">')
     if image_height:
         lines.append(f'    <meta property="og:image:height" content="{image_height}">')
+    if not image or image == DEFAULT_IMAGE:
+        lines.append('    <meta property="og:image:type" content="image/jpeg">')
     og_lines = "\n".join(lines)
 
     return f"""{og_lines}
-    <meta name="twitter:image" content="{image_safe}">"""
+    <meta name="twitter:image" content="{image_safe}">
+    <meta name="twitter:image:alt" content="{alt_safe}">"""
 
 
 def head(title, description, canonical, extra_head="", image=None, image_alt=None, image_width=None, image_height=None):
@@ -103,6 +110,13 @@ def head(title, description, canonical, extra_head="", image=None, image_alt=Non
     description_safe = esc(description, quote=True)
     canonical_safe = esc(canonical, quote=True)
     og_image_block = social_image_tags(image, image_alt, image_width, image_height)
+    schema = json.dumps({
+        "@context": "https://schema.org", "@type": "CollectionPage",
+        "url": canonical, "name": title, "description": description,
+        "inLanguage": "es", "author": {
+            "@type": "Person", "name": SITE_NAME, "url": SITE_URL + "/",
+        },
+    }, ensure_ascii=False, indent=4).replace("</", "<\\/")
 
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -136,6 +150,9 @@ def head(title, description, canonical, extra_head="", image=None, image_alt=Non
 
     <link rel="stylesheet" href="/assets/site.css">
     <link rel="stylesheet" href="/assets/pages.css">
+    <script type="application/ld+json">
+{schema}
+    </script>
 {extra_head}</head>"""
 
 
@@ -154,7 +171,7 @@ def navbar(current=""):
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand" aria-label="{SITE_NAME} — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <a href="/" class="brand" aria-label="{SITE_NAME} — Inicio"><img src="/img/jfg-logo.png" alt="" width="96" height="38"></a>
             <nav class="nav-links desktop-nav" aria-label="Navegación principal">{desktop}</nav>
             <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation">{ICON_MENU}</button>
         </div>
@@ -166,7 +183,7 @@ def navbar(current=""):
 
 def footer():
     return """    <footer>
-        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <img src="/img/jfg-logo.png" alt="" width="96" height="38">
         <span>© 2026 Jesús F. García Gavilán</span>
         <span>Ciencia rigurosa. Ideas claras.</span>
     </footer>

@@ -2,6 +2,7 @@ import datetime
 import html
 import re
 import xml.etree.ElementTree as ET
+import subprocess
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
@@ -19,6 +20,26 @@ NS_IMAGE = "http://www.google.com/schemas/sitemap-image/1.1"
 
 
 def to_lastmod(path: Path) -> str:
+    # Checkout mtimes change on every Actions run, even for untouched pages.
+    # Prefer the actual content edit date, then the latest Git commit date.
+    content = path.read_text(encoding="utf-8")
+    for match in re.finditer(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})', content):
+        return match.group(1)
+    try:
+        changed = subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", str(path)],
+            capture_output=True,
+        )
+        if changed.returncode == 1:
+            return datetime.datetime.fromtimestamp(path.stat().st_mtime, tz=datetime.UTC).date().isoformat()
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", str(path)],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        if result:
+            return result
+    except (OSError, subprocess.CalledProcessError):
+        pass
     modified = datetime.datetime.fromtimestamp(path.stat().st_mtime, tz=datetime.UTC)
     return modified.date().isoformat()
 
@@ -85,14 +106,16 @@ def parse_date(date_text: str):
     return None
 
 
-def should_include_post(path: Path) -> bool:
+def should_include_post(path: Path, today=None) -> bool:
     content = path.read_text(encoding="utf-8")
+    if "noindex" in extract_meta(content, "robots").lower():
+        return False
     raw_date = extract_meta(content, "post-date")
     post_dt = parse_date(raw_date)
     if post_dt is None:
         return True
 
-    today = datetime.datetime.now(datetime.UTC).date()
+    today = today or datetime.datetime.now(datetime.UTC).date()
     return post_dt.date() <= today
 
 
@@ -118,6 +141,8 @@ def collect_entries() -> list[dict]:
             if path.name not in EXCLUDED_TUTORIAL_FILES
         )
         for path in tutorial_files:
+            if "noindex" in extract_meta(path.read_text(encoding="utf-8"), "robots").lower():
+                continue
             entries.append(
                 build_entry(
                     f"/tutoriales/{path.name}",
@@ -139,7 +164,11 @@ def collect_entries() -> list[dict]:
             entry = build_entry(
                 f"/post/{path.name}", path, "monthly", "0.8"
             )
-            entry["images"] = extract_article_images(path)
+            content = path.read_text(encoding="utf-8")
+            social_image = extract_meta(content, "post-image")
+            entry["images"] = list(dict.fromkeys(
+                ([social_image] if social_image else []) + extract_article_images(path)
+            ))
             entries.append(entry)
 
     return entries

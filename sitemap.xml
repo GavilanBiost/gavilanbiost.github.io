@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://gavilanbiost.com/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -11,150 +11,165 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/posts.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/publicaciones.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/news.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/ICC.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/L-Ecuyer-CMRG.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/MAE.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/c-index.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/confusion-e-interaccion.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/estadistico-contraste.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/tutoriales/t-sne.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/cada-cuanto-sabemos-que-nos-hemos-equivocado.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/Imagen%201.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/ciclo-aprendizaje-refuerzo-nutricion-og.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%202.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/ciclo-aprendizaje-refuerzo-nutricion.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%203.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/glucemia-ensayo-aprendizaje-refuerzo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/imagen%204.jpg</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/frecuencia-retroalimentacion-metabolomica.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/Imagen%205.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/simulador-vimms-espectrometro-virtual.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/cada-cuanto-sabemos-que-nos-hemos-equivocado/metabolomica-contexto-intervencion.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/deep-learning-ciencias-omicas.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn-omicas-og.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/rnn-lstm.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/cnn.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/rnn-lstm.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/transformers.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/autoencoders-vae.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gnn.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/transformers.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gan.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gnn.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/deep-learning-ciencias-omicas/gan.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/dieta-en-la-sangre-metabolomica-ingesta.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/correlacion_metabolitos_ingesta_por_alimento.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/correlacion-metabolitos-ingesta-alimentos-og.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/recorrido_alimento_metaboloma_modelo_estimacion.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/correlacion-metabolitos-ingesta-alimentos.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/alimento-metaboloma-estimacion-ingesta.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/el-modelo-que-se-niega-a-creer-en-el-consumidor-medio.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/Imagen%20de%20ChatGPT%2026%20sept%202026,%2017_44_29.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/consumidores-eleccion-yogures-og.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/Pasted%20image%2020260926175342.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/consumidores-eleccion-yogures.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/el_modelo_que_se_niega_a_creer/preferencias-individuales-brocoli.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/el-problema-de-nutricion-personalizada-esta-en-personalizada.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/nutricion_personalizada/sensor-glucosa-plato-comida.png</image:loc>
     </image:image>
@@ -173,9 +188,12 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/el-script-que-compila.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/el-script-que-compila/bucle-agente-ia.webp</image:loc>
     </image:image>
@@ -194,9 +212,12 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/entre-un-diez-y-un-veinte-por-ciento.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/entre-un-diez-y-un-veinte-por-ciento/microbiota-quien-esta-que-fabrica-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/entre-un-diez-y-un-veinte-por-ciento/microbiota-quien-esta-que-fabrica.webp</image:loc>
     </image:image>
@@ -209,18 +230,24 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/metabolomica-biomarcadores.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://gavilanbiost.com/img/posts/Captura%20de%20pantalla%202026-09-13%20a%20las%2021.56.46.png</image:loc>
+      <image:loc>https://gavilanbiost.com/img/posts/tabla-metabolitos-plasma-benchmark-og.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/tabla-metabolitos-plasma-benchmark.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/pocos-pacientes-muchas-variables.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/pocos-pacientes-muchas-variables/enfermedades-raras-cuatro-cifras-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/pocos-pacientes-muchas-variables/enfermedades-raras-cuatro-cifras.webp</image:loc>
     </image:image>
@@ -239,9 +266,12 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/que-plataforma-de-metabolomica.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/que-plataforma-de-metabolomica/triangulo-tres-compromisos-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/que-plataforma-de-metabolomica/triangulo-tres-compromisos.webp</image:loc>
     </image:image>
@@ -257,9 +287,12 @@
   </url>
   <url>
     <loc>https://gavilanbiost.com/post/un-algoritmo-para-cada-pregunta.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision-og.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://gavilanbiost.com/img/posts/un-algoritmo-para-cada-pregunta/guia-algoritmos-medicina-precision.webp</image:loc>
     </image:image>

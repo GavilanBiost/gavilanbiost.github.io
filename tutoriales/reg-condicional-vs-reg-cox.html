@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reg Condicional vs Reg Cox · Jesús F. García Gavilán</title>
+    <title>Regresión logística condicional y Cox: comparación en R</title>
 
-    <meta name="description" content="Tutorial en R sobre regresión logística condicional y regresión de Cox.">
+    <meta name="description" content="Compara la regresión logística condicional y la regresión de Cox en R: diseños emparejados, datos estratificados y un ejemplo de equivalencia.">
     <meta name="author" content="Jesús F García Gavilán">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html">
-    <meta property="og:title" content="Reg Condicional vs Reg Cox · Jesús F. García Gavilán">
-    <meta property="og:description" content="Tutorial en R sobre regresión logística condicional y regresión de Cox.">
-    <meta property="og:image" content="https://gavilanbiost.com/img/jesus.jpg">
+    <meta property="og:title" content="Regresión logística condicional y Cox: comparación en R">
+    <meta property="og:description" content="Compara la regresión logística condicional y la regresión de Cox en R: diseños emparejados, datos estratificados y un ejemplo de equivalencia.">
+    <meta property="og:image" content="https://gavilanbiost.com/img/jesus-garcia-gavilan-og.jpg">
     <meta property="og:site_name" content="Jesús F. García Gavilán">
     <meta property="og:locale" content="es_ES">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html">
-    <meta name="twitter:title" content="Reg Condicional vs Reg Cox · Jesús F. García Gavilán">
-    <meta name="twitter:description" content="Tutorial en R sobre regresión logística condicional y regresión de Cox.">
-    <meta name="twitter:image" content="https://gavilanbiost.com/img/jesus.jpg">
+    <meta name="twitter:title" content="Regresión logística condicional y Cox: comparación en R">
+    <meta name="twitter:description" content="Compara la regresión logística condicional y la regresión de Cox en R: diseños emparejados, datos estratificados y un ejemplo de equivalencia.">
+    <meta name="twitter:image" content="https://gavilanbiost.com/img/jesus-garcia-gavilan-og.jpg">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/jf-icon.png" sizes="any">
@@ -34,12 +34,52 @@
     <meta name="tutorial-category" content="R / SUPERVIVENCIA Y CASOS-CONTROLES">
     <meta name="tutorial-repository" content="https://github.com/GavilanBiost/reg-condicional-vs-regcox">
     <meta name="tutorial-date" content="2026-07-05">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="Jesús F. García Gavilán: bioinformática, bioestadística y ciencia de datos.">
+    <meta name="twitter:image:alt" content="Jesús F. García Gavilán: bioinformática, bioestadística y ciencia de datos.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html#article",
+        "url": "https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html",
+        "headline": "Reg Condicional vs Reg Cox",
+        "name": "Regresión logística condicional y Cox: comparación en R",
+        "description": "Compara la regresión logística condicional y la regresión de Cox en R: diseños emparejados, datos estratificados y un ejemplo de equivalencia.",
+        "inLanguage": "es",
+        "author": {
+            "@type": "Person",
+            "name": "Jesús F. García Gavilán",
+            "url": "https://gavilanbiost.com/"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-11-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://gavilanbiost.com/tutoriales/reg-condicional-vs-reg-cox.html"
+        },
+        "image": [
+            {
+                "@type": "ImageObject",
+                "url": "https://gavilanbiost.com/img/jesus-garcia-gavilan-og.jpg",
+                "contentUrl": "https://gavilanbiost.com/img/jesus-garcia-gavilan-og.jpg",
+                "width": 1200,
+                "height": 630,
+                "caption": "Jesús F. García Gavilán: bioinformática, bioestadística y ciencia de datos."
+            }
+        ]
+    }
+    </script>
+    <meta property="article:published_time" content="2026-07-05">
+    <meta property="article:modified_time" content="2026-11-22">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="" width="96" height="38"></a>
             <nav class="nav-links desktop-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/posts.html">Posts</a><a href="/tutoriales.html" aria-current="page">Tutoriales</a><a href="/publicaciones.html">Publicaciones</a><a href="/#proyectos">Proyectos</a><a href="/news.html">Noticias</a><a href="/#contact">Contacto</a></nav>
             <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
@@ -152,7 +192,7 @@ coef(modelo_cox_equivalente)</code></pre>
         </main>
     </div>
     <footer>
-        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <img src="/img/jfg-logo.png" alt="" width="96" height="38">
         <span>© 2026 Jesús F. García Gavilán</span>
         <span>Ciencia rigurosa. Ideas claras.</span>
     </footer>

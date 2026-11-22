@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>El script que compila y la estadística que no: IA en bioestadística</title>
+    <title>Agentes de IA en bioestadística: el script que compila</title>
 
     <meta name="description" content="Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.">
     <meta name="author" content="Jesús F García Gavilán">
@@ -14,13 +14,13 @@
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://gavilanbiost.com/post/el-script-que-compila.html">
-    <meta property="og:title" content="El script que compila y la estadística que no: IA en bioestadística">
+    <meta property="og:title" content="Agentes de IA en bioestadística: el script que compila">
     <meta property="og:description" content="Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.">
     <meta property="og:image" content="https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-og.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Esquema de enrutamiento según la sensibilidad de los datos: los identificables van a un modelo abierto en el servidor del hospital sin internet; los anonimizados o públicos, a un modelo cerrado en la nube.">
+    <meta property="og:image:alt" content="Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle.">
     <meta property="og:site_name" content="Jesús F. García Gavilán">
     <meta property="og:locale" content="es_ES">
     <meta property="article:published_time" content="2026-11-02">
@@ -33,10 +33,10 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gavilanbiost.com/post/el-script-que-compila.html">
-    <meta name="twitter:title" content="El script que compila y la estadística que no: IA en bioestadística">
+    <meta name="twitter:title" content="Agentes de IA en bioestadística: el script que compila">
     <meta name="twitter:description" content="Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.">
     <meta name="twitter:image" content="https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-og.jpg">
-    <meta name="twitter:image:alt" content="Esquema de enrutamiento según la sensibilidad de los datos: los identificables van a un modelo abierto en el servidor del hospital sin internet; los anonimizados o públicos, a un modelo cerrado en la nube.">
+    <meta name="twitter:image:alt" content="Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle.">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/jf-icon.png" sizes="any">
@@ -47,7 +47,7 @@
     <meta name="post-category" content="BLOG">
     <meta name="post-date" content="2026-11-02">
     <meta name="post-image" content="https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-og.jpg">
-    <meta name="post-image-alt" content="Esquema de enrutamiento según la sensibilidad de los datos: los identificables van a un modelo abierto en el servidor del hospital sin internet; los anonimizados o públicos, a un modelo cerrado en la nube.">
+    <meta name="post-image-alt" content="Datos identificables hacia un modelo abierto en el servidor del hospital sin internet; datos anonimizados o públicos hacia un modelo cerrado en la nube.">
 
     <script type="application/ld+json">
     {
@@ -63,7 +63,7 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-og.jpg",
                 "width": 1200,
                 "height": 630,
-                "caption": "Enrutamiento según la sensibilidad de los datos: modelo abierto en el hospital para datos identificables y modelo cerrado en la nube para datos anonimizados o públicos."
+                "caption": "Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle."
             },
             {
                 "@type": "ImageObject",
@@ -71,7 +71,7 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/bucle-agente-ia.webp",
                 "width": 1672,
                 "height": 941,
-                "caption": "Figura 1. Bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar."
+                "caption": "Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle."
             },
             {
                 "@type": "ImageObject",
@@ -79,7 +79,7 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp",
                 "width": 3200,
                 "height": 1800,
-                "caption": "Figura 2. Resultados de MLCR-AA en historias clínicas sintéticas."
+                "caption": "Respuestas completas en MLCR-AA: GPT-6 Astra y Claude Sonnet 5.5, 41,7 %; GPT-6.1 Sol, 38,3 %; Qwen 3.8, 30,6 %; mediana inferior al 15 %. Precisión máxima: 98,3 %."
             },
             {
                 "@type": "ImageObject",
@@ -87,7 +87,7 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/r-t-student-asimetria.webp",
                 "width": 2560,
                 "height": 1440,
-                "caption": "Figura 3. Un script de R sin errores aplica una t de Student a una variable muy asimétrica."
+                "caption": "Captura de RStudio con un script que aplica t.test a 20 datos sintéticos sin errores y, a la derecha, el histograma muy asimétrico de la variable."
             },
             {
                 "@type": "ImageObject",
@@ -95,7 +95,7 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp",
                 "width": 1672,
                 "height": 941,
-                "caption": "Figura 4. Ejemplo de GROUNDING.md con reglas de análisis."
+                "caption": "Fragmento de un archivo GROUNDING.md con reglas de análisis sobre lotes, valores faltantes, pruebas estadísticas, supuestos y trazabilidad."
             },
             {
                 "@type": "ImageObject",
@@ -103,11 +103,11 @@
                 "contentUrl": "https://gavilanbiost.com/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp",
                 "width": 1672,
                 "height": 941,
-                "caption": "Figura 5. Enrutamiento según la sensibilidad de los datos."
+                "caption": "Datos identificables hacia un modelo abierto en el servidor del hospital sin internet; datos anonimizados o públicos hacia un modelo cerrado en la nube."
             }
         ],
         "datePublished": "2026-11-02",
-        "dateModified": "2026-11-02",
+        "dateModified": "2026-11-22",
         "inLanguage": "es",
         "keywords": "modelos de lenguaje, bioestadística, agentes de IA, protección de datos, ómicas, ventana de contexto, GROUNDING.md",
         "mainEntityOfPage": {
@@ -127,12 +127,13 @@
         "articleSection": "Inteligencia artificial"
     }
     </script>
+    <meta property="article:modified_time" content="2026-11-22">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="JFG" width="96" height="38"></a>
+            <a href="/" class="brand" aria-label="Jesús F. García Gavilán — Inicio"><img src="/img/jfg-logo.png" alt="" width="96" height="38"></a>
             <nav class="nav-links desktop-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/posts.html" aria-current="page">Posts</a><a href="/tutoriales.html">Tutoriales</a><a href="/publicaciones.html">Publicaciones</a><a href="/#proyectos">Proyectos</a><a href="/news.html">Noticias</a><a href="/#contact">Contacto</a></nav>
             <button class="mobile-menu" id="menu-toggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
@@ -161,7 +162,7 @@
                     <p>Hace no tanto, usábamos los modelos de lenguaje como un buscador con buena capacidad de conversación: preguntabas, respondía y hasta ahí. Este año, cualquiera que haya decidido utilizar IA para agilizar tareas estará de acuerdo en que ya no funcionan así. Los modelos actuales actúan como agentes que planifican un análisis, escriben el código, lo ejecutan en una terminal, leen el error, lo corrigen y vuelven a ejecutar, a veces durante horas y sin que nadie intervenga. En otro <a href="https://gavilanbiost.substack.com/p/la-ilusion-del-vibe-coding-por-que" target="_blank" rel="noopener noreferrer">post</a> escribí sobre los riesgos de programar por intuición con estas herramientas. Vayamos un paso más allá: ¿qué pasa cuando las usamos en bioestadística, con datos de pacientes y de ómicas?</p>
 
                     <figure style="margin: 0;">
-                        <img src="/img/posts/el-script-que-compila/bucle-agente-ia.webp" srcset="/img/posts/el-script-que-compila/bucle-agente-ia-860.webp 860w, /img/posts/el-script-que-compila/bucle-agente-ia.webp 1672w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1672" height="941" alt="Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle." fetchpriority="high" decoding="async">
+                        <picture><source type="image/webp" srcset="/img/posts/el-script-que-compila/bucle-agente-ia-860.webp 860w, /img/posts/el-script-que-compila/bucle-agente-ia.webp 1672w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Esquema del bucle de un agente de IA: planificar, escribir código, ejecutar, leer el error, corregir y volver a ejecutar, con una persona fuera del bucle." decoding="async" fetchpriority="high" height="941" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/el-script-que-compila/bucle-agente-ia.webp" srcset="/img/posts/el-script-que-compila/bucle-agente-ia-860.webp 860w, /img/posts/el-script-que-compila/bucle-agente-ia.webp 1672w" width="1672"/></picture>
                         <figcaption>Figura 1. Un modelo de lenguaje que ya no responde, sino que actúa.</figcaption>
                     </figure>
 
@@ -180,7 +181,7 @@
                     <p>La única evaluación independiente con modelos actuales que he encontrado proviene, además, de nuestro propio terreno. <a href="https://artificialanalysis.ai/evaluations/mlcr-aa" target="_blank" rel="noopener noreferrer">MLCR-AA</a>, de Artificial Analysis y Wisedocs, pide a los modelos que razonen sobre historias clínicas sintéticas. Por ejemplo, reconstruir la cronología de un tratamiento repartida en varios informes o decidir si una lesión se explica mejor por un accidente laboral o por una enfermedad previa. En la actualización del 21 de octubre, GPT-6 Astra y Claude Sonnet 5.5 empatan en cabeza con un 41,7 % de respuestas completas y sin contradicciones con la historia. El mejor modelo abierto, Qwen3.8 2.4T A95B, se queda en torno al 31 %, y la mediana de todos los evaluados no alcanza el 15 %. Esas historias clínicas tienen entre 25.000 y 64.000 tokens, entre quince y cuarenta veces menos que lo que cabe en la ventana. Lo que nos está indicando eso es que la longitud de la ventana determina cuánto puede leer el modelo, no cuánto puede relacionar (y que a estas empresas les interesa más vender que mostrar números reales).</p>
 
                     <figure style="margin: 0;">
-                        <img src="/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp" srcset="/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico-860.webp 860w, /img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp 3200w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="3200" height="1800" alt="Gráfico de barras con la tasa de respuestas completas y sin contradicciones en MLCR-AA: GPT-6 Astra 41,7 %, Claude Sonnet 5.5 41,7 %, GPT-6.1 Sol 38,3 %, Qwen 3.8 30,6 % (mejor modelo abierto) y mediana de los modelos evaluados por debajo del 15 %, frente a una precisión máxima del 98,3 %." loading="lazy" decoding="async">
+                        <picture><source type="image/webp" srcset="/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico-860.webp 860w, /img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp 3200w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Respuestas completas en MLCR-AA: GPT-6 Astra y Claude Sonnet 5.5, 41,7 %; GPT-6.1 Sol, 38,3 %; Qwen 3.8, 30,6 %; mediana inferior al 15 %. Precisión máxima: 98,3 %." decoding="async" height="1800" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp" srcset="/img/posts/el-script-que-compila/mlcr-aa-contexto-clinico-860.webp 860w, /img/posts/el-script-que-compila/mlcr-aa-contexto-clinico.webp 3200w" width="3200"/></picture>
                         <figcaption>Figura 2. Encontrar no es relacionar: lo que dicen los modelos actuales es correcto casi siempre, pero ninguno da una respuesta completa en más del 42 % de las historias clínicas. Datos de MLCR-AA (Artificial Analysis y Wisedocs, actualización del 21-10-2026; historias clínicas sintéticas de 25.000 a 64.000 tokens).</figcaption>
                     </figure>
 
@@ -189,14 +190,14 @@
                     <p>El problema más serio, para mí, es que un agente puede escribir un script de R impecable, que se ejecuta sin un solo error, comprobar su funcionamiento y decirte que es genial y no tiene errores, y aun así estar mal. Puede corregir los efectos de lote de forma incorrecta o aplicar una t de Student a variables genómicas muy asimétricas asumiendo normalidad. El código funciona, pero lo que falla es la ciencia detrás. El resultado es una lista de biomarcadores llena de falsos positivos en un paper que, si tenemos suerte, morirá en el mar de papers iguales y, si no, formará parte de un conjunto de datos erróneos que potenciará la pérdida de tiempo, dinero y otros recursos al investigar algo que no tiene recorrido.</p>
 
                     <figure style="margin: 0;">
-                        <img src="/img/posts/el-script-que-compila/r-t-student-asimetria.webp" srcset="/img/posts/el-script-que-compila/r-t-student-asimetria-860.webp 860w, /img/posts/el-script-que-compila/r-t-student-asimetria.webp 2560w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="2560" height="1440" alt="Captura de RStudio con un script que aplica t.test a 20 datos sintéticos sin errores y, a la derecha, el histograma muy asimétrico de la variable." loading="lazy" decoding="async">
+                        <picture><source type="image/webp" srcset="/img/posts/el-script-que-compila/r-t-student-asimetria-860.webp 860w, /img/posts/el-script-que-compila/r-t-student-asimetria.webp 2560w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Captura de RStudio con un script que aplica t.test a 20 datos sintéticos sin errores y, a la derecha, el histograma muy asimétrico de la variable." decoding="async" height="1440" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/el-script-que-compila/r-t-student-asimetria.webp" srcset="/img/posts/el-script-que-compila/r-t-student-asimetria-860.webp 860w, /img/posts/el-script-que-compila/r-t-student-asimetria.webp 2560w" width="2560"/></picture>
                         <figcaption>Figura 3. El código funciona; la ciencia no.</figcaption>
                     </figure>
 
                     <p>La literatura lo llama violar los <a href="https://arxiv.org/html/2604.21744v1" target="_blank" rel="noopener noreferrer">invariantes epistémicos</a> del dominio, es decir, las reglas que un bioestadístico aplicaría sin pensarlo y que el modelo desconoce si nadie se las dice. Las propuestas para evitarlo van justo por ahí: darle al agente, antes de que escriba una línea, un documento con las reglas del análisis. Palmblad y colaboradores lo llaman GROUNDING.md y lo plantean como un documento mantenido por cada comunidad científica. Ya han publicado uno sobre <a href="https://github.com/OmicsGrounding/proteomics-grounding" target="_blank" rel="noopener noreferrer">proteómica</a>. Una regla de ese tipo podría ser, por ejemplo, «la imputación por vecinos más cercanos nunca cruza la frontera entre lotes experimentales». La otra pata es conectar los agentes con ontologías formales de herramientas y de formatos bioinformáticos.</p>
 
                     <figure style="margin: 0;">
-                        <img src="/img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp" srcset="/img/posts/el-script-que-compila/grounding-md-reglas-analisis-860.webp 860w, /img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp 1672w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1672" height="941" alt="Fragmento de un archivo GROUNDING.md con reglas de análisis sobre lotes, valores faltantes, pruebas estadísticas, supuestos y trazabilidad." loading="lazy" decoding="async">
+                        <picture><source type="image/webp" srcset="/img/posts/el-script-que-compila/grounding-md-reglas-analisis-860.webp 860w, /img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp 1672w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Fragmento de un archivo GROUNDING.md con reglas de análisis sobre lotes, valores faltantes, pruebas estadísticas, supuestos y trazabilidad." decoding="async" height="941" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp" srcset="/img/posts/el-script-que-compila/grounding-md-reglas-analisis-860.webp 860w, /img/posts/el-script-que-compila/grounding-md-reglas-analisis.webp 1672w" width="1672"/></picture>
                         <figcaption>Figura 4. Las reglas que un bioestadístico aplica sin pensar, escritas para el agente.</figcaption>
                     </figure>
 
@@ -211,7 +212,7 @@
                     <p>De ahí sale la propuesta que me parece más sensata: dejarse de elegir modelos y enrutar según la sensibilidad de los datos. En local, con un modelo abierto, todo lo que toque datos identificables (extracción de historias clínicas, secuencias con metadatos de pacientes) y en la nube, solo con datos anonimizados o públicos, lo que más se beneficia de los modelos cerrados: construir y depurar <em>pipelines</em> complejos o revisar literatura. No es una idea nueva ni es fácil de aplicar. Copilot GitHub intenta eso cuando automatizas el modelo según la tarea que le pidas y su calidad lo ha sufrido.</p>
 
                     <figure style="margin: 0;">
-                        <img src="/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp" srcset="/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-860.webp 860w, /img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp 1672w" sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) calc(100vw - 50px), 860px" width="1672" height="941" alt="Esquema de enrutamiento según la sensibilidad de los datos: los identificables van a un modelo abierto en el servidor del hospital sin internet; los anonimizados o públicos, a un modelo cerrado en la nube." loading="lazy" decoding="async">
+                        <picture><source type="image/webp" srcset="/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-860.webp 860w, /img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp 1672w" sizes="(max-width: 900px) calc(100vw - 40px), 860px"><img alt="Datos identificables hacia un modelo abierto en el servidor del hospital sin internet; datos anonimizados o públicos hacia un modelo cerrado en la nube." decoding="async" height="941" loading="lazy" sizes="(max-width: 900px) calc(100vw - 40px), 860px" src="/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp" srcset="/img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos-860.webp 860w, /img/posts/el-script-que-compila/enrutamiento-sensibilidad-datos.webp 1672w" width="1672"/></picture>
                         <figcaption>Figura 5. Separar los datos antes que los modelos.</figcaption>
                     </figure>
 
@@ -239,7 +240,7 @@
         </main>
     </div>
     <footer>
-        <img src="/img/jfg-logo.png" alt="JFG" width="96" height="38">
+        <img src="/img/jfg-logo.png" alt="" width="96" height="38">
         <span>© 2026 Jesús F. García Gavilán</span>
         <span>Ciencia rigurosa. Ideas claras.</span>
     </footer>

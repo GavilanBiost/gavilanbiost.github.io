@@ -24,14 +24,49 @@ que 'proyectos' se sigue manteniendo a mano desde el proyecto React.
 """
 
 import json
+import re
 from pathlib import Path
 
+import layout
 import topics
 
 HOME_DATA_PATH = Path("data/home-content.json")
 SEARCH_INDEX_PATH = Path("data/search-index.json")
 COUNTS_PATH = Path("data/content-counts.json")
 MAX_HOME_CARDS = 3
+HOME_HTML_PATH = Path("index.html")
+
+
+def refresh_static_home():
+    """Keep the initial HTML in sync with the cards React reads from JSON.
+
+    The compiled React app still owns interactions. Visitors and crawlers get
+    the same profile, navigation and current cards before JavaScript runs.
+    """
+    if not HOME_HTML_PATH.exists():
+        return
+    content = HOME_HTML_PATH.read_text(encoding="utf-8")
+    for section, cards in read_home_data().items():
+        pattern = re.compile(
+            rf"(<!-- home-static:{re.escape(section)}:start -->).*?"
+            rf"(<!-- home-static:{re.escape(section)}:end -->)", re.DOTALL
+        )
+        rendered = "\n".join(
+            layout.card(
+                title=card["title"], url=card["url"],
+                meta=card.get("meta", ""), description=card.get("description", ""),
+                links=[(link["label"], link["url"], False) for link in card.get("links", [])],
+            )
+            for card in cards
+        )
+        content = pattern.sub(lambda m: m[1] + "\n" + rendered + "\n" + m[2], content)
+    count = read_counts().get("publicaciones")
+    if count is not None:
+        content = re.sub(
+            r'(<strong id="publication-count-static">).*?(</strong>)',
+            lambda m: m[1] + str(int(count)) + m[2], content,
+        )
+    HOME_HTML_PATH.write_text(content, encoding="utf-8")
 
 
 def card_entry(title, url, meta="", description="", links=(), year="", tags=(), original_title=None):
@@ -102,5 +137,6 @@ def update_section(section_id, cards):
     # La nube de temas mira TODO el índice, así que se recalcula al vuelo cada vez
     # que cambia cualquier sección.
     topics.update_topics()
+    refresh_static_home()
 
     return len(home[section_id])

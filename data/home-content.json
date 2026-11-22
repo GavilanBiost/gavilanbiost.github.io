@@ -57,7 +57,7 @@
       "title": "Estadístico F de contraste global",
       "url": "/tutoriales/estadistico-contraste.html",
       "meta": "R / REGRESIÓN LINEAL",
-      "description": "Tutorial en R sobre el estadístico F de contraste global en modelos lineales múltiples.",
+      "description": "Interpreta el estadístico F de una regresión lineal múltiple en R: extrae el contraste global, sus grados de libertad y el p-valor con un ejemplo de HDL.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -79,7 +79,7 @@
       "title": "C-index en modelos de Cox",
       "url": "/tutoriales/c-index.html",
       "meta": "R / SUPERVIVENCIA",
-      "description": "Tutorial en R para calcular e interpretar el C-index en modelos de Cox.",
+      "description": "Calcula e interpreta el C-index en R para modelos de Cox: datos censurados, predictor lineal, concordancia y evaluación de la capacidad discriminativa.",
       "links": [
         {
           "label": "Ver repositorio",
@@ -101,7 +101,7 @@
       "title": "t-SNE en R: visualización de datos de alta dimensionalidad",
       "url": "/tutoriales/t-sne.html",
       "meta": "R / REDUCCIÓN DE DIMENSIONALIDAD",
-      "description": "Tutorial práctico de t-SNE en R para reducir dimensionalidad y visualizar patrones en datos multivariables.",
+      "description": "Aplica t-SNE en R para explorar datos de alta dimensión: estandarización, elección de parámetros, visualización de grupos y evaluación de la estabilidad.",
       "links": [
         {
           "label": "Ver repositorio",

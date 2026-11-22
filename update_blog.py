@@ -12,6 +12,38 @@ POSTS_DIR = Path("post")
 SCHEDULED_POSTS_DIR = Path("_scheduled")
 EXCLUDED_FILES = {"post-template.html"}
 DEFAULT_CATEGORY = "BLOG"
+SCHEDULED_INDEXING_MARKER = "<!-- scheduled-indexing -->"
+
+
+def sync_post_indexability(today=None):
+    """Exclude future posts from search until their scheduled publication date.
+
+    Only remove noindex that this function added; preserve editorial exclusions.
+    """
+    today = today or datetime.datetime.now(datetime.UTC).date()
+    for path in sorted(POSTS_DIR.glob("*.html")):
+        if path.name in EXCLUDED_FILES:
+            continue
+        content = path.read_text(encoding="utf-8")
+        post_dt = parse_date(extract_meta(content, "post-date"))
+        if post_dt is None:
+            continue
+        robots = re.compile(r'<meta\s+name="robots"\s+content="[^"]*"\s*/?>', re.IGNORECASE)
+        if post_dt.date() > today:
+            # An intentional noindex without our marker must stay intentional.
+            if "noindex" in extract_meta(content, "robots").lower() and SCHEDULED_INDEXING_MARKER not in content:
+                continue
+            replacement = '<meta name="robots" content="noindex, follow">'
+            updated = robots.sub(replacement, content) if robots.search(content) else content.replace("</head>", replacement + "\n</head>")
+            if SCHEDULED_INDEXING_MARKER not in updated:
+                updated = updated.replace(replacement, replacement + "\n    " + SCHEDULED_INDEXING_MARKER)
+        elif SCHEDULED_INDEXING_MARKER in content:
+            updated = robots.sub('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">', content)
+            updated = updated.replace("\n    " + SCHEDULED_INDEXING_MARKER, "").replace(SCHEDULED_INDEXING_MARKER, "")
+        else:
+            continue
+        if updated != content:
+            path.write_text(updated, encoding="utf-8")
 
 
 def find_div_bounds(content, div_id):
@@ -105,9 +137,9 @@ def publish_scheduled_posts():
         print(f"✓ Publicado post programado: {published_path.name}")
 
 
-def load_posts():
+def load_posts(today=None):
     posts = []
-    today = datetime.datetime.now(datetime.UTC).date()
+    today = today or datetime.datetime.now(datetime.UTC).date()
 
     for path in sorted(POSTS_DIR.glob("*.html")):
         if path.name in EXCLUDED_FILES:
@@ -123,6 +155,9 @@ def load_posts():
 
         if post_dt is not None and post_dt.date() > today:
             print(f"⏳ {path.name} programado para {post_dt.date().isoformat()}, todavía no se publica")
+            continue
+
+        if "noindex" in extract_meta(content, "robots").lower():
             continue
 
         sort_dt = post_dt or datetime.datetime.min
@@ -188,6 +223,7 @@ def update_archive(posts, timestamp):
 
 def main():
     publish_scheduled_posts()
+    sync_post_indexability()
     posts = load_posts()
     if not posts:
         print("No se encontraron posts para actualizar")
