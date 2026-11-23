@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Superinteligencia por decreto",
+      "url": "/post/superinteligencia-por-decreto.html",
+      "meta": "BLOG · 23/11/2026",
+      "description": "Superinteligencia por decreto: qué implica el cambio de nombre del NIH para la IA, los modelos de predicción y las búsquedas bibliográficas en PubMed.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/superinteligencia-por-decreto.html"
+        }
+      ],
+      "originalTitle": "Superinteligencia por decreto",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "¿Qué plataforma de metabolómica ve lo que necesitas?",
       "url": "/post/que-plataforma-de-metabolomica.html",
       "meta": "BLOG · 16/11/2026",
@@ -29,23 +46,6 @@
         }
       ],
       "originalTitle": "Pocos pacientes, muchas variables",
-      "year": "2026",
-      "tags": [
-        "blog"
-      ]
-    },
-    {
-      "title": "El script que compila y la estadística que no",
-      "url": "/post/el-script-que-compila.html",
-      "meta": "BLOG · 02/11/2026",
-      "description": "Los agentes de IA escriben scripts que compilan, pero no garantizan un análisis correcto. Contexto, soberanía de los datos y verificación en bioestadística.",
-      "links": [
-        {
-          "label": "Leer post",
-          "url": "/post/el-script-que-compila.html"
-        }
-      ],
-      "originalTitle": "El script que compila y la estadística que no",
       "year": "2026",
       "tags": [
         "blog"

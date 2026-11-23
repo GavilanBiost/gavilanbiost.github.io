@@ -1,6 +1,23 @@
 {
   "posts": [
     {
+      "title": "Superinteligencia por decreto",
+      "url": "/post/superinteligencia-por-decreto.html",
+      "meta": "BLOG · 23/11/2026",
+      "description": "Superinteligencia por decreto: qué implica el cambio de nombre del NIH para la IA, los modelos de predicción y las búsquedas bibliográficas en PubMed.",
+      "links": [
+        {
+          "label": "Leer post",
+          "url": "/post/superinteligencia-por-decreto.html"
+        }
+      ],
+      "originalTitle": "Superinteligencia por decreto",
+      "year": "2026",
+      "tags": [
+        "blog"
+      ]
+    },
+    {
       "title": "¿Qué plataforma de metabolómica ve lo que necesitas?",
       "url": "/post/que-plataforma-de-metabolomica.html",
       "meta": "BLOG · 16/11/2026",
