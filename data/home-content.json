@@ -122,16 +122,6 @@
   ],
   "noticias": [
     {
-      "title": "El riesgo de sustituir los lácteos por alternativas vegetales - El Diario de la Pampa",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPdGRqejRUOGxxUXhfSEFuR1ctdm80RmlxTkNKdy04bkJwNU9fQlNnWnNfY3NsOEhEbFlCY0Fzd3FJZjBURXFaWnpzMFlUM3NwSU9aNjktTGk2QXpfMGxMZHNURWU1aXJOUEtzcXc5Ri1reVZyWVZLT0E5LVhNUVE2VEY1ODM3aG1vcWt0Smtwc2pMbnhqZXVpTmtpcmhqTnVEeTU0eFNfUndIb0VmU3dn?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "meta": "El Diario de la Pampa · 06/11/2026",
-      "description": "El Diario de la Pampa",
-      "links": [],
-      "originalTitle": "El riesgo de sustituir los lácteos por alternativas vegetales - El Diario de la Pampa",
-      "year": "2026",
-      "tags": []
-    },
-    {
       "title": "Un estudio calcula que reemplazar los lácteos por alternativas de origen vegetal reduce la ingesta de yodo - Science Media Centre España",
       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOek5JOVlGdVZld1ZSRnB6NlFuTURzTUJ3aGFGR0YwekNPTkhkSG1wX1RWZHZaVXFwS3hGTEVNUHFBVmY5SHNSRTJVM1kwcl9RRjltczdLYS1LZW9RZDRLLTZYaldIR3VkVmZBTkU1TnpfbFgzZEgxamRYNFZtN3paN1lsWVlPRU5ISlNUQ3FCb0NmYzluMUZZekVIVWJzRjdfUzVpSXpMVDlkLVRXYl9xUk9sNjZHUkZSaW13ZVg3alJVQkE?oc=5&hl=en-US&gl=US&ceid=US:en",
       "meta": "Science Media Centre España · 05/11/2026",
@@ -148,6 +138,16 @@
       "description": "La Nueva España",
       "links": [],
       "originalTitle": "Sustituir la leche por bebidas vegetales podría reducir el consumo de nutrientes esenciales, según un estudio - La Nueva España",
+      "year": "2026",
+      "tags": []
+    },
+    {
+      "title": "Un estudio de Reino Unido calcula que reemplazar los lácteos por alternativas de origen vegetal puede reducir hasta un 28 % la ingesta de yodo",
+      "url": "https://sciencemediacentre.es/un-estudio-de-reino-unido-calcula-que-reemplazar-los-lacteos-por-alternativas-de-origen-vegetal",
+      "meta": "SMC España · 05/11/2026",
+      "description": "SMC España",
+      "links": [],
+      "originalTitle": "Un estudio de Reino Unido calcula que reemplazar los lácteos por alternativas de origen vegetal puede reducir hasta un 28 % la ingesta de yodo",
       "year": "2026",
       "tags": []
     }
